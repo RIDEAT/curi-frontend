@@ -1,5 +1,5 @@
 name: Bug Fix 🐛
-description: Submit a issue for bug fix
+description: 버그 수정을 위한 이슈 제출
 title: "[RID-@@@][fix]: Please write title "
 labels: [":rocket: fix"]
 body:
