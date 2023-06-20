@@ -3,10 +3,11 @@ description: Submit a issue for a new feature
 title: "[RID-@@@][Feature]: Please write title "
 labels: [":rocket: Feature"]
 body:
-  - type: markdown
+  - type: textarea
     attributes:
+      label: 체크리스트
+      description: 이슈 제출 전에 반드시 아래 체크리스트를 확인하세요
       value: |
-        ### 이슈 제출 전에 반드시 아래 체크리스트를 확인하세요:
         - [ ] 나는 linear에 해당 이슈를 작업하기 위한 백로그가 존재하는지 확인했다.
         - [ ] 나는 이슈 제목에 RID 번호를 적었다.
   - type: textarea
