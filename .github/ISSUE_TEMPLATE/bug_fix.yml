@@ -1,7 +1,7 @@
-name: Feature 🚀
-description: Submit a issue for a new feature
-title: "[RID-@@@][feat]: Please write title "
-labels: [":rocket: Feature"]
+name: Bug Fix 🐛
+description: Submit a issue for bug fix
+title: "[RID-@@@][fix]: Please write title "
+labels: [":rocket: fix"]
 body:
   - type: textarea
     attributes:
@@ -14,13 +14,13 @@ body:
     id: description
     attributes:
       label: 목적
-      description: 만들고자하는 기능의 목적에 대해 설명해주세요.
+      description: 수정하고자하는 버그에 대해 설명해주세요.
     validations:
       required: true
   - type: textarea
     id: solution
     attributes:
       label: 기능 명세
-      description: 목적을 달성하기 위해 어떤 세부 기능이 필요한지 나열해주세요.
+      description: 버그를 수정하기 위해 어떤 해결책이 존재하는지 기재해주세요.
     validations:
-      required: true
+      required: false
