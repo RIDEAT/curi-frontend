@@ -1,4 +1,4 @@
-## [RID-@@][#00][type] {이슈 이름}
+## [RID-@@][#00][type] PR title
 
 ### branch명
 
