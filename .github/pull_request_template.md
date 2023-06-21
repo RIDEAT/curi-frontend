@@ -1,4 +1,4 @@
-## [RID-@@][type] ISSUE [#00] {이슈 이름}
+## [RID-@@][#00][type] {이슈 이름}
 
 ### branch명
 
@@ -18,6 +18,7 @@
 
 `required`
 
+- [ ] 나는 PR title을 format에 맞게 작성하였다.
 - [ ] 작업 전 main branch의 변경사항을 pull 한 이후, 작업했다.
 - [ ] 내 코드는 main branch의 최신 변경사항에 대해 호환이 된다.
 - [ ] 내 코드는 협의된 코드 스타일을 준수하고 있다.
