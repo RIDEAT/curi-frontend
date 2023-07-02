@@ -1,10 +1,9 @@
-import { Button, Header } from "ui";
+import { Button } from "ui";
 
 export default function Page() {
   return (
     <>
-      <Header text="Front-office" />
-      <Button />
+      <Button>Front Office</Button>
     </>
   );
 }
