@@ -8,6 +8,7 @@
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "test": "turbo run test",
+    "test:watch": "turbo run test:watch",
     "ui:add": "pnpm --filter ui ui:add"
   },
   "devDependencies": {

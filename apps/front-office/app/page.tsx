@@ -1,6 +1,6 @@
 import { Button } from "ui";
 
-export default function Page() {
+export default function Home() {
   return (
     <>
       <Button>Front Office</Button>
