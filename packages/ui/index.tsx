@@ -1,3 +1,3 @@
 "use client";
 
-export * from "./components/ui/button";
+export * from "./components/index";
