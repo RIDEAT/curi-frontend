@@ -85,6 +85,7 @@ function RegisterForm({
               id="email"
               type="email"
               placeholder="example@email.com"
+              value={registerEmail}
               onChange={handleEmailChange}
             />
           </div>
@@ -93,6 +94,7 @@ function RegisterForm({
             <Input
               id="password"
               type="password"
+              value={registerPassword}
               onChange={handlePasswordChange}
             />
           </div>
