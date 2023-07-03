@@ -1,12 +1,24 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": ["**/.env.*local", "**/.env"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "NEXT_PUBLIC_FIREBASE_API_KEY",
+        "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
+        "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
+        "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
+        "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID",
+        "NEXT_PUBLIC_FIREBASE_APP_ID",
+        "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID"
+      ]
     },
-    "lint": {},
+    "lint": {
+      "outputs": [],
+      "cache": false
+    },
     "dev": {
       "cache": false,
       "persistent": true

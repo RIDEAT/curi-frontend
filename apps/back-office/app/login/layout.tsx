@@ -28,19 +28,8 @@ export default function RouterLayout({
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <NavigationMenu>
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link href="/login" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  로그인
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
       </div>
-      <div>{children}</div>{" "}
+      <div>{children}</div>
     </div>
   );
 }
