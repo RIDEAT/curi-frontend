@@ -7,8 +7,9 @@ import {
 } from "firebase/auth";
 import { firebaseAuth } from "../../lib/firebase/firebaseClient";
 import { useRouter } from "next/navigation";
-import RegisterForm from "./RegisterForm";
-import VerifyForm from "./VerifyForm";
+import RegisterForm from "../../components/forms/RegisterForm";
+import VerifyForm from "../../components/cards/RegisterVerifyCard";
+import UserAPI from "../../lib/api/user";
 
 function Register({
   setSentEmail,
@@ -17,37 +18,26 @@ function Register({
 }) {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("　");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const clearForm = () => {
+    setRegisterEmail("");
+    setRegisterPassword("");
+  };
 
   const register = async () => {
+    setErrorMsg("");
     try {
-      setErrorMsg("　");
-      const actionCodeSettings = {
-        url: "http://localhost:3000/login",
-      };
-      const { user } = await createUserWithEmailAndPassword(
-        firebaseAuth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(user);
-      await sendEmailVerification(user, actionCodeSettings);
-      setRegisterEmail("");
-      setRegisterPassword("");
+      await UserAPI.registerFirebase(registerEmail, registerPassword);
       setSentEmail(true);
     } catch (err) {
-      console.log(err.code);
-      switch (err.code) {
-        case "auth/weak-password":
-          setErrorMsg("비밀번호는 6자리 이상이어야 합니다");
-          break;
-        case "auth/invalid-email":
-          setErrorMsg("잘못된 이메일 주소입니다");
-          break;
-        case "auth/email-already-in-use":
-          setErrorMsg("이미 가입되어 있는 계정입니다");
-          break;
+      if (err.message) {
+        setErrorMsg(err.message);
+      } else {
+        setErrorMsg("회원가입에 실패했습니다. 다시 시도해주세요.");
       }
+    } finally {
+      clearForm();
     }
   };
 
@@ -69,24 +59,16 @@ function Register({
 
 function VerifyEmail() {
   const router = useRouter();
-  const [errorMsg, setErrorMsg] = useState("　");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleVerifyEmail = () => {
-    firebaseAuth.currentUser
-      .reload()
-      .then(() => {
-        const isVerified = firebaseAuth.currentUser.emailVerified;
-        console.log(isVerified);
-        console.log(firebaseAuth.currentUser);
-        if (isVerified) {
-          router.push("/login");
-        } else {
-          setErrorMsg("이메일 인증을 완료해주세요");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handleVerifyEmail = async () => {
+    const isVerified = await UserAPI.checkEmailverification();
+
+    if (isVerified) {
+      router.push("/login");
+    } else {
+      setErrorMsg("이메일 인증을 완료해주세요");
+    }
   };
 
   return (
@@ -98,16 +80,6 @@ function VerifyEmail() {
 
 export default function SignupPage() {
   const [sentEmail, setSentEmail] = useState(false);
-  const router = useRouter();
-  //   useEffect(() => {
-  //     const user = firebaseAuth.currentUser;
-  //     if (user) {
-  //       const isVerified = user.emailVerified;
-  //       if (isVerified) {
-  //         router.push("/login");
-  //       }
-  //     }
-  //   });
 
   return sentEmail ? <VerifyEmail /> : <Register setSentEmail={setSentEmail} />;
 }

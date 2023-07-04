@@ -8,15 +8,15 @@ import {
   CardTitle,
 } from "ui";
 
-export interface VerifyFormProps {
+export interface RegisterVerifyCardProps {
   errorMsg: string;
   handleVerifyEmail: () => void;
 }
 
-export default function VerifyForm({
+export default function RegisterVerifyCard({
   errorMsg,
   handleVerifyEmail,
-}: VerifyFormProps) {
+}: RegisterVerifyCardProps) {
   return (
     <Card className="w-1/2 max-w-screen-md">
       <CardHeader className="space-y-1">
