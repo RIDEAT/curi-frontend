@@ -20,21 +20,20 @@ function Login() {
       );
       const user = userCredential.user;
       console.log("로그인 성공:", user);
-      //   const result = fetch(
-      //     "http://a2b2c1ccd0d854050ba59b174d9977a8-535405562.ap-northeast-2.elb.amazonaws.com:8080/user/authorize",
-      //     {
-      //       method: "GET",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         Authentication: await user.getIdToken(),
-      //       },
-      //     }
-      //   );
-      //   console.log(result);
+      const accessToken = await user.getIdToken();
+      const response = await fetch("http://localhost:8080/user/authorize", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authentication: accessToken,
+        },
+      });
+      console.dir(response);
+      console.log(response.headers.get("Authorization"));
       setLoginEmail("");
       setLoginPassword("");
     } catch (err) {
-      console.log(err.code);
+      console.error(err);
       switch (err.code) {
         case "auth/user-not-found":
         case "auth/wrong-password":
