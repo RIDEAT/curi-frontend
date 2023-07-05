@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import RegisterForm from "../../components/forms/RegisterForm";
 import VerifyForm from "../../components/cards/RegisterVerifyCard";
 import UserAPI from "../../lib/api/user";
+import withAuth from "../../components/hoc/withAuth";
 
 function Register({
   setSentEmail,
@@ -78,7 +79,8 @@ function VerifyEmail() {
   );
 }
 
-export default function SignupPage() {
+export default withAuth(SignupPage, "auth");
+function SignupPage() {
   const [sentEmail, setSentEmail] = useState(false);
 
   return sentEmail ? <VerifyEmail /> : <Register setSentEmail={setSentEmail} />;
