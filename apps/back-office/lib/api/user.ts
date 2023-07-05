@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { firebaseAuth } from "../firebase/firebaseClient";
+import { IUser } from "user-types";
 
 const UserAPI = {
   registerFirebase: async (email: string, password: string) => {
@@ -98,11 +99,12 @@ const UserAPI = {
           "Content-Type": "application/json",
           Authentication: accessToken,
         },
+        credentials: "include",
       });
-      const authToken = response.headers.get("Authorization");
-      // const refreshToken = response.headers.get("RefreshToken");
-      const refreshToken = "refreshToken";
-      return { authToken, refreshToken };
+      const user: IUser = { id: 1, email: "ddd" };
+      const authToken = response.headers.get("Authtoken");
+
+      return { user, authToken };
     } catch (error) {
       console.error(error);
     }
