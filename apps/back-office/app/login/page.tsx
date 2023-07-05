@@ -1,14 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginForm from "../../components/forms/LoginForm";
 import UserAPI from "../../lib/api/user";
 import getAccessToken from "../../lib/utils/getAccessToken";
+import { useAtom } from "jotai";
+import { authStateAtom } from "../../lib/context/auth";
 
 function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [authState, setAuthState] = useAtom(authStateAtom);
 
   const clearForm = () => {
     setLoginEmail("");
@@ -16,7 +19,7 @@ function Login() {
   };
 
   const clearErrorMsg = () => {
-    setErrorMsg("　");
+    setErrorMsg("");
   };
 
   const login = async () => {
@@ -27,7 +30,8 @@ function Login() {
         loginPassword
       );
       const accessToken = await getAccessToken(userCredential);
-      const { authToken, refreshToken } = await UserAPI.getTokens(accessToken);
+      const { user, authToken } = await UserAPI.getTokens(accessToken);
+      setAuthState({ isAuthenticated: true, user, authToken });
     } catch (err) {
       if (err.message) {
         setErrorMsg(err.message);
@@ -40,16 +44,18 @@ function Login() {
   };
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center">
-      <LoginForm
-        loginEmail={loginEmail}
-        setLoginEmail={setLoginEmail}
-        loginPassword={loginPassword}
-        setLoginPassword={setLoginPassword}
-        errorMsg={errorMsg}
-        login={login}
-      />
-    </div>
+    <>
+      <div className="h-screen w-screen flex justify-center items-center">
+        <LoginForm
+          loginEmail={loginEmail}
+          setLoginEmail={setLoginEmail}
+          loginPassword={loginPassword}
+          setLoginPassword={setLoginPassword}
+          errorMsg={errorMsg}
+          login={login}
+        />
+      </div>
+    </>
   );
 }
 
