@@ -58,22 +58,17 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
     useEffect(() => {
       if (isAuthenticated) {
         if (routeRole == "auth") {
-          console.log("here1");
           router.push(HOME_ROUTE);
         } else {
-          console.log("here2");
           setIsLoading(false);
         }
       } else {
         if (routeRole == "protected") {
-          console.log("here3");
           checkAuth().then((isValidate) => {
             if (!isValidate) {
               router.push(`${LOGIN_ROUTE}?redirect=${pathname}`);
-              console.log("here4");
             } else {
               setIsLoading(false);
-              console.log("here5");
             }
           });
         }
