@@ -29,7 +29,7 @@ export default function RouterNav({
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href={`/${path}`} legacyBehavior passHref>
+            <Link href={`${path}`} legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 {display}
               </NavigationMenuLink>

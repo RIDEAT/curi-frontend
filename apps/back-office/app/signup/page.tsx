@@ -1,58 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
-} from "firebase/auth";
-import { firebaseAuth } from "../../lib/firebase/firebaseClient";
 import { useRouter } from "next/navigation";
+
 import RegisterForm from "../../components/ui/forms/RegisterForm";
 import VerifyForm from "../../components/ui/cards/RegisterVerifyCard";
-import UserAPI from "../../lib/api/user";
 import withAuth from "../../components/hoc/withAuth";
+import UserAPI from "../../lib/api/user";
 
 function Register({
   setSentEmail,
 }: {
   setSentEmail: (value: boolean) => void;
 }) {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const clearForm = () => {
-    setRegisterEmail("");
-    setRegisterPassword("");
-  };
-
-  const register = async () => {
-    setErrorMsg("");
-    try {
-      await UserAPI.registerFirebase(registerEmail, registerPassword);
-      setSentEmail(true);
-    } catch (err) {
-      if (err.message) {
-        setErrorMsg(err.message);
-      } else {
-        setErrorMsg("회원가입에 실패했습니다. 다시 시도해주세요.");
-      }
-    } finally {
-      clearForm();
-    }
-  };
-
   return (
     <>
       <div className="h-screen w-screen flex justify-center items-center">
-        <RegisterForm
-          register={register}
-          registerEmail={registerEmail}
-          setRegisterEmail={setRegisterEmail}
-          registerPassword={registerPassword}
-          setRegisterPassword={setRegisterPassword}
-          errorMsg={errorMsg}
-        />
+        <RegisterForm setSentEmail={setSentEmail} />
       </div>
     </>
   );

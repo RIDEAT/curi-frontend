@@ -49,6 +49,10 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
 
   const form = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const clearErrorMsg = () => {
@@ -88,7 +92,7 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
   };
 
   return (
-    <Card className="w-1/2 max-w-screen-md">
+    <Card className="w-2/3 max-w-screen-md">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">로그인</CardTitle>
         <CardDescription>
@@ -132,7 +136,9 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
               <p>{errorMsg}</p>
             </div>
             <div className="flex justify-center">
-              <Button type="submit">로그인</Button>
+              <Button type="submit" className="w-full">
+                로그인
+              </Button>
             </div>
           </form>
         </Form>

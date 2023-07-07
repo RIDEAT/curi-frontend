@@ -45,6 +45,10 @@ const FormSchema = z.object({
 export function CreateWorkspaceForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      workspacename: "",
+      emailId: "",
+    },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
