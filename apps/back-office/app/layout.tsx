@@ -1,4 +1,8 @@
+"use client";
+
+import { Provider } from "jotai";
 import "ui/styles/globals.css";
+
 export default function RootLayout({
   children,
 }: {
@@ -6,7 +10,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true}>
+        {children}
+      </body>
     </html>
   );
 }

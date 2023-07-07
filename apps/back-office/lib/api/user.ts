@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { firebaseAuth } from "../firebase/firebaseClient";
 import { IUser } from "user-types";
+import { API_URL } from "../constant/url";
 
 const UserAPI = {
   registerFirebase: async (email: string, password: string) => {
@@ -43,6 +44,10 @@ const UserAPI = {
    */
   loginFirebase: async (email: string, password: string) => {
     try {
+      if (!UserAPI.checkEmailverification()) {
+        const emailVerifyError = new Error("이메일 인증을 완료해주세요.");
+        throw emailVerifyError;
+      }
       const userCredential: UserCredential = await signInWithEmailAndPassword(
         firebaseAuth,
         email,
@@ -50,6 +55,9 @@ const UserAPI = {
       );
       return userCredential;
     } catch (error) {
+      if (error.message === "이메일 인증을 완료해주세요.") {
+        throw error;
+      }
       switch (error.code) {
         case "auth/user-not-found":
         case "auth/wrong-password":
@@ -93,7 +101,7 @@ const UserAPI = {
    */
   getTokens: async (accessToken: string) => {
     try {
-      const response = await fetch("http://localhost:8080/user/authorize", {
+      const response = await fetch(API_URL + "/user/authorize", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -101,10 +109,74 @@ const UserAPI = {
         },
         credentials: "include",
       });
+
+      if (!response.ok) {
+        throw new Error("서버에서 토큰을 받아오지 못했습니다.");
+      }
+
       const user: IUser = { id: 1, email: "ddd" };
       const authToken = response.headers.get("Authtoken");
 
       return { user, authToken };
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  /**
+   *
+   */
+  validateToken: async (
+    authToken: string,
+    setAuthToken: (token: string) => void,
+    setUser: (user: IUser) => void
+  ) => {
+    try {
+      const response = await fetch(API_URL + "/user/validate", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + authToken,
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        return false;
+      }
+
+      const newAuthToken = response.headers.get("Authtoken");
+      const user: IUser = await response.json();
+
+      setAuthToken(newAuthToken);
+      setUser(user);
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+  /**
+   * logout
+   */
+  logout: async (authToken: string, clearFunc: () => void) => {
+    try {
+      const response = await fetch(API_URL + "/user/logout", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + authToken,
+        },
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        clearFunc();
+        return true;
+      }
+
+      clearFunc();
+      return true;
     } catch (error) {
       console.error(error);
     }
