@@ -1,3 +1,16 @@
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import UserAPI from "../../../lib/api/user";
+import getAccessToken from "../../../lib/utils/getAccessToken";
+import { useRouter } from "next/navigation";
+import { useSetAtom } from "jotai";
+import {
+  isAuthenticatedAtom,
+  authTokenAtom,
+  userAtom,
+} from "../../../lib/context/auth";
 import {
   Button,
   Card,
@@ -6,34 +19,72 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Input,
+  toast,
 } from "ui";
-import { Input } from "ui";
-import { Label } from "ui";
 import Link from "next/link";
 
-export interface LoginFormProps {
-  loginEmail: string;
-  loginPassword: string;
-  errorMsg: string;
-  setLoginEmail: (value: string) => void;
-  setLoginPassword: (value: string) => void;
-  login: () => void;
-}
+const LoginFormSchema = z.object({
+  email: z.string().email({
+    message: "올바른 이메일 형식이어야 합니다.",
+  }),
+  password: z.string().min(8, {
+    message: "비밀번호는 8글자 이상이어야 합니다.",
+  }),
+});
 
-export default function LoginForm({
-  loginEmail,
-  setLoginEmail,
-  loginPassword,
-  setLoginPassword,
-  errorMsg,
-  login,
-}: LoginFormProps) {
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginEmail(e.target.value);
+export default function LoginForm({ nextRoute }: { nextRoute: string }) {
+  const setIsAuthenticated = useSetAtom(isAuthenticatedAtom);
+  const setAuthToken = useSetAtom(authTokenAtom);
+  const setUser = useSetAtom(userAtom);
+
+  const [errorMsg, setErrorMsg] = useState("");
+  const router = useRouter();
+
+  const form = useForm<z.infer<typeof LoginFormSchema>>({
+    resolver: zodResolver(LoginFormSchema),
+  });
+
+  const clearErrorMsg = () => {
+    setErrorMsg("");
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginPassword(e.target.value);
+  const login = async (email: string, password: string) => {
+    clearErrorMsg();
+
+    try {
+      const userCredential = await UserAPI.loginFirebase(email, password);
+      const accessToken = await getAccessToken(userCredential);
+      const { user, authToken } = await UserAPI.getTokens(accessToken);
+
+      setIsAuthenticated(true);
+      setAuthToken(authToken);
+      setUser(user);
+
+      router.replace(nextRoute);
+    } catch (err) {
+      err.message
+        ? setErrorMsg(err.message)
+        : setErrorMsg("로그인에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const onSubmit = async (data: z.infer<typeof LoginFormSchema>) => {
+    await login(data.email, data.password);
+    toast({
+      title: "[Test] 로그인이 요청되었습니다.",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
   };
 
   return (
@@ -45,33 +96,48 @@ export default function LoginForm({
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <div className="grid gap-2">
-          <Label htmlFor="email">이메일</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="example@email.com"
-            value={loginEmail}
-            onChange={handleEmailChange}
-          />
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="password">비밀번호</Label>
-          <Input
-            id="password"
-            type="password"
-            value={loginPassword}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <div className="grid gap-2 text-red-500 text-xs">
-          <p>{errorMsg}</p>
-        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-semibold">
+                    이메일 주소
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="example@curi.work" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg font-semibold">
+                    비밀번호
+                  </FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="grid gap-2 text-red-500 text-xs">
+              <p>{errorMsg}</p>
+            </div>
+            <div className="flex justify-center">
+              <Button type="submit">로그인</Button>
+            </div>
+          </form>
+        </Form>
       </CardContent>
-      <CardFooter className="flex flex-col">
-        <Button className="w-full" onClick={login}>
-          로그인
-        </Button>
+      <CardFooter className="flex justify-center">
         <div className="text-sm my-3">
           계정이 없으신가요?{" "}
           <Link href="/signup" className="text-blue-400">
