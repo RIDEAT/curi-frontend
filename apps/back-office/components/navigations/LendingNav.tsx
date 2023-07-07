@@ -1,3 +1,4 @@
+import { useAtomValue } from "jotai";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -9,8 +10,11 @@ import {
   navigationMenuTriggerStyle,
 } from "ui";
 import { cn } from "ui/lib/utils";
+import { isAuthenticatedAtom } from "../../lib/context/auth";
 
 export default function LendingNav() {
+  const isAuthenticated = useAtomValue(isAuthenticatedAtom);
+
   return (
     <div className="w-full flex justify-between">
       <div className="flex justify-start ">
@@ -51,9 +55,16 @@ export default function LendingNav() {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
+            <Link href="/auth_test_page" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                auth_test_page
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
             <Link href="/login" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                로그인
+                {isAuthenticated ? "마이페이지" : "로그인"}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
