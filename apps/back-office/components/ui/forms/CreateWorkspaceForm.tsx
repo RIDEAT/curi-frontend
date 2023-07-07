@@ -13,6 +13,8 @@ import {
   Input,
   toast,
 } from "ui";
+import { useState } from "react";
+import LoadingButton from "ui/components/buttons/loadingButton";
 
 const FormSchema = z.object({
   workspacename: z
@@ -43,6 +45,7 @@ const FormSchema = z.object({
 });
 
 export function CreateWorkspaceForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -51,20 +54,31 @@ export function CreateWorkspaceForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "[Test] 워크스페이스 생성이 요청되었습니다.",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setIsLoading(true);
+    try {
+      toast({
+        title: "[Test] 워크스페이스 생성이 요청되었습니다.",
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          </pre>
+        ),
+      });
+    } catch (error) {
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+    }
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-2/3 max-w-screen-md space-y-6"
+      >
         <FormField
           control={form.control}
           name="workspacename"
@@ -108,7 +122,13 @@ export function CreateWorkspaceForm() {
           )}
         />
         <div className="flex justify-center">
-          <Button type="submit">생성하기</Button>
+          {isLoading ? (
+            <LoadingButton />
+          ) : (
+            <Button type="submit" className="w-full">
+              생성하기
+            </Button>
+          )}
         </div>
       </form>
     </Form>

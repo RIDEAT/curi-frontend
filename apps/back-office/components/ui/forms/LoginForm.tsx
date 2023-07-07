@@ -29,6 +29,7 @@ import {
   toast,
 } from "ui";
 import Link from "next/link";
+import LoadingButton from "ui/components/buttons/loadingButton";
 
 const LoginFormSchema = z.object({
   email: z.string().email({
@@ -44,6 +45,7 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
   const setAuthToken = useSetAtom(authTokenAtom);
   const setUser = useSetAtom(userAtom);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
 
@@ -60,6 +62,7 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
   };
 
   const login = async (email: string, password: string) => {
+    setIsLoading(true);
     clearErrorMsg();
 
     try {
@@ -76,6 +79,8 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
       err.message
         ? setErrorMsg(err.message)
         : setErrorMsg("로그인에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -136,9 +141,13 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
               <p>{errorMsg}</p>
             </div>
             <div className="flex justify-center">
-              <Button type="submit" className="w-full">
-                로그인
-              </Button>
+              {isLoading ? (
+                <LoadingButton />
+              ) : (
+                <Button type="submit" className="w-full">
+                  로그인
+                </Button>
+              )}
             </div>
           </form>
         </Form>
