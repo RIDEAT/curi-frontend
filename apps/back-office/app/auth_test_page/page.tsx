@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import LogoutButton from "../../components/buttons/LogoutButton";
+import LogoutButton from "../../components/ui/buttons/LogoutButton";
 import withAuth from "../../components/hoc/withAuth";
 
 export default withAuth(AuthTestPage, "protected");

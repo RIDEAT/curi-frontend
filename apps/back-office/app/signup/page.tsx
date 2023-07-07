@@ -7,8 +7,8 @@ import {
 } from "firebase/auth";
 import { firebaseAuth } from "../../lib/firebase/firebaseClient";
 import { useRouter } from "next/navigation";
-import RegisterForm from "../../components/forms/RegisterForm";
-import VerifyForm from "../../components/cards/RegisterVerifyCard";
+import RegisterForm from "../../components/ui/forms/RegisterForm";
+import VerifyForm from "../../components/ui/cards/RegisterVerifyCard";
 import UserAPI from "../../lib/api/user";
 import withAuth from "../../components/hoc/withAuth";
 

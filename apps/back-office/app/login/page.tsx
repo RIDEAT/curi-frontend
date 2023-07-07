@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSetAtom, useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 
-import LoginForm from "../../components/forms/LoginForm";
+import LoginForm from "../../components/ui/forms/LoginForm";
 import UserAPI from "../../lib/api/user";
 import getAccessToken from "../../lib/utils/getAccessToken";
 import {
