@@ -2,7 +2,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 
 import { Button } from "../ui/button";
 
-export default function LoadingButton() {
+function LoadingButton() {
   return (
     <Button disabled>
       <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
@@ -10,3 +10,7 @@ export default function LoadingButton() {
     </Button>
   );
 }
+
+LoadingButton.displayName = "LoadingButton";
+
+export { LoadingButton };

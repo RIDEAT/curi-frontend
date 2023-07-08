@@ -14,7 +14,7 @@ import {
   toast,
 } from "ui";
 import { useState } from "react";
-import LoadingButton from "ui/components/buttons/loadingButton";
+import { LoadingButton } from "ui";
 
 const FormSchema = z.object({
   workspacename: z
@@ -84,19 +84,17 @@ export function CreateWorkspaceForm() {
           name="workspacename"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-lg font-semibold">
+              <FormLabel className="text-base font-semibold">
                 워크스페이스 명
               </FormLabel>
-              <FormDescription className="text-xs">
-                큐리에서 사용될 워크스페이스의 명칭이 됩니다.
-              </FormDescription>
               <FormControl>
-                <Input
-                  placeholder="ex.curi (2글자 이상, 20글자 이하)"
-                  {...field}
-                />
+                <Input placeholder="ex. curi " {...field} />
               </FormControl>
-              <FormMessage />
+              <FormDescription className="text-xs">
+                큐리에서 사용될 워크스페이스의 명칭이 됩니다. (2글자 이상,
+                20글자 이하)
+              </FormDescription>
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
@@ -105,19 +103,19 @@ export function CreateWorkspaceForm() {
           name="emailId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-lg font-semibold">
+              <FormLabel className="text-base font-semibold">
                 이메일 주소
               </FormLabel>
-              <FormDescription className="text-xs">
-                큐리에서 멤버와 연락을 주고 받을 이메일 주소입니다.
-              </FormDescription>
               <div className="flex w-full items-center space-x-2">
                 <FormControl>
-                  <Input placeholder="회사 메일" {...field} />
+                  <Input placeholder="ex. example" {...field} />
                 </FormControl>
                 <div>@curi.work</div>
               </div>
-              <FormMessage />
+              <FormDescription className="text-xs">
+                큐리에서 멤버와 연락을 주고 받을 이메일 주소입니다.
+              </FormDescription>
+              <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
