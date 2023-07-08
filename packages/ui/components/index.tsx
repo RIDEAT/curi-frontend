@@ -10,6 +10,10 @@ export * from "./ui/toaster";
 export * from "./ui/use-toast";
 export * from "./ui/sheet";
 export * from "./ui/scroll-area";
+export * from "./ui/command";
+export * from "./ui/dialog";
+export * from "./ui/popover";
+export * from "./ui/avatar";
 
 // buttons
 export * from "./buttons/closeButton";
