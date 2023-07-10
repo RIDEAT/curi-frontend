@@ -15,6 +15,7 @@ import {
 } from "ui";
 import { useState } from "react";
 import { LoadingButton } from "ui";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   workspacename: z
@@ -45,6 +46,8 @@ const FormSchema = z.object({
 });
 
 export function CreateWorkspaceForm() {
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -57,7 +60,7 @@ export function CreateWorkspaceForm() {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/workspace/create", {
+      const response = await fetch("/api/workspace", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,22 +72,27 @@ export function CreateWorkspaceForm() {
       });
       console.log(response);
       const result = await response.json();
-      toast({
-        title: "[Test] 워크스페이스 생성이 요청되었습니다.",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-            <code className="text-white">
-              {JSON.stringify(result, null, 2)}
-            </code>
-          </pre>
-        ),
-      });
+      if (response.ok) {
+        toast({
+          title: "워크스페이스가 생성되었습니다.",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <div>request</div>
+              <code className="text-white">
+                {JSON.stringify(data, null, 2)}
+              </code>
+              <div>response</div>
+              <code className="text-white">
+                {JSON.stringify(result, null, 2)}
+              </code>
+            </pre>
+          ),
+        });
+        router.replace(`/workspace/${result.workspaceId}`);
+      }
     } catch (error) {
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+      setIsLoading(false);
     }
   };
 
