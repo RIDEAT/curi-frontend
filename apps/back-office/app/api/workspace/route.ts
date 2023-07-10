@@ -6,16 +6,19 @@ export async function GET(request) {
       transactionId: 11,
       list: [
         {
-          workspaceId: 1,
-          workspaceName: "workspace1",
+          id: 1,
+          name: "workspace1",
+          emailId: "ws1",
         },
         {
-          workspaceId: 2,
-          workspaceName: "workspace2",
+          id: 2,
+          name: "workspace2",
+          emailId: "ws2",
         },
         {
-          workspaceId: 3,
-          workspaceName: "workspace3",
+          id: 3,
+          name: "workspace3",
+          emailId: "ws3",
         },
       ],
     },
@@ -25,7 +28,6 @@ export async function GET(request) {
 
 export async function POST(request) {
   const { workspacename, emailId } = await request.json();
-  console.log(workspacename, emailId);
 
   return NextResponse.json(
     {

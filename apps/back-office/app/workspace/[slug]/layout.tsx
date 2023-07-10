@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { WorkspaceSidebar } from "../../../components/ui/sidebars/WorkspaceSideBar";
 import { CloseButton, OpenButton } from "ui";
 
@@ -17,7 +17,6 @@ export default function WorkspaceLayout({
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  console.log("workspace layout", params);
   return (
     <div className="w-screen flex">
       <div className={`w-52 ${isSidebarOpen ? "" : "hidden"}`}>

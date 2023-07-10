@@ -15,18 +15,22 @@ import {
 } from "ui";
 import { useState } from "react";
 import { LoadingButton } from "ui";
-import { useRouter } from "next/navigation";
+import { IWorkspace } from "workspace-types";
 import { workspaceSchema } from "./schemas/workspaceSchema";
 
-export function CreateWorkspaceForm() {
-  const router = useRouter();
-
+export function UpdateWorkspaceForm({
+  targetWorkspace,
+  setOpen,
+}: {
+  targetWorkspace: IWorkspace;
+  setOpen: (open: boolean) => void;
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof workspaceSchema>>({
     resolver: zodResolver(workspaceSchema),
     defaultValues: {
-      workspaceName: "",
-      emailId: "",
+      workspaceName: targetWorkspace.name,
+      emailId: targetWorkspace.emailId,
     },
   });
 
@@ -34,12 +38,13 @@ export function CreateWorkspaceForm() {
     setIsLoading(true);
     try {
       const response = await fetch("/api/workspace", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          workspacename: data.workspaceName,
+          workspaceId: targetWorkspace.id,
+          workspaceName: data.workspaceName,
           emailId: data.emailId,
         }),
       });
@@ -47,23 +52,22 @@ export function CreateWorkspaceForm() {
 
       if (response.ok) {
         toast({
-          title: "워크스페이스가 생성되었습니다.",
+          title: "워크스페이스가 수정되었습니다.",
           description: (
             <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <div>request</div>
               <code className="text-white">
                 {JSON.stringify(data, null, 2)}
               </code>
-              <div>response</div>
               <code className="text-white">
                 {JSON.stringify(result, null, 2)}
               </code>
             </pre>
           ),
         });
-        router.replace(`/workspace/${result.workspaceId}`);
       }
+      setOpen(false);
     } catch (error) {
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -120,7 +124,7 @@ export function CreateWorkspaceForm() {
             <LoadingButton />
           ) : (
             <Button type="submit" className="w-full">
-              생성하기
+              수정하기
             </Button>
           )}
         </div>

@@ -12,7 +12,9 @@ export default function CreateWorkspace() {
             회사 또는 팀 이름을 알려주세요.
           </h4>
           <h5 className="text-lg font-normal"></h5>
-          <CreateWorkspaceForm />
+          <div className="w-2/3">
+            <CreateWorkspaceForm />
+          </div>
         </div>
       </div>
     </>
