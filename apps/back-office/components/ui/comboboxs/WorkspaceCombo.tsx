@@ -22,6 +22,7 @@ import WorkspaceSettingDialog from "../dialogs/WorkspaceSettingDialog";
 import { IWorkspace } from "workspace-types";
 import { usePathname, useRouter } from "next/navigation";
 import extractSlug from "../../../lib/utils/extractSlug";
+import WorkspaceAPI from "../../../lib/api/workspace";
 
 export default function WorkspaceCombo() {
   const [open, setOpen] = useState(false);
@@ -33,19 +34,8 @@ export default function WorkspaceCombo() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const getWorkspace = async () => {
-    const response = await fetch("/api/workspace", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const result = await response.json();
-    return result.list as IWorkspace[];
-  };
-
   useEffect(() => {
-    getWorkspace().then((result) => {
+    WorkspaceAPI.getWorkspace().then((result) => {
       setWorkspaces(result);
 
       const currentSlug = extractSlug(pathname);
@@ -116,13 +106,6 @@ export default function WorkspaceCombo() {
               ))}
               <hr></hr>
               <CommandItem>
-                {/* <Link
-                  href="/create-workspace"
-                  className="w-full px-3 flex justify-between items-center"
-                >
-                  <p>설정</p>
-                  <GearIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Link> */}
                 <WorkspaceSettingDialog targetWorkspace={selectedWorkspace} />
               </CommandItem>
               <hr></hr>

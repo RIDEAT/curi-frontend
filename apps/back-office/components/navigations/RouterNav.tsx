@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
+  Button,
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
@@ -10,28 +12,28 @@ import {
 export default function RouterNav({
   right,
 }: {
-  right: { path: string; display: string };
+  right?: { path: string; display: string };
 }) {
-  const { path, display } = right;
+  const router = useRouter();
   return (
     <>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <Button variant="ghost" onClick={() => router.back()}>
                 <div>&larr; 뒤로</div>
-              </NavigationMenuLink>
-            </Link>
+              </Button>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href={`${path}`} legacyBehavior passHref>
+            <Link href={`${right?.path}`} legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {display}
+                {right?.display}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>

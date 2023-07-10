@@ -51,7 +51,12 @@ export function WorkspaceSidebar({ className, slug }: SidebarProps) {
       <div className="px-3 py-2">
         <div className="space-y-1 flex flex-col gap-1">
           {menuItems.map((item) => (
-            <Link href={item.path} className="w-full" key={item.key}>
+            <Link
+              href={item.path}
+              className="w-full"
+              key={item.key}
+              replace={true}
+            >
               <Button
                 variant={lastPath === item.key ? "secondary" : "ghost"}
                 className="w-full flex justify-start items-center gap-2"

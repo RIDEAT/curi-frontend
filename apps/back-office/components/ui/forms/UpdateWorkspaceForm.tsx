@@ -48,24 +48,10 @@ export function UpdateWorkspaceForm({
           emailId: data.emailId,
         }),
       });
-      const result = await response.json();
 
       if (response.ok) {
-        toast({
-          title: "워크스페이스가 수정되었습니다.",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">
-                {JSON.stringify(data, null, 2)}
-              </code>
-              <code className="text-white">
-                {JSON.stringify(result, null, 2)}
-              </code>
-            </pre>
-          ),
-        });
+        setOpen(false);
       }
-      setOpen(false);
     } catch (error) {
       console.error(error);
     } finally {
