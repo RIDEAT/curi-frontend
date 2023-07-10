@@ -57,11 +57,26 @@ export function CreateWorkspaceForm() {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setIsLoading(true);
     try {
+      const response = await fetch("/api/workspace/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          workspacename: data.workspacename,
+          emailId: data.emailId,
+        }),
+      });
+      console.log(response);
+      const result = await response.json();
       toast({
         title: "[Test] 워크스페이스 생성이 요청되었습니다.",
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+            <code className="text-white">
+              {JSON.stringify(result, null, 2)}
+            </code>
           </pre>
         ),
       });
