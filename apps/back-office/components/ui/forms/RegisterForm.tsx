@@ -15,6 +15,7 @@ import {
   CardTitle,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,7 +23,7 @@ import {
   Input,
   toast,
 } from "ui";
-import LoadingButton from "ui/components/buttons/loadingButton";
+import { LoadingButton } from "ui";
 
 const RegisterFormSchema = z
   .object({
@@ -120,11 +121,13 @@ export default function RegisterForm({
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg font-semibold">이름</FormLabel>
+                  <FormLabel className="text-base font-semibold">
+                    이름
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="이름을 입력해주세요." {...field} />
+                    <Input placeholder="홍길동" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -133,16 +136,13 @@ export default function RegisterForm({
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg font-semibold">
+                  <FormLabel className="text-base font-semibold">
                     이메일 주소
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="회사에서 사용하는 이메일 주소를 입력해주세요."
-                      {...field}
-                    />
+                    <Input placeholder="example@email.com" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -151,17 +151,16 @@ export default function RegisterForm({
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg font-semibold">
+                  <FormLabel className="text-base font-semibold">
                     비밀번호
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="사용할 비밀번호를 입력해주세요. (8글자 이상)"
-                      {...field}
-                    />
+                    <Input type="password" placeholder="" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormDescription className="text-xs">
+                    사용할 비밀번호를 입력해주세요. (8글자 이상)
+                  </FormDescription>
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -171,17 +170,16 @@ export default function RegisterForm({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="비밀번호를 확인해주세요."
-                      {...field}
-                    />
+                    <Input type="password" placeholder="" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormDescription className="text-xs">
+                    비밀번호를 확인해주세요.
+                  </FormDescription>
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
-            <div className="grid gap-2 text-red-500 text-xs">
+            <div className="grid gap-2 text-destructive text-xs">
               <p>{errorMsg}</p>
             </div>
             <div className="flex justify-center">

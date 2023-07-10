@@ -29,7 +29,7 @@ import {
   toast,
 } from "ui";
 import Link from "next/link";
-import LoadingButton from "ui/components/buttons/loadingButton";
+import { LoadingButton } from "ui";
 
 const LoginFormSchema = z.object({
   email: z.string().email({
@@ -112,13 +112,13 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg font-semibold">
+                  <FormLabel className="text-base font-semibold">
                     이메일 주소
                   </FormLabel>
                   <FormControl>
                     <Input placeholder="example@curi.work" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -127,17 +127,17 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-lg font-semibold">
+                  <FormLabel className="text-base font-semibold">
                     비밀번호
                   </FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="password" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
-            <div className="grid gap-2 text-red-500 text-xs">
+            <div className="grid gap-2 text-destructive text-xs">
               <p>{errorMsg}</p>
             </div>
             <div className="flex justify-center">
