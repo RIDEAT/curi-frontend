@@ -2,23 +2,30 @@
 
 import { useEffect, useState } from "react";
 import withAuth from "../../../../components/hoc/withAuth";
-import MemberTable from "../../../../components/ui/tables/MemberTable/MemberTable";
 import { IMember } from "member-types";
 import MemberAPI from "../../../../lib/api/member";
+import { MemberCategoryTab } from "../../../../components/ui/tabs/MemberCategoryTab";
+
+const tabs = [
+  { value: "all", label: "전체" },
+  { value: "admin", label: "관리자" },
+  { value: "manager", label: "매니저" },
+  { value: "employee", label: "신입사원" },
+];
 
 export default withAuth(Member, "protected");
 function Member() {
-  const [member, setMember] = useState<IMember[]>([]);
+  const [members, setMembers] = useState<IMember[]>([]);
 
   useEffect(() => {
     MemberAPI.get().then((result) => {
-      setMember(result);
+      setMembers(result);
     });
   }, []);
 
   return (
-    <div className="w-full p-5">
-      <MemberTable data={member} />
+    <div className="w-full min-w-max p-5">
+      <MemberCategoryTab tabs={tabs} members={members} />
     </div>
   );
 }

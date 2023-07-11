@@ -1,6 +1,7 @@
 // ui
 export * from "./ui/avatar";
 export * from "./ui/button";
+export * from "./ui/calendar";
 export * from "./ui/card";
 export * from "./ui/checkbox";
 export * from "./ui/collapsible";
@@ -16,6 +17,7 @@ export * from "./ui/scroll-area";
 export * from "./ui/select";
 export * from "./ui/sheet";
 export * from "./ui/table";
+export * from "./ui/tabs";
 export * from "./ui/toast";
 export * from "./ui/toaster";
 export * from "./ui/use-toast";

@@ -49,6 +49,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.9.3
         version: 8.9.3(react-dom@18.2.0)(react@18.2.0)
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
       firebase:
         specifier: ^9.23.0
         version: 9.23.0
@@ -248,6 +251,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.0.2
         version: 1.0.2(@types/react@18.2.5)(react@17.0.2)
+      '@radix-ui/react-tabs':
+        specifier: ^1.0.4
+        version: 1.0.4(@types/react-dom@18.2.3)(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2)
       '@radix-ui/react-toast':
         specifier: ^1.1.4
         version: 1.1.4(@types/react-dom@18.2.3)(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2)
@@ -263,9 +269,15 @@ importers:
       cmdk:
         specifier: ^0.2.0
         version: 0.2.0(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2)
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
       lucide-react:
         specifier: ^0.244.0
         version: 0.244.0(react@17.0.2)
+      react-day-picker:
+        specifier: ^8.8.0
+        version: 8.8.0(date-fns@2.30.0)(react@17.0.2)
       react-hook-form:
         specifier: ^7.45.1
         version: 7.45.1(react@17.0.2)
@@ -1234,7 +1246,7 @@ packages:
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
-      react-hook-form: 7.45.1(react@17.0.2)
+      react-hook-form: 7.45.1(react@18.2.0)
     dev: false
 
   /@humanwhocodes/config-array@0.5.0:
@@ -2495,6 +2507,34 @@ packages:
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.5)(react@17.0.2)
       '@types/react': 18.2.5
       react: 17.0.2
+    dev: false
+
+  /@radix-ui/react-tabs@1.0.4(@types/react-dom@18.2.3)(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2):
+    resolution: {integrity: sha512-egZfYY/+wRNCflXNHx+dePvnz9FbmssDTJBtgRfDY7e8SE5oIo3Py2eCB1ckAbh1Q7cQ/6yJZThJ++sgbxibog==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.21.5
+      '@radix-ui/primitive': 1.0.1
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.5)(react@17.0.2)
+      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.5)(react@17.0.2)
+      '@radix-ui/react-id': 1.0.1(@types/react@18.2.5)(react@17.0.2)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.3)(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.3)(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2)
+      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.3)(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.5)(react@17.0.2)
+      '@types/react': 18.2.5
+      '@types/react-dom': 18.2.3
+      react: 17.0.2
+      react-dom: 18.2.0(react@17.0.2)
     dev: false
 
   /@radix-ui/react-toast@1.1.4(@types/react-dom@18.2.3)(@types/react@18.2.5)(react-dom@18.2.0)(react@17.0.2):
@@ -3879,6 +3919,13 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
     dev: true
+
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.21.5
+    dev: false
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -6813,6 +6860,16 @@ packages:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
     dev: true
+
+  /react-day-picker@8.8.0(date-fns@2.30.0)(react@17.0.2):
+    resolution: {integrity: sha512-QIC3uOuyGGbtypbd5QEggsCSqVaPNu8kzUWquZ7JjW9fuWB9yv7WyixKmnaFelTLXFdq7h7zU6n/aBleBqe/dA==}
+    peerDependencies:
+      date-fns: ^2.28.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      date-fns: 2.30.0
+      react: 17.0.2
+    dev: false
 
   /react-dom@18.2.0(react@17.0.2):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}

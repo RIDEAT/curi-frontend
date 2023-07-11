@@ -18,7 +18,7 @@ import {
 import Link from "next/link";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
-import WorkspaceSettingDialog from "../dialogs/WorkspaceSettingDialog";
+import { WorkspaceSettingDialog } from "../dialogs/WorkspaceSettingDialog";
 import { IWorkspace } from "workspace-types";
 import { usePathname, useRouter } from "next/navigation";
 import extractSlug from "../../../lib/utils/extractSlug";

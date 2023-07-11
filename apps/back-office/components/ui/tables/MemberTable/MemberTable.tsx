@@ -66,7 +66,7 @@ function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="min-w-max max-w-4xl">
+    <div className="w-full">
       <div className="flex items-center py-4">
         <Input
           placeholder="이름으로 검색하기"

@@ -12,7 +12,7 @@ import { UpdateWorkspaceForm } from "../forms/UpdateWorkspaceForm";
 import { IWorkspace } from "workspace-types";
 import { useState } from "react";
 
-export default function WorkspaceSettingDialog({
+export function WorkspaceSettingDialog({
   targetWorkspace,
 }: {
   targetWorkspace: IWorkspace;
