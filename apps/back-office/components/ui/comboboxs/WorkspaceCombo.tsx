@@ -35,7 +35,7 @@ export default function WorkspaceCombo() {
   const pathname = usePathname();
 
   useEffect(() => {
-    WorkspaceAPI.getWorkspace().then((result) => {
+    WorkspaceAPI.get().then((result) => {
       setWorkspaces(result);
 
       const currentSlug = extractSlug(pathname);

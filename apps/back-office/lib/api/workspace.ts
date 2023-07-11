@@ -1,7 +1,7 @@
 import { IWorkspace } from "workspace-types";
 
 const WorkspaceAPI = {
-  getWorkspace: async () => {
+  get: async () => {
     const response = await fetch("/api/workspace", {
       method: "GET",
       headers: {

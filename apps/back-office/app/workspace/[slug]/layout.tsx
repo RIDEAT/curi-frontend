@@ -22,14 +22,12 @@ export default function WorkspaceLayout({
       <div className={`w-52 ${isSidebarOpen ? "" : "hidden"}`}>
         <WorkspaceSidebar slug={params.slug} />
       </div>
-      <div>
+      <div className="w-full">
         {isSidebarOpen ? (
           <CloseButton onClick={toggleSidebar} variant="ghost" />
         ) : (
           <OpenButton onClick={toggleSidebar} variant="ghost" />
         )}
-
-        <div>workspace: {params.slug}</div>
         {children}
       </div>
     </div>

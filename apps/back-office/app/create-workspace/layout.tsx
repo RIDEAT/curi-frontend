@@ -1,6 +1,5 @@
 "use client";
 
-import { Toaster } from "ui";
 import RouterNav from "../../components/navigations/RouterNav";
 
 export default function RouterLayout({
@@ -14,7 +13,6 @@ export default function RouterLayout({
         <RouterNav />
       </div>
       <div>{children}</div>
-      <Toaster />
     </div>
   );
 }
