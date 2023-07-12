@@ -8,9 +8,7 @@ import {
   DialogTrigger,
 } from "ui";
 
-import { GearIcon, PlusCircledIcon } from "@radix-ui/react-icons";
-import { UpdateWorkspaceForm } from "../forms/UpdateWorkspaceForm";
-import { IWorkspace } from "workspace-types";
+import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { CreateMemberForm } from "../forms/CreateMemberForm";
 
