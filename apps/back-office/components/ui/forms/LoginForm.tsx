@@ -30,6 +30,7 @@ import {
 } from "ui";
 import Link from "next/link";
 import { LoadingButton } from "ui";
+import FirebaseAPI from "../../../lib/api/firebase";
 
 const LoginFormSchema = z.object({
   email: z.string().email({
@@ -66,7 +67,7 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
     clearErrorMsg();
 
     try {
-      const userCredential = await UserAPI.loginFirebase(email, password);
+      const userCredential = await FirebaseAPI.login(email, password);
       const accessToken = await getAccessToken(userCredential);
       const { user, authToken } = await UserAPI.getTokens(accessToken);
 

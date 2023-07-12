@@ -24,6 +24,7 @@ import {
   toast,
 } from "ui";
 import { LoadingButton } from "ui";
+import FirebaseAPI from "../../../lib/api/firebase";
 
 const RegisterFormSchema = z
   .object({
@@ -80,7 +81,7 @@ export default function RegisterForm({
     setIsLoading(true);
     setErrorMsg("");
     try {
-      await UserAPI.registerFirebase(email, password);
+      await FirebaseAPI.register(email, password);
       setSentEmail(true);
     } catch (err) {
       if (err.message) {

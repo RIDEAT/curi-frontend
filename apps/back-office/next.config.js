@@ -5,8 +5,8 @@ module.exports = {
     return [
       {
         source: "/get",
-        destination: "http://localhost:8080/user/authorize",
-        // destination: "https://auth.curiboard.com/auth/authorize",
+        // destination: "http://localhost:8080/user/authorize",
+        destination: "https://auth.curiboard.com/auth/verify",
       },
     ];
   },

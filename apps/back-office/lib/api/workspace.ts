@@ -1,12 +1,14 @@
 import { IWorkspace } from "workspace-types";
 
 const WorkspaceAPI = {
-  get: async () => {
-    const response = await fetch("/api/workspace", {
+  get: async (authToken: string) => {
+    const response = await fetch("https://api.curiboard.com/workspace", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + authToken,
       },
+      credentials: "include",
     });
     const result = await response.json();
     return result.list as IWorkspace[];

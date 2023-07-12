@@ -33,14 +33,17 @@ export function CreateWorkspaceForm() {
   const onSubmit = async (data: z.infer<typeof workspaceSchema>) => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/workspace", {
+      const authToken = localStorage.getItem("authToken")?.replace(/"/g, "");
+      const response = await fetch("https://api.curiboard.com/workspace", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + authToken,
         },
+        credentials: "include",
         body: JSON.stringify({
-          workspacename: data.workspaceName,
-          emailId: data.emailId,
+          name: data.workspaceName,
+          email: data.emailId + "@curi.work",
         }),
       });
       const result = await response.json();
