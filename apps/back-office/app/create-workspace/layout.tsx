@@ -1,6 +1,5 @@
 "use client";
 
-import { Toaster } from "ui";
 import RouterNav from "../../components/navigations/RouterNav";
 
 export default function RouterLayout({
@@ -11,10 +10,9 @@ export default function RouterLayout({
   return (
     <div className="flex flex-col">
       <div className="flex justify-between p-2">
-        <RouterNav right={{ path: "/logout", display: "로그아웃" }} />
+        <RouterNav />
       </div>
       <div>{children}</div>
-      <Toaster />
     </div>
   );
 }

@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import withAuth from "../../../components/hoc/withAuth";
 
-import { WorkspaceSidebar } from "../../../components/ui/sidebars/WorkspaceSideBar";
-import { CloseButton, OpenButton } from "ui";
-
-export default function Page() {
+export default withAuth(Page, "protected");
+function Page() {
   return (
     <>
       <div>Default</div>

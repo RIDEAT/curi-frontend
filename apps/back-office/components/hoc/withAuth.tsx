@@ -72,9 +72,10 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
             }
           });
         }
+        setIsLoading(false);
       }
 
-      setIsLoading(false);
+      if (routeRole == "public") setIsLoading(false);
     }, []);
 
     if (isloading) return <div>loading...</div>;

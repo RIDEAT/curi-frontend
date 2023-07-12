@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "ui/lib/utils";
@@ -18,25 +17,35 @@ import {
 } from "ui";
 import Link from "next/link";
 import { PlusIcon } from "@radix-ui/react-icons";
-
-const workspaces = [
-  {
-    value: "rideat",
-    label: "RIDEAT",
-  },
-  {
-    value: "curi",
-    label: "CURI",
-  },
-  {
-    value: "example",
-    label: "example",
-  },
-];
+import { useEffect, useState } from "react";
+import { WorkspaceSettingDialog } from "../dialogs/WorkspaceSettingDialog";
+import { IWorkspace } from "workspace-types";
+import { usePathname, useRouter } from "next/navigation";
+import extractSlug from "../../../lib/utils/extractSlug";
+import WorkspaceAPI from "../../../lib/api/workspace";
 
 export default function WorkspaceCombo() {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("rideat");
+  const [open, setOpen] = useState(false);
+  const [workspaces, setWorkspaces] = useState<IWorkspace[]>([]);
+  const [selectedWorkspace, setSelectedWorkspace] = useState<IWorkspace | null>(
+    null
+  );
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    WorkspaceAPI.get().then((result) => {
+      setWorkspaces(result);
+
+      const currentSlug = extractSlug(pathname);
+      const currentWorkspace = result.find(
+        (workspace) => Number(workspace.id) === currentSlug
+      );
+
+      setSelectedWorkspace(currentWorkspace);
+    });
+  }, []);
 
   return (
     <div className="w-full justify-start">
@@ -57,10 +66,11 @@ export default function WorkspaceCombo() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className="text-lg">
-                {value
-                  ? workspaces.find((workspace) => workspace.value === value)
-                      ?.label
-                  : "RIDEAT"}
+                {selectedWorkspace?.name
+                  ? workspaces.find(
+                      (workspace) => workspace.name === selectedWorkspace.name
+                    )?.name
+                  : ""}
               </div>
             </div>
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -71,21 +81,33 @@ export default function WorkspaceCombo() {
             <CommandGroup>
               {workspaces.map((workspace) => (
                 <CommandItem
-                  key={workspace.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                  key={workspace.id}
+                  onSelect={(currentLabel) => {
+                    setSelectedWorkspace((prev) => {
+                      if (currentLabel === prev.name) return prev;
+                      return workspaces.find(
+                        (workspace) => workspace.name === currentLabel
+                      );
+                    });
                     setOpen(false);
+                    router.push(`/workspace/${workspace.id}/dashboard`);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === workspace.value ? "opacity-100" : "opacity-0"
+                      selectedWorkspace.name === workspace.name
+                        ? "opacity-100"
+                        : "opacity-0"
                     )}
                   />
-                  {workspace.label}
+                  {workspace.name}
                 </CommandItem>
               ))}
+              <hr></hr>
+              <CommandItem>
+                <WorkspaceSettingDialog targetWorkspace={selectedWorkspace} />
+              </CommandItem>
               <hr></hr>
               <CommandItem>
                 <Link

@@ -11,12 +11,12 @@ export default function Home() {
         <LendingNav />
         <main className="flex justify-center items-center">
           <div className="flex flex-col gap-5">
-            <Button>
-              <Link href="/create-workspace">워크스페이스 생성하기</Link>
-            </Button>
-            <Button>
-              <Link href="/workspace/rideat">워크스페이스로 이동하기</Link>
-            </Button>
+            <Link href="/create-workspace">
+              <Button>워크스페이스 생성하기</Button>
+            </Link>
+            <Link href="/workspace">
+              <Button>워크스페이스로 이동하기</Button>
+            </Link>
           </div>
         </main>
       </div>
