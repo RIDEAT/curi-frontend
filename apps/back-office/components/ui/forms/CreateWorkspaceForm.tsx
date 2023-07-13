@@ -17,10 +17,10 @@ import { useState } from "react";
 import { LoadingButton } from "ui";
 import { useRouter } from "next/navigation";
 import { workspaceSchema } from "./schemas/workspaceSchema";
+import { WorkspaceAPI } from "../../../lib/api/workspace";
 
 export function CreateWorkspaceForm() {
   const router = useRouter();
-
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof workspaceSchema>>({
     resolver: zodResolver(workspaceSchema),
@@ -33,35 +33,17 @@ export function CreateWorkspaceForm() {
   const onSubmit = async (data: z.infer<typeof workspaceSchema>) => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/workspace", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          workspacename: data.workspaceName,
-          emailId: data.emailId,
-        }),
-      });
-      const result = await response.json();
+      const { result, response } = await WorkspaceAPI.create(
+        data.workspaceName,
+        data.emailId
+      );
 
       if (response.ok) {
         toast({
           title: "워크스페이스가 생성되었습니다.",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <div>request</div>
-              <code className="text-white">
-                {JSON.stringify(data, null, 2)}
-              </code>
-              <div>response</div>
-              <code className="text-white">
-                {JSON.stringify(result, null, 2)}
-              </code>
-            </pre>
-          ),
+          type: "success",
         });
-        router.replace(`/workspace/${result.workspaceId}`);
+        router.replace(`/workspace/${result.workspace.id}`);
       }
     } catch (error) {
     } finally {

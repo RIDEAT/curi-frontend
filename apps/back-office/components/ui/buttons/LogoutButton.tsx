@@ -6,7 +6,7 @@ import {
   isAuthenticatedAtom,
   userAtom,
 } from "../../../lib/context/auth";
-import UserAPI from "../../../lib/api/user";
+import { UserAPI } from "../../../lib/api/user";
 
 export default function LogoutButton() {
   const setIsAuthenticated = useSetAtom(isAuthenticatedAtom);

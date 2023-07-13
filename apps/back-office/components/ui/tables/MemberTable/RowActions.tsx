@@ -43,7 +43,6 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const [open, setOpen] = useState(false);
-  console.log(open);
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
@@ -105,7 +104,6 @@ export function DataTableRowActions<TData>({
             <AlertDialogFooter>
               <AlertDialogCancel
                 onClick={() => {
-                  console.log(row);
                   setOpen(false);
                 }}
               >
@@ -114,7 +112,6 @@ export function DataTableRowActions<TData>({
               <AlertDialogAction
                 className="bg-destructive"
                 onClick={() => {
-                  console.log(row);
                   setOpen(false);
                 }}
               >

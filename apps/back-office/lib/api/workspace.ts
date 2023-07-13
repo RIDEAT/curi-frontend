@@ -1,16 +1,44 @@
 import { IWorkspace } from "workspace-types";
+import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
+import { RESOURSE_API_URL, WORKSPACE_PATH } from "../constant/url";
+import { id } from "date-fns/locale";
 
-const WorkspaceAPI = {
+interface IResponse {
+  list: IWorkspace[];
+  user: {
+    id: string;
+  };
+}
+
+export const WorkspaceAPI = {
+  endPoint: RESOURSE_API_URL + WORKSPACE_PATH,
   get: async () => {
-    const response = await fetch("/api/workspace", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    return await fetcherWithToken(
+      WorkspaceAPI.endPoint,
+      (data: IResponse) => data.list
+    );
+  },
+  create: async (name: string, emailId: string) => {
+    return await fetcherWithTokenAndBody(WorkspaceAPI.endPoint, {
+      name,
+      email: emailId + "@curi.work",
     });
-    const result = await response.json();
-    return result.list as IWorkspace[];
+  },
+  update: async (id: string, name: string, emailId: string) => {
+    return await fetcherWithTokenAndBody(
+      `${WorkspaceAPI.endPoint}/${id}`,
+      {
+        name,
+        email: emailId + "@curi.work",
+      },
+      "PUT"
+    );
+  },
+  delete: async (id: string) => {
+    return await fetcherWithToken(
+      `${WorkspaceAPI.endPoint}/${id}`,
+      null,
+      "DELETE"
+    );
   },
 };
-
-export default WorkspaceAPI;

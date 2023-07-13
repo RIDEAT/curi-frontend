@@ -17,6 +17,7 @@ import { useState } from "react";
 import { LoadingButton } from "ui";
 import { IWorkspace } from "workspace-types";
 import { workspaceSchema } from "./schemas/workspaceSchema";
+import { WorkspaceAPI } from "../../../lib/api/workspace";
 
 export function UpdateWorkspaceForm({
   targetWorkspace,
@@ -37,17 +38,12 @@ export function UpdateWorkspaceForm({
   const onSubmit = async (data: z.infer<typeof workspaceSchema>) => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/workspace", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          workspaceId: targetWorkspace.id,
-          workspaceName: data.workspaceName,
-          emailId: data.emailId,
-        }),
-      });
+      const { result, response } = await WorkspaceAPI.update(
+        targetWorkspace.workspaceId,
+        data.workspaceName,
+        data.emailId
+      );
+      console.log(result);
 
       if (response.ok) {
         setOpen(false);

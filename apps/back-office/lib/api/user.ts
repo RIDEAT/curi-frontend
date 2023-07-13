@@ -1,111 +1,22 @@
-import {
-  UserCredential,
-  createUserWithEmailAndPassword,
-  reload,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { firebaseAuth } from "../firebase/firebaseClient";
 import { IUser } from "user-types";
-import { API_URL } from "../constant/url";
+import {
+  AUTHROIZE_PATH,
+  AUTH_API_URL,
+  LOGOUT_PATH,
+  VERIFY_PATH,
+} from "../constant/url";
 
-const UserAPI = {
-  registerFirebase: async (email: string, password: string) => {
-    try {
-      const actionCodeSettings = {
-        url: "http://localhost:3000/login",
-      };
-      const { user } = await createUserWithEmailAndPassword(
-        firebaseAuth,
-        email,
-        password
-      );
-      await sendEmailVerification(user, actionCodeSettings);
-      return true;
-    } catch (error) {
-      switch (error.code) {
-        case "auth/weak-password":
-          error.message = "비밀번호는 6자리 이상이어야 합니다";
-          break;
-        case "auth/invalid-email":
-          error.message = "잘못된 이메일 주소입니다";
-          break;
-        case "auth/email-already-in-use":
-          error.message = "이미 가입되어 있는 계정입니다";
-          break;
-        default:
-          error.message = "회원가입에 실패했습니다. 다시 시도해주세요.";
-      }
-      throw error;
-    }
-  },
-  /**
-   * login with firebase auth and get userCredential
-   */
-  loginFirebase: async (email: string, password: string) => {
-    try {
-      if (!UserAPI.checkEmailverification()) {
-        const emailVerifyError = new Error("이메일 인증을 완료해주세요.");
-        throw emailVerifyError;
-      }
-      const userCredential: UserCredential = await signInWithEmailAndPassword(
-        firebaseAuth,
-        email,
-        password
-      );
-      return userCredential;
-    } catch (error) {
-      if (error.message === "이메일 인증을 완료해주세요.") {
-        throw error;
-      }
-      switch (error.code) {
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-          error.message = "이메일 혹은 비밀번호가 일치하지 않습니다.";
-          break;
-        case "auth/weak-password":
-          error.message = "비밀번호는 6글자 이상이어야 합니다.";
-          break;
-        case "auth/network-request-failed":
-          error.message = "네트워크 연결에 실패 하였습니다.";
-          break;
-        case "auth/invalid-email":
-          error.message = "잘못된 이메일 형식입니다.";
-          break;
-        case "auth/too-many-requests":
-          error.message =
-            "비밀번호를 너무 많이 틀렸습니다. 잠시 후 다시 시도해주세요.";
-          break;
-        case "auth/internal-error":
-          error.message = "잘못된 요청입니다.";
-          break;
-        default:
-          error.message = "로그인에 실패했습니다. 다시 시도해주세요.";
-      }
-      throw error;
-    }
-  },
-  /**
-   * check if email verification from firebase auth
-   */
-  checkEmailverification: async () => {
-    try {
-      await reload(firebaseAuth.currentUser);
-      return firebaseAuth.currentUser.emailVerified;
-    } catch (error) {
-      console.error(error);
-    }
-  },
+export const UserAPI = {
   /**
    * get Auth token and refresh token from server
    */
   getTokens: async (accessToken: string) => {
     try {
-      const response = await fetch(API_URL + "/user/authorize", {
+      const response = await fetch(AUTH_API_URL + AUTHROIZE_PATH, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authentication: accessToken,
+          Authorization: "Bearer " + accessToken,
         },
         credentials: "include",
       });
@@ -131,7 +42,7 @@ const UserAPI = {
     setUser: (user: IUser) => void
   ) => {
     try {
-      const response = await fetch(API_URL + "/user/validate", {
+      const response = await fetch(AUTH_API_URL + VERIFY_PATH, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +72,7 @@ const UserAPI = {
    */
   logout: async (authToken: string, clearFunc: () => void) => {
     try {
-      const response = await fetch(API_URL + "/user/logout", {
+      const response = await fetch(AUTH_API_URL + LOGOUT_PATH, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -182,5 +93,3 @@ const UserAPI = {
     }
   },
 };
-
-export default UserAPI;

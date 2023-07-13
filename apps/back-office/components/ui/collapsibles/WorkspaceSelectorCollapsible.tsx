@@ -1,4 +1,6 @@
-import { MouseEvent, useState } from "react";
+"use client";
+
+import { MouseEvent, useEffect, useState } from "react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import {
   Button,
@@ -6,21 +8,28 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "ui";
-import { IWorkspace } from "workspace-types";
 import { useRouter } from "next/navigation";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
-export default function WorkspaceSelectorCollapsible({
-  workspaces,
-}: {
-  workspaces: IWorkspace[];
-}) {
+import useWorkspace from "../../../lib/hook/swr/useWorkspace";
+
+export default function WorkspaceSelectorCollapsible() {
+  const { workspaces, isLoading, error } = useWorkspace();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
   const onclickHandler = (event: MouseEvent) => {
     router.push(`/workspace/${event.currentTarget.id}`);
   };
+
+  useEffect(() => {
+    if (!isLoading && workspaces.length == 0) {
+      router.replace(`/create-workspace`);
+    }
+  }, [workspaces]);
+
+  if (isLoading) return <div>loading..</div>;
+  if (error) return <div>error</div>;
 
   return (
     <Collapsible
@@ -42,20 +51,20 @@ export default function WorkspaceSelectorCollapsible({
       <Button
         className="w-full flex justify-between items-center px-4 py-2 font-mono text-sm shadow-sm rounded-md border"
         variant="outline"
-        id={workspaces[0]?.id}
+        id={workspaces[0].workspaceId}
         onClick={onclickHandler}
       >
-        <p>{workspaces[0]?.name}</p>
+        <p>{workspaces[0].name}</p>
         <ArrowRightIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </Button>
       <CollapsibleContent className="space-y-2">
         {workspaces.slice(1).map((workspace) => (
           <Button
-            key={workspace.id}
+            key={workspace.workspaceId}
             className="w-full flex justify-between items-center px-4 py-2 font-mono text-sm shadow-sm rounded-md border"
             variant="outline"
             onClick={onclickHandler}
-            id={workspace.id}
+            id={workspace.workspaceId}
           >
             <p>{workspace.name}</p>
             <ArrowRightIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />

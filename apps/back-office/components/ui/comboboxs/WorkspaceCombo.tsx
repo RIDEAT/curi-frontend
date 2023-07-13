@@ -22,30 +22,29 @@ import { WorkspaceSettingDialog } from "../dialogs/WorkspaceSettingDialog";
 import { IWorkspace } from "workspace-types";
 import { usePathname, useRouter } from "next/navigation";
 import extractSlug from "../../../lib/utils/extractSlug";
-import WorkspaceAPI from "../../../lib/api/workspace";
+import useWorkspace from "../../../lib/hook/swr/useWorkspace";
 
 export default function WorkspaceCombo() {
   const [open, setOpen] = useState(false);
-  const [workspaces, setWorkspaces] = useState<IWorkspace[]>([]);
+  const { workspaces, isLoading, error } = useWorkspace();
   const [selectedWorkspace, setSelectedWorkspace] = useState<IWorkspace | null>(
     null
   );
-
-  const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    WorkspaceAPI.get().then((result) => {
-      setWorkspaces(result);
-
+    if (!isLoading) {
       const currentSlug = extractSlug(pathname);
-      const currentWorkspace = result.find(
-        (workspace) => Number(workspace.id) === currentSlug
+      const currentWorkspace = workspaces?.find(
+        (workspace) => Number(workspace.workspaceId) === currentSlug
       );
 
       setSelectedWorkspace(currentWorkspace);
-    });
-  }, []);
+    }
+  }, [workspaces]);
+
+  if (isLoading) return <div>loading..</div>;
+  if (error) return <div>error</div>;
 
   return (
     <div className="w-full justify-start">
@@ -65,13 +64,7 @@ export default function WorkspaceCombo() {
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <div className="text-lg">
-                {selectedWorkspace?.name
-                  ? workspaces.find(
-                      (workspace) => workspace.name === selectedWorkspace.name
-                    )?.name
-                  : ""}
-              </div>
+              <CurrentWorkspaceLabel selectedWorkspace={selectedWorkspace} />
             </div>
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -79,31 +72,11 @@ export default function WorkspaceCombo() {
         <PopoverContent className="w-[230px] p-0">
           <Command>
             <CommandGroup>
-              {workspaces.map((workspace) => (
-                <CommandItem
-                  key={workspace.id}
-                  onSelect={(currentLabel) => {
-                    setSelectedWorkspace((prev) => {
-                      if (currentLabel === prev.name) return prev;
-                      return workspaces.find(
-                        (workspace) => workspace.name === currentLabel
-                      );
-                    });
-                    setOpen(false);
-                    router.push(`/workspace/${workspace.id}/dashboard`);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      selectedWorkspace.name === workspace.name
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
-                  />
-                  {workspace.name}
-                </CommandItem>
-              ))}
+              <CommandItems
+                selectedWorkspace={selectedWorkspace}
+                setSelectedWorkspace={setSelectedWorkspace}
+                setOpen={setOpen}
+              />
               <hr></hr>
               <CommandItem>
                 <WorkspaceSettingDialog targetWorkspace={selectedWorkspace} />
@@ -123,5 +96,60 @@ export default function WorkspaceCombo() {
         </PopoverContent>
       </Popover>
     </div>
+  );
+}
+
+function CurrentWorkspaceLabel({ selectedWorkspace }) {
+  const { workspaces, isLoading, error } = useWorkspace();
+
+  if (isLoading) return <div>loading..</div>;
+  if (error) return <div>error</div>;
+
+  return (
+    <div className="text-lg">
+      {selectedWorkspace?.name
+        ? workspaces.find(
+            (workspace) => workspace.name === selectedWorkspace.name
+          )?.name
+        : ""}
+    </div>
+  );
+}
+
+function CommandItems({ selectedWorkspace, setSelectedWorkspace, setOpen }) {
+  const { workspaces, isLoading, error } = useWorkspace();
+  const router = useRouter();
+
+  if (isLoading) return <div>loading..</div>;
+  if (error) return <div>error</div>;
+
+  return (
+    <>
+      {workspaces?.map((workspace) => (
+        <CommandItem
+          key={workspace.workspaceId}
+          onSelect={(currentLabel) => {
+            setSelectedWorkspace((prev) => {
+              if (currentLabel === prev.name) return prev;
+              return workspaces?.find(
+                (workspace) => workspace.name === currentLabel
+              );
+            });
+            setOpen(false);
+            router.push(`/workspace/${workspace.workspaceId}/dashboard`);
+          }}
+        >
+          <Check
+            className={cn(
+              "mr-2 h-4 w-4",
+              selectedWorkspace.name === workspace.name
+                ? "opacity-100"
+                : "opacity-0"
+            )}
+          />
+          {workspace.name}
+        </CommandItem>
+      ))}
+    </>
   );
 }
