@@ -6,7 +6,7 @@ import {
   VERIFY_PATH,
 } from "../constant/url";
 
-const UserAPI = {
+export const UserAPI = {
   /**
    * get Auth token and refresh token from server
    */
@@ -93,5 +93,3 @@ const UserAPI = {
     }
   },
 };
-
-export default UserAPI;

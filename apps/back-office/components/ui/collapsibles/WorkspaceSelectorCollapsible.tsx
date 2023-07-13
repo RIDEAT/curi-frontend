@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import {
   Button,
@@ -21,6 +21,12 @@ export default function WorkspaceSelectorCollapsible() {
   const onclickHandler = (event: MouseEvent) => {
     router.push(`/workspace/${event.currentTarget.id}`);
   };
+
+  useEffect(() => {
+    if (!isLoading && workspaces.length == 0) {
+      router.replace(`/create-workspace`);
+    }
+  }, [workspaces]);
 
   if (isLoading) return <div>loading..</div>;
   if (error) return <div>error</div>;

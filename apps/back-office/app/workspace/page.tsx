@@ -1,13 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import useSWR from "swr";
-import WorkspaceAPI from "../../lib/api/workspace";
-import { IWorkspace } from "workspace-types";
 import WorkspaceSelectorCollapsible from "../../components/ui/collapsibles/WorkspaceSelectorCollapsible";
 import withAuth from "../../components/hoc/withAuth";
 import RouterNav from "../../components/navigations/RouterNav";
-import { RESOURSE_API_URL, WORKSPACE_PATH } from "../../lib/constant/url";
 
 export default withAuth(SelectWorkspace, "protected");
 function SelectWorkspace() {

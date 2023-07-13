@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { firebaseAuth } from "../firebase/firebaseClient";
 
-const FirebaseAPI = {
+export const FirebaseAPI = {
   /**
    * register with firebase auth
    */
@@ -45,15 +45,19 @@ const FirebaseAPI = {
    */
   login: async (email: string, password: string) => {
     try {
-      if (!FirebaseAPI.checkEmailverification()) {
+      const isEmailVerified = await FirebaseAPI.checkEmailVerification();
+
+      if (!isEmailVerified) {
         const emailVerifyError = new Error("이메일 인증을 완료해주세요.");
         throw emailVerifyError;
       }
+
       const userCredential: UserCredential = await signInWithEmailAndPassword(
         firebaseAuth,
         email,
         password
       );
+
       return userCredential;
     } catch (error) {
       if (error.message === "이메일 인증을 완료해주세요.") {
@@ -89,7 +93,7 @@ const FirebaseAPI = {
   /**
    * check if email verification from firebase auth
    */
-  checkEmailverification: async () => {
+  checkEmailVerification: async () => {
     try {
       await reload(firebaseAuth.currentUser);
       return firebaseAuth.currentUser.emailVerified;
@@ -97,6 +101,15 @@ const FirebaseAPI = {
       console.error(error);
     }
   },
+  /**
+   *
+   */
+  logout: async () => {
+    try {
+      await firebaseAuth.signOut();
+      return true;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
-
-export default FirebaseAPI;

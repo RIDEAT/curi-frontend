@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import RegisterForm from "../../components/ui/forms/RegisterForm";
 import VerifyForm from "../../components/ui/cards/RegisterVerifyCard";
 import withAuth from "../../components/hoc/withAuth";
-import FirebaseAPI from "../../lib/api/firebase";
+import { FirebaseAPI } from "../../lib/api/firebase";
 
 function Register({
   setSentEmail,
@@ -27,7 +27,7 @@ function VerifyEmail() {
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleVerifyEmail = async () => {
-    const isVerified = await FirebaseAPI.checkEmailverification();
+    const isVerified = await FirebaseAPI.checkEmailVerification();
 
     if (isVerified) {
       router.push("/login");

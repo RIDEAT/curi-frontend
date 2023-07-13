@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import Link from "next/link";
-
-import UserAPI from "../../../lib/api/user";
 import {
   Button,
   Card,
@@ -24,7 +22,7 @@ import {
   toast,
 } from "ui";
 import { LoadingButton } from "ui";
-import FirebaseAPI from "../../../lib/api/firebase";
+import { FirebaseAPI } from "../../../lib/api/firebase";
 
 const RegisterFormSchema = z
   .object({
@@ -96,14 +94,6 @@ export default function RegisterForm({
 
   const onSubmit = async (data: z.infer<typeof RegisterFormSchema>) => {
     await register(data.email, data.password);
-    toast({
-      title: "[Test] 회원가입이 요청되었습니다.",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
   };
 
   return (

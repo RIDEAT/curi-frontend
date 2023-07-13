@@ -1,13 +1,15 @@
+import getAuthToken from "./getAuthToken";
+
 const getHeader = () => {
   return {
     "Content-Type": "application/json",
   };
 };
 
-const getHeaderWithAuth = (authToken: string) => {
+const getHeaderWithAuth = async () => {
   return {
     ...getHeader(),
-    Authorization: "Bearer " + authToken,
+    Authorization: "Bearer " + getAuthToken(),
   };
 };
 

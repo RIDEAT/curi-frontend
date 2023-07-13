@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { IUser } from "user-types";
 import { authStateAtom, userAtom } from "../../lib/context/auth";
 import { useEffect, useState } from "react";
-import UserAPI from "../../lib/api/user";
+import { UserAPI } from "../../lib/api/user";
 
 import { isAuthenticatedAtom, authTokenAtom } from "../../lib/context/auth";
 
