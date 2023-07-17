@@ -26,8 +26,9 @@ export default function WorkspaceSelectorCollapsible() {
     if (!isLoading && workspaces.length == 0) {
       router.replace(`/create-workspace`);
     }
-  }, [workspaces]);
+  }, [isLoading, workspaces]);
 
+  if (!isLoading && workspaces.length == 0) return <div>redirect</div>;
   if (isLoading) return <div>loading..</div>;
   if (error) return <div>error</div>;
 
@@ -51,7 +52,7 @@ export default function WorkspaceSelectorCollapsible() {
       <Button
         className="w-full flex justify-between items-center px-4 py-2 font-mono text-sm shadow-sm rounded-md border"
         variant="outline"
-        id={workspaces[0].workspaceId}
+        id={workspaces[0].id}
         onClick={onclickHandler}
       >
         <p>{workspaces[0].name}</p>
@@ -60,11 +61,11 @@ export default function WorkspaceSelectorCollapsible() {
       <CollapsibleContent className="space-y-2">
         {workspaces.slice(1).map((workspace) => (
           <Button
-            key={workspace.workspaceId}
+            key={workspace.id}
             className="w-full flex justify-between items-center px-4 py-2 font-mono text-sm shadow-sm rounded-md border"
             variant="outline"
             onClick={onclickHandler}
-            id={workspace.workspaceId}
+            id={workspace.id}
           >
             <p>{workspace.name}</p>
             <ArrowRightIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />

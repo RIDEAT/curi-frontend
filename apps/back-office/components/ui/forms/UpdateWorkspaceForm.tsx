@@ -39,7 +39,7 @@ export function UpdateWorkspaceForm({
     setIsLoading(true);
     try {
       const { result, response } = await WorkspaceAPI.update(
-        targetWorkspace.workspaceId,
+        targetWorkspace.id,
         data.workspaceName,
         data.emailId
       );

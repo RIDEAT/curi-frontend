@@ -1,13 +1,9 @@
 "use client";
 
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { usePathname, useRouter } from "next/navigation";
-import { IUser } from "user-types";
-import { authStateAtom, userAtom } from "../../lib/context/auth";
 import { useEffect, useState } from "react";
-import { UserAPI } from "../../lib/api/user";
-
-import { isAuthenticatedAtom, authTokenAtom } from "../../lib/context/auth";
+import { AuthAPI } from "../../lib/api/auth";
+import { localStore } from "../../lib/utils/localStore";
 
 const HOME_ROUTE = "/";
 const LOGIN_ROUTE = "/login";
@@ -18,36 +14,23 @@ enum RouteRole {
   protected,
 }
 
-interface withAuthProps {
-  user: IUser;
-}
+interface withAuthProps {}
 
 export default function withAuth<T extends withAuthProps = withAuthProps>(
   Component: React.ComponentType<T>,
   routeRole: keyof typeof RouteRole
 ) {
   const ComponentWithAuth = (props: Omit<T, keyof withAuthProps>) => {
-    const authState = useAtomValue(authStateAtom);
     const router = useRouter();
     const pathname = usePathname();
-
-    const [isAuthenticated, setIsAuthenticated] = useAtom(isAuthenticatedAtom);
-    const setAuthToken = useSetAtom(authTokenAtom);
-    const setUser = useSetAtom(userAtom);
 
     const [isloading, setIsLoading] = useState(true);
 
     const checkAuth = async () => {
-      const authToken = localStorage.getItem("authToken")?.replace(/"/g, "");
-      const isValidToken = await UserAPI.validateToken(
-        authToken == null ? "auth" : authToken,
-        setAuthToken,
-        setUser
-      );
+      const isValidToken = await AuthAPI.validateToken();
 
       if (!isValidToken) {
-        setIsAuthenticated(false);
-        setAuthToken(null);
+        await AuthAPI.logout();
 
         return false;
       }
@@ -56,7 +39,7 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
     };
 
     useEffect(() => {
-      if (isAuthenticated) {
+      if (localStore.isAuthenticated()) {
         if (routeRole == "auth") {
           router.push(HOME_ROUTE);
         } else {
@@ -80,7 +63,7 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
 
     if (isloading) return <div>loading...</div>;
     else {
-      return <Component {...(props as T)} user={authState.user} />;
+      return <Component {...(props as T)} />;
     }
   };
 

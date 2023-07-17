@@ -41,7 +41,6 @@ export function CreateWorkspaceForm() {
       if (response.ok) {
         toast({
           title: "워크스페이스가 생성되었습니다.",
-          type: "success",
         });
         router.replace(`/workspace/${result.workspace.id}`);
       }

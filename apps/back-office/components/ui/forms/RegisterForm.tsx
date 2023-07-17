@@ -23,6 +23,7 @@ import {
 } from "ui";
 import { LoadingButton } from "ui";
 import { FirebaseAPI } from "../../../lib/api/firebase";
+import { useRouter } from "next/navigation";
 
 const RegisterFormSchema = z
   .object({
@@ -57,13 +58,10 @@ const RegisterFormSchema = z
     }
   );
 
-export default function RegisterForm({
-  setSentEmail,
-}: {
-  setSentEmail: (value: boolean) => void;
-}) {
+export default function RegisterForm() {
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
@@ -80,15 +78,13 @@ export default function RegisterForm({
     setErrorMsg("");
     try {
       await FirebaseAPI.register(email, password);
-      setSentEmail(true);
+      router.push("/signup/verify-email");
     } catch (err) {
       if (err.message) {
         setErrorMsg(err.message);
       } else {
         setErrorMsg("회원가입에 실패했습니다. 다시 시도해주세요.");
       }
-    } finally {
-      setIsLoading(false);
     }
   };
 

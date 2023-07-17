@@ -1,4 +1,4 @@
-import getAuthToken from "./getAuthToken";
+import { localStore } from "./localStore";
 
 const getHeader = () => {
   return {
@@ -9,7 +9,7 @@ const getHeader = () => {
 const getHeaderWithAuth = async () => {
   return {
     ...getHeader(),
-    Authorization: "Bearer " + getAuthToken(),
+    Authorization: "Bearer " + localStore.getAuthToken(),
   };
 };
 
