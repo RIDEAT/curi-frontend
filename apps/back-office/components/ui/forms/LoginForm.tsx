@@ -2,15 +2,9 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { UserAPI } from "../../../lib/api/user";
+import { AuthAPI } from "../../../lib/api/auth";
 import getAccessToken from "../../../lib/utils/getAccessToken";
 import { useRouter } from "next/navigation";
-import { useSetAtom } from "jotai";
-import {
-  isAuthenticatedAtom,
-  authTokenAtom,
-  userAtom,
-} from "../../../lib/context/auth";
 import {
   Button,
   Card,
@@ -26,7 +20,6 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  toast,
 } from "ui";
 import Link from "next/link";
 import { LoadingButton } from "ui";
@@ -42,10 +35,6 @@ const LoginFormSchema = z.object({
 });
 
 export default function LoginForm({ nextRoute }: { nextRoute: string }) {
-  const setIsAuthenticated = useSetAtom(isAuthenticatedAtom);
-  const setAuthToken = useSetAtom(authTokenAtom);
-  const setUser = useSetAtom(userAtom);
-
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
@@ -68,12 +57,13 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
 
     try {
       const userCredential = await FirebaseAPI.login(email, password);
-      const accessToken = await getAccessToken(userCredential);
-      const { user, authToken } = await UserAPI.getTokens(accessToken);
+      const accessToken = await getAccessToken(userCredential.user);
+      const isGetTokens = await AuthAPI.getTokens(accessToken);
 
-      setIsAuthenticated(true);
-      setAuthToken(authToken);
-      setUser(user);
+      if (!isGetTokens) {
+        setErrorMsg("로그인에 실패했습니다. 다시 시도해주세요.");
+        return;
+      }
 
       router.replace(nextRoute);
     } catch (err) {

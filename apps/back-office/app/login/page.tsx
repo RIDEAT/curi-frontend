@@ -7,7 +7,7 @@ function Login() {
   return (
     <>
       <div className="h-screen w-screen flex justify-center items-center">
-        <LoginForm nextRoute="/auth_test_page" />
+        <LoginForm nextRoute="/workspace" />
       </div>
     </>
   );

@@ -36,7 +36,7 @@ export default function WorkspaceCombo() {
     if (!isLoading) {
       const currentSlug = extractSlug(pathname);
       const currentWorkspace = workspaces?.find(
-        (workspace) => Number(workspace.workspaceId) === currentSlug
+        (workspace) => Number(workspace.id) === currentSlug
       );
 
       setSelectedWorkspace(currentWorkspace);
@@ -127,7 +127,7 @@ function CommandItems({ selectedWorkspace, setSelectedWorkspace, setOpen }) {
     <>
       {workspaces?.map((workspace) => (
         <CommandItem
-          key={workspace.workspaceId}
+          key={workspace.id}
           onSelect={(currentLabel) => {
             setSelectedWorkspace((prev) => {
               if (currentLabel === prev.name) return prev;
@@ -136,7 +136,7 @@ function CommandItems({ selectedWorkspace, setSelectedWorkspace, setOpen }) {
               );
             });
             setOpen(false);
-            router.push(`/workspace/${workspace.workspaceId}/dashboard`);
+            router.push(`/workspace/${workspace.id}/dashboard`);
           }}
         >
           <Check

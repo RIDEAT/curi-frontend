@@ -4,7 +4,10 @@ import { RESOURSE_API_URL, WORKSPACE_PATH } from "../constant/url";
 import { id } from "date-fns/locale";
 
 interface IResponse {
-  list: IWorkspace[];
+  list: {
+    status: string;
+    workspaceList: IWorkspace[];
+  };
   user: {
     id: string;
   };
@@ -13,10 +16,11 @@ interface IResponse {
 export const WorkspaceAPI = {
   endPoint: RESOURSE_API_URL + WORKSPACE_PATH,
   get: async () => {
-    return await fetcherWithToken(
+    const { response, result } = await fetcherWithToken(
       WorkspaceAPI.endPoint,
-      (data: IResponse) => data.list
+      (data: IResponse) => data.list.workspaceList
     );
+    return result;
   },
   create: async (name: string, emailId: string) => {
     return await fetcherWithTokenAndBody(WorkspaceAPI.endPoint, {

@@ -2,7 +2,9 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "build:back-office": "pnpm --filter back-office build",
     "dev": "turbo run dev --parallel",
+    "dev:back-office": "pnpm --filter back-office dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install",

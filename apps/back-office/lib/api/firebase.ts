@@ -13,15 +13,13 @@ export const FirebaseAPI = {
    */
   register: async (email: string, password: string) => {
     try {
-      const actionCodeSettings = {
-        url: "http://localhost:3000/login",
-      };
       const { user } = await createUserWithEmailAndPassword(
         firebaseAuth,
         email,
         password
       );
-      await sendEmailVerification(user, actionCodeSettings);
+      await sendEmailVerification(user);
+
       return true;
     } catch (error) {
       switch (error.code) {
@@ -101,8 +99,24 @@ export const FirebaseAPI = {
       console.error(error);
     }
   },
+  getCurrentUser: async () => {
+    try {
+      await reload(firebaseAuth.currentUser);
+      return firebaseAuth.currentUser;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  getUserEmail: async () => {
+    try {
+      await reload(firebaseAuth.currentUser);
+      return firebaseAuth.currentUser.email;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   /**
-   *
+   * logout from firebase auth
    */
   logout: async () => {
     try {

@@ -1,6 +1,6 @@
 declare module "workspace-types" {
   interface IWorkspace {
-    workspaceId: string;
+    id: string;
     name: string;
     emailId?: string;
   }
