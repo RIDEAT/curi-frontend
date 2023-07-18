@@ -2,28 +2,17 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon } from "@radix-ui/react-icons";
 
-import {
-  Button,
-  Calendar,
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  LoadingButton,
-} from "ui";
-import { cn } from "ui/lib/utils";
+import { Button, Form, LoadingButton } from "ui";
 
 import { IEmployee } from "member-types";
 import { employeeSchema, employeeSchemaType } from "./memberSchema";
+import { EmailField } from "./fields/EmailField";
+import { NameField } from "./fields/NameField";
+import { PhoneNumberField } from "./fields/PhoneNumberField";
+import { DepartmentField } from "./fields/DepartmentField";
+import { StartDateField } from "./fields/StartDateField";
+import { SubmitButton } from "./button/SubmitButton";
 
 export function UpdateEmployeeForm({
   employee,
@@ -39,6 +28,7 @@ export function UpdateEmployeeForm({
       name: employee.name,
       email: employee.email,
       phoneNumber: employee.phoneNumber,
+      startDate: new Date(employee.startDate),
       department: employee.department,
     },
   });
@@ -75,125 +65,12 @@ export function UpdateEmployeeForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="max-w-screen-md space-y-6"
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-base font-semibold">이름</FormLabel>
-              <FormControl>
-                <Input placeholder="ex. 홍길동" {...field} />
-              </FormControl>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-base font-semibold">
-                이메일 주소
-              </FormLabel>
-              <FormDescription className="text-xs">
-                멤버가 큐리 시스템에게 연락받을 이메일입니다.
-              </FormDescription>
-              <div className="flex w-full items-center space-x-2">
-                <FormControl>
-                  <Input placeholder="ex. example@example.com" {...field} />
-                </FormControl>
-              </div>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="phoneNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-base font-semibold">
-                전화번호
-              </FormLabel>
-              <FormDescription className="text-xs">
-                멤버가 큐리 시스템에게 연락받을 전화번호입니다.
-              </FormDescription>
-              <div className="flex w-full items-center space-x-2">
-                <FormControl>
-                  <Input placeholder="ex. 010-3333-3333" {...field} />
-                </FormControl>
-              </div>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="department"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-base font-semibold">부서</FormLabel>
-              <div className="flex w-full items-center space-x-2">
-                <FormControl>
-                  <Input placeholder="ex. 개발팀" {...field} />
-                </FormControl>
-              </div>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="startDate"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel className="text-base">입사일</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={false}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription className="text-xs">
-                입사(예정)일을 선택해주세요.
-              </FormDescription>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <div className="flex justify-center">
-          {isLoading ? (
-            <LoadingButton />
-          ) : (
-            <Button type="submit" className="w-full">
-              수정하기
-            </Button>
-          )}
-        </div>
+        <NameField form={form} />
+        <EmailField form={form} />
+        <PhoneNumberField form={form} />
+        <DepartmentField form={form} />
+        <StartDateField form={form} />
+        <SubmitButton isLoading={isLoading} text="수정하기" />
       </form>
     </Form>
   );

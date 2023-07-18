@@ -70,9 +70,7 @@ export function MemberRowActions<TData>({
           <SheetContent>
             <SheetHeader>
               <SheetTitle>멤버 수정하기</SheetTitle>
-              <SheetDescription>
-                멤버의 정보를 수정할 수 있습니다.
-              </SheetDescription>
+              <SheetDescription></SheetDescription>
             </SheetHeader>
             {type == "employee" ? (
               <UpdateEmployeeForm
