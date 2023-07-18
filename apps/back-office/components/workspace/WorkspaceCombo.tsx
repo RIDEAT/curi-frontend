@@ -18,11 +18,11 @@ import {
 import Link from "next/link";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
-import { WorkspaceSettingDialog } from "../dialogs/WorkspaceSettingDialog";
+import { WorkspaceSettingDialog } from "./WorkspaceSettingDialog";
 import { IWorkspace } from "workspace-types";
 import { usePathname, useRouter } from "next/navigation";
-import extractSlug from "../../../lib/utils/extractSlug";
-import { useWorkspace } from "../../../lib/hook/swr/useWorkspace";
+import extractSlug from "../../lib/utils/extractSlug";
+import { useWorkspace } from "../../lib/hook/swr/useWorkspace";
 
 export default function WorkspaceCombo() {
   const [open, setOpen] = useState(false);

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "ui";
-import LendingNav from "../components/navigations/LendingNav";
+import LendingNav from "../components/ui/navigations/LendingNav";
 import Link from "next/link";
 
 export default function Home() {

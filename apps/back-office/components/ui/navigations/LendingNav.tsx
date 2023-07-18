@@ -11,7 +11,7 @@ import {
   navigationMenuTriggerStyle,
 } from "ui";
 import { cn } from "ui/lib/utils";
-import { localStore } from "../../lib/utils/localStore";
+import { localStore } from "../../../lib/utils/localStore";
 import { useEffect, useState } from "react";
 
 export default function LendingNav() {

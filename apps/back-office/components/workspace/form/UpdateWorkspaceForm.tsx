@@ -15,36 +15,41 @@ import {
 } from "ui";
 import { useState } from "react";
 import { LoadingButton } from "ui";
-import { useRouter } from "next/navigation";
-import { workspaceSchema } from "./schemas/workspaceSchema";
+import { IWorkspace } from "workspace-types";
+import { workspaceSchema } from "./workspaceSchema";
 import { WorkspaceAPI } from "../../../lib/api/workspace";
 
-export function CreateWorkspaceForm() {
-  const router = useRouter();
+export function UpdateWorkspaceForm({
+  targetWorkspace,
+  setOpen,
+}: {
+  targetWorkspace: IWorkspace;
+  setOpen: (open: boolean) => void;
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof workspaceSchema>>({
     resolver: zodResolver(workspaceSchema),
     defaultValues: {
-      workspaceName: "",
-      emailId: "",
+      workspaceName: targetWorkspace.name,
+      emailId: targetWorkspace.emailId,
     },
   });
 
   const onSubmit = async (data: z.infer<typeof workspaceSchema>) => {
     setIsLoading(true);
     try {
-      const { result, response } = await WorkspaceAPI.create(
+      const { result, response } = await WorkspaceAPI.update(
+        targetWorkspace.id,
         data.workspaceName,
         data.emailId
       );
+      console.log(result);
 
       if (response.ok) {
-        toast({
-          title: "워크스페이스가 생성되었습니다.",
-        });
-        router.replace(`/workspace/${result.workspace.id}`);
+        setOpen(false);
       }
     } catch (error) {
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -101,7 +106,7 @@ export function CreateWorkspaceForm() {
             <LoadingButton />
           ) : (
             <Button type="submit" className="w-full">
-              생성하기
+              수정하기
             </Button>
           )}
         </div>

@@ -1,11 +1,11 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "ui";
-import { MemberCreateDialog } from "../dialogs/MemberCreateDialog";
+import { MemberCreateDialog } from "./MemberCreateDialog";
 import { useRef } from "react";
-import { ManagerTable } from "../tables/MemberTable/ManagerTable";
-import { EmployeeTable } from "../tables/MemberTable/EmployeeTable";
-import { MemberTable } from "../tables/MemberTable/MemberTable";
+import { ManagerTable } from "./table/ManagerTable";
+import { EmployeeTable } from "./table/EmployeeTable";
+import { MemberTable } from "./table/MemberTable";
 import { MemberType } from "member-types";
 
 interface ITabs {

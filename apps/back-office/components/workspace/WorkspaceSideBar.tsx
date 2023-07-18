@@ -1,5 +1,5 @@
 import { cn } from "ui/lib/utils";
-import WorkspaceCombo from "../comboboxs/WorkspaceCombo";
+import WorkspaceCombo from "./WorkspaceCombo";
 import { Button } from "ui";
 import {
   DashboardIcon,

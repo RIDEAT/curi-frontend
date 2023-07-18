@@ -1,7 +1,7 @@
 "use client";
 
 import withAuth from "../../../../components/hoc/withAuth";
-import { MemberCategoryTab } from "../../../../components/ui/tabs/MemberCategoryTab";
+import { MemberCategoryTab } from "../../../../components/member/MemberCategoryTab";
 
 export default withAuth(Member, "protected");
 function Member() {

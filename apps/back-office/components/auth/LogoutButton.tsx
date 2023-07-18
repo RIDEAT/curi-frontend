@@ -1,7 +1,7 @@
 import { Button } from "ui";
 import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { AuthAPI } from "../../../lib/api/auth";
+import { AuthAPI } from "../../lib/api/auth";
 
 export default function LogoutButton() {
   const router = useRouter();

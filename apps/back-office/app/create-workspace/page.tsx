@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateWorkspaceForm } from "../../components/ui/forms/CreateWorkspaceForm";
+import { CreateWorkspaceForm } from "../../components/workspace/form/CreateWorkspaceForm";
 
 export default function CreateWorkspace() {
   return (

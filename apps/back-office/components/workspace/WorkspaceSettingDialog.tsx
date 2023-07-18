@@ -8,7 +8,7 @@ import {
 } from "ui";
 
 import { GearIcon } from "@radix-ui/react-icons";
-import { UpdateWorkspaceForm } from "../forms/UpdateWorkspaceForm";
+import { UpdateWorkspaceForm } from "./form/UpdateWorkspaceForm";
 import { IWorkspace } from "workspace-types";
 import { useState } from "react";
 

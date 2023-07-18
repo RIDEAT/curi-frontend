@@ -27,9 +27,9 @@ import { useState } from "react";
 import { LoadingButton } from "ui";
 import {
   employeeSchema,
-  employeeSchemaType,
+  managerSchemaType,
   managerSchema,
-} from "./schemas/memberSchema";
+} from "./memberSchema";
 import { cn } from "ui/lib/utils";
 import { format } from "date-fns";
 import { MemberAPI } from "../../../lib/api/member";
@@ -37,37 +37,35 @@ import { MemberFormType } from "member-types";
 import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 import { formatDate } from "../../../lib/utils/formatDate";
 
-export function CreateEmployeeForm({
+export function CreateManagerForm({
   setOpen,
 }: {
   setOpen: (open: boolean) => void;
 }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm<employeeSchemaType>({
+  const form = useForm<managerSchemaType>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
       name: "",
       email: "",
       phoneNumber: "",
       department: "",
-      startDate: new Date(),
     },
   });
 
-  const onSubmit = async (data: employeeSchemaType) => {
+  const onSubmit = async (data: managerSchemaType) => {
     setIsLoading(true);
     try {
-      const employeeFormData = {
+      const managerFormData = {
         wid: Number(currentWorkspaceId),
         name: data.name,
         email: data.email,
         phoneNumber: data.phoneNumber,
-        startDate: formatDate(data.startDate), // format : 2020-02-02
         department: data.department,
       } as MemberFormType;
 
-      const { response, result } = await MemberAPI.create(employeeFormData);
+      const { response, result } = await MemberAPI.create(managerFormData);
       if (response.ok) {
         setOpen(false);
       }
@@ -142,48 +140,6 @@ export function CreateEmployeeForm({
                   <Input placeholder="ex. 개발팀" {...field} />
                 </FormControl>
               </div>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="startDate"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel className="text-base">입사일</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={false}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription className="text-xs">
-                입사(예정)일을 선택해주세요.
-              </FormDescription>
               <FormMessage className="text-xs" />
             </FormItem>
           )}

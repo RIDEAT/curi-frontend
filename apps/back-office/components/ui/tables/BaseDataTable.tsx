@@ -31,7 +31,7 @@ import {
 
 import { useState } from "react";
 
-import { DataTablePagination } from "./DataPagination";
+import { DataTablePagination } from "./reusables/DataPagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

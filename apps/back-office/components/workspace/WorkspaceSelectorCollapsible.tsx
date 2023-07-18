@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
-import { useWorkspace } from "../../../lib/hook/swr/useWorkspace";
+import { useWorkspace } from "../../lib/hook/swr/useWorkspace";
 
 export default function WorkspaceSelectorCollapsible() {
   const { workspaces, isLoading, error } = useWorkspace();

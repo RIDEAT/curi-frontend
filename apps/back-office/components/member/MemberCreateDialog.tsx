@@ -11,8 +11,8 @@ import {
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { MemberType } from "member-types";
-import { CreateEmployeeForm } from "../forms/CreateEmployeeForm";
-import { CreateManagerForm } from "../forms/CreateManagerForm";
+import { CreateEmployeeForm } from "./form/CreateEmployeeForm";
+import { CreateManagerForm } from "./form/CreateManagerForm";
 
 export function MemberCreateDialog({ type }: { type: MemberType }) {
   const [open, setOpen] = useState(false);

@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "ui";
-import { FirebaseAPI } from "../../../lib/api/firebase";
+import { FirebaseAPI } from "../../lib/api/firebase";
 import { useEffect, useState } from "react";
 
 export interface RegisterVerifyCardProps {

@@ -4,8 +4,8 @@ import {
   ManagerColumnType,
   MemberType,
 } from "member-types";
-import { DataTableColumnHeader } from "../reusables/DataTableColumnHeader";
-import { DataTableRowActions } from "./RowActions";
+import { DataTableColumnHeader } from "../../ui/tables/reusables/DataTableColumnHeader";
+import { MemberRowActions } from "./MemberRowActions";
 
 const BaseInfoColumns: ColumnDef<ManagerColumnType>[] = [
   {
@@ -38,7 +38,7 @@ const getActionsColumns = (type: MemberType) => {
   return [
     {
       id: "actions",
-      cell: ({ row }) => <DataTableRowActions row={row} type={type} />,
+      cell: ({ row }) => <MemberRowActions row={row} type={type} />,
     },
   ];
 };

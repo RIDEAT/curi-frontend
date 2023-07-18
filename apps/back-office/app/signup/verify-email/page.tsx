@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FirebaseAPI } from "../../../lib/api/firebase";
-import VerifyForm from "../../../components/ui/cards/RegisterVerifyCard";
+import VerifyForm from "../../../components/auth/RegisterVerifyCard";
 import withAuth from "../../../components/hoc/withAuth";
 import { UserAPI } from "../../../lib/api/user";
 import getAccessToken from "../../../lib/utils/getAccessToken";

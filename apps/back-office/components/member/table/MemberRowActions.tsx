@@ -29,16 +29,16 @@ import {
 
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { IEmployee, IManager, IMember, MemberType } from "member-types";
-import { UpdateEmployeeForm } from "../../forms/UpdateEmployeeForm";
-import { UpdateManagerForm } from "../../forms/UpdateManagerForm";
-import { MemberAPI } from "../../../../lib/api/member";
+import { UpdateEmployeeForm } from "../form/UpdateEmployeeForm";
+import { UpdateManagerForm } from "../form/UpdateManagerForm";
+import { MemberAPI } from "../../../lib/api/member";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
   type: MemberType;
 }
 
-export function DataTableRowActions<TData>({
+export function MemberRowActions<TData>({
   row,
   type,
 }: DataTableRowActionsProps<TData>) {

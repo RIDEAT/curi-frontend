@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { WorkspaceSidebar } from "../../../components/ui/sidebars/WorkspaceSideBar";
+import { WorkspaceSidebar } from "../../../components/workspace/WorkspaceSideBar";
 import { CloseButton, OpenButton } from "ui";
 
 export default function WorkspaceLayout({
