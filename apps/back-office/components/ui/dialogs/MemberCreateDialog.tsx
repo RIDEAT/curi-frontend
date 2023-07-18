@@ -10,9 +10,11 @@ import {
 
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import { CreateMemberForm } from "../forms/CreateMemberForm";
+import { MemberType } from "member-types";
+import { CreateEmployeeForm } from "../forms/CreateEmployeeForm";
+import { CreateManagerForm } from "../forms/CreateManagerForm";
 
-export function MemberCreateDialog() {
+export function MemberCreateDialog({ type }: { type: MemberType }) {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -29,7 +31,11 @@ export function MemberCreateDialog() {
             새로운 멤버를 추가할 수 있습니다.
           </DialogDescription>
         </DialogHeader>
-        <CreateMemberForm setOpen={setOpen} />
+        {type == "employee" ? (
+          <CreateEmployeeForm setOpen={setOpen} />
+        ) : (
+          <CreateManagerForm setOpen={setOpen} />
+        )}
       </DialogContent>
     </Dialog>
   );

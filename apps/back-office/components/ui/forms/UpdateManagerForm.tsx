@@ -25,32 +25,35 @@ import {
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { LoadingButton } from "ui";
-import { memberSchema } from "./schemas/memberSchema";
+import { managerSchema, managerSchemaType } from "./schemas/memberSchema";
 import { cn } from "ui/lib/utils";
 import { format } from "date-fns";
+import { IMember } from "member-types";
+import { Row } from "@tanstack/react-table";
 
-export function CreateMemberForm({
+export function UpdateManagerForm({
+  manager,
   setOpen,
 }: {
+  manager: IMember;
   setOpen: (open: boolean) => void;
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm<z.infer<typeof memberSchema>>({
-    resolver: zodResolver(memberSchema),
+  const form = useForm<managerSchemaType>({
+    resolver: zodResolver(managerSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      phoneNumber: "",
-      startDate: new Date(),
-      role: "",
+      name: manager.name,
+      email: manager.email,
+      phoneNumber: manager.phoneNumber,
+      department: manager.department,
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof memberSchema>) => {
+  const onSubmit = async (data: managerSchemaType) => {
     setIsLoading(true);
     try {
       const response = await fetch("/api/member", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -58,8 +61,7 @@ export function CreateMemberForm({
           name: data.name,
           email: data.email,
           phoneNumber: data.phoneNumber,
-          startDate: data.startDate,
-          role: data.role,
+          department: data.department,
         }),
       });
 
@@ -134,64 +136,15 @@ export function CreateMemberForm({
         />
         <FormField
           control={form.control}
-          name="startDate"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel className="text-base">입사일</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={false}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription className="text-xs">
-                입사(예정)일을 선택해주세요.
-              </FormDescription>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="role"
+          name="department"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-base">구분</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormLabel className="text-base font-semibold">부서</FormLabel>
+              <div className="flex w-full items-center space-x-2">
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="역할을 선택" />
-                  </SelectTrigger>
+                  <Input placeholder="ex. 개발팀" {...field} />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="admin">관리자</SelectItem>
-                  <SelectItem value="manager">매니저</SelectItem>
-                  <SelectItem value="employee">신입사원</SelectItem>
-                </SelectContent>
-              </Select>
+              </div>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
@@ -201,7 +154,7 @@ export function CreateMemberForm({
             <LoadingButton />
           ) : (
             <Button type="submit" className="w-full">
-              추가하기
+              수정하기
             </Button>
           )}
         </div>

@@ -1,11 +1,24 @@
 // export const API_URL = "http://localhost:8080";
 
+import { MemberType } from "member-types";
+
+// -----------------------------
 // RESOURSE
 export const RESOURSE_API_URL = "https://api.curiboard.com";
 
+// WORKSPACE
 export const WORKSPACE_PATH = "/workspace";
+
+// USER
 export const USER_PATH = "/user";
 
+// MEMBER
+export const MEMBERS_PATH = "/members";
+export const MEMBER_PATH = "/member";
+export const membersQueryWith = (workspaceId: string, type: MemberType) =>
+  `?wid=${workspaceId}&type=${type}`;
+
+// -----------------------------
 // AUTH
 export const AUTH_API_URL = "https://auth.curiboard.com";
 

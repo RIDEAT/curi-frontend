@@ -1,42 +1,39 @@
-import { IMember } from "member-types";
-import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "ui";
-import MemberTable from "../tables/MemberTable/MemberTable";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
-import { MemberCreateDialog } from "../dialogs/MemberCreateDialog";
+"use client";
 
-interface ITab {
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "ui";
+import { MemberCreateDialog } from "../dialogs/MemberCreateDialog";
+import { useRef } from "react";
+import { ManagerTable } from "../tables/MemberTable/ManagerTable";
+import { EmployeeTable } from "../tables/MemberTable/EmployeeTable";
+import { MemberTable } from "../tables/MemberTable/MemberTable";
+import { MemberType } from "member-types";
+
+interface ITabs {
+  value: MemberType;
   label: string;
-  value: string;
 }
 
-export function MemberCategoryTab({
-  tabs,
-  members,
-}: {
-  tabs: ITab[];
-  members: IMember[];
-}) {
+export function MemberCategoryTab() {
+  const tabs = useRef([
+    { value: "manager", label: "매니저" },
+    { value: "employee", label: "신입" },
+  ] as ITabs[]);
+
   return (
-    <Tabs defaultValue="all">
+    <Tabs defaultValue={tabs.current[0].value}>
       <div className="flex justify-between">
-        <TabsList className="grid grid-cols-4 w-[350px]">
-          {tabs.map((tab) => (
+        <TabsList className="grid grid-cols-2 w-[250px]">
+          {tabs.current.map((tab) => (
             <TabsTrigger value={tab.value} key={tab.value}>
               {tab.label}
             </TabsTrigger>
           ))}
         </TabsList>
-        <MemberCreateDialog />
       </div>
-      {tabs.map((tab) => (
+      {tabs.current.map((tab) => (
         <TabsContent value={tab.value} key={tab.value}>
-          <MemberTable
-            data={
-              tab.value == "all"
-                ? members
-                : members.filter((member) => member.role == tab.value)
-            }
-          />
+          <MemberCreateDialog type={tab.value} />
+          <MemberTable type={tab.value} />
         </TabsContent>
       ))}
     </Tabs>

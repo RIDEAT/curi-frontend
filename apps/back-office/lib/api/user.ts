@@ -25,7 +25,6 @@ export const UserAPI = {
       return true;
     } catch (error) {
       console.error(error);
-      throw new Error("회원가입에 실패했습니다.");
     }
   },
 };

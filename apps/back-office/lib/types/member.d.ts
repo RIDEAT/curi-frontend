@@ -1,11 +1,26 @@
 declare module "member-types" {
-  type MemberRoleType = "employee" | "manager" | "admin";
+  type MemberType = "employee" | "manager";
+
   interface IMember {
     id: number;
+    wid: number;
     name: string;
     email: string;
     phoneNumber: string;
-    startDate: string;
-    role: MemberRoleType;
+    department: string;
+    type: MemberType;
   }
+
+  interface IEmployee extends IMember {
+    startDate: string;
+  }
+
+  interface IManager extends IMember {}
+
+  type EmployeeFormType = Omit<IEmployee, "id">;
+  type ManagerFormType = Omit<IManager, "id">;
+  type MemberFormType = EmployeeFormType | ManagerFormType;
+
+  type EmployeeColumnType = Omit<IEmployee, "id", "wid", "type">;
+  type ManagerColumnType = Omit<IManager, "id", "wid", "type">;
 }

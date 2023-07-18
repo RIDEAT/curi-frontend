@@ -25,32 +25,31 @@ import {
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { LoadingButton } from "ui";
-import { memberSchema } from "./schemas/memberSchema";
+import { employeeSchema, employeeSchemaType } from "./schemas/memberSchema";
 import { cn } from "ui/lib/utils";
 import { format } from "date-fns";
-import { IMember } from "member-types";
+import { IEmployee, IMember } from "member-types";
 import { Row } from "@tanstack/react-table";
 
-export function UpdateMemberForm({
-  member,
+export function UpdateEmployeeForm({
+  employee,
   setOpen,
 }: {
-  member: IMember;
+  employee: IEmployee;
   setOpen: (open: boolean) => void;
 }) {
   const [isLoading, setIsLoading] = useState(false);
-  const form = useForm<z.infer<typeof memberSchema>>({
-    resolver: zodResolver(memberSchema),
+  const form = useForm<employeeSchemaType>({
+    resolver: zodResolver(employeeSchema),
     defaultValues: {
-      name: member.name,
-      email: member.email,
-      phoneNumber: member.phoneNumber,
-      startDate: new Date(member.startDate),
-      role: member.role,
+      name: employee.name,
+      email: employee.email,
+      phoneNumber: employee.phoneNumber,
+      department: employee.department,
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof memberSchema>) => {
+  const onSubmit = async (data: employeeSchemaType) => {
     setIsLoading(true);
     try {
       const response = await fetch("/api/member", {
@@ -62,8 +61,7 @@ export function UpdateMemberForm({
           name: data.name,
           email: data.email,
           phoneNumber: data.phoneNumber,
-          startDate: data.startDate,
-          role: data.role,
+          department: data.department,
         }),
       });
 
@@ -138,6 +136,21 @@ export function UpdateMemberForm({
         />
         <FormField
           control={form.control}
+          name="department"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-base font-semibold">부서</FormLabel>
+              <div className="flex w-full items-center space-x-2">
+                <FormControl>
+                  <Input placeholder="ex. 개발팀" {...field} />
+                </FormControl>
+              </div>
+              <FormMessage className="text-xs" />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="startDate"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -174,28 +187,6 @@ export function UpdateMemberForm({
               <FormDescription className="text-xs">
                 입사(예정)일을 선택해주세요.
               </FormDescription>
-              <FormMessage className="text-xs" />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="role"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-base">구분</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="역할을 선택" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="admin">관리자</SelectItem>
-                  <SelectItem value="manager">매니저</SelectItem>
-                  <SelectItem value="employee">신입사원</SelectItem>
-                </SelectContent>
-              </Select>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
