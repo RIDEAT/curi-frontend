@@ -6,7 +6,6 @@ import {
 } from "@radix-ui/react-icons";
 import { Column } from "@tanstack/react-table";
 
-import { cn } from "ui/lib/utils";
 import {
   Button,
   DropdownMenu,
@@ -15,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "ui";
+import { cn } from "ui/lib/utils";
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {

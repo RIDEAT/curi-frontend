@@ -1,5 +1,6 @@
 "use client";
 
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { DotsHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
 
@@ -27,11 +28,10 @@ import {
   SheetTrigger,
 } from "ui";
 
-import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { IEmployee, IManager, IMember, MemberType } from "member-types";
+import { IEmployee, IManager, MemberType } from "member-types";
+import { MemberAPI } from "../../../lib/api/member";
 import { UpdateEmployeeForm } from "../form/UpdateEmployeeForm";
 import { UpdateManagerForm } from "../form/UpdateManagerForm";
-import { MemberAPI } from "../../../lib/api/member";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

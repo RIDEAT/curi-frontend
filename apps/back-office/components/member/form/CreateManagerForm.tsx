@@ -1,41 +1,23 @@
-import { z } from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Button,
-  Calendar,
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
   Input,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  toast,
+  LoadingButton,
 } from "ui";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import { LoadingButton } from "ui";
-import {
-  employeeSchema,
-  managerSchemaType,
-  managerSchema,
-} from "./memberSchema";
-import { cn } from "ui/lib/utils";
-import { format } from "date-fns";
-import { MemberAPI } from "../../../lib/api/member";
+
 import { MemberFormType } from "member-types";
 import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
-import { formatDate } from "../../../lib/utils/formatDate";
+import { MemberAPI } from "../../../lib/api/member";
+import { employeeSchema, managerSchemaType } from "./memberSchema";
 
 export function CreateManagerForm({
   setOpen,

@@ -1,11 +1,11 @@
 import { MemberFormType, MemberType } from "member-types";
-import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 import {
   MEMBERS_PATH,
   MEMBER_PATH,
   RESOURSE_API_URL,
   membersQueryWith,
 } from "../constant/url";
+import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 
 export const MemberAPI = {
   membersEndPoint: RESOURSE_API_URL + MEMBERS_PATH,

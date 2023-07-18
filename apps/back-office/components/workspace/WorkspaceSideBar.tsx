@@ -1,15 +1,17 @@
-import { cn } from "ui/lib/utils";
-import WorkspaceCombo from "./WorkspaceCombo";
-import { Button } from "ui";
+import { useRef } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   DashboardIcon,
   Share1Icon,
   FileTextIcon,
   PersonIcon,
 } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRef } from "react";
+
+import { Button } from "ui";
+import { cn } from "ui/lib/utils";
+
+import WorkspaceCombo from "./WorkspaceCombo";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   slug: string;

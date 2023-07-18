@@ -1,5 +1,6 @@
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+
 import extractSlug from "../utils/extractSlug";
 
 const useCurrentWorkspace = () => {

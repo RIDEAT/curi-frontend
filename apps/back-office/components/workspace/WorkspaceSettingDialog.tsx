@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { GearIcon } from "@radix-ui/react-icons";
+
 import {
   Dialog,
   DialogContent,
@@ -7,10 +10,8 @@ import {
   DialogTrigger,
 } from "ui";
 
-import { GearIcon } from "@radix-ui/react-icons";
-import { UpdateWorkspaceForm } from "./form/UpdateWorkspaceForm";
 import { IWorkspace } from "workspace-types";
-import { useState } from "react";
+import { UpdateWorkspaceForm } from "./form/UpdateWorkspaceForm";
 
 export function WorkspaceSettingDialog({
   targetWorkspace,

@@ -1,10 +1,10 @@
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { AuthAPI } from "../../../lib/api/auth";
-import getAccessToken from "../../../lib/utils/getAccessToken";
-import { useRouter } from "next/navigation";
+
 import {
   Button,
   Card,
@@ -20,9 +20,11 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  LoadingButton,
 } from "ui";
-import Link from "next/link";
-import { LoadingButton } from "ui";
+
+import { AuthAPI } from "../../../lib/api/auth";
+import getAccessToken from "../../../lib/utils/getAccessToken";
 import { FirebaseAPI } from "../../../lib/api/firebase";
 
 const LoginFormSchema = z.object({

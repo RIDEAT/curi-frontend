@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { MixerHorizontalIcon } from "@radix-ui/react-icons";
 import {
   ColumnDef,
@@ -28,8 +29,6 @@ import {
   TableHeader,
   TableRow,
 } from "ui";
-
-import { useState } from "react";
 
 import { DataTablePagination } from "./reusables/DataPagination";
 

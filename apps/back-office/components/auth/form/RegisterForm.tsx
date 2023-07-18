@@ -1,8 +1,10 @@
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import Link from "next/link";
+
 import {
   Button,
   Card,
@@ -19,11 +21,10 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  toast,
+  LoadingButton,
 } from "ui";
-import { LoadingButton } from "ui";
+
 import { FirebaseAPI } from "../../../lib/api/firebase";
-import { useRouter } from "next/navigation";
 
 const RegisterFormSchema = z
   .object({

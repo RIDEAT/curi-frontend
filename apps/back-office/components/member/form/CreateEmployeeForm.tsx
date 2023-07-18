@@ -1,6 +1,9 @@
-import { z } from "zod";
+import { useState } from "react";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CalendarIcon } from "@radix-ui/react-icons";
+
 import {
   Button,
   Calendar,
@@ -15,27 +18,15 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  toast,
+  LoadingButton,
 } from "ui";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import { LoadingButton } from "ui";
-import {
-  employeeSchema,
-  employeeSchemaType,
-  managerSchema,
-} from "./memberSchema";
 import { cn } from "ui/lib/utils";
-import { format } from "date-fns";
-import { MemberAPI } from "../../../lib/api/member";
+
 import { MemberFormType } from "member-types";
+import { MemberAPI } from "../../../lib/api/member";
 import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 import { formatDate } from "../../../lib/utils/formatDate";
+import { employeeSchema, employeeSchemaType } from "./memberSchema";
 
 export function CreateEmployeeForm({
   setOpen,

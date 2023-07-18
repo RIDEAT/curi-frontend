@@ -1,6 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 import { cn } from "ui/lib/utils";
 import {
@@ -15,14 +19,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "ui";
-import Link from "next/link";
-import { PlusIcon } from "@radix-ui/react-icons";
-import { useEffect, useState } from "react";
-import { WorkspaceSettingDialog } from "./WorkspaceSettingDialog";
+
 import { IWorkspace } from "workspace-types";
-import { usePathname, useRouter } from "next/navigation";
 import extractSlug from "../../lib/utils/extractSlug";
 import { useWorkspace } from "../../lib/hook/swr/useWorkspace";
+import { WorkspaceSettingDialog } from "./WorkspaceSettingDialog";
 
 export default function WorkspaceCombo() {
   const [open, setOpen] = useState(false);

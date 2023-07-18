@@ -5,6 +5,7 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
 import { firebaseAuth } from "../firebase/firebaseClient";
 
 export const FirebaseAPI = {

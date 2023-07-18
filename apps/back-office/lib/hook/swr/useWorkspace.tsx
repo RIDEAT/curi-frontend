@@ -1,6 +1,5 @@
-"use client";
-
 import useSWR from "swr";
+
 import { IWorkspace } from "workspace-types";
 import { WorkspaceAPI } from "../../api/workspace";
 

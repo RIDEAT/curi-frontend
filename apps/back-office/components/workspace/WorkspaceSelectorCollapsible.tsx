@@ -1,15 +1,15 @@
 "use client";
 
 import { MouseEvent, useEffect, useState } from "react";
-import { CaretSortIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
+import { CaretSortIcon, ArrowRightIcon } from "@radix-ui/react-icons";
+
 import {
   Button,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "ui";
-import { useRouter } from "next/navigation";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 import { useWorkspace } from "../../lib/hook/swr/useWorkspace";
 

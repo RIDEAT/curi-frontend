@@ -1,5 +1,6 @@
-import { IEmployee } from "member-types";
 import useSWR from "swr";
+
+import { IEmployee } from "member-types";
 import { MemberAPI } from "../../api/member";
 import { membersQueryWith } from "../../constant/url";
 

@@ -1,7 +1,7 @@
 import { useEmployees } from "../../../lib/hook/swr/useMember";
 import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 import { BaseDataTable } from "../../ui/tables/BaseDataTable";
-import { EmployeeColumns, ManagerColumns } from "./memberColumns";
+import { EmployeeColumns } from "./memberColumns";
 
 export function EmployeeTable() {
   const { currentWorkspaceId } = useCurrentWorkspace();

@@ -1,6 +1,7 @@
-import { Button } from "ui";
-import { useSetAtom } from "jotai";
 import { useRouter } from "next/navigation";
+
+import { Button } from "ui";
+
 import { AuthAPI } from "../../lib/api/auth";
 
 export default function LogoutButton() {
