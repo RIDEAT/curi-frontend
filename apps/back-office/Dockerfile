@@ -45,12 +45,12 @@ USER nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/next.config.js .
 COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/package.json .
 
-COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/standalone/apps ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/static ./back-office/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/static ./apps/back-office/.next/static
 RUN ls -la
 
 # CMD ["node", "back-office/server.js"]
 # CMD ["ls" , "-la"]
 # CMD ["cd app &ls" , "-la"]
 # CMD cd app;ls -la
-CMD ["node", ".next/standalone/apps/back-office/server.js"]
+CMD ["node", "./apps/back-office/server.js"]
