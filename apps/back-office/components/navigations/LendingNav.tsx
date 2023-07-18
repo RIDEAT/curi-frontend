@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -10,8 +12,15 @@ import {
 } from "ui";
 import { cn } from "ui/lib/utils";
 import { localStore } from "../../lib/utils/localStore";
+import { useEffect, useState } from "react";
 
 export default function LendingNav() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(localStore.isAuthenticated());
+  }, []);
+
   return (
     <div className="w-full flex justify-between">
       <div className="flex justify-start ">
@@ -61,7 +70,7 @@ export default function LendingNav() {
           <NavigationMenuItem>
             <Link href="/login" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {localStore.isAuthenticated() ? "마이페이지" : "로그인"}
+                {isAuthenticated ? "마이페이지" : "로그인"}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
