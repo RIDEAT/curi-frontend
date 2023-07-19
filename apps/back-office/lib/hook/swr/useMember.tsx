@@ -1,10 +1,11 @@
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 
-import { IEmployee } from "member-types";
+import { IEmployee, IManager } from "member-types";
 import { MemberAPI } from "../../api/member";
 import { membersQueryWith } from "../../constant/url";
 
 const useEmployees = (workspaceId: string) => {
+  const { mutate } = useSWRConfig();
   const {
     data,
     isLoading,
@@ -21,22 +22,31 @@ const useEmployees = (workspaceId: string) => {
     ([url, workspaceId, type]) => MemberAPI.getMany(workspaceId, type)
   );
 
+  const reloadEmployees = () => {
+    mutate([
+      MemberAPI.membersEndPoint + membersQueryWith(workspaceId, "employee"),
+      workspaceId,
+      "employee",
+    ]);
+  };
+
   return {
     employees: data,
     isLoading,
     error,
     mutateEmployees,
+    reloadEmployees,
   };
 };
 
 const useManagers = (workspaceId: string) => {
-  URLSearchParams;
+  const { mutate } = useSWRConfig();
   const {
     data,
     isLoading,
     error,
     mutate: mutateManagers,
-  } = useSWR<IEmployee[]>(
+  } = useSWR<IManager[]>(
     workspaceId
       ? [
           MemberAPI.membersEndPoint + membersQueryWith(workspaceId, "manager"),
@@ -47,11 +57,20 @@ const useManagers = (workspaceId: string) => {
     ([url, workspaceId, type]) => MemberAPI.getMany(workspaceId, type)
   );
 
+  const reloadManagers = () => {
+    mutate([
+      MemberAPI.membersEndPoint + membersQueryWith(workspaceId, "manager"),
+      workspaceId,
+      "manager",
+    ]);
+  };
+
   return {
     managers: data,
     isLoading,
     error,
     mutateManagers,
+    reloadManagers,
   };
 };
 

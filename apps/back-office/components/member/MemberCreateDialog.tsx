@@ -17,7 +17,6 @@ import { CreateEmployeeForm } from "./form/CreateEmployeeForm";
 import { CreateManagerForm } from "./form/CreateManagerForm";
 
 export function MemberCreateDialog({ type }: { type: MemberType }) {
-  console.log(type);
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>

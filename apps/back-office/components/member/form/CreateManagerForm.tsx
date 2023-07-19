@@ -2,17 +2,18 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button, Form, LoadingButton } from "ui";
+import { Form } from "ui";
 
-import { MemberFormType } from "member-types";
+import { ManagerFormType } from "member-types";
 import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 import { MemberAPI } from "../../../lib/api/member";
 import { managerSchema, managerSchemaType } from "./memberSchema";
 import { NameField } from "./fields/NameField";
 import { EmailField } from "./fields/EmailField";
-import { PhoneNumberField } from "./fields/PhoneNumberField";
+import { PhoneNumField } from "./fields/PhoneNumField";
 import { DepartmentField } from "./fields/DepartmentField";
 import { SubmitButton } from "./button/SubmitButton";
+import { useManagers } from "../../../lib/hook/swr/useMember";
 
 export function CreateManagerForm({
   setOpen,
@@ -20,13 +21,14 @@ export function CreateManagerForm({
   setOpen: (open: boolean) => void;
 }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
+  const { reloadManagers } = useManagers(currentWorkspaceId);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<managerSchemaType>({
     resolver: zodResolver(managerSchema),
     defaultValues: {
       name: "",
       email: "",
-      phoneNumber: "",
+      phoneNum: "",
       department: "",
     },
   });
@@ -38,18 +40,25 @@ export function CreateManagerForm({
         wid: Number(currentWorkspaceId),
         name: data.name,
         email: data.email,
-        phoneNumber: data.phoneNumber,
+        phoneNum: data.phoneNum,
         department: data.department,
         startDate: "2022-05-30",
         type: "manager",
-      } as MemberFormType;
+      } as ManagerFormType;
 
-      const { response, result } = await MemberAPI.create(managerFormData);
+      const { response, result } = await MemberAPI.createManager(
+        managerFormData
+      );
+
+      reloadManagers();
+
       if (response.ok) {
         setOpen(false);
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -61,9 +70,9 @@ export function CreateManagerForm({
       >
         <NameField form={form} />
         <EmailField form={form} />
-        <PhoneNumberField form={form} />
+        <PhoneNumField form={form} />
         <DepartmentField form={form} />
-        <SubmitButton isLoading={isLoading} text="수정하기" />
+        <SubmitButton isLoading={isLoading} text="생성하기" />
       </form>
     </Form>
   );

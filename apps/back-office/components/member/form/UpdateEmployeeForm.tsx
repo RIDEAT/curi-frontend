@@ -5,14 +5,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button, Form, LoadingButton } from "ui";
 
-import { IEmployee } from "member-types";
+import { EmployeeFormType, IEmployee } from "member-types";
 import { employeeSchema, employeeSchemaType } from "./memberSchema";
 import { EmailField } from "./fields/EmailField";
 import { NameField } from "./fields/NameField";
-import { PhoneNumberField } from "./fields/PhoneNumberField";
+import { PhoneNumField } from "./fields/PhoneNumField";
 import { DepartmentField } from "./fields/DepartmentField";
 import { StartDateField } from "./fields/StartDateField";
 import { SubmitButton } from "./button/SubmitButton";
+import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
+import { formatDate } from "../../../lib/utils/formatDate";
+import { MemberAPI } from "../../../lib/api/member";
+import { useEmployees } from "../../../lib/hook/swr/useMember";
 
 export function UpdateEmployeeForm({
   employee,
@@ -21,13 +25,15 @@ export function UpdateEmployeeForm({
   employee: IEmployee;
   setOpen: (open: boolean) => void;
 }) {
+  const { currentWorkspaceId } = useCurrentWorkspace();
+  const { reloadEmployees } = useEmployees(currentWorkspaceId);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<employeeSchemaType>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
       name: employee.name,
       email: employee.email,
-      phoneNumber: employee.phoneNumber,
+      phoneNum: employee.phoneNum,
       startDate: new Date(employee.startDate),
       department: employee.department,
     },
@@ -36,18 +42,21 @@ export function UpdateEmployeeForm({
   const onSubmit = async (data: employeeSchemaType) => {
     setIsLoading(true);
     try {
-      const response = await fetch("/api/member", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          phoneNumber: data.phoneNumber,
-          department: data.department,
-        }),
-      });
+      const employeeFormData = {
+        wid: Number(currentWorkspaceId),
+        name: data.name,
+        email: data.email,
+        phoneNum: data.phoneNum,
+        startDate: formatDate(data.startDate), // format : 2020-02-02
+        department: data.department,
+      } as EmployeeFormType;
+
+      const { response, result } = await MemberAPI.updateEmployee(
+        employee.id.toString(),
+        employeeFormData
+      );
+
+      reloadEmployees();
 
       if (response.ok) {
         setOpen(false);
@@ -67,7 +76,7 @@ export function UpdateEmployeeForm({
       >
         <NameField form={form} />
         <EmailField form={form} />
-        <PhoneNumberField form={form} />
+        <PhoneNumField form={form} />
         <DepartmentField form={form} />
         <StartDateField form={form} />
         <SubmitButton isLoading={isLoading} text="수정하기" />

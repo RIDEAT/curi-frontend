@@ -6,7 +6,7 @@ declare module "member-types" {
     wid: number;
     name: string;
     email: string;
-    phoneNumber: string;
+    phoneNum: string;
     department: string;
     type: MemberType;
   }

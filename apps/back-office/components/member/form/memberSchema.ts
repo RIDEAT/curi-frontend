@@ -15,7 +15,7 @@ const baseSchema = z.object({
   email: z.string().email({
     message: "올바른 이메일 형식이 아닙니다.",
   }),
-  phoneNumber: z.string().regex(/^\d{2,3}-\d{3,4}-\d{4}$/, {
+  phoneNum: z.string().regex(/^\d{2,3}-\d{3,4}-\d{4}$/, {
     message: "올바른 전화번호 형식이 아닙니다. 예) 010-1234-5678",
   }),
   department: z.string().min(2, {

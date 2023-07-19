@@ -21,7 +21,7 @@ const BaseInfoColumns: ColumnDef<ManagerColumnType>[] = [
     ),
   },
   {
-    accessorKey: "phoneNumber",
+    accessorKey: "phoneNum",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="전화번호" />
     ),

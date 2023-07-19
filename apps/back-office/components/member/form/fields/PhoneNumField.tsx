@@ -8,11 +8,11 @@ import {
   Input,
 } from "ui";
 
-export function PhoneNumberField({ form }) {
+export function PhoneNumField({ form }) {
   return (
     <FormField
       control={form.control}
-      name="phoneNumber"
+      name="phoneNum"
       render={({ field }) => (
         <FormItem>
           <FormLabel className="text-base font-semibold">전화번호</FormLabel>

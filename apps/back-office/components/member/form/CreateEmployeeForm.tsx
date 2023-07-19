@@ -3,19 +3,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button, Form, LoadingButton } from "ui";
+import { Form } from "ui";
 
-import { MemberFormType } from "member-types";
+import { EmployeeFormType } from "member-types";
 import { MemberAPI } from "../../../lib/api/member";
 import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 import { formatDate } from "../../../lib/utils/formatDate";
 import { employeeSchema, employeeSchemaType } from "./memberSchema";
 import { NameField } from "./fields/NameField";
 import { EmailField } from "./fields/EmailField";
-import { PhoneNumberField } from "./fields/PhoneNumberField";
+import { PhoneNumField } from "./fields/PhoneNumField";
 import { DepartmentField } from "./fields/DepartmentField";
 import { StartDateField } from "./fields/StartDateField";
 import { SubmitButton } from "./button/SubmitButton";
+import { useEmployees } from "../../../lib/hook/swr/useMember";
 
 export function CreateEmployeeForm({
   setOpen,
@@ -23,13 +24,14 @@ export function CreateEmployeeForm({
   setOpen: (open: boolean) => void;
 }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
+  const { reloadEmployees } = useEmployees(currentWorkspaceId);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<employeeSchemaType>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
       name: "",
       email: "",
-      phoneNumber: "",
+      phoneNum: "",
       department: "",
       startDate: new Date(),
     },
@@ -42,13 +44,18 @@ export function CreateEmployeeForm({
         wid: Number(currentWorkspaceId),
         name: data.name,
         email: data.email,
-        phoneNumber: data.phoneNumber,
+        phoneNum: data.phoneNum,
         startDate: formatDate(data.startDate), // format : 2020-02-02
         department: data.department,
         type: "employee",
-      } as MemberFormType;
+      } as EmployeeFormType;
 
-      const { response, result } = await MemberAPI.create(employeeFormData);
+      const { response, result } = await MemberAPI.createEmployee(
+        employeeFormData
+      );
+
+      reloadEmployees();
+
       if (response.ok) {
         setOpen(false);
       }
@@ -67,10 +74,10 @@ export function CreateEmployeeForm({
       >
         <NameField form={form} />
         <EmailField form={form} />
-        <PhoneNumberField form={form} />
+        <PhoneNumField form={form} />
         <DepartmentField form={form} />
         <StartDateField form={form} />
-        <SubmitButton isLoading={isLoading} text="수정하기" />
+        <SubmitButton isLoading={isLoading} text="생성하기" />
       </form>
     </Form>
   );

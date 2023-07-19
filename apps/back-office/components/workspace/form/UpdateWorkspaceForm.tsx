@@ -45,7 +45,6 @@ export function UpdateWorkspaceForm({
         data.workspaceName,
         data.emailId
       );
-      console.log(result);
 
       if (response.ok) {
         setOpen(false);

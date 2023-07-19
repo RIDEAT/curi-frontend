@@ -32,6 +32,8 @@ import { IEmployee, IManager, MemberType } from "member-types";
 import { MemberAPI } from "../../../lib/api/member";
 import { UpdateEmployeeForm } from "../form/UpdateEmployeeForm";
 import { UpdateManagerForm } from "../form/UpdateManagerForm";
+import { useEmployees, useManagers } from "../../../lib/hook/swr/useMember";
+import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -100,6 +102,7 @@ export function MemberRowActions<TData>({
             </DropdownMenuItem>
           </AlertDialogTrigger>
           <DeleteActionContent
+            type={rowOriginal.current.type}
             memberId={rowOriginal.current.id.toString()}
             setOpen={setOpen}
           />
@@ -110,16 +113,24 @@ export function MemberRowActions<TData>({
 }
 
 function DeleteActionContent({
+  type,
   memberId,
   setOpen,
 }: {
+  type: MemberType;
   memberId: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  const actionHandler = async () => {
-    const result = await MemberAPI.delete(memberId);
-    console.log(result);
-    setOpen(false);
+  const { currentWorkspaceId } = useCurrentWorkspace();
+  const { reloadEmployees } = useEmployees(currentWorkspaceId);
+  const { reloadManagers } = useManagers(currentWorkspaceId);
+
+  const actionHandler = async (event) => {
+    event.preventDefault();
+    await MemberAPI.delete(memberId);
+
+    if (type == "employee") reloadEmployees();
+    else reloadManagers();
   };
   return (
     <AlertDialogContent>
@@ -132,7 +143,8 @@ function DeleteActionContent({
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             setOpen(false);
           }}
         >
