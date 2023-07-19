@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -46,7 +46,11 @@ const menuItems = (slug: string) => [
 
 export function WorkspaceSidebar({ className, slug }: SidebarProps) {
   const pathname = usePathname();
-  const lastPath = useRef(pathname.split("/").pop());
+  const [lastPath, setLastPath] = useState(pathname.split("/").pop());
+
+  useEffect(() => {
+    setLastPath(pathname.split("/").pop());
+  }, [pathname]);
 
   return (
     <div className={cn("pb-12 h-screen shadow-inner", className)}>
@@ -61,7 +65,7 @@ export function WorkspaceSidebar({ className, slug }: SidebarProps) {
               replace={true}
             >
               <Button
-                variant={lastPath.current === item.key ? "secondary" : "ghost"}
+                variant={lastPath === item.key ? "secondary" : "ghost"}
                 className="w-full flex justify-start items-center gap-2"
               >
                 {item.icon}
