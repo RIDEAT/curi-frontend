@@ -131,6 +131,8 @@ function DeleteActionContent({
 
     if (type == "employee") reloadEmployees();
     else reloadManagers();
+
+    setOpen(false);
   };
   return (
     <AlertDialogContent>
