@@ -1,9 +1,11 @@
 "use client";
 
 import { Provider } from "jotai";
-import "ui/styles/globals.css";
-import { BaseSWRProvider } from "../lib/provider/swr-provider";
+
 import { Toaster } from "ui";
+import "ui/styles/globals.css";
+
+import { BaseSWRProvider } from "../lib/provider/swr-provider";
 
 export default function RootLayout({
   children,

@@ -5,6 +5,8 @@
     "build:back-office": "pnpm --filter back-office build",
     "dev": "turbo run dev --parallel",
     "dev:back-office": "pnpm --filter back-office dev",
+    "start": "turbo run start",
+    "start:back-office": "pnpm --filter back-office start",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install",

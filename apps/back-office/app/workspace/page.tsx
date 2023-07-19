@@ -1,8 +1,8 @@
 "use client";
 
-import WorkspaceSelectorCollapsible from "../../components/ui/collapsibles/WorkspaceSelectorCollapsible";
+import WorkspaceSelectorCollapsible from "../../components/workspace/WorkspaceSelectorCollapsible";
 import withAuth from "../../components/hoc/withAuth";
-import RouterNav from "../../components/navigations/RouterNav";
+import RouterNav from "../../components/ui/navigations/RouterNav";
 
 export default withAuth(SelectWorkspace, "protected");
 function SelectWorkspace() {
