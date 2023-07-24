@@ -1,18 +1,13 @@
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import {
   Button,
-  ScrollArea,
-  ScrollBar,
   Separator,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "ui";
-import { listenNowAlbums, madeForYouAlbums } from "../data/albums";
-import { AlbumArtwork } from "../components/album-artwork";
-import { PodcastEmptyPlaceholder } from "../components/podcast-empty-placeholder";
-import { TaskPage } from "./TaskPage";
+import ManagerTable, { EmployeeTable } from "./MemberTable";
 
 const MemberTabsList = [
   {
@@ -76,7 +71,7 @@ export default function Member() {
                   </div>
                 </div>
                 <Separator className="my-4" />
-                <TaskPage />
+                {tab.value == "employee" ? <EmployeeTable /> : <ManagerTable />}
               </TabsContent>
             );
           })}

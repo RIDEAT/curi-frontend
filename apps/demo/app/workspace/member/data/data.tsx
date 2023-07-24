@@ -7,7 +7,7 @@ import {
   CrossCircledIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
-} from "@radix-ui/react-icons"
+} from "@radix-ui/react-icons";
 
 export const labels = [
   {
@@ -22,35 +22,35 @@ export const labels = [
     value: "documentation",
     label: "Documentation",
   },
-]
+];
 
-export const statuses = [
+export const departments = [
   {
-    value: "backlog",
-    label: "Backlog",
+    value: "development",
+    label: "개발",
     icon: QuestionMarkCircledIcon,
   },
   {
-    value: "todo",
-    label: "Todo",
+    value: "marketing",
+    label: "마케팅",
     icon: CircleIcon,
   },
   {
-    value: "in progress",
-    label: "In Progress",
+    value: "design",
+    label: "디자인",
     icon: StopwatchIcon,
   },
   {
-    value: "done",
-    label: "Done",
+    value: "business",
+    label: "영업",
     icon: CheckCircledIcon,
   },
   {
-    value: "canceled",
-    label: "Canceled",
+    value: "hr",
+    label: "HR",
     icon: CrossCircledIcon,
   },
-]
+];
 
 export const priorities = [
   {
@@ -68,4 +68,4 @@ export const priorities = [
     value: "high",
     icon: ArrowUpIcon,
   },
-]
+];

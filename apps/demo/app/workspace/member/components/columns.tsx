@@ -2,13 +2,13 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { labels, priorities, statuses } from "../data/data";
-import { Task } from "../data/schema";
+import { departments } from "../data/data";
+import { EmployeeSchemaType, ManagerSchemaType } from "../data/schema";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
-import { Badge, Checkbox } from "ui";
+import { Checkbox } from "ui";
 
-export const columns: ColumnDef<Task>[] = [
+const baseColumns = [
   {
     id: "select",
     header: ({ table }) => (
@@ -31,52 +31,34 @@ export const columns: ColumnDef<Task>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "id",
+    accessorKey: "name",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Task" />
+      <DataTableColumnHeader column={column} title="이름" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="w-[50px]">{row.getValue("name")}</div>,
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "title",
+    accessorKey: "department",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Title" />
+      <DataTableColumnHeader column={column} title="부서" />
     ),
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label);
-
-      return (
-        <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("title")}
-          </span>
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "status",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
-    ),
-    cell: ({ row }) => {
-      const status = statuses.find(
-        (status) => status.value === row.getValue("status")
+      const department = departments.find(
+        (department) => department.label === row.getValue("department")
       );
 
-      if (!status) {
+      if (!department) {
         return null;
       }
 
       return (
-        <div className="flex w-[100px] items-center">
-          {status.icon && (
-            <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+        <div className="flex w-[70px] items-center">
+          {department.icon && (
+            <department.icon className="mr-2 h-4 w-4 text-muted-foreground" />
           )}
-          <span>{status.label}</span>
+          <span>{department.label}</span>
         </div>
       );
     },
@@ -84,35 +66,72 @@ export const columns: ColumnDef<Task>[] = [
       return value.includes(row.getValue(id));
     },
   },
-  {
-    accessorKey: "priority",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Priority" />
-    ),
-    cell: ({ row }) => {
-      const priority = priorities.find(
-        (priority) => priority.value === row.getValue("priority")
-      );
+];
 
-      if (!priority) {
-        return null;
-      }
-
-      return (
-        <div className="flex items-center">
-          {priority.icon && (
-            <priority.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
-          <span>{priority.label}</span>
-        </div>
-      );
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
-  },
+const actionColumns = [
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
+];
+
+export const employeeColumns: ColumnDef<EmployeeSchemaType>[] = [
+  ...baseColumns,
+  {
+    accessorKey: "startDate",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="입사일" />
+    ),
+    cell: ({ row }) => (
+      <div className="w-[100px]">{row.getValue("startDate")}</div>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "buddy",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="버디" />
+    ),
+    cell: ({ row }) => <div className="w-[50px]">{row.getValue("buddy")}</div>,
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "manager",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="매니저" />
+    ),
+    cell: ({ row }) => (
+      <div className="w-[50px]">{row.getValue("manager")}</div>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  ...actionColumns,
+];
+
+export const managerColumns: ColumnDef<ManagerSchemaType>[] = [
+  ...baseColumns,
+  {
+    accessorKey: "email",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="이메일" />
+    ),
+    cell: ({ row }) => <div className="w-[80px]">{row.getValue("email")}</div>,
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "phoneNum",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="전화번호" />
+    ),
+    cell: ({ row }) => (
+      <div className="w-[120px]">{row.getValue("phoneNum")}</div>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  ...actionColumns,
 ];
