@@ -7,6 +7,7 @@ WORKDIR /app
 
 RUN yarn global add turbo@1.10.7
 COPY . .
+RUN npx @turbo/codemod add-package-manager
 RUN turbo prune --scope="demo" --docker
 
 ## Builder
