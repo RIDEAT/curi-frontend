@@ -29,7 +29,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY --from=pruner /app/out/full/ .
 RUN ls -la
-COPY ../../turbo.json turbo.json
+COPY turbo.json turbo.json
 
 RUN pnpm build:demo
 RUN ls -la
