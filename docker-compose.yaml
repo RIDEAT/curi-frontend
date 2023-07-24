@@ -7,3 +7,10 @@ services:
     ports:
       - 3000:3000
     command: ["node", "./apps/back-office/server.js"]
+  demo:
+    build:
+      context: .
+      dockerfile: ./apps/demo/Dockerfile
+    ports:
+      - 3002:3002
+    command: ["node", "./apps/demo/server.js"]

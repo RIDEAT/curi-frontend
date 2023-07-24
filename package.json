@@ -3,6 +3,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:back-office": "pnpm --filter back-office build",
+    "build:demo": "pnpm --filter demo build",
     "dev": "turbo run dev --parallel",
     "dev:back-office": "pnpm --filter back-office dev",
     "start": "turbo run start",
