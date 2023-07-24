@@ -30,6 +30,7 @@ export default function Home() {
                     alt="curi"
                     width={64}
                     height={64}
+                    className="ml-4"
                   />
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -53,10 +54,10 @@ export default function Home() {
               <h1 className="text-5xl font-bold">
                 회사의 첫인상을 디자인합니다
               </h1>
-              <h3 className="text-2xl font-medium">
+              <h3 className="text-xl font-medium my-5">
                 온보딩 과정에 필요한 모든 도구를 제공합니다
               </h3>
-              <h3 className="text-2xl font-medium mb-10">
+              <h3 className="text-xl font-medium mb-10">
                 지금 바로 데모 버전을 마음껏 만져보세요
               </h3>
               <Button className="w-40 h-12 text-xl font-bold">

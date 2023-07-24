@@ -19,6 +19,7 @@ WORKDIR /app
 
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NEXT_PUBLIC_ENV dev
+ENV HOSTNAME localhost
 
 RUN yarn global add pnpm@8.5.0
 COPY .gitignore .gitignore

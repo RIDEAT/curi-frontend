@@ -7,13 +7,7 @@ module.exports = {
   experimental: {
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
-  async rewrites() {
-    return [
-      {
-        source: "/get",
-        // destination: "http://localhost:8080/user/authorize",
-        destination: "https://auth.curiboard.com/auth/verify",
-      },
-    ];
+  images: {
+    domains: ["avatars.githubusercontent.com", "images.unsplash.com"],
   },
 };
