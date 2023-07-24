@@ -5,8 +5,6 @@ import { Provider } from "jotai";
 import { Toaster } from "ui";
 import "ui/styles/globals.css";
 
-import { BaseSWRProvider } from "../lib/provider/swr-provider";
-
 export default function RootLayout({
   children,
 }: {
@@ -15,10 +13,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <BaseSWRProvider>
-          <Provider>{children}</Provider>
-          <Toaster />
-        </BaseSWRProvider>
+        <Provider>{children}</Provider>
+        <Toaster />
       </body>
     </html>
   );

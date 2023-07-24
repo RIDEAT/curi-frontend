@@ -7,7 +7,7 @@ WORKDIR /app
 
 RUN yarn global add turbo@1.10.7
 COPY . .
-RUN turbo prune --scope="back-office" --docker
+RUN turbo prune --scope="back-office-demo" --docker
 
 ## Builder
 
@@ -53,4 +53,4 @@ RUN ls -la
 # CMD ["ls" , "-la"]
 # CMD ["cd app &ls" , "-la"]
 # CMD cd app;ls -la
-CMD ["node", "./apps/back-office/server.js"]
+CMD ["node", "./apps/back-office-demo/server.js"]
