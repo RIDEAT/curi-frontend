@@ -1,6 +1,7 @@
 // ui
 export * from "./ui/alert-dialog";
 export * from "./ui/avatar";
+export * from "./ui/badge";
 export * from "./ui/button";
 export * from "./ui/calendar";
 export * from "./ui/card";
