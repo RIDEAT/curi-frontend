@@ -1,3 +1,4 @@
+import { IRole } from "workspace-types";
 import { z } from "zod";
 
 const baseSchema = z.object({
@@ -23,11 +24,21 @@ const baseSchema = z.object({
   }),
 });
 
-export const employeeSchema = baseSchema.extend({
+const employeeSchema = baseSchema.extend({
   startDate: z.date({
     required_error: "A date of birth is required.",
   }),
 });
+
+export const getEmployeeSchema = (roles: IRole[]) => {
+  console.log("getEmployeeSchema roles: ", roles);
+  const field = {};
+  roles.forEach((role) => {
+    field[role.name] = z.string({});
+  });
+  return employeeSchema.extend(field);
+};
+
 export type employeeSchemaType = z.infer<typeof employeeSchema>;
 
 export const managerSchema = baseSchema.extend({});

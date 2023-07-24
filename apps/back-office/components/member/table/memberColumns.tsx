@@ -6,6 +6,7 @@ import {
 } from "member-types";
 import { DataTableColumnHeader } from "../../ui/tables/reusables/DataTableColumnHeader";
 import { MemberRowActions } from "./MemberRowActions";
+import { IRole } from "workspace-types";
 
 const BaseInfoColumns: ColumnDef<ManagerColumnType>[] = [
   {
@@ -43,16 +44,31 @@ const getActionsColumns = (type: MemberType) => {
   ];
 };
 
-export const EmployeeColumns: ColumnDef<EmployeeColumnType>[] = [
-  ...BaseInfoColumns,
-  {
-    accessorKey: "startDate",
+const getRoleColumns = (roles: IRole[]) => {
+  return roles.map((role) => ({
+    accessorKey: role.name,
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="입사일" />
+      <DataTableColumnHeader column={column} title={role.name} />
     ),
-  },
-  ...getActionsColumns("employee"),
-];
+  }));
+};
+
+export const getEmployeeColumns = (
+  roles: IRole[]
+): ColumnDef<EmployeeColumnType>[] => {
+  console.log("getEmployeeColumns roles: ", roles);
+  return [
+    ...BaseInfoColumns,
+    {
+      accessorKey: "startDate",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="입사일" />
+      ),
+    },
+    ...getRoleColumns(roles),
+    ...getActionsColumns("employee"),
+  ];
+};
 
 export const ManagerColumns: ColumnDef<ManagerColumnType>[] = [
   ...BaseInfoColumns,

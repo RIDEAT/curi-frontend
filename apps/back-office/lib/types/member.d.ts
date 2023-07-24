@@ -11,8 +11,16 @@ declare module "member-types" {
     type: MemberType;
   }
 
+  interface IRelatedManagerInfo {
+    id: number;
+    name: string;
+    roleId: number;
+    roleName: string;
+  }
+
   interface IEmployee extends IMember {
     startDate: string;
+    managers: IRelatedManagerInfo[];
   }
 
   interface IManager extends IMember {}

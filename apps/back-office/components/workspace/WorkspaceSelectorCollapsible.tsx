@@ -11,10 +11,10 @@ import {
   CollapsibleTrigger,
 } from "ui";
 
-import { useWorkspace } from "../../lib/hook/swr/useWorkspace";
+import { useWorkspaces } from "../../lib/hook/swr/useWorkspaces";
 
 export default function WorkspaceSelectorCollapsible() {
-  const { workspaces, isLoading, error } = useWorkspace();
+  const { workspaces, isLoading, error } = useWorkspaces();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 

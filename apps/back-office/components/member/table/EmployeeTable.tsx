@@ -1,14 +1,39 @@
+import { useEffect, useState } from "react";
 import { useEmployees } from "../../../lib/hook/swr/useMember";
+import { useWorkspaces } from "../../../lib/hook/swr/useWorkspaces";
 import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 import { BaseDataTable } from "../../ui/tables/BaseDataTable";
-import { EmployeeColumns } from "./memberColumns";
+import { getEmployeeColumns } from "./memberColumns";
 
 export function EmployeeTable() {
   const { currentWorkspaceId } = useCurrentWorkspace();
-  const { employees, isLoading } = useEmployees(currentWorkspaceId);
+  const {
+    workspaces,
+    getRolesInWorkspace,
+    isLoading: isLoadingWs,
+  } = useWorkspaces();
+  const { employees, isLoading: isLoadingEp } =
+    useEmployees(currentWorkspaceId);
 
-  if (isLoading) return <div>loading...</div>;
+  const [EmployeeColumns, setEmployeeColumns] = useState([]);
+
+  useEffect(() => {
+    if (currentWorkspaceId && workspaces) {
+      console.log(getEmployeeColumns(getRolesInWorkspace(currentWorkspaceId)));
+      setEmployeeColumns(
+        getEmployeeColumns(getRolesInWorkspace(currentWorkspaceId))
+      );
+    }
+  }, [currentWorkspaceId, workspaces]);
+
+  if (isLoadingWs || isLoadingEp) return <div>loading...</div>;
   if (!employees) return <div></div>;
 
-  return <BaseDataTable columns={EmployeeColumns} data={employees} />;
+  return (
+    <>
+      {EmployeeColumns.length ? (
+        <BaseDataTable columns={EmployeeColumns} data={employees} />
+      ) : null}
+    </>
+  );
 }

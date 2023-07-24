@@ -22,12 +22,12 @@ import {
 
 import { IWorkspace } from "workspace-types";
 import extractSlug from "../../lib/utils/extractSlug";
-import { useWorkspace } from "../../lib/hook/swr/useWorkspace";
+import { useWorkspaces } from "../../lib/hook/swr/useWorkspaces";
 import { WorkspaceSettingDialog } from "./WorkspaceSettingDialog";
 
 export default function WorkspaceCombo() {
   const [open, setOpen] = useState(false);
-  const { workspaces, isLoading, error } = useWorkspace();
+  const { workspaces, isLoading, error } = useWorkspaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<IWorkspace | null>(
     null
   );
@@ -101,7 +101,7 @@ export default function WorkspaceCombo() {
 }
 
 function CurrentWorkspaceLabel({ selectedWorkspace }) {
-  const { workspaces, isLoading, error } = useWorkspace();
+  const { workspaces, isLoading, error } = useWorkspaces();
 
   if (isLoading) return <div>loading..</div>;
   if (error) return <div>error</div>;
@@ -118,7 +118,7 @@ function CurrentWorkspaceLabel({ selectedWorkspace }) {
 }
 
 function CommandItems({ selectedWorkspace, setSelectedWorkspace, setOpen }) {
-  const { workspaces, isLoading, error } = useWorkspace();
+  const { workspaces, isLoading, error } = useWorkspaces();
   const router = useRouter();
 
   if (isLoading) return <div>loading..</div>;
