@@ -1,115 +1,177 @@
-import { PlusCircledIcon } from "@radix-ui/react-icons";
-import {
-  Button,
-  ScrollArea,
-  ScrollBar,
-  Separator,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "ui";
-import { listenNowAlbums, madeForYouAlbums } from "../data/albums";
-import { AlbumArtwork } from "../components/album-artwork";
-import { PodcastEmptyPlaceholder } from "../components/podcast-empty-placeholder";
+"use client";
+
+import { DragHandleDots2Icon } from "@radix-ui/react-icons";
 
 export default function Workflow() {
   return (
-    <div className="col-span-3 lg:col-span-4 lg:border-l">
-      <div className="h-full px-4 py-6 lg:px-8">
-        <Tabs defaultValue="music" className="h-full space-y-6">
-          <div className="space-between flex items-center">
-            <TabsList>
-              <TabsTrigger value="music" className="relative">
-                Music
-              </TabsTrigger>
-              <TabsTrigger value="podcasts">Podcasts</TabsTrigger>
-              <TabsTrigger value="live" disabled>
-                Live
-              </TabsTrigger>
-            </TabsList>
-            <div className="ml-auto mr-4">
-              <Button>
-                <PlusCircledIcon className="mr-2 h-4 w-4" />
-                Add music
-              </Button>
-            </div>
-          </div>
-          <TabsContent value="music" className="border-none p-0 outline-none">
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <h2 className="text-2xl font-semibold tracking-tight">
-                  Listen Now
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Top picks for you. Updated daily.
-                </p>
-              </div>
-            </div>
-            <Separator className="my-4" />
-            <div className="relative">
-              <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                  {listenNowAlbums.map((album) => (
-                    <AlbumArtwork
-                      key={album.name}
-                      album={album}
-                      className="w-[250px]"
-                      aspectRatio="portrait"
-                      width={250}
-                      height={330}
-                    />
-                  ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            </div>
-            <div className="mt-6 space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
-                Made for You
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                Your personal playlists. Updated daily.
-              </p>
-            </div>
-            <Separator className="my-4" />
-            <div className="relative">
-              <ScrollArea>
-                <div className="flex space-x-4 pb-4">
-                  {madeForYouAlbums.map((album) => (
-                    <AlbumArtwork
-                      key={album.name}
-                      album={album}
-                      className="w-[150px]"
-                      aspectRatio="square"
-                      width={150}
-                      height={150}
-                    />
-                  ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-            </div>
-          </TabsContent>
-          <TabsContent
-            value="podcasts"
-            className="h-full flex-col border-none p-0 data-[state=active]:flex"
-          >
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <h2 className="text-2xl font-semibold tracking-tight">
-                  New Episodes
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Your favorite podcasts. Updated daily.
-                </p>
-              </div>
-            </div>
-            <Separator className="my-4" />
-            <PodcastEmptyPlaceholder />
-          </TabsContent>
-        </Tabs>
+    <div className="w-screen h-screen overflow-scroll flex bg-stone-50">
+      <div className="w-1/3 m-5">
+        <TimeBox />
+        <TimeBox />
+        <TimeBox />
+        <TimeBox />
+        <TimeBox />
+        <TimeBox />
       </div>
     </div>
   );
 }
+
+const TimeBox = () => {
+  return (
+    <div className="flex h-[310px]">
+      <SequenceBox />
+      <div className="relative h-full">
+        <TimeLineVerticalElement date="-0" />
+      </div>
+      <SequenceBox />
+    </div>
+  );
+};
+
+const SequenceBox = () => {
+  return (
+    <div className="flex justify-center items-center">
+      <div className="w-[300px] h-[250px] bg-white rounded-lg shadow-md">
+        <div className="flex justify-between items-center h-[50px] p-4">
+          <div className="text-lg font-medium">신입사원을 환영합니다</div>
+          <div className="text-md font-medium bg-orange-200 p-1 rounded-md">
+            신입
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 items-center w-full h-[200px] p-4 pt-0 overflow-scroll">
+          <ModuleBox />
+          <ModuleBox />
+          <ModuleBox />
+          <ModuleBox />
+          <ModuleBox />
+          <ModuleBox />
+          <ModuleBox />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ModuleBox = () => {
+  return (
+    <div className="flex justify-between items-center w-full h-9  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm">
+      <div className="text-md">신입사원을 환영합니다</div>
+      <div>
+        <DragHandleDots2Icon />
+      </div>
+    </div>
+  );
+};
+
+const TimeLineVerticalElement = ({ date }: { date: string }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="95"
+      height="311"
+      viewBox="0 0 95 311"
+      fill="none"
+    >
+      <line
+        x1="48"
+        y1="4.37114e-08"
+        x2="48"
+        y2="150"
+        stroke="#9101C2"
+        stroke-opacity="0.4"
+        stroke-width="2"
+      />
+      <text
+        x="70"
+        y={145}
+        textAnchor="middle"
+        fill="#8E00BF"
+        fontSize="12"
+        fontWeight="bold"
+      >
+        {"D" + date}
+      </text>
+      <circle cx="48" cy="156" r="5.5" stroke="#8E00BF" stroke-opacity="0.85" />
+      <line
+        x1="53"
+        y1="156"
+        x2="95"
+        y2="156"
+        stroke="#8E00BF"
+        stroke-opacity="0.3"
+        stroke-width="2"
+        stroke-dasharray="2 2"
+      />
+      <line
+        x1="1"
+        y1="156"
+        x2="43"
+        y2="156"
+        stroke="#8E00BF"
+        stroke-opacity="0.3"
+        stroke-width="2"
+        stroke-dasharray="2 2"
+      />
+      <line
+        x1="48"
+        y1="161"
+        x2="48"
+        y2="311"
+        stroke="#9101C2"
+        stroke-opacity="0.4"
+        stroke-width="2"
+      />
+      <g filter="url(#filter0_f_13_1369)">
+        <circle cx="48" cy="156" r="3" fill="#A400DD" />
+      </g>
+      <g filter="url(#filter1_f_13_1369)">
+        <circle cx="48" cy="156" r="3" fill="#A400BF" />
+      </g>
+      <defs>
+        <filter
+          id="filter0_f_13_1369"
+          x="40"
+          y="148"
+          width="16"
+          height="16"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feGaussianBlur
+            stdDeviation="2.5"
+            result="effect1_foregroundBlur_13_1369"
+          />
+        </filter>
+        <filter
+          id="filter1_f_13_1369"
+          x="44"
+          y="152"
+          width="8"
+          height="8"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feGaussianBlur
+            stdDeviation="0.5"
+            result="effect1_foregroundBlur_13_1369"
+          />
+        </filter>
+      </defs>
+    </svg>
+  );
+};
