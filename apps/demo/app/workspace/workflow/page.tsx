@@ -1,22 +1,53 @@
 "use client";
 
-import { DragHandleDots2Icon } from "@radix-ui/react-icons";
-import { DraggableList } from "ui";
+import { DragHandleDots2Icon, PlusCircledIcon } from "@radix-ui/react-icons";
+import {
+  Button,
+  DraggableList,
+  Separator,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "ui";
 
 export default function Workflow() {
   return (
-    <div className="w-screen h-screen overflow-scroll flex bg-stone-50">
-      <div className="w-1/3 m-5">
-        <TimeBox />
-        <TimeBox />
-        <TimeBox />
-        <TimeBox />
-        <TimeBox />
-        <TimeBox />
+    <div className="col-span-3 lg:col-span-4 lg:border-l bg-stone-50">
+      <div className="h-full px-4 py-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          <div className="space-y-1">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              {"신입 공통 워크플로우"}
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {"모든 신입사원의 공통 워크플로우입니다."}
+            </p>
+          </div>
+        </div>
+        <WorkflowTimeline />
       </div>
     </div>
   );
 }
+
+const WorkflowTimeline = () => {
+  return (
+    <>
+      <Separator className="my-4" />
+      <div className="w-screen h-screen overflow-scroll flex ">
+        <div className="w-1/3 m-5">
+          <TimeBox />
+          <TimeBox />
+          <TimeBox />
+          <TimeBox />
+          <TimeBox />
+          <TimeBox />
+        </div>
+      </div>
+    </>
+  );
+};
 
 const TimeBox = () => {
   return (
@@ -70,16 +101,14 @@ const SequenceBox = () => {
       <div className="w-[320px] h-[280px] bg-white rounded-lg shadow-md p-1">
         <div className="flex justify-between items-center h-[50px] p-4">
           <div className="text-lg font-medium">신입사원을 환영합니다</div>
-          <div className="text-md font-medium bg-orange-200 p-1 rounded-md">
+          <div className="text-xs font-medium bg-yellow-200 p-1 pl-2 pr-2 rounded-md">
             신입
           </div>
         </div>
-        {/* <div className="w-full overflow-scroll"> */}
         <DraggableList
           data={listData}
           renderItemContent={(title) => <ModuleBox title={title} />}
         />
-        {/* </div> */}
       </div>
     </div>
   );

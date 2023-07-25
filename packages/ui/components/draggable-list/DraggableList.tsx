@@ -38,7 +38,7 @@ const DraggableList: FC<DraggableListProps> = ({
   };
 
   return (
-    <div className="w-full h-[210px] draggable-list overflow-scroll scrollbar-hide p-2">
+    <div className="w-full h-[210px] draggable-list overflow-scroll scrollbar-hide p-2 pt-0">
       {data.map((item, index) => (
         <DraggableListItem
           key={index}
