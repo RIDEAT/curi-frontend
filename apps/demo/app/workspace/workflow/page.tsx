@@ -1,6 +1,7 @@
 "use client";
 
 import { DragHandleDots2Icon } from "@radix-ui/react-icons";
+import { DraggableList } from "ui";
 
 export default function Workflow() {
   return (
@@ -29,34 +30,65 @@ const TimeBox = () => {
   );
 };
 
+interface ListItem {
+  id: string;
+  title: string;
+}
+
+const listData: ListItem[] = [
+  {
+    id: "1",
+    title: "First Item",
+  },
+  {
+    id: "2",
+    title: "Second Item",
+  },
+  {
+    id: "3",
+    title: "Third Item",
+  },
+  {
+    id: "4",
+    title: "Fourth Item",
+  },
+  {
+    id: "5",
+    title: "Fifth Item",
+  },
+  {
+    id: "6",
+    title: "Sixth Item",
+  },
+
+  // and so on...
+];
+
 const SequenceBox = () => {
   return (
     <div className="flex justify-center items-center">
-      <div className="w-[300px] h-[250px] bg-white rounded-lg shadow-md">
+      <div className="w-[320px] h-[280px] bg-white rounded-lg shadow-md p-1">
         <div className="flex justify-between items-center h-[50px] p-4">
           <div className="text-lg font-medium">신입사원을 환영합니다</div>
           <div className="text-md font-medium bg-orange-200 p-1 rounded-md">
             신입
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-center w-full h-[200px] p-4 pt-0 overflow-scroll">
-          <ModuleBox />
-          <ModuleBox />
-          <ModuleBox />
-          <ModuleBox />
-          <ModuleBox />
-          <ModuleBox />
-          <ModuleBox />
-        </div>
+        {/* <div className="w-full overflow-scroll"> */}
+        <DraggableList
+          data={listData}
+          renderItemContent={(title) => <ModuleBox title={title} />}
+        />
+        {/* </div> */}
       </div>
     </div>
   );
 };
 
-const ModuleBox = () => {
+const ModuleBox = ({ title }: { title: string }) => {
   return (
-    <div className="flex justify-between items-center w-full h-9  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm">
-      <div className="text-md">신입사원을 환영합니다</div>
+    <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm">
+      <div className="text-md">{title}</div>
       <div>
         <DragHandleDots2Icon />
       </div>
@@ -79,8 +111,8 @@ const TimeLineVerticalElement = ({ date }: { date: string }) => {
         x2="48"
         y2="150"
         stroke="#9101C2"
-        stroke-opacity="0.4"
-        stroke-width="2"
+        strokeOpacity="0.4"
+        strokeWidth="2"
       />
       <text
         x="70"
@@ -92,16 +124,16 @@ const TimeLineVerticalElement = ({ date }: { date: string }) => {
       >
         {"D" + date}
       </text>
-      <circle cx="48" cy="156" r="5.5" stroke="#8E00BF" stroke-opacity="0.85" />
+      <circle cx="48" cy="156" r="5.5" stroke="#8E00BF" strokeOpacity="0.85" />
       <line
         x1="53"
         y1="156"
         x2="95"
         y2="156"
         stroke="#8E00BF"
-        stroke-opacity="0.3"
-        stroke-width="2"
-        stroke-dasharray="2 2"
+        strokeOpacity="0.3"
+        strokeWidth="2"
+        strokeDasharray="2 2"
       />
       <line
         x1="1"
@@ -109,9 +141,9 @@ const TimeLineVerticalElement = ({ date }: { date: string }) => {
         x2="43"
         y2="156"
         stroke="#8E00BF"
-        stroke-opacity="0.3"
-        stroke-width="2"
-        stroke-dasharray="2 2"
+        strokeOpacity="0.3"
+        strokeWidth="2"
+        strokeDasharray="2 2"
       />
       <line
         x1="48"
@@ -119,8 +151,8 @@ const TimeLineVerticalElement = ({ date }: { date: string }) => {
         x2="48"
         y2="311"
         stroke="#9101C2"
-        stroke-opacity="0.4"
-        stroke-width="2"
+        strokeOpacity="0.4"
+        strokeWidth="2"
       />
       <g filter="url(#filter0_f_13_1369)">
         <circle cx="48" cy="156" r="3" fill="#A400DD" />
@@ -136,9 +168,9 @@ const TimeLineVerticalElement = ({ date }: { date: string }) => {
           width="16"
           height="16"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
@@ -157,9 +189,9 @@ const TimeLineVerticalElement = ({ date }: { date: string }) => {
           width="8"
           height="8"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
