@@ -1,15 +1,15 @@
 "use client";
 
-import { DragHandleDots2Icon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { DragHandleDots2Icon } from "@radix-ui/react-icons";
+import { useState } from "react";
 import {
-  Button,
   DraggableList,
   Separator,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
+  Sheet,
+  SheetContent,
+  SheetTrigger,
 } from "ui";
+import Editor from "./components/ui/editor";
 
 export default function Workflow() {
   return (
@@ -96,6 +96,7 @@ const listData: ListItem[] = [
 ];
 
 const SequenceBox = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className="flex justify-center items-center">
       <div className="w-[320px] h-[280px] bg-white rounded-lg shadow-md p-1">
@@ -105,10 +106,19 @@ const SequenceBox = () => {
             신입
           </div>
         </div>
-        <DraggableList
-          data={listData}
-          renderItemContent={(title) => <ModuleBox title={title} />}
-        />
+        <Sheet open={open} onOpenChange={setOpen}>
+          <DraggableList
+            data={listData}
+            renderItemContent={(title) => <ModuleBox title={title} />}
+            onItemClick={() => {
+              console.log("clicked");
+              setOpen((prev) => !prev);
+            }}
+          />
+          <SheetContent isBlur={true}>
+            <Editor />
+          </SheetContent>
+        </Sheet>
       </div>
     </div>
   );
@@ -116,12 +126,14 @@ const SequenceBox = () => {
 
 const ModuleBox = ({ title }: { title: string }) => {
   return (
-    <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm">
-      <div className="text-md">{title}</div>
-      <div>
-        <DragHandleDots2Icon />
+    <SheetTrigger asChild>
+      <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm border border-stone-200">
+        <div className="text-md">{title}</div>
+        <div>
+          <DragHandleDots2Icon />
+        </div>
       </div>
-    </div>
+    </SheetTrigger>
   );
 };
 

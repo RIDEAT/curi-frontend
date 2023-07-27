@@ -6,11 +6,13 @@ import "./draggable-list.css";
 interface DraggableListProps {
   data: any[];
   renderItemContent: (item: any) => JSX.Element;
+  onItemClick?: () => void;
 }
 
 const DraggableList: FC<DraggableListProps> = ({
   data: initialData,
   renderItemContent,
+  onItemClick,
 }) => {
   const [data, setData] = useState(initialData);
   const [dragStartIndex, setDragStartIndex] = useState<number | null>(null);
@@ -45,6 +47,7 @@ const DraggableList: FC<DraggableListProps> = ({
           index={index}
           onDragStart={onDragStart}
           onDrop={onDrop}
+          onItemClick={onItemClick}
         >
           {renderItemContent(item.title)}
         </DraggableListItem>
