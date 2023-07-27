@@ -5,6 +5,7 @@ interface DraggableListItemProps {
   index: number;
   onDragStart?: (index: number) => void;
   onDrop: (index: number) => void;
+  onItemClick?: () => void;
   children: ReactNode;
 }
 
@@ -14,6 +15,7 @@ const DraggableListItem: FC<DraggableListItemProps> = ({
   onDragStart,
   onDrop,
   children,
+  onItemClick,
 }) => {
   const itemRef: RefObject<HTMLLIElement> = useRef(null);
 
@@ -65,7 +67,7 @@ const DraggableListItem: FC<DraggableListItemProps> = ({
   return (
     <li
       ref={itemRef}
-      className="draggable-list__item"
+      className="draggable-list__item cursor-pointer hover:opacity-50 "
       draggable={draggable}
       onDragStart={onDragStartHandle}
       onDrag={onDrag}
@@ -74,6 +76,7 @@ const DraggableListItem: FC<DraggableListItemProps> = ({
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onDropHandle}
+      onClick={onItemClick}
     >
       {children}
     </li>
