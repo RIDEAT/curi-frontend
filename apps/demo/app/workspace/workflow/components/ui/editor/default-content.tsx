@@ -2,195 +2,156 @@ const DEFAULT_EDITOR_CONTENT = {
   type: "doc",
   content: [
     {
-      type: "heading",
-      attrs: { level: 2 },
-      content: [{ type: "text", text: "Introducing Novel" }],
-    },
-    {
-      type: "paragraph",
+      type: "doc",
       content: [
         {
-          type: "text",
-          text: "Novel is a Notion-style WYSIWYG editor with AI-powered autocompletion. Built with ",
-        },
-        {
-          type: "text",
-          marks: [
-            {
-              type: "link",
-              attrs: {
-                href: "https://tiptap.dev/",
-                target: "_blank",
-                class:
-                  "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
-              },
-            },
-          ],
-          text: "Tiptap",
-        },
-        { type: "text", text: " and " },
-        {
-          type: "text",
-          marks: [
-            {
-              type: "link",
-              attrs: {
-                href: "https://sdk.vercel.ai/docs",
-                target: "_blank",
-                class:
-                  "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
-              },
-            },
-          ],
-          text: "Vercel AI SDK",
-        },
-        { type: "text", text: "." },
-      ],
-    },
-    {
-      type: "heading",
-      attrs: { level: 3 },
-      content: [{ type: "text", text: "Features" }],
-    },
-    {
-      type: "orderedList",
-      attrs: { tight: true, start: 1 },
-      content: [
-        {
-          type: "listItem",
+          type: "heading",
+          attrs: { level: 2 },
           content: [
             {
-              type: "paragraph",
-              content: [{ type: "text", text: "Slash menu & bubble menu" }],
+              type: "text",
+              marks: [
+                { type: "bold" },
+                { type: "textStyle", attrs: { color: "#008A00" } },
+              ],
+              text: "RIDEAT 팀 소개",
             },
           ],
         },
         {
-          type: "listItem",
+          type: "paragraph",
           content: [
             {
-              type: "paragraph",
+              type: "text",
+              text: "RIDEAT는 B2B SaaS 사업을 영위하며, 온보딩 프로세스를 효율화하는 서비스를 제공합니다. 이 서비스를 통해 기업들은 신입사원 교육 과정을 보다 원활하게 진행할 수 있습니다.",
+            },
+          ],
+        },
+        {
+          type: "heading",
+          attrs: { level: 3 },
+          content: [
+            {
+              type: "text",
+              marks: [
+                { type: "bold" },
+                { type: "textStyle", attrs: { color: "#2563EB" } },
+              ],
+              text: "주요 기능",
+            },
+          ],
+        },
+        {
+          type: "orderedList",
+          attrs: { tight: true, start: 1 },
+          content: [
+            {
+              type: "listItem",
               content: [
-                { type: "text", text: "AI autocomplete (type " },
-                { type: "text", marks: [{ type: "code" }], text: "++" },
                 {
-                  type: "text",
-                  text: " to activate, or select from slash menu)",
+                  type: "paragraph",
+                  content: [
+                    { type: "text", text: "효율적인 온보딩 프로세스 관리" },
+                  ],
                 },
               ],
             },
-          ],
-        },
-        {
-          type: "listItem",
-          content: [
             {
-              type: "paragraph",
+              type: "listItem",
               content: [
                 {
-                  type: "text",
-                  text: "Image uploads (drag & drop / copy & paste, or select from slash menu)",
+                  type: "paragraph",
+                  content: [{ type: "text", text: "다양한 교육 자료 제공" }],
                 },
               ],
             },
-          ],
-        },
-      ],
-    },
-    {
-      type: "image",
-      attrs: {
-        src: "https://public.blob.vercel-storage.com/pJrjXbdONOnAeZAZ/banner-2wQk82qTwyVgvlhTW21GIkWgqPGD2C.png",
-        alt: "banner.png",
-        title: "banner.png",
-      },
-    },
-    { type: "horizontalRule" },
-    {
-      type: "heading",
-      attrs: { level: 3 },
-      content: [{ type: "text", text: "Learn more" }],
-    },
-    {
-      type: "taskList",
-      content: [
-        {
-          type: "taskItem",
-          attrs: { checked: false },
-          content: [
             {
-              type: "paragraph",
+              type: "listItem",
               content: [
-                { type: "text", text: "Check out the " },
                 {
-                  type: "text",
-                  marks: [
+                  type: "paragraph",
+                  content: [
                     {
-                      type: "link",
-                      attrs: {
-                        href: "https://twitter.com/steventey/status/1669762868416512000",
-                        target: "_blank",
-                        class:
-                          "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
-                      },
+                      type: "text",
+                      text: "신입사원의 성장을 돕는 지원 시스템",
                     },
                   ],
-                  text: "launch video",
                 },
               ],
             },
           ],
         },
         {
-          type: "taskItem",
-          attrs: { checked: false },
+          type: "heading",
+          attrs: { level: 3 },
           content: [
             {
-              type: "paragraph",
-              content: [
-                { type: "text", text: "Star us on " },
-                {
-                  type: "text",
-                  marks: [
-                    {
-                      type: "link",
-                      attrs: {
-                        href: "https://github.com/steven-tey/novel",
-                        target: "_blank",
-                        class:
-                          "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
-                      },
-                    },
-                  ],
-                  text: "GitHub",
-                },
+              type: "text",
+              marks: [
+                { type: "bold" },
+                { type: "textStyle", attrs: { color: "#EAB308" } },
               ],
+              text: "더 알아보기",
             },
           ],
         },
         {
-          type: "taskItem",
-          attrs: { checked: false },
+          type: "taskList",
           content: [
             {
-              type: "paragraph",
+              type: "taskItem",
+              attrs: { checked: false },
               content: [
                 {
-                  type: "text",
-                  marks: [
+                  type: "paragraph",
+                  content: [
+                    { type: "text", text: " RIDEAT의 " },
                     {
-                      type: "link",
-                      attrs: {
-                        href: "https://vercel.com/templates/next.js/novel",
-                        target: "_blank",
-                        class:
-                          "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
-                      },
+                      type: "text",
+                      marks: [
+                        {
+                          type: "link",
+                          attrs: {
+                            href: "https://www.rideat.com",
+                            target: "_blank",
+                            class:
+                              "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
+                          },
+                        },
+                      ],
+                      text: "웹사이트",
                     },
+                    { type: "text", text: "를 방문해 보세요." },
                   ],
-                  text: "Deploy your own",
                 },
-                { type: "text", text: " to Vercel" },
+              ],
+            },
+            {
+              type: "taskItem",
+              attrs: { checked: false },
+              content: [
+                {
+                  type: "paragraph",
+                  content: [
+                    { type: "text", text: " 자세한 정보를 위해 " },
+                    {
+                      type: "text",
+                      marks: [
+                        {
+                          type: "link",
+                          attrs: {
+                            href: "mailto:support@rideat.com",
+                            target: "_blank",
+                            class:
+                              "text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer",
+                          },
+                        },
+                      ],
+                      text: "support@rideat.com",
+                    },
+                    { type: "text", text: "로 문의해 주세요." },
+                  ],
+                },
               ],
             },
           ],

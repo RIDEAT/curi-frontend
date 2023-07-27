@@ -7,14 +7,17 @@ import {
   Separator,
   Sheet,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from "ui";
 import Editor from "./components/ui/editor";
 
 export default function Workflow() {
   return (
-    <div className="col-span-3 lg:col-span-4 lg:border-l bg-stone-50">
-      <div className="h-full px-4 py-6 lg:px-8">
+    <div className="col-span-3 lg:col-span-4 lg:border-l bg-stone-100">
+      <div className=" px-4 py-6 pb-0 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <h2 className="text-2xl font-semibold tracking-tight">
@@ -25,8 +28,9 @@ export default function Workflow() {
             </p>
           </div>
         </div>
-        <WorkflowTimeline />
+        <Separator className="my-4" />
       </div>
+      <WorkflowTimeline />
     </div>
   );
 }
@@ -34,9 +38,8 @@ export default function Workflow() {
 const WorkflowTimeline = () => {
   return (
     <>
-      <Separator className="my-4" />
-      <div className="w-screen h-screen overflow-scroll flex ">
-        <div className="w-1/3 m-5">
+      <div className="w-full h-screen overflow-scroll scrollbar-hide">
+        <div className="m-5 flex flex-col justify-center items-center">
           <TimeBox />
           <TimeBox />
           <TimeBox />
@@ -99,27 +102,36 @@ const SequenceBox = () => {
   const [open, setOpen] = useState(false);
   return (
     <div className="flex justify-center items-center">
-      <div className="w-[320px] h-[280px] bg-white rounded-lg shadow-md p-1">
-        <div className="flex justify-between items-center h-[50px] p-4">
-          <div className="text-lg font-medium">신입사원을 환영합니다</div>
-          <div className="text-xs font-medium bg-yellow-200 p-1 pl-2 pr-2 rounded-md">
-            신입
+      <Sheet open={open} onOpenChange={setOpen}>
+        <div className="w-[320px] h-[280px] bg-white rounded-lg shadow-md p-1">
+          <div className="flex justify-between items-center h-[50px] p-4">
+            <div className="text-lg font-medium">신입사원을 환영합니다</div>
+            <div className="text-xs font-medium bg-yellow-200 p-1 pl-2 pr-2 rounded-md">
+              신입
+            </div>
           </div>
-        </div>
-        <Sheet open={open} onOpenChange={setOpen}>
           <DraggableList
             data={listData}
             renderItemContent={(title) => <ModuleBox title={title} />}
             onItemClick={() => {
-              console.log("clicked");
               setOpen((prev) => !prev);
             }}
           />
-          <SheetContent isBlur={true}>
-            <Editor />
-          </SheetContent>
-        </Sheet>
-      </div>
+        </div>
+        <SheetContent
+          isBlur={true}
+          className="w-[800px] sm:w-[800px] sm:max-w-none"
+        >
+          <SheetHeader>
+            <SheetTitle>Text Module</SheetTitle>
+            <SheetDescription>
+              텍스트 모듈입니다. 아래 에디터에서 텍스트를 편집할 수 있습니다.
+            </SheetDescription>
+          </SheetHeader>
+          <Separator className="my-4" />
+          <Editor />
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };
