@@ -8,27 +8,33 @@ import {
 const sequenceData: IModuleData[] = [
   {
     id: "1",
-    title: "First Module",
+    type: "notification",
+    title: "안내",
   },
   {
     id: "2",
-    title: "Second Module",
+    type: "text",
+    title: "지침",
   },
   {
     id: "3",
-    title: "Third Module",
+    type: "form",
+    title: "설문",
   },
   {
     id: "4",
-    title: "Fourth Module",
+    type: "quiz",
+    title: "퀴즈",
   },
   {
     id: "5",
-    title: "Fifth Module",
+    type: "video",
+    title: "비디오",
   },
   {
     id: "6",
-    title: "Sixth Module",
+    type: "finished",
+    title: "완료",
   },
 
   // and so on...
@@ -39,7 +45,7 @@ const timelineData: TimeBoxProps[] = [
     date: "-10",
     employeeSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="employee"
         sequenceData={sequenceData}
       />
@@ -49,7 +55,7 @@ const timelineData: TimeBoxProps[] = [
     date: "-9",
     managerSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="manager"
         sequenceData={sequenceData}
       />
@@ -59,7 +65,7 @@ const timelineData: TimeBoxProps[] = [
     date: "-3",
     employeeSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="employee"
         sequenceData={sequenceData}
       />
@@ -69,14 +75,14 @@ const timelineData: TimeBoxProps[] = [
     date: "-0",
     employeeSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="employee"
         sequenceData={sequenceData}
       />
     ),
     managerSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="manager"
         sequenceData={sequenceData}
       />
@@ -86,7 +92,7 @@ const timelineData: TimeBoxProps[] = [
     date: "+1",
     managerSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="manager"
         sequenceData={sequenceData}
       />
@@ -96,14 +102,14 @@ const timelineData: TimeBoxProps[] = [
     date: "+2",
     employeeSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="employee"
         sequenceData={sequenceData}
       />
     ),
     managerSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="manager"
         sequenceData={sequenceData}
       />
@@ -113,7 +119,7 @@ const timelineData: TimeBoxProps[] = [
     date: "+6",
     employeeSequence: (
       <SequenceBox
-        title="sequence title"
+        title="시퀀스명"
         stakeholder="employee"
         sequenceData={sequenceData}
       />

@@ -18,6 +18,10 @@ import {
   StakeholderType,
   getStakeholderBadge,
 } from "../../../../../../../components/badges/stakeholder-badges";
+import {
+  ModuleType,
+  getModuleIcon,
+} from "../../../../../../../components/icons/module-icons";
 
 export interface WorkflowTimelineProps {
   timelineData: TimeBoxProps[];
@@ -72,6 +76,7 @@ const TimeBox = ({ date, employeeSequence, managerSequence }: TimeBoxProps) => {
 
 export interface IModuleData {
   id: string;
+  type: ModuleType;
   title: string;
 }
 
@@ -100,7 +105,9 @@ const SequenceBox = ({
           </div>
           <DraggableList
             data={sequenceData}
-            renderItemContent={(title) => <ModuleBox title={title} />}
+            renderItemContent={(type, title) => (
+              <ModuleBox type={type} title={title} />
+            )}
             onItemClick={() => {
               setOpen((prev) => !prev);
             }}
@@ -124,11 +131,14 @@ const SequenceBox = ({
   );
 };
 
-const ModuleBox = ({ title }: { title: string }) => {
+const ModuleBox = ({ type, title }: { type: ModuleType; title: string }) => {
   return (
     <SheetTrigger asChild>
       <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm border border-stone-200">
-        <div className="text-md">{title}</div>
+        <div className="flex gap-3 items-center">
+          {getModuleIcon(type)}
+          <div className="text-md">{title}</div>
+        </div>
         <div>
           <DragHandleDots2Icon />
         </div>
