@@ -11,7 +11,7 @@ import { timelineDataAtom } from "../../../lib/context/workflow";
 export default function Workflow() {
   const timelineData = useAtomValue(timelineDataAtom);
   return (
-    <div className="col-span-3 lg:col-span-4 lg:border-l bg-stone-100">
+    <div className="col-span-3 lg:col-span-4 lg:border-l bg-stone-100 scrollbar-hide">
       <div className=" px-4 py-6 pb-0 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="space-y-1">

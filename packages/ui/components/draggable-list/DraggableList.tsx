@@ -5,7 +5,7 @@ import "./draggable-list.css";
 
 interface DraggableListProps {
   data: any[];
-  renderItemContent: (item: any) => JSX.Element;
+  renderItemContent: any;
   onItemClick?: () => void;
 }
 
@@ -49,7 +49,7 @@ const DraggableList: FC<DraggableListProps> = ({
           onDrop={onDrop}
           onItemClick={onItemClick}
         >
-          {renderItemContent(item.title)}
+          {renderItemContent(item.type, item.title)}
         </DraggableListItem>
       ))}
       <DraggableListItem
