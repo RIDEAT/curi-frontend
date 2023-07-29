@@ -4,8 +4,8 @@ import Script from "next/script";
 // import { Toaster } from "ui";
 import "ui/styles/globals.css";
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_MEASUREMENT_ID;
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const GA_MEASUREMENT_ID = "G-BES6VRBG1D";
+const GTM_ID = "GTM-PLHQLW5G";
 
 export const metadata: Metadata = {
   title: "Curi Board",
