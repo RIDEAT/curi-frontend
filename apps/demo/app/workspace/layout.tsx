@@ -1,10 +1,7 @@
-import { Metadata } from "next";
-import { Sidebar } from "./components/sidebar";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Curi Board",
-  description: "동료의 첫번째 경험을 디자인하세요",
-};
+import { Provider } from "jotai";
+import { Sidebar } from "./components/sidebar";
 
 export default function WorkspaceLayout({
   children,
@@ -17,7 +14,7 @@ export default function WorkspaceLayout({
         <div className="bg-background">
           <div className="grid lg:grid-cols-5">
             <Sidebar className="hidden lg:block" />
-            {children}
+            <Provider>{children}</Provider>
           </div>
         </div>
       </div>
