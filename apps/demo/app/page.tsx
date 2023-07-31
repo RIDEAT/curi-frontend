@@ -39,7 +39,7 @@ export default function Home() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/workspace" className=" mr-10">
+                <Link href="/workspace" className="mr-10">
                   <Button className="w-40 h-12 text-xl font-bold">
                     데모 체험하기
                   </Button>
@@ -60,9 +60,11 @@ export default function Home() {
               <h3 className="text-xl font-medium mb-10">
                 지금 바로 데모 버전을 마음껏 만져보세요
               </h3>
-              <Button className="w-40 h-12 text-xl font-bold">
-                <Link href="/workspace">데모 체험하기</Link>
-              </Button>
+              <Link href="/workspace">
+                <Button className="w-40 h-12 text-xl font-bold">
+                  데모 체험하기
+                </Button>
+              </Link>
             </div>
             {/* <div className="flex flex-col gap-4">
               <h3 className="text-2xl font-bold">뉴스레터 구독하기</h3>

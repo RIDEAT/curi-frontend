@@ -2,7 +2,7 @@
 
 import { cn } from "ui/lib/utils";
 
-import { Button } from "ui";
+import { Button, Input, Label } from "ui";
 import {
   BellIcon,
   GearIcon,
@@ -113,6 +113,23 @@ export function Sidebar({ className }: SidebarProps) {
             </div>
           );
         })}
+        <div className="flex flex-col gap-2 w-full max-w-sm justify-start items-start p-4">
+          <Label className="flex flex-col gap-2 w-full">
+            <span className="text-lg font-bold text-violet-600">
+              큐리소식 받아보기
+            </span>
+            <Input type="email" placeholder="Email" />
+          </Label>
+          <Button
+            type="submit"
+            className="w-full bg-violet-500 hover:bg-violet-700"
+            onClick={() => {
+              alert("구독 신청이 완료되었습니다.");
+            }}
+          >
+            Subscribe
+          </Button>
+        </div>
       </div>
     </div>
   );
