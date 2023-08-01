@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Script from "next/script";
+import { Toaster } from "ui";
 
 // import { Toaster } from "ui";
 import "ui/styles/globals.css";
@@ -51,7 +52,7 @@ export default function RootLayout({
           />
         </noscript>
         {children}
-        {/* <Toaster /> */}
+        <Toaster />
       </body>
     </html>
   );

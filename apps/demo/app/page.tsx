@@ -12,6 +12,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "ui";
+import { CuriExmapleLogo } from "../components/logos/curi-example-logo";
 
 export default function Home() {
   return (
@@ -25,13 +26,7 @@ export default function Home() {
                   aria-disabled
                   className={navigationMenuTriggerStyle()}
                 >
-                  <Image
-                    src="/curi_simple_logo.png"
-                    alt="curi"
-                    width={64}
-                    height={64}
-                    className="ml-4"
-                  />
+                  <CuriExmapleLogo />
                 </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -39,8 +34,8 @@ export default function Home() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/workspace" className="mr-10">
-                  <Button className="w-40 h-12 text-xl font-bold">
+                <Link href="/workspace/workflow" className="mr-10">
+                  <Button className="w-40 h-12 text-xl font-bold bg-violet-500 hover:bg-violet-700">
                     데모 체험하기
                   </Button>
                 </Link>
@@ -60,8 +55,8 @@ export default function Home() {
               <h3 className="text-xl font-medium mb-10">
                 지금 바로 데모 버전을 마음껏 만져보세요
               </h3>
-              <Link href="/workspace">
-                <Button className="w-40 h-12 text-xl font-bold">
+              <Link href="/workspace/workflow">
+                <Button className="w-40 h-12 text-xl font-boldm bg-violet-500 hover:bg-violet-700">
                   데모 체험하기
                 </Button>
               </Link>
