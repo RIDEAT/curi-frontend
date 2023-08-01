@@ -5,6 +5,10 @@ import { collection, getDocs } from "firebase/firestore";
 
 import {
   Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
@@ -13,25 +17,29 @@ import {
 } from "ui";
 
 import { CuriExmapleLogo } from "../components/logos/curi-example-logo";
-import { db } from "../lib/firebase/firebaseClient";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    reservationsCount: 0,
+    newletterCount: 0,
+  });
 
-  const getData = async () => {
-    await getDocs(collection(db, "todos")).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setData(newData);
-      console.log(data, newData);
+  const getReservationsInfo = async () => {
+    return await fetch("/api/reservation", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   };
 
   useEffect(() => {
-    getData();
+    getReservationsInfo().then((response) => {
+      response.json().then((result) => {
+        setData(result.data);
+      });
+    });
   }, []);
 
   return (
@@ -80,13 +88,46 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-            <div>
-              <div>실시간 뉴스레터 구독자 : {} 명</div>
-              <div>실시간 closed beta 신청자 : {} 명</div>
+            <div className="flex justify-center gap-5">
+              <SubscriptionCard
+                title="뉴스레터 구독자"
+                count={data.newletterCount}
+              />
+              <SubscriptionCard
+                title="closed beta 신청자"
+                count={data.reservationsCount}
+              />
             </div>
           </div>
         </main>
       </div>
     </>
+  );
+}
+
+function SubscriptionCard({ title, count }: { title: string; count: number }) {
+  return (
+    <Card className="w-64">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-lg font-medium">{title}</CardTitle>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          className="h-4 w-4 text-muted-foreground"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">+{count == 0 ? "" : count}</div>
+      </CardContent>
+    </Card>
   );
 }

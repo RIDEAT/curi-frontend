@@ -1,16 +1,66 @@
 import { NextResponse } from "next/server";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../../lib/firebase/firebaseClient";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
+
+interface Reservation {
+  id: string;
+  name: string;
+  email: string;
+  optional_agreement: boolean;
+  required_agreement: boolean;
+  pre_reservation: boolean;
+  created_at: Date;
+}
+
+const getAllReservations = async () => {
+  return await getDocs(collection(db, "user")).then((querySnapshot) => {
+    const newData = querySnapshot.docs.map(
+      (doc) =>
+        ({
+          ...doc.data(),
+          id: doc.id,
+        } as Reservation)
+    );
+    return newData;
+  });
+};
+
+const getCountForReservations = (data: Reservation[]) => {
+  if (data) {
+    const Reservationed = data.filter((item) => item.pre_reservation === true);
+    return Reservationed.length;
+  }
+  return 0;
+};
+
+export async function GET() {
+  const result = await getAllReservations();
+  const reservationsCount = getCountForReservations(result);
+  const newletterCount = result.length;
+  const json_response = {
+    status: "success",
+    data: {
+      reservationsCount,
+      newletterCount,
+    },
+  };
+
+  return new NextResponse(JSON.stringify(json_response), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}
 
 const addReservation = async (reservation: any) => {
   try {
-    console.log("[request]", reservation, "save to database");
-    const docRef = await addDoc(collection(db, "user"), {
+    const data = {
       ...reservation,
-    });
-    console.log(docRef);
+      created_at: new Date(),
+    };
+    console.log("[request]", data, "save to database");
+    const docRef = await addDoc(collection(db, "user"), data);
     console.log("Document written with ID: ", docRef.id);
-    console.log("[complete]", reservation, "saved to database");
+    console.log("[complete]", data, "saved to database");
   } catch (e) {
     console.error("Error adding document: ", e);
   }
