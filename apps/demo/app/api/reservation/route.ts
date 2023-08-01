@@ -4,11 +4,13 @@ import { db } from "../../../lib/firebase/firebaseClient";
 
 const addReservation = async (reservation: any) => {
   try {
+    console.log("[request]", reservation, "save to database");
     const docRef = await addDoc(collection(db, "user"), {
       ...reservation,
     });
+    console.log(docRef);
     console.log("Document written with ID: ", docRef.id);
-    console.log("[reservation]", reservation, "saved to database");
+    console.log("[complete]", reservation, "saved to database");
   } catch (e) {
     console.error("Error adding document: ", e);
   }
