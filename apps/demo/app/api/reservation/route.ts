@@ -1,15 +1,30 @@
 import { NextResponse } from "next/server";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../../lib/firebase/firebaseClient";
+
+const addReservation = async (reservation: any) => {
+  try {
+    const docRef = await addDoc(collection(db, "user"), {
+      ...reservation,
+    });
+    console.log("Document written with ID: ", docRef.id);
+    console.log("[reservation]", reservation, "saved to database");
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
 
 export async function POST(request: Request) {
   try {
-    const json = await request.json();
-    console.log(json);
-    let json_response = {
+    const data = await request.json();
+    const json_response = {
       status: "success",
       data: {
-        json,
+        data,
       },
     };
+
+    addReservation(data);
     return new NextResponse(JSON.stringify(json_response), {
       status: 201,
       headers: { "Content-Type": "application/json" },

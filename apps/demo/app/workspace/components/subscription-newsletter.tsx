@@ -39,7 +39,7 @@ function TermsOfServiceHoverCard({
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Button variant="link" className=" text-gray-500">
+        <Button variant="link" className="text-gray-500 h-0">
           약관보기
         </Button>
       </HoverCardTrigger>
@@ -68,6 +68,13 @@ const formSchema = z.object({
     message: "올바른 이메일 형식이 아닙니다.",
   }),
   name: z.union([z.string(), z.undefined()]).optional(),
+  phone_number: z.union([
+    z
+      .string()
+      .regex(/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/)
+      .optional(),
+    z.string(),
+  ]),
   required_agreement: z
     .boolean()
     .default(true)
@@ -75,9 +82,7 @@ const formSchema = z.object({
       message: "뉴스레터 수신 동의는 필수입니다.",
     }),
   optional_agreement: z.boolean().default(false).optional(),
-  //   phoneNum: z.string().regex(/^\d{2,3}-\d{3,4}-\d{4}$/, {
-  //     message: "올바른 전화번호 형식이 아닙니다. 예) 010-1234-5678",
-  //   }),
+  pre_reservation: z.boolean().default(false).optional(),
 });
 
 function SubscribeForm({
@@ -93,19 +98,36 @@ function SubscribeForm({
     defaultValues: {
       email: emailDefault,
       name: "",
+      phone_number: "",
       required_agreement: true,
       optional_agreement: false,
+      pre_reservation: false,
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setOpen(false);
+    const response = await fetch("/api/reservation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      toast({
+        title: "❌ 신청에 실패하였습니다.",
+        description: "잠시 후 다시 시도해주세요.",
+      });
+      return;
+    }
+
     toast({
       title: "✅ 신청이 완료되었습니다.",
       description: `${data.email}로, 큐리의 새로운 소식을 받아보실 수 있습니다.`,
     });
-    console.log(data);
   }
 
   return (
@@ -129,9 +151,22 @@ function SubscribeForm({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>이름</FormLabel>
+              <FormLabel>이름 (선택)</FormLabel>
               <FormControl>
                 <Input placeholder="홍길동" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="phone_number"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>전화번호 (선택)</FormLabel>
+              <FormControl>
+                <Input placeholder="ex. 010-1234-5678" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -161,7 +196,7 @@ function SubscribeForm({
                       "-",
                       "개인정보 수집‧이용 내역",
                       "필수항목 : 이메일(E-mail)",
-                      "선택항목 : 이름",
+                      "선택항목 : 이름, 전화번호",
                       "수집목적 : 뉴스레터 발송",
                       "보유기간 : 정보 주체의 동의 철회 시 까지",
                     ]}
@@ -195,11 +230,31 @@ function SubscribeForm({
                       "-",
                       "개인정보 수집‧이용 내역",
                       "필수항목 : 이메일(E-mail)",
-                      "선택항목 : 이름",
+                      "선택항목 : 이름, 전화번호",
                       "수집목적 : HR SaaS 및 업계 동향, 관련 행사 및 제품 정보 발송 등 홍보‧마케팅 활용 목적",
                       "보유기간 : 정보 주체의 동의 철회 시 까지",
                     ]}
                   />
+                </FormLabel>
+              </div>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pre_reservation"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-2 shadow">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange as any}
+                />
+              </FormControl>
+              <div>
+                <FormLabel>
+                  (선택) 큐리의 closed beta 사전예약을 신청합니다. (9월 진행
+                  예정)
                 </FormLabel>
               </div>
             </FormItem>
