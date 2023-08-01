@@ -14,6 +14,8 @@ import { useRouter } from "next/navigation";
 import { useCurrentMenu } from "../../../lib/hook/useCurrentMenu";
 import { DashboardIcon } from "../../../components/icons/DashboardIcon";
 import { MemberIcon } from "../../../components/icons/MemberIcon";
+import { SubscriptionNewsletter } from "./subscription-newsletter";
+import { CuriExmapleLogo } from "../../../components/logos/curi-example-logo";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -87,6 +89,9 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
+        <div className="px-6 py-2">
+          <CuriExmapleLogo />
+        </div>
         {categoryList.map((category) => {
           return (
             <div className="px-3 py-2" key={category.value}>
@@ -113,23 +118,7 @@ export function Sidebar({ className }: SidebarProps) {
             </div>
           );
         })}
-        <div className="flex flex-col gap-2 w-full max-w-sm justify-start items-start p-4">
-          <Label className="flex flex-col gap-2 w-full">
-            <span className="text-lg font-bold text-violet-600">
-              큐리소식 받아보기
-            </span>
-            <Input type="email" placeholder="Email" />
-          </Label>
-          <Button
-            type="submit"
-            className="w-full bg-violet-500 hover:bg-violet-700"
-            onClick={() => {
-              alert("구독 신청이 완료되었습니다.");
-            }}
-          >
-            Subscribe
-          </Button>
-        </div>
+        <SubscriptionNewsletter />
       </div>
     </div>
   );
