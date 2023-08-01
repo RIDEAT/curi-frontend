@@ -13,6 +13,9 @@ export const firebaseConfig = {
 const firebaseApp = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp();
+
+console.log("firebaseApp", firebaseApp);
+
 const db = getFirestore(firebaseApp);
 
 export { firebaseApp, db };

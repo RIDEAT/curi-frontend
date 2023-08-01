@@ -1,27 +1,46 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { collection, getDocs } from "firebase/firestore";
 
 import {
   Button,
-  Input,
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "ui";
+
 import { CuriExmapleLogo } from "../components/logos/curi-example-logo";
+import { db } from "../lib/firebase/firebaseClient";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [data, setData] = useState([]);
+
+  const getData = async () => {
+    await getDocs(collection(db, "todos")).then((querySnapshot) => {
+      const newData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setData(newData);
+      console.log(data, newData);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <div className="w-screen flex flex-col justify-center">
         <div className="flex justify-between my-6">
           <NavigationMenu>
             <NavigationMenuList>
-              <NavigationMenuItem>
+              <NavigationMenuItem className="ml-6">
                 <NavigationMenuLink
                   aria-disabled
                   className={navigationMenuTriggerStyle()}
@@ -61,13 +80,10 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-            {/* <div className="flex flex-col gap-4">
-              <h3 className="text-2xl font-bold">뉴스레터 구독하기</h3>
-              <div className="flex gap-5">
-                <Input type="email" placeholder="Email" />
-                <Button type="submit">Subscribe</Button>
-              </div>
-            </div> */}
+            <div>
+              <div>실시간 뉴스레터 구독자 : {} 명</div>
+              <div>실시간 closed beta 신청자 : {} 명</div>
+            </div>
           </div>
         </main>
       </div>
