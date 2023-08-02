@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   DraggableList,
   Separator,
@@ -12,9 +12,6 @@ import {
 import Editor from "../../editor";
 import { DragHandleDots2Icon } from "@radix-ui/react-icons";
 import {
-  BuddyBadge,
-  EmployeeBadge,
-  ManagerBadge,
   StakeholderType,
   getStakeholderBadge,
 } from "../../../../../../../components/badges/stakeholder-badges";
@@ -27,7 +24,7 @@ export interface WorkflowTimelineProps {
   timelineData: TimeBoxProps[];
 }
 
-const WorkflowTimeline = ({ timelineData }: WorkflowTimelineProps) => {
+function WorkflowTimeline({ timelineData }: WorkflowTimelineProps) {
   return (
     <>
       <div className="w-full h-screen overflow-scroll scrollbar-hide">
@@ -46,7 +43,7 @@ const WorkflowTimeline = ({ timelineData }: WorkflowTimelineProps) => {
       </div>
     </>
   );
-};
+}
 
 export interface TimeBoxProps {
   date: string;
@@ -54,11 +51,11 @@ export interface TimeBoxProps {
   managerSequence?: ReactNode;
 }
 
-const EmptySequenceBox = () => {
+function EmptySequenceBox() {
   return <div className="w-[320px] h-[280px]"></div>;
-};
+}
 
-const TimeBox = ({ date, employeeSequence, managerSequence }: TimeBoxProps) => {
+function TimeBox({ date, employeeSequence, managerSequence }: TimeBoxProps) {
   return (
     <div className="flex h-[310px]">
       {employeeSequence ? employeeSequence : <EmptySequenceBox />}
@@ -72,12 +69,13 @@ const TimeBox = ({ date, employeeSequence, managerSequence }: TimeBoxProps) => {
       {managerSequence}
     </div>
   );
-};
+}
 
 export interface IModuleData {
   id: string;
   type: ModuleType;
   title: string;
+  content: any;
 }
 
 export interface SequenceBoxProps {
@@ -86,12 +84,14 @@ export interface SequenceBoxProps {
   sequenceData: IModuleData[];
 }
 
-const SequenceBox = ({
-  title,
-  stakeholder,
-  sequenceData,
-}: SequenceBoxProps) => {
+function SequenceBox({ title, stakeholder, sequenceData }: SequenceBoxProps) {
   const [open, setOpen] = useState(false);
+  const [currentId, setCurrentId] = useState(sequenceData[0].id);
+
+  const getModuleById = (id: string) => {
+    return sequenceData.find((data) => data.id === id);
+  };
+
   return (
     <div className="flex justify-center items-center">
       <Sheet open={open} onOpenChange={setOpen}>
@@ -108,30 +108,43 @@ const SequenceBox = ({
             renderItemContent={(type, title) => (
               <ModuleBox type={type} title={title} />
             )}
-            onItemClick={() => {
+            onItemClick={(e) => {
+              setCurrentId(e.currentTarget.accessKey);
               setOpen((prev) => !prev);
             }}
           />
         </div>
-        <SheetContent
-          isBlur={true}
-          className="w-[800px] sm:w-[800px] sm:max-w-none"
-        >
-          <SheetHeader>
-            <SheetTitle>Text Module</SheetTitle>
-            <SheetDescription>
-              텍스트 모듈입니다. 아래 에디터에서 텍스트를 편집할 수 있습니다.
-            </SheetDescription>
-          </SheetHeader>
-          <Separator className="my-4" />
-          <Editor />
-        </SheetContent>
+        <ModuleContent module={getModuleById(currentId)} />
       </Sheet>
     </div>
   );
-};
+}
 
-const ModuleBox = ({ type, title }: { type: ModuleType; title: string }) => {
+function ModuleContent({ module }: { module: IModuleData }) {
+  const [content, setContent] = useState({ type: "doc", content: [] });
+
+  useEffect(() => {
+    setContent({ type: "doc", content: module.content });
+  }, [module]);
+
+  return (
+    <SheetContent
+      isBlur={true}
+      className="w-[800px] sm:w-[800px] sm:max-w-none"
+    >
+      <SheetHeader>
+        <SheetTitle>{module.title}</SheetTitle>
+        <SheetDescription>
+          아래 에디터에서 모듈을 편집할 수 있습니다.
+        </SheetDescription>
+      </SheetHeader>
+      <Separator className="my-4" />
+      <Editor content={content} setContent={setContent} />
+    </SheetContent>
+  );
+}
+
+function ModuleBox({ type, title }: { type: ModuleType; title: string }) {
   return (
     <SheetTrigger asChild>
       <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm border border-stone-200">
@@ -145,9 +158,9 @@ const ModuleBox = ({ type, title }: { type: ModuleType; title: string }) => {
       </div>
     </SheetTrigger>
   );
-};
+}
 
-const TimeLineVerticalElement = ({
+function TimeLineVerticalElement({
   date,
   left = true,
   right = true,
@@ -155,7 +168,7 @@ const TimeLineVerticalElement = ({
   date: string;
   left?: boolean;
   right?: boolean;
-}) => {
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -273,6 +286,6 @@ const TimeLineVerticalElement = ({
       </defs>
     </svg>
   );
-};
+}
 
 export { WorkflowTimeline, TimeBox, SequenceBox };

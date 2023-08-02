@@ -6,7 +6,7 @@ import "./draggable-list.css";
 interface DraggableListProps {
   data: any[];
   renderItemContent: any;
-  onItemClick?: () => void;
+  onItemClick?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
 
 const DraggableList: FC<DraggableListProps> = ({
@@ -45,6 +45,7 @@ const DraggableList: FC<DraggableListProps> = ({
         <DraggableListItem
           key={index}
           index={index}
+          accessKey={item.id}
           onDragStart={onDragStart}
           onDrop={onDrop}
           onItemClick={onItemClick}

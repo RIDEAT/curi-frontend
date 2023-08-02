@@ -13,11 +13,17 @@ import DEFAULT_EDITOR_CONTENT from "./default-content";
 import { EditorBubbleMenu } from "./components";
 import { getPrevText } from "./lib/editor";
 
-export default function Editor() {
-  const [content, setContent] = useLocalStorage(
-    "content",
-    DEFAULT_EDITOR_CONTENT
-  );
+export default function Editor({
+  content,
+  setContent,
+}: {
+  content: any;
+  setContent: any;
+}) {
+  // const [content, setContent] = useLocalStorage(
+  //   "content",
+  //   DEFAULT_EDITOR_CONTENT
+  // );
   const [saveStatus, setSaveStatus] = useState("Saved");
 
   const [hydrated, setHydrated] = useState(false);

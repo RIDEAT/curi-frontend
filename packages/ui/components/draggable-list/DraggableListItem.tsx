@@ -3,15 +3,17 @@ import React, { useRef, DragEvent, ReactNode, RefObject, FC } from "react";
 interface DraggableListItemProps {
   draggable?: boolean;
   index: number;
+  accessKey?: string;
   onDragStart?: (index: number) => void;
   onDrop: (index: number) => void;
-  onItemClick?: () => void;
+  onItemClick?: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
   children: ReactNode;
 }
 
 const DraggableListItem: FC<DraggableListItemProps> = ({
   draggable = true,
   index,
+  accessKey,
   onDragStart,
   onDrop,
   children,
@@ -66,6 +68,7 @@ const DraggableListItem: FC<DraggableListItemProps> = ({
 
   return (
     <li
+      accessKey={accessKey}
       ref={itemRef}
       className="draggable-list__item cursor-pointer hover:opacity-50 "
       draggable={draggable}

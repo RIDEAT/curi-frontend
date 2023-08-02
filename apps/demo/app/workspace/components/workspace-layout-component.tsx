@@ -1,7 +1,7 @@
 "use client";
 
 import { Provider } from "jotai";
-import { Sidebar } from "./components/sidebar";
+import { Sidebar } from "./sidebar";
 
 export function WorkspaceLayoutComponent({
   children,
