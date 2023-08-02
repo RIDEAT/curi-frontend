@@ -46,6 +46,9 @@ jobs:
           FIREBASE_APP_ID: ${{vars.FIREBASE_APP_ID}}
           FIREBASE_MEASUREMENT_ID: ${{vars.FIREBASE_MEASUREMENT_ID}}
         run: |
+          echo $FIREBASE_API_KEY
+          echo $FIREBASE_AUTH_DOMAIN
+          echo $FIREBASE_PROJECT_ID
           echo "::set-output name=ecr_repository::$ECR_REPOSITORY"
           echo "::set-output name=image_tag::$IMAGE_TAG"
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f apps/demo/Dockerfile .
