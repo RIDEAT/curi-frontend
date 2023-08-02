@@ -1,14 +1,28 @@
 import { atom } from "jotai";
+import { IModuleData } from "../../app/workspace/workflow/components/ui/timeline/components/module";
 import {
-  IModuleData,
   SequenceBox,
   TimeBoxProps,
-} from "../../app/workspace/workflow/components/ui/timeline/components/workflow";
+} from "../../app/workspace/workflow/components/ui/timeline/components/sequence";
 
 const notificationContent = [
   {
     type: "doc",
     content: [
+      {
+        type: "heading",
+        attrs: { level: 2 },
+        content: [
+          {
+            type: "text",
+            marks: [
+              { type: "bold" },
+              { type: "textStyle", attrs: { color: "#de5d00" } },
+            ],
+            text: "사전 온보딩 안내",
+          },
+        ],
+      },
       {
         type: "heading",
         attrs: { level: 3 },
@@ -19,7 +33,7 @@ const notificationContent = [
               { type: "bold" },
               { type: "textStyle", attrs: { color: "#000000" } },
             ],
-            text: "안녕하세요. 온보딩 과정이 시작되었습니다.",
+            text: "안녕하세요. 사전 온보딩 과정이 시작되었습니다.",
           },
         ],
       },

@@ -14,11 +14,13 @@ import { EditorBubbleMenu } from "./components";
 import { getPrevText } from "./lib/editor";
 
 export default function Editor({
+  editable = true,
   content,
   setContent,
 }: {
+  editable?: boolean;
   content: any;
-  setContent: any;
+  setContent?: any;
 }) {
   // const [content, setContent] = useLocalStorage(
   //   "content",
@@ -39,6 +41,7 @@ export default function Editor({
   }, 750);
 
   const editor = useEditor({
+    editable,
     extensions: TiptapExtensions,
     editorProps: TiptapEditorProps,
     onUpdate: (e) => {
@@ -141,12 +144,18 @@ export default function Editor({
       onClick={() => {
         editor?.chain().focus().run();
       }}
-      className="relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white p-12 px-8 sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg overflow-scroll h-[calc(85vh)]"
+      className={
+        editable
+          ? "relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white p-12 px-8 sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg overflow-scroll h-[calc(85vh)]"
+          : "relative w-full max-w-screen-lg border-stone-200 bg-white p-12 px-8 sm:mb-[calc(20vh)] sm:rounded-lg sm:px-12  overflow-scroll"
+      }
     >
-      <div className="absolute right-5 top-5 mb-5 rounded-lg bg-stone-100 px-2 py-1 text-sm text-stone-400">
-        {saveStatus}
-      </div>
-      {editor && <EditorBubbleMenu editor={editor} />}
+      {editable && (
+        <div className="absolute right-5 top-5 mb-5 rounded-lg bg-stone-100 px-2 py-1 text-sm text-stone-400">
+          {saveStatus}
+        </div>
+      )}
+      {editor && editable && <EditorBubbleMenu editor={editor} />}
       <EditorContent editor={editor} />
     </div>
   );
