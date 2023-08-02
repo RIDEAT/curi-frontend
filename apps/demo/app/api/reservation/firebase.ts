@@ -10,8 +10,6 @@ export const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-console.debug("[firebaseConfig]", firebaseConfig);
-
 const firebaseApp = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp();
