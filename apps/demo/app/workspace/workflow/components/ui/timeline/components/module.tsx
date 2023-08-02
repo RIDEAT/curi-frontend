@@ -20,6 +20,7 @@ import {
   getModuleIcon,
 } from "../../../../../../../components/icons/module-icons";
 import { TextModule } from "./modules/text-module";
+import { NotificationModule } from "./modules/notification-module";
 
 export interface IModuleData {
   id: string;
@@ -27,6 +28,17 @@ export interface IModuleData {
   title: string;
   content: any;
 }
+
+const getModuleComponentByType = (type: ModuleType) => {
+  switch (type) {
+    case "text":
+      return TextModule;
+    case "notification":
+      return NotificationModule;
+    default:
+      return TextModule;
+  }
+};
 
 function ModuleContent({ module }: { module: IModuleData }) {
   const [content, setContent] = useState({ type: "doc", content: [] });
@@ -73,11 +85,11 @@ function ModuleContent({ module }: { module: IModuleData }) {
         </div>
       </SheetHeader>
       <Separator className="my-4" />
-      <TextModule
-        content={content}
-        setContent={setContent}
-        togglePreview={togglePreview}
-      />
+      {getModuleComponentByType(module.type)({
+        content,
+        setContent,
+        togglePreview,
+      })}
     </SheetContent>
   );
 }

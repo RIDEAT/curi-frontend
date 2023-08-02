@@ -147,7 +147,7 @@ export default function Editor({
       className={
         editable
           ? "relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white p-12 px-8 sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg overflow-scroll h-[calc(85vh)]"
-          : "relative w-full max-w-screen-lg border-stone-200 bg-white p-12 px-8 sm:mb-[calc(20vh)] sm:rounded-lg sm:px-12  overflow-scroll"
+          : "relative w-full max-w-screen-lg border-stone-200 bg-white sm:rounded-lg"
       }
     >
       {editable && (

@@ -1,6 +1,7 @@
 import { DeviceFrameset } from "react-device-frameset";
 import "react-device-frameset/styles/marvel-devices.min.css";
 import Editor from "../../../editor";
+import { PreviewFrame } from "./preview-frame";
 
 function TextModule({
   content,
@@ -24,11 +25,11 @@ function TextModule({
 
 function PreShowTextModule({ content }: { content: any }) {
   return (
-    <div className="h-full flex justify-center items-start overflow-scroll">
-      <DeviceFrameset device="iPhone X" color="gold" zoom={0.8}>
+    <PreviewFrame>
+      <div className="h-full py-12 px-8 overflow-scroll">
         <Editor content={content} editable={false} />
-      </DeviceFrameset>
-    </div>
+      </div>
+    </PreviewFrame>
   );
 }
 
