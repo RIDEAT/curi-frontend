@@ -98,6 +98,8 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
     // Otherwise, insert it at the placeholder's position, and remove
     // the placeholder
 
+    // When BLOB_READ_WRITE_TOKEN is not valid or unavailable, read
+    // the image locally
     const imageSrc = typeof src === "object" ? reader.result : src;
 
     const node = schema.nodes.image.create({ src: imageSrc });
@@ -122,17 +124,22 @@ export const handleImageUpload = (file: File) => {
       }).then(async (res) => {
         // Successfully uploaded image
         if (res.status === 200) {
-          const { url } = (await res.json()) as BlobResult;
-          // preload the image
-          let image = new Image();
-          image.src = url;
-          image.onload = () => {
-            resolve(url);
-          };
+          resolve(file);
+          /* 일단 지금은 그대로 에디터에 resolve */
+          // const { url } = (await res.json()) as BlobResult;
+          // // preload the image
+          // let image = new Image();
+          // image.src = url;
+          // image.onload = () => {
+          //   resolve(url);
+          // };
           // No blob store configured
         } else if (res.status === 401) {
           resolve(file);
 
+          throw new Error(
+            "`BLOB_READ_WRITE_TOKEN` environment variable not found, reading image locally instead."
+          );
           // Unknown error
         } else {
           throw new Error(`Error uploading image. Please try again.`);
