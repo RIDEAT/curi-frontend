@@ -38,6 +38,13 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: next/curi-demo
           IMAGE_TAG: ${{ steps.image.outputs.version }}
+          FIREBASE_API_KEY: ${{var.FIREBASE_API_KEY}}
+          FIREBASE_AUTH_DOMAIN: ${{var.FIREBASE_AUTH_DOMAIN}}
+          FIREBASE_PROJECT_ID: ${{var.FIREBASE_PROJECT_ID}}
+          FIREBASE_STORAGE_BUCKET: ${{var.FIREBASE_STORAGE_BUCKET}}
+          FIREBASE_MESSAGING_SENDER_ID: ${{var.FIREBASE_MESSAGING_SENDER_ID}}
+          FIREBASE_APP_ID: ${{var.FIREBASE_APP_ID}}
+          FIREBASE_MEASUREMENT_ID: ${{var.FIREBASE_MEASUREMENT_ID}}
         run: |
           echo "::set-output name=ecr_repository::$ECR_REPOSITORY"
           echo "::set-output name=image_tag::$IMAGE_TAG"
