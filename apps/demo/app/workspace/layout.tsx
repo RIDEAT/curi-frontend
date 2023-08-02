@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 import { Metadata, ResolvingMetadata } from "next";
-import { WorkspaceLayoutComponent } from "./workspace-layout-component";
-import { usePathname } from "next/navigation";
+import { WorkspaceLayoutComponent } from "./components/workspace-layout-component";
 import { pathExtractor } from "../../lib/function/pathExtractor";
 
 // export const metadata: Metadata = {
