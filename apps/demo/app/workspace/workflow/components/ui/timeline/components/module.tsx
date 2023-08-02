@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { DragHandleDots2Icon } from "@radix-ui/react-icons";
+import {
+  DragHandleDots2Icon,
+  EyeClosedIcon,
+  EyeOpenIcon,
+} from "@radix-ui/react-icons";
 
 import {
+  Button,
   Separator,
   SheetContent,
   SheetDescription,
@@ -10,11 +15,11 @@ import {
   SheetTrigger,
 } from "ui";
 
-import Editor from "../../editor";
 import {
   ModuleType,
   getModuleIcon,
 } from "../../../../../../../components/icons/module-icons";
+import { TextModule } from "./modules/text-module";
 
 export interface IModuleData {
   id: string;
@@ -23,18 +28,13 @@ export interface IModuleData {
   content: any;
 }
 
-function TextModule({
-  content,
-  setContent,
-}: {
-  content: any;
-  setContent: any;
-}) {
-  return <Editor content={content} setContent={setContent} />;
-}
-
 function ModuleContent({ module }: { module: IModuleData }) {
   const [content, setContent] = useState({ type: "doc", content: [] });
+  const [togglePreview, setTogglePreview] = useState(false);
+
+  const toggleHandler = () => {
+    setTogglePreview((prev) => !prev);
+  };
 
   useEffect(() => {
     setContent({ type: "doc", content: module.content });
@@ -43,16 +43,41 @@ function ModuleContent({ module }: { module: IModuleData }) {
   return (
     <SheetContent
       isBlur={true}
-      className="w-[800px] sm:w-[800px] sm:max-w-none"
+      className="w-[800px] h-screen sm:w-[800px] sm:max-w-none overflow-scroll scrollbar-hide"
     >
-      <SheetHeader>
-        <SheetTitle>{module.title}</SheetTitle>
-        <SheetDescription>
-          아래 에디터에서 모듈을 편집할 수 있습니다.
-        </SheetDescription>
+      <SheetHeader className="flex flex-row justify-between">
+        <div className="flex flex-col gap-2">
+          <SheetTitle className=" text-xl">{module.title}</SheetTitle>
+          <SheetDescription>
+            아래 에디터에서 모듈을 편집할 수 있습니다.
+          </SheetDescription>
+        </div>
+        <div className="mr-5">
+          <Button
+            variant="outline"
+            className="flex flex-row gap-2"
+            onClick={toggleHandler}
+          >
+            {togglePreview ? (
+              <>
+                <EyeClosedIcon />
+                <div>편집하기</div>
+              </>
+            ) : (
+              <>
+                <EyeOpenIcon />
+                <div>미리보기</div>
+              </>
+            )}
+          </Button>
+        </div>
       </SheetHeader>
       <Separator className="my-4" />
-      <TextModule content={content} setContent={setContent} />
+      <TextModule
+        content={content}
+        setContent={setContent}
+        togglePreview={togglePreview}
+      />
     </SheetContent>
   );
 }

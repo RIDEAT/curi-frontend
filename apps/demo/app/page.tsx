@@ -126,7 +126,9 @@ function SubscriptionCard({ title, count }: { title: string; count: number }) {
         </svg>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">+{count == 0 ? "" : count}</div>
+        <div className="text-2xl font-bold">
+          +{count == 0 ? "집계중" : count}
+        </div>
       </CardContent>
     </Card>
   );
