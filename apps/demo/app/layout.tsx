@@ -9,7 +9,7 @@ const GA_MEASUREMENT_ID = "G-BES6VRBG1D";
 const GTM_ID = "GTM-PLHQLW5G";
 
 export const metadata: Metadata = {
-  title: "Curi Board",
+  title: "Curi Board - Home",
   description: "새로운 동료의 첫만남을 디자인하세요",
   viewport: "width=device-width, initial-scale=1",
 };

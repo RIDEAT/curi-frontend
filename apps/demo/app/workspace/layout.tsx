@@ -1,7 +1,31 @@
-"use client";
+import { headers } from "next/headers";
+import { Metadata, ResolvingMetadata } from "next";
+import { WorkspaceLayoutComponent } from "./workspace-layout-component";
+import { usePathname } from "next/navigation";
+import { pathExtractor } from "../../lib/function/pathExtractor";
 
-import { Provider } from "jotai";
-import { Sidebar } from "./components/sidebar";
+// export const metadata: Metadata = {
+//   title: "Curi Board - workflow",
+//   description: "모든 신입사원의 공통 워크플로우입니다.",
+// };
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent?: ResolvingMetadata
+): Promise<Metadata> {
+  const headersList = headers();
+  const pathname = headersList.get("x-invoke-path") || "";
+  const curPathname = pathExtractor(pathname);
+
+  return {
+    title: "Curi Board - " + curPathname,
+  };
+}
 
 export default function WorkspaceLayout({
   children,
@@ -13,8 +37,7 @@ export default function WorkspaceLayout({
       <div className="border-t">
         <div className="bg-background">
           <div className="grid lg:grid-cols-5">
-            <Sidebar className="hidden lg:block" />
-            <Provider>{children}</Provider>
+            <WorkspaceLayoutComponent>{children}</WorkspaceLayoutComponent>
           </div>
         </div>
       </div>
