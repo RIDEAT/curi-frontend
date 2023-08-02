@@ -94,23 +94,23 @@ const Command = Extension.create({
 const getSuggestionItems = ({ query }: { query: string }) => {
   return [
     {
-      title: "Continue writing",
-      description: "Use AI to expand your thoughts.",
+      title: "AI 보조 쓰기",
+      description: "AI로 글을 확장하세요.",
       searchTerms: ["gpt"],
       icon: <Magic className="w-7" />,
     },
+    // {
+    //   title: "Send Feedback",
+    //   description: "Let us know how we can improve.",
+    //   icon: <MessageSquarePlus size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).run();
+    //     window.open("/feedback", "_blank");
+    //   },
+    // },
     {
-      title: "Send Feedback",
-      description: "Let us know how we can improve.",
-      icon: <MessageSquarePlus size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).run();
-        window.open("/feedback", "_blank");
-      },
-    },
-    {
-      title: "Text",
-      description: "Just start typing with plain text.",
+      title: "텍스트",
+      description: "일반 크기의 문자를 입력하세요.",
       searchTerms: ["p", "paragraph"],
       icon: <Text size={18} />,
       command: ({ editor, range }: CommandProps) => {
@@ -123,8 +123,8 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "To-do List",
-      description: "Track tasks with a to-do list.",
+      title: "체크 항목",
+      description: "체크 항목을 만드세요.",
       searchTerms: ["todo", "task", "list", "check", "checkbox"],
       icon: <CheckSquare size={18} />,
       command: ({ editor, range }: CommandProps) => {
@@ -132,8 +132,8 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Heading 1",
-      description: "Big section heading.",
+      title: "제목 1",
+      description: "가장 큰 크기의 제목",
       searchTerms: ["title", "big", "large"],
       icon: <Heading1 size={18} />,
       command: ({ editor, range }: CommandProps) => {
@@ -146,8 +146,8 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Heading 2",
-      description: "Medium section heading.",
+      title: "제목 2",
+      description: "중간 크기의 제목",
       searchTerms: ["subtitle", "medium"],
       icon: <Heading2 size={18} />,
       command: ({ editor, range }: CommandProps) => {
@@ -160,8 +160,8 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Heading 3",
-      description: "Small section heading.",
+      title: "제목 3",
+      description: "작은 크기의 제목",
       searchTerms: ["subtitle", "small"],
       icon: <Heading3 size={18} />,
       command: ({ editor, range }: CommandProps) => {
@@ -174,8 +174,8 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Bullet List",
-      description: "Create a simple bullet list.",
+      title: "일반 목록",
+      description: "항목을 구분하세요.",
       searchTerms: ["unordered", "point"],
       icon: <List size={18} />,
       command: ({ editor, range }: CommandProps) => {
@@ -183,8 +183,8 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Numbered List",
-      description: "Create a list with numbering.",
+      title: "순서 목록",
+      description: "항목을 순서대로 구분하세요.",
       searchTerms: ["ordered"],
       icon: <ListOrdered size={18} />,
       command: ({ editor, range }: CommandProps) => {
@@ -192,8 +192,8 @@ const getSuggestionItems = ({ query }: { query: string }) => {
       },
     },
     {
-      title: "Quote",
-      description: "Capture a quote.",
+      title: "인용",
+      description: "인용문을 입력하세요.",
       searchTerms: ["blockquote"],
       icon: <TextQuote size={18} />,
       command: ({ editor, range }: CommandProps) =>
@@ -206,16 +206,16 @@ const getSuggestionItems = ({ query }: { query: string }) => {
           .run(),
     },
     {
-      title: "Code",
-      description: "Capture a code snippet.",
+      title: "코드 블록",
+      description: "코드 블록을 입력하세요.",
       searchTerms: ["codeblock"],
       icon: <Code size={18} />,
       command: ({ editor, range }: CommandProps) =>
         editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
     },
     {
-      title: "Image",
-      description: "Upload an image from your computer.",
+      title: "이미지",
+      description: "이미지를 업로드하세요.",
       searchTerms: ["photo", "picture", "media"],
       icon: <ImageIcon size={18} />,
       command: ({ editor, range }: CommandProps) => {

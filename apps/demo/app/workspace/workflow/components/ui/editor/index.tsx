@@ -4,12 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import { TiptapEditorProps } from "./props";
 import { TiptapExtensions } from "./extensions";
-import useLocalStorage from "./lib/hooks/use-local-storage";
 import { useDebouncedCallback } from "use-debounce";
 import { useCompletion } from "ai/react";
 import { toast } from "sonner";
 import va from "@vercel/analytics";
-import DEFAULT_EDITOR_CONTENT from "./default-content";
 import { EditorBubbleMenu } from "./components";
 import { getPrevText } from "./lib/editor";
 
@@ -22,10 +20,6 @@ export default function Editor({
   content: any;
   setContent?: any;
 }) {
-  // const [content, setContent] = useLocalStorage(
-  //   "content",
-  //   DEFAULT_EDITOR_CONTENT
-  // );
   const [saveStatus, setSaveStatus] = useState("Saved");
 
   const [hydrated, setHydrated] = useState(false);
