@@ -57,4 +57,5 @@ RUN ls -la
 # CMD ["ls" , "-la"]
 # CMD ["cd app &ls" , "-la"]
 # CMD cd app;ls -la
+CMD ["vi", "apps/demo/server.js"]
 CMD ["node", "./apps/demo/server.js"]
