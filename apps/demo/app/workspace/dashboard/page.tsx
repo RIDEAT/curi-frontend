@@ -1,5 +1,7 @@
 import { MainPageLayout } from "../../../components/layouts/main-page-layout";
-import { WorkflowTracker } from "./components/workflow-tracker";
+import { MemberAlertCard } from "./components/member-alert-card";
+import { WorkflowInfoCard } from "./components/workflow-info-card";
+import { WorkflowTrackerCard } from "./components/workflow-tracker-card";
 
 export default function Dashboard() {
   return (
@@ -7,13 +9,13 @@ export default function Dashboard() {
       title="대시보드"
       description="모든 온보딩 현황을 추적할 수 있는 대시보드입니다."
     >
-      <div className=" h-[80vh] grid grid-cols-3 grid-rows-4 gap-4 px-8">
-        <WorkflowTracker className="col-span-2 row-span-2" />
-        <WorkflowTracker />
-        <WorkflowTracker />
-        <WorkflowTracker className="col-span-2 row-span-2" />
-        <WorkflowTracker />
-        <WorkflowTracker />
+      <div className=" h-[80vh] grid grid-cols-5 grid-rows-4 gap-4 px-8">
+        <WorkflowTrackerCard className="col-span-3 row-span-2" />
+        <WorkflowInfoCard title="신입 사원 참여율" number={95} />
+        <MemberAlertCard type="employee" />
+        <WorkflowInfoCard title="매니저 참여율" number={82} />
+        <MemberAlertCard type="manager" />
+        <WorkflowTrackerCard className="col-span-4 row-span-2" />
       </div>
     </MainPageLayout>
   );

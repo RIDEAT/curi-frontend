@@ -8,8 +8,9 @@ import {
   Separator,
 } from "ui";
 import { cn } from "ui/lib/utils";
+import { getBgColor, getTextColor } from "./util";
 
-export function WorkflowTracker({ className }: { className?: string }) {
+export function WorkflowTrackerCard({ className }: { className?: string }) {
   return (
     <>
       <Card className={cn(className, "overflow-hidden")}>
@@ -94,38 +95,6 @@ function WorkflowTrackerTable() {
   );
 }
 
-const getBgColor = (rate: number) => {
-  if (rate < 0.1) {
-    return "bg-violet-100 ";
-  } else if (rate < 0.3) {
-    return "bg-violet-200";
-  } else if (rate < 0.5) {
-    return "bg-violet-300 text-white";
-  } else if (rate < 0.7) {
-    return "bg-violet-400 text-white";
-  } else if (rate < 0.9) {
-    return "bg-violet-500 text-white";
-  } else {
-    return "bg-violet-700 text-white";
-  }
-};
-
-const getTextColor = (rate: number) => {
-  if (rate < 0.1) {
-    return "text-stone-400";
-  } else if (rate < 0.3) {
-    return "text-violet-300";
-  } else if (rate < 0.5) {
-    return "text-violet-400";
-  } else if (rate < 0.7) {
-    return "text-violet-500";
-  } else if (rate < 0.9) {
-    return "text-violet-600";
-  } else {
-    return "text-violet-700";
-  }
-};
-
 function WorkflowTrackerTableDataRow({
   name,
   waiting,
@@ -174,7 +143,7 @@ function WorkflowTrackerTableDataRow({
           "p-1 flex justify-center items-center font-semibold"
         )}
       >
-        {(completed / total).toFixed(2).toString().slice(2, 4) + " %"}
+        {Math.round((completed / total) * 100)}%
       </div>
     </>
   );
