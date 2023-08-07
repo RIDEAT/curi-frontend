@@ -13,5 +13,5 @@ export const useCurrentMenu = () => {
     setCurrentMenu(menu);
   }, [pathname]);
 
-  return currentMenu;
+  return { currentMenu, setCurrentMenu };
 };

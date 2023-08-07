@@ -21,6 +21,7 @@ import {
 } from "../../../../../../../components/icons/module-icons";
 import { TextModule } from "./modules/text-module";
 import { NotificationModule } from "./modules/notification-module";
+import { FormModule } from "./modules/form-module";
 
 export interface IModuleData {
   id: string;
@@ -35,6 +36,8 @@ const getModuleComponentByType = (type: ModuleType) => {
       return TextModule;
     case "notification":
       return NotificationModule;
+    case "form":
+      return FormModule;
     default:
       return TextModule;
   }

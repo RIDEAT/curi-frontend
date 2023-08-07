@@ -1,7 +1,7 @@
 "use client";
 
 import { Provider } from "jotai";
-import { Sidebar } from "./sidebar";
+import { HeadBar, Sidebar } from "./sidebar";
 
 export function WorkspaceLayoutComponent({
   children,
@@ -11,6 +11,7 @@ export function WorkspaceLayoutComponent({
   return (
     <>
       <Sidebar className="hidden lg:block" />
+      <HeadBar className="lg:hidden" />
       <Provider>{children}</Provider>
     </>
   );
