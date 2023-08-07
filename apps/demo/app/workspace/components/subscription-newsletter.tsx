@@ -28,6 +28,7 @@ import {
   useToast,
 } from "ui";
 import Link from "next/link";
+import { cn } from "ui/lib/utils";
 
 function TermsOfServiceHoverCard({
   title,
@@ -272,31 +273,44 @@ function SubscribeForm({
   );
 }
 
-export function SubscriptionNewsletter() {
+export function SubscriptionNewsletter({
+  simple = false,
+}: {
+  simple?: boolean;
+}) {
   const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <div className="flex flex-col gap-2 w-full max-w-sm justify-start items-start p-4">
-        <Label className="flex flex-col gap-2 w-full">
-          <span className="text-lg font-bold text-violet-600">
-            큐리 소식 받아보기
-          </span>
-          <Input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </Label>
-
+      <div
+        className={cn(
+          "flex flex-col gap-2 w-full max-w-sm justify-start items-start p-4",
+          simple && "p-0"
+        )}
+      >
+        {!simple && (
+          <Label className="flex flex-col gap-2 w-full">
+            <span className="text-lg font-bold text-violet-600">
+              큐리 소식 받아보기
+            </span>
+            <Input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Label>
+        )}
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button
               type="submit"
-              className="w-full bg-violet-500 hover:bg-violet-700"
+              className={cn(
+                "bg-violet-500 hover:bg-violet-700",
+                !simple && "w-full"
+              )}
             >
               구독하기
             </Button>

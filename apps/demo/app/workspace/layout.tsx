@@ -32,7 +32,7 @@ export default function WorkspaceLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="hidden md:block">
+    <div>
       <div className="border-t">
         <div className="bg-background">
           <div className="grid lg:grid-cols-5">

@@ -74,7 +74,7 @@ const categoryList = [
 ];
 
 export function Sidebar({ className }: SidebarProps) {
-  const currentMenu = useCurrentMenu();
+  const { currentMenu, setCurrentMenu } = useCurrentMenu();
   const router = useRouter();
 
   const routingHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -82,6 +82,7 @@ export function Sidebar({ className }: SidebarProps) {
     const menu = target.accessKey;
 
     if (menu) {
+      setCurrentMenu(menu);
       router.push(`/workspace/${menu}`);
     }
   };
@@ -89,7 +90,7 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
-        <div className="px-6 py-2">
+        <div className="px-7 py-2">
           <CuriExmapleLogo />
         </div>
         {categoryList.map((category) => {
@@ -119,6 +120,47 @@ export function Sidebar({ className }: SidebarProps) {
           );
         })}
         <SubscriptionNewsletter />
+      </div>
+    </div>
+  );
+}
+
+export function HeadBar({ className }: SidebarProps) {
+  const { currentMenu, setCurrentMenu } = useCurrentMenu();
+  const router = useRouter();
+
+  const routingHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.currentTarget;
+    const menu = target.accessKey;
+
+    if (menu) {
+      setCurrentMenu(menu);
+      router.push(`/workspace/${menu}`);
+    }
+  };
+
+  return (
+    <div className={cn("", className)}>
+      <div className="py-4 flex items-center">
+        <div className="px-7 py-2">
+          <CuriExmapleLogo />
+        </div>
+        <div className="w-full flex gap-2">
+          {generalMenuList.map((menu) => {
+            const isActive = currentMenu == menu.value;
+            return (
+              <Button
+                onClick={routingHandler}
+                variant={isActive ? "secondary" : "ghost"}
+                key={menu.value}
+                accessKey={menu.value}
+              >
+                {menu.icon(isActive)}
+              </Button>
+            );
+          })}
+          <SubscriptionNewsletter simple={true} />
+        </div>
       </div>
     </div>
   );
