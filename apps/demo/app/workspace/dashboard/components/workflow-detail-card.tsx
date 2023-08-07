@@ -35,7 +35,7 @@ export function WorkflowDetailCard({ className }: { className?: string }) {
           {workflowDataList[selectedWorkflowId - 1].name}
         </CardTitle>
       </CardHeader>
-      <CardContent className="w-full h-4/5 flex items-center gap-3  overflow-x-scroll overflow-y-scroll">
+      <CardContent className="w-full h-[90%] flex items-center gap-3  overflow-x-scroll overflow-y-scroll">
         <div className="h-full overflow-scroll">
           <WorkflowDetailTable
             data={workflowDataList[selectedWorkflowId - 1].members}
@@ -46,14 +46,77 @@ export function WorkflowDetailCard({ className }: { className?: string }) {
   );
 }
 
+const CompletedIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <circle
+        cx="12"
+        cy="11.9999"
+        r="9"
+        stroke="#22C55E"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M15 10L11 14L9 12"
+        stroke="#22C55E"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
+const InProgressIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M5.63606 18.364C9.15077 21.8787 14.8493 21.8787 18.364 18.364C21.8787 14.8492 21.8787 9.15076 18.364 5.63604C14.8493 2.12132 9.15077 2.12132 5.63606 5.63604C3.87757 7.39453 2.99889 9.69966 3.00002 12.0044L3 14"
+        stroke="#FFC800"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M1 12L3 14L5 12"
+        stroke="#FFC800"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M11 8L11 13L16 13"
+        stroke="#FFC800"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+};
+
 const getStatusIcon = (status: string) => {
   switch (status) {
     case "inProgress":
-      return "🟡";
+      return <InProgressIcon />;
     case "outDate":
       return "🚫";
     case "completed":
-      return "✅";
+      return <CompletedIcon />;
     default:
       return "🔴";
   }
@@ -82,7 +145,9 @@ function WorkflowDetailTable({ data }: { data: IMemberWorkspace[] }) {
             <TableCell className="font-medium">{row.name}</TableCell>
             <TableCell className="text-center">{row.startDate}</TableCell>
             <TableCell className="text-center">
-              {getStatusIcon(row.status)}
+              <div className="flex justify-center">
+                {getStatusIcon(row.status)}
+              </div>
             </TableCell>
             <TableCell className="flex gap-2">
               <Progress
@@ -90,7 +155,7 @@ function WorkflowDetailTable({ data }: { data: IMemberWorkspace[] }) {
                 color="bg-violet-600"
                 className="flex-1"
               />
-              <div>{row.progressRate * 100} %</div>
+              <div>{Math.floor(row.progressRate * 100)} %</div>
             </TableCell>
             <TableCell
               className={cn(getTextColor(row.eNPS / 100), "text-center")}
@@ -99,7 +164,9 @@ function WorkflowDetailTable({ data }: { data: IMemberWorkspace[] }) {
             </TableCell>
             {row.sequences.map((sequence) => (
               <TableCell key={sequence.id} className="text-center">
-                {getStatusIcon(sequence.status)}
+                <div className="flex justify-center">
+                  {getStatusIcon(sequence.status)}
+                </div>
               </TableCell>
             ))}
           </TableRow>

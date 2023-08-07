@@ -156,6 +156,24 @@ const membersDataFor0: IMemberWorkspace[] = [
   {
     id: 1,
     name: MEMBER_NAMES[1],
+    startDate: "2023-05-18",
+    progressRate: 0,
+    status: "inProgress",
+    sequences: getNewSequenceDataList(sequenceDataList, 0),
+    eNPS: 88.9,
+  },
+  {
+    id: 2,
+    name: MEMBER_NAMES[2],
+    startDate: "2023-05-11",
+    progressRate: 0,
+    status: "inProgress",
+    sequences: getNewSequenceDataList(sequenceDataList, 0),
+    eNPS: 90.2,
+  },
+  {
+    id: 3,
+    name: MEMBER_NAMES[1],
     startDate: "2023-05-04",
     progressRate: 0.5,
     status: "inProgress",
@@ -163,7 +181,7 @@ const membersDataFor0: IMemberWorkspace[] = [
     eNPS: 88.9,
   },
   {
-    id: 2,
+    id: 4,
     name: MEMBER_NAMES[2],
     startDate: "2023-04-11",
     progressRate: 0.7,
@@ -172,7 +190,7 @@ const membersDataFor0: IMemberWorkspace[] = [
     eNPS: 90.2,
   },
   {
-    id: 3,
+    id: 5,
     name: MEMBER_NAMES[3],
     startDate: "2023-04-23",
     progressRate: 0.9,
@@ -181,16 +199,61 @@ const membersDataFor0: IMemberWorkspace[] = [
     eNPS: 83.2,
   },
   {
-    id: 4,
+    id: 6,
     name: MEMBER_NAMES[4],
     startDate: "2023-03-01",
-    progressRate: 0.3,
-    status: "inProgress",
-    sequences: getNewSequenceDataList(sequenceDataList, 2),
+    progressRate: 1,
+    status: "completed",
+    sequences: getNewSequenceDataList(sequenceDataList, 7),
     eNPS: 93.2,
   },
   {
-    id: 5,
+    id: 7,
+    name: MEMBER_NAMES[5],
+    startDate: "2023-01-05",
+    progressRate: 1,
+    status: "completed",
+    sequences: getNewSequenceDataList(sequenceDataList, 7),
+    eNPS: 95.9,
+  },
+  {
+    id: 8,
+    name: MEMBER_NAMES[4],
+    startDate: "2023-03-01",
+    progressRate: 1,
+    status: "completed",
+    sequences: getNewSequenceDataList(sequenceDataList, 7),
+    eNPS: 93.2,
+  },
+  {
+    id: 9,
+    name: MEMBER_NAMES[5],
+    startDate: "2023-01-05",
+    progressRate: 1,
+    status: "completed",
+    sequences: getNewSequenceDataList(sequenceDataList, 7),
+    eNPS: 95.9,
+  },
+  {
+    id: 10,
+    name: MEMBER_NAMES[4],
+    startDate: "2023-03-01",
+    progressRate: 1,
+    status: "completed",
+    sequences: getNewSequenceDataList(sequenceDataList, 7),
+    eNPS: 93.2,
+  },
+  {
+    id: 11,
+    name: MEMBER_NAMES[5],
+    startDate: "2023-01-05",
+    progressRate: 1,
+    status: "completed",
+    sequences: getNewSequenceDataList(sequenceDataList, 7),
+    eNPS: 95.9,
+  },
+  {
+    id: 12,
     name: MEMBER_NAMES[5],
     startDate: "2023-01-05",
     progressRate: 1,
@@ -243,6 +306,15 @@ const workflowDataList: IWorkflowData[] = [
   },
 ];
 
+const getRandomDate = (start: Date, end: Date) => {
+  const diff = end.getTime() - start.getTime();
+  const newTimestamp = start.getTime() + Math.random() * diff;
+  const date = new Date(newTimestamp);
+  return `${date.getFullYear()}-${(date.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+};
+
 const generateMemberData = (
   numMembers: number,
   numWaiting: number,
@@ -252,11 +324,10 @@ const generateMemberData = (
 
   for (let i = 0; i < numMembers; i++) {
     const randomName = getRandomMemberName();
-    const randomStartDate = `2023-${Math.floor(Math.random() * 12 + 1)
-      .toString()
-      .padStart(2, "0")}-${Math.floor(Math.random() * 28 + 1)
-      .toString()
-      .padStart(2, "0")}`;
+    const randomStartDate = getRandomDate(
+      new Date("2023-03-01"),
+      new Date("2023-07-01")
+    );
 
     // For waiting members
     if (i < numWaiting) {
@@ -323,7 +394,7 @@ const generateMemberData = (
 };
 
 const membersDataFor1 = generateMemberData(
-  5,
+  8,
   workflowDataList[1].waiting,
   workflowDataList[1].completed
 );
@@ -343,11 +414,14 @@ const membersDataFor4 = generateMemberData(
   workflowDataList[4].completed
 );
 
-// Re-assigning to the workflowDataList to use the newly generated members
-workflowDataList[1].members = membersDataFor1;
-workflowDataList[2].members = membersDataFor2;
-workflowDataList[3].members = membersDataFor3;
-workflowDataList[4].members = membersDataFor4;
+const sortMembersByProgress = (members: IMemberWorkspace[]) => {
+  return members.sort((a, b) => a.progressRate - b.progressRate);
+};
+
+workflowDataList[1].members = sortMembersByProgress(membersDataFor1);
+workflowDataList[2].members = sortMembersByProgress(membersDataFor2);
+workflowDataList[3].members = sortMembersByProgress(membersDataFor3);
+workflowDataList[4].members = sortMembersByProgress(membersDataFor4);
 
 export const workflowDataListAtom = atom<IWorkflowData[]>(workflowDataList);
 export const selectedWorkflowIdAtom = atom(workflowDataList[0].id);
