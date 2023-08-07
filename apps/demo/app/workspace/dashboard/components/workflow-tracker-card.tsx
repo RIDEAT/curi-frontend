@@ -62,7 +62,7 @@ function WorkflowTrackerTable() {
       {workflowData.map((workflow) => (
         <WorkflowTrackerTableDataRow
           id={workflow.id}
-          key={workflow.name}
+          key={workflow.id}
           name={workflow.name}
           waiting={workflow.waiting}
           inProgress={workflow.inProgress}

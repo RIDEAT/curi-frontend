@@ -8,7 +8,7 @@ export default function Dashboard() {
   return (
     <MainPageLayout
       title="대시보드"
-      description="모든 온보딩 현황을 추적할 수 있는 대시보드입니다."
+      description="모든 온보딩 현황을 추적할 수 있는 대시보드입니다. (이하 데이터는 예시 데이터입니다)"
     >
       <div className=" h-[80vh] grid grid-cols-5 grid-rows-4 gap-4 px-8">
         <WorkflowTrackerCard className="col-span-3 row-span-2" />

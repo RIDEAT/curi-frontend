@@ -18,6 +18,7 @@ export * from "./ui/label";
 export * from "./ui/menubar";
 export * from "./ui/navigation-menu";
 export * from "./ui/popover";
+export * from "./ui/progress";
 export * from "./ui/scroll-area";
 export * from "./ui/select";
 export * from "./ui/separator";
