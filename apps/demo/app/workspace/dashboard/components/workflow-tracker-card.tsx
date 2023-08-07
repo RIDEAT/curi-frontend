@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -9,6 +11,11 @@ import {
 } from "ui";
 import { cn } from "ui/lib/utils";
 import { getBgColor, getTextColor } from "./util";
+import { useAtomValue, useSetAtom } from "jotai";
+import {
+  selectedWorkflowIdAtom,
+  workflowDataListAtom,
+} from "../../../../lib/context/dashboard";
 
 export function WorkflowTrackerCard({ className }: { className?: string }) {
   return (
@@ -29,43 +36,14 @@ export function WorkflowTrackerCard({ className }: { className?: string }) {
 }
 
 const headerColumns = ["워크플로우명", "대기 중", "참여 중", "완료", "진행률"];
-const workflowData = [
-  {
-    name: "신입 사원 공통 온보딩",
-    waiting: 2,
-    inProgress: 3,
-    completed: 7,
-  },
-  {
-    name: "경력 사원 공통 온보딩",
-    waiting: 0,
-    inProgress: 2,
-    completed: 6,
-  },
-  {
-    name: "육아 휴직 사원 리보딩",
-    waiting: 2,
-    inProgress: 3,
-    completed: 1,
-  },
-  {
-    name: "정기 안전 교육",
-    waiting: 30,
-    inProgress: 0,
-    completed: 0,
-  },
-  {
-    name: "주니어 백엔드 개발자 교육",
-    waiting: 0,
-    inProgress: 1,
-    completed: 8,
-  },
-];
 
 function WorkflowTrackerTable() {
+  const workflowData = useAtomValue(workflowDataListAtom);
+  const selectedWorkflowId = useAtomValue(selectedWorkflowIdAtom);
+
   return (
-    <>
-      <div className="h-full overflow-y-scroll scrollbar grid grid-cols-6 gap-y-3 gap-x-1 pr-4">
+    <div className="h-full overflow-y-scroll scrollbar-hide">
+      <div className="grid grid-cols-6 gap-y-3 gap-x-1 pr-4">
         {headerColumns.map((column, index) => (
           <div
             key={index}
@@ -80,36 +58,50 @@ function WorkflowTrackerTable() {
           </div>
         ))}
         <Separator className="col-span-6" />
-        {workflowData.map((workflow) => (
-          <WorkflowTrackerTableDataRow
-            key={workflow.name}
-            name={workflow.name}
-            waiting={workflow.waiting}
-            inProgress={workflow.inProgress}
-            completed={workflow.completed}
-          />
-        ))}
-        <div className="col-span-5 h-3"></div>
       </div>
-    </>
+      {workflowData.map((workflow) => (
+        <WorkflowTrackerTableDataRow
+          id={workflow.id}
+          key={workflow.name}
+          name={workflow.name}
+          waiting={workflow.waiting}
+          inProgress={workflow.inProgress}
+          completed={workflow.completed}
+          selected={workflow.id == selectedWorkflowId}
+        />
+      ))}
+      <div className="col-span-5 h-3"></div>
+    </div>
   );
 }
 
 function WorkflowTrackerTableDataRow({
+  id,
   name,
   waiting,
   inProgress,
   completed,
+  selected,
 }: {
+  id: number;
   name: string;
   waiting: number;
   inProgress: number;
   completed: number;
+  selected?: boolean;
 }) {
+  const setSelectedWorkflowId = useSetAtom(selectedWorkflowIdAtom);
   const total = waiting + inProgress + completed;
+
   return (
-    <>
-      <div className="col-span-2 flex justify-start items-center font-medium ">
+    <div
+      className={cn(
+        "grid grid-cols-6 gap-y-3 gap-x-1 p-2 cursor-pointer hover:bg-stone-100",
+        selected && "bg-stone-200"
+      )}
+      onClick={() => setSelectedWorkflowId(id)}
+    >
+      <div className="col-span-2 flex justify-start items-center font-medium text-sm">
         {name}
       </div>
       <div
@@ -145,6 +137,6 @@ function WorkflowTrackerTableDataRow({
       >
         {Math.round((completed / total) * 100)}%
       </div>
-    </>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 import { MainPageLayout } from "../../../components/layouts/main-page-layout";
 import { MemberAlertCard } from "./components/member-alert-card";
+import { WorkflowDetailCard } from "./components/workflow-detail-card";
 import { WorkflowInfoCard } from "./components/workflow-info-card";
 import { WorkflowTrackerCard } from "./components/workflow-tracker-card";
 
@@ -15,7 +16,7 @@ export default function Dashboard() {
         <MemberAlertCard type="employee" />
         <WorkflowInfoCard title="매니저 참여율" number={82} />
         <MemberAlertCard type="manager" />
-        <WorkflowTrackerCard className="col-span-4 row-span-2" />
+        <WorkflowDetailCard className="col-span-4 row-span-2" />
       </div>
     </MainPageLayout>
   );
