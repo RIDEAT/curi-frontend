@@ -66,10 +66,10 @@ export default function Home() {
           >
             <WorkflowIntroduction />
           </div>
-          <div className={cn("flex flex-col gap-2")}>
+          {/* <div className={cn("flex flex-col gap-2")}>
             <SubscriptionInfo />
-          </div>
-          <div className="px-3 mb-5">
+          </div> */}
+          <div className="px-3 mb-5 flex flex-col items-start ml-10 pt-5">
             <Separator />
             <div className="text-stone-400 text-sm mt-5">© 2023 RIDEAT.</div>
             <div className="text-stone-400 text-sm mt-5">대표자 | 강민혁</div>
