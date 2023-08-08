@@ -316,7 +316,7 @@ export function SubscriptionNewsletter({
               <p className="sm:hidden">구독</p>
             </Button>
           </DialogTrigger>
-          <DialogContent className="h-[85vh] mt-10 overflow-scroll w-full sm:h-fit sm:w-[800px]">
+          <DialogContent className="h-[85vh] mt-10 sm:mt-0 overflow-scroll w-full sm:h-fit sm:w-[800px]">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold text-violet-600">
                 큐리 소식 받아보기
