@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import {
   Button,
@@ -8,6 +9,9 @@ import {
   TabsTrigger,
 } from "ui";
 import ManagerTable, { EmployeeTable } from "./MemberTable";
+
+import member_mobile_1 from "../../../public/member_mobile_1.png";
+import member_mobile_2 from "../../../public/member_mobile_2.png";
 
 const MemberTabsList = [
   {
@@ -27,7 +31,7 @@ const MemberTabsList = [
 export default function Member() {
   return (
     <div className="col-span-3 lg:col-span-1 lg:border-l">
-      <div className="h-full px-4 py-6 lg:px-8">
+      <div className="h-full px-4 py-6 lg:px-8 hidden sm:block">
         <Tabs
           defaultValue={MemberTabsList[0].value}
           className="h-full space-y-6"
@@ -76,6 +80,34 @@ export default function Member() {
             );
           })}
         </Tabs>
+      </div>
+      <div className="w-screen block sm:hidden font-semibold text-stone-600 p-4">
+        <p>모바일 환경에서는 예시 이미지만 확인할 수 있습니다.</p>
+        <p>원활한 서비스 체험을 위해 PC로 접속해주세요.</p>
+      </div>
+      <div className="w-screen block sm:hidden">
+        <Image
+          alt="Curi Board UI"
+          src={member_mobile_1}
+          width={952}
+          height={790}
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+          }}
+          quality={100}
+        />
+        <Image
+          alt="Curi Board UI"
+          src={member_mobile_2}
+          width={952}
+          height={190}
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+          }}
+          quality={100}
+        />
       </div>
     </div>
   );
