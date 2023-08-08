@@ -35,7 +35,7 @@ export default function WorkspaceLayout({
     <div>
       <div className="border-t">
         <div className="bg-background">
-          <div className="grid lg:grid-cols-5">
+          <div className="grid lg:grid-cols-[230px_minmax(900px,_1fr)]">
             <WorkspaceLayoutComponent>{children}</WorkspaceLayoutComponent>
           </div>
         </div>
