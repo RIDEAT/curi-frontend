@@ -30,11 +30,13 @@
 export function CuriExmapleLogo({
   size = "md",
 }: {
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
 }) {
   return (
     <svg
-      width={size == "lg" ? "103" : size == "md" ? "73" : "55"}
+      width={
+        size == "lg" ? "103" : size == "md" ? "73" : size == "sm" ? "55" : "35"
+      }
       height={"34"}
       viewBox="0 0 103 34"
       fill="none"

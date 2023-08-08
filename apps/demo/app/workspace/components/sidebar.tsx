@@ -149,12 +149,12 @@ export function HeadBar({ className }: SidebarProps) {
   return (
     <div className={cn("", className)}>
       <div className="py-4 flex items-center">
-        <div className="px-7 py-2">
+        <div className="pl-4 pr-2 sm:px-7 py-2">
           <Link href="/">
-            <CuriExmapleLogo />
+            <CuriExmapleLogo size="xs" />
           </Link>
         </div>
-        <div className="w-full flex gap-2">
+        <div className="w-full flex gap-0 sm:gap-2">
           {generalMenuList.map((menu) => {
             const isActive = currentMenu == menu.value;
             return (
