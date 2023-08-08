@@ -9,7 +9,7 @@ export default function Workspace() {
 
   useEffect(() => {
     router.replace("/workspace/workflow");
-  }, []);
+  }, [router]);
 
   return <></>;
 }
