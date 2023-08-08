@@ -20,12 +20,10 @@ import {
 import { cn } from "ui/lib/utils";
 import { CuriExmapleLogo } from "../components/logos/curi-example-logo";
 import main_ui from "../public/main_ui.png";
-import workflow_sm from "../public/workflow_sm.png";
 import editor_main from "../public/editor_main.png";
 
 const backgroundStyle1 = "bg-gradient-to-br from-white to-violet-300";
 const backgroundStyle2 = "bg-gradient-to-br from-white to-blue-200";
-const backgroundStyle3 = "bg-gradient-to-br from-white to-green-100";
 
 export default function Home() {
   return (
@@ -69,7 +67,7 @@ export default function Home() {
           {/* <div className={cn("flex flex-col gap-2")}>
             <SubscriptionInfo />
           </div> */}
-          <div className="px-3 mb-5 flex flex-col items-start ml-10 pt-5">
+          <div className="px-3 mb-5 flex flex-col items-start ml-10 mr-10 pt-5">
             <Separator />
             <div className="text-stone-400 text-sm mt-5">© 2023 RIDEAT.</div>
             <div className="text-stone-400 text-sm mt-5">대표자 | 강민혁</div>
@@ -162,7 +160,6 @@ function WorkflowIntroduction() {
       </h1>
       <h3 className="text-stone-700 text-sm sm:text-base md:text-lg font-semibold my-5 md:mb-10">
         <p>AI 어시스턴트를 활용하여 컨텐츠를 빠르게 제작하세요</p>
-        {/* <p>지금 바로 데모 버전을 마음껏 체험하세요</p> */}
       </h3>
       <DemoLinkButton className="bg-blue-500 hover:bg-blue-700" />
       <div className="mt-5">
@@ -182,6 +179,7 @@ function WorkflowIntroduction() {
   );
 }
 
+/*
 function SubscriptionInfo() {
   const [data, setData] = useState({
     reservationsCount: 0,
@@ -242,3 +240,4 @@ function SubscriptionCard({ title, count }: { title: string; count: number }) {
     </Card>
   );
 }
+*/

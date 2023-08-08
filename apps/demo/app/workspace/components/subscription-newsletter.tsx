@@ -308,14 +308,15 @@ export function SubscriptionNewsletter({
             <Button
               type="submit"
               className={cn(
-                "bg-violet-500 hover:bg-violet-700",
+                "bg-violet-500 hover:bg-violet-700 text-sm",
                 !simple && "w-full"
               )}
             >
-              구독하기
+              <p className="hidden sm:block">구독하기</p>
+              <p className="sm:hidden">구독</p>
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[625px] w-[800px] sm:w-[800px]">
+          <DialogContent className="h-screen overflow-scroll w-full sm:h-fit sm:w-[800px]">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold text-violet-600">
                 큐리 소식 받아보기

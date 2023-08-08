@@ -127,13 +127,24 @@ function WorkflowDetailTable({ data }: { data: IMemberWorkspace[] }) {
     <Table className="w-screen overflow-x-scroll overflow-y-scroll">
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">이름</TableHead>
-          <TableHead className="w-[150px] text-center">입사일</TableHead>
-          <TableHead className="w-[100px] text-center">상태</TableHead>
-          <TableHead className="w-[200px] text-center">진행률</TableHead>
-          <TableHead className="w-[100px] text-center">eNPS</TableHead>
+          <TableHead className="w-[100px] min-w-[100px]">이름</TableHead>
+          <TableHead className="w-[150px] min-w-[150px] text-center">
+            입사일
+          </TableHead>
+          <TableHead className="w-[100px] min-w-[100px] text-center">
+            상태
+          </TableHead>
+          <TableHead className="w-[200px] min-w-[200px] text-center">
+            진행률
+          </TableHead>
+          <TableHead className="w-[100px] min-w-[100px] text-center">
+            eNPS
+          </TableHead>
           {data[0].sequences.map((sequence) => (
-            <TableHead key={sequence.id} className="w-[150px] text-center">
+            <TableHead
+              key={sequence.id}
+              className="w-[150px] min-w-[150px] text-center"
+            >
               {sequence.title}
             </TableHead>
           ))}
