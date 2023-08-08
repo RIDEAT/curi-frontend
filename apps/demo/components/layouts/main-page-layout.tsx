@@ -15,7 +15,7 @@ export function MainPageLayout({
   return (
     <div
       className={cn(
-        "col-span-3 lg:col-span-4 lg:border-l scrollbar-hide",
+        "col-span-3 lg:col-span-1 lg:border-l scrollbar-hide",
         bgColor
       )}
     >

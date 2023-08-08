@@ -10,7 +10,7 @@ export function WorkspaceLayoutComponent({
 }) {
   return (
     <>
-      <Sidebar className="hidden lg:block" />
+      <Sidebar className="hidden max-w-[250px] lg:block" />
       <HeadBar className="lg:hidden" />
       <Provider>{children}</Provider>
     </>

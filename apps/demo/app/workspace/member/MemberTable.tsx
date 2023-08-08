@@ -10,7 +10,7 @@ export function EmployeeTable() {
 
   return (
     <>
-      <div className="hidden h-full flex-1 flex-col space-y-8 md:flex">
+      <div className="h-full flex-1 flex-col space-y-8 flex">
         <DataTable data={employeeData} columns={employeeColumns} />
       </div>
     </>
@@ -22,7 +22,7 @@ export default function ManagerTable() {
 
   return (
     <>
-      <div className="hidden h-full flex-1 flex-col space-y-8 md:flex">
+      <div className="h-full flex-1 flex-col space-y-8 flex">
         <DataTable data={managerData} columns={managerColumns} />
       </div>
     </>

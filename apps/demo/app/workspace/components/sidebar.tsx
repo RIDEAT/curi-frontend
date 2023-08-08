@@ -16,6 +16,7 @@ import { DashboardIcon } from "../../../components/icons/DashboardIcon";
 import { MemberIcon } from "../../../components/icons/MemberIcon";
 import { SubscriptionNewsletter } from "./subscription-newsletter";
 import { CuriExmapleLogo } from "../../../components/logos/curi-example-logo";
+import Link from "next/link";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -91,7 +92,9 @@ export function Sidebar({ className }: SidebarProps) {
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
         <div className="px-7 py-2">
-          <CuriExmapleLogo />
+          <Link href="/">
+            <CuriExmapleLogo />
+          </Link>
         </div>
         {categoryList.map((category) => {
           return (
@@ -111,7 +114,11 @@ export function Sidebar({ className }: SidebarProps) {
                       accessKey={menu.value}
                     >
                       {menu.icon(isActive)}
-                      <div className="mx-2">{menu.label}</div>
+                      <div
+                        className={cn("mx-2", isActive && "text-violet-700")}
+                      >
+                        {menu.label}
+                      </div>
                     </Button>
                   );
                 })}
@@ -143,7 +150,9 @@ export function HeadBar({ className }: SidebarProps) {
     <div className={cn("", className)}>
       <div className="py-4 flex items-center">
         <div className="px-7 py-2">
-          <CuriExmapleLogo />
+          <Link href="/">
+            <CuriExmapleLogo />
+          </Link>
         </div>
         <div className="w-full flex gap-2">
           {generalMenuList.map((menu) => {

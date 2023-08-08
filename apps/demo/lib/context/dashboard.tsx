@@ -274,7 +274,7 @@ const workflowDataList: IWorkflowData[] = [
   },
   {
     id: 2,
-    name: WORKFLOW_NAMES[3],
+    name: WORKFLOW_NAMES[1],
     waiting: 0,
     inProgress: 2,
     completed: 6,
