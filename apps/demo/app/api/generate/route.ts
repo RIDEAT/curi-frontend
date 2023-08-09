@@ -1,25 +1,22 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { openai } from "./openai";
+import { ratelimit } from "./upstash-redis";
 // import { kv } from "@vercel/kv";
 // import { Ratelimit } from "@upstash/ratelimit";
 
 export const runtime = "edge";
 
 export async function POST(req: Request): Promise<Response> {
-  /* rate limiting 
+  /* rate limiting */
   if (
-    process.env.NODE_ENV != "development" &&
-    process.env.KV_REST_API_URL &&
-    process.env.KV_REST_API_TOKEN
+    // process.env.NODE_ENV != "development" &&
+    process.env.UPSTASH_REDIS_REST_URL &&
+    process.env.UPSTASH_REDIS_REST_TOKEN
   ) {
     const ip = req.headers.get("x-forwarded-for");
-    const ratelimit = new Ratelimit({
-      redis: kv,
-      limiter: Ratelimit.slidingWindow(50, "1 d"),
-    });
 
     const { success, limit, reset, remaining } = await ratelimit.limit(
-      `novel_ratelimit_${ip}`,
+      `curi_ratelimit_${ip}`
     );
 
     if (!success) {
@@ -33,7 +30,7 @@ export async function POST(req: Request): Promise<Response> {
       });
     }
   }
-  */
+  /* rate limiting */
 
   let { prompt } = await req.json();
 
@@ -41,7 +38,7 @@ export async function POST(req: Request): Promise<Response> {
     prompt = prompt.slice(-200);
   }
 
-  console.log("prompt: ", prompt);
+  console.log("[request] Recieved Prompt: ", prompt);
 
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
