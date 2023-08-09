@@ -57,10 +57,10 @@ const addReservation = async (reservation: any) => {
       ...reservation,
       created_at: new Date(),
     };
-    console.log("[request]", data, "save to database");
+    console.log("[request]", data, "reservation save to database");
     const docRef = await addDoc(collection(db, "user"), data);
     console.log("Document written with ID: ", docRef.id);
-    console.log("[complete]", data, "saved to database");
+    console.log("[complete]", data, "reservation saved to database");
   } catch (e) {
     console.error("Error adding document: ", e);
   }
@@ -76,7 +76,7 @@ export async function POST(request: Request) {
       },
     };
 
-    addReservation(data);
+    await addReservation(data);
     return new NextResponse(JSON.stringify(json_response), {
       status: 201,
       headers: { "Content-Type": "application/json" },

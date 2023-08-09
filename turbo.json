@@ -25,7 +25,8 @@
         "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID",
         "__NEXT_PRIVATE_PREBUNDLED_REACT",
         "NEXT_PUBLIC_MEASUREMENT_ID",
-        "NEXT_PUBLIC_GTM_ID"
+        "NEXT_PUBLIC_GTM_ID",
+        "NODE_ENV"
       ]
     },
     "start": {
@@ -50,7 +51,8 @@
         "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID",
         "__NEXT_PRIVATE_PREBUNDLED_REACT",
         "NEXT_PUBLIC_MEASUREMENT_ID",
-        "NEXT_PUBLIC_GTM_ID"
+        "NEXT_PUBLIC_GTM_ID",
+        "NODE_ENV"
       ]
     },
     "lint": {

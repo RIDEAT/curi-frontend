@@ -45,7 +45,7 @@ export default function Editor({
       const lastTwo = getPrevText(e.editor, {
         chars: 2,
       });
-      if (lastTwo === "++" && !isLoading) {
+      if (lastTwo === "++" && !isLoadingText) {
         e.editor.commands.deleteRange({
           from: selection.from - 2,
           to: selection.from,
@@ -64,9 +64,14 @@ export default function Editor({
     autofocus: "end",
   });
 
-  const { complete, completion, isLoading, stop } = useCompletion({
+  const {
+    complete,
+    completion,
+    isLoading: isLoadingText,
+    stop,
+  } = useCompletion({
     id: "curi_text_gpt",
-    api: "/api/generate",
+    api: "/api/generate/text",
     onFinish: (_prompt, completion) => {
       editor?.commands.setTextSelection({
         from: editor.state.selection.from - completion.length,
@@ -81,6 +86,15 @@ export default function Editor({
     },
   });
 
+  const { completion: completionImage, isLoading: isLoadingImage } =
+    useCompletion({
+      id: "curi_image_gpt",
+      api: "/api/generate/text",
+      onError: (err) => {
+        toast({ title: err.message });
+      },
+    });
+
   const prev = useRef("");
 
   // Insert chunks of the generated text
@@ -88,11 +102,16 @@ export default function Editor({
     const diff = completion.slice(prev.current.length);
     prev.current = completion;
     editor?.commands.insertContent(diff);
-  }, [isLoading, editor, completion]);
+  }, [isLoadingText, editor, completion]);
+
+  // Insert chunks of the generated image
+  useEffect(() => {
+    editor?.commands.insertContent(completionImage);
+  }, [isLoadingImage, editor, completionImage]);
 
   useEffect(() => {
     // if user presses escape or cmd + z and it's loading,
-    // stop the request, delete the completion, and insert back the "++"
+    // stop the request, delete the completionText, and insert back the "++"
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" || (e.metaKey && e.key === "z")) {
         stop();
@@ -113,7 +132,7 @@ export default function Editor({
         complete(editor?.getText() || "");
       }
     };
-    if (isLoading) {
+    if (isLoadingText) {
       document.addEventListener("keydown", onKeyDown);
       window.addEventListener("mousedown", mousedownHandler);
     } else {
@@ -124,7 +143,7 @@ export default function Editor({
       document.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("mousedown", mousedownHandler);
     };
-  }, [stop, isLoading, editor, complete, completion.length]);
+  }, [stop, isLoadingText, editor, complete, completion.length]);
 
   // Hydrate the editor with the content from localStorage.
   useEffect(() => {
