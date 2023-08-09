@@ -6,10 +6,11 @@ import { TiptapEditorProps } from "./props";
 import { TiptapExtensions } from "./extensions";
 import { useDebouncedCallback } from "use-debounce";
 import { useCompletion } from "ai/react";
-import { toast } from "sonner";
+
 import va from "@vercel/analytics";
 import { EditorBubbleMenu } from "./components";
 import { getPrevText } from "./lib/editor";
+import { toast } from "ui";
 
 export default function Editor({
   editable = true,
@@ -64,7 +65,7 @@ export default function Editor({
   });
 
   const { complete, completion, isLoading, stop } = useCompletion({
-    id: "novel",
+    id: "curi_text_gpt",
     api: "/api/generate",
     onFinish: (_prompt, completion) => {
       editor?.commands.setTextSelection({
@@ -73,10 +74,10 @@ export default function Editor({
       });
     },
     onError: (err) => {
-      toast.error(err.message);
-      if (err.message === "You have reached your request limit for the day.") {
-        va.track("Rate Limit Reached");
-      }
+      toast({ title: err.message });
+      // if (err.message === "You have reached your request limit for the day.") {
+      //   va.track("Rate Limit Reached");
+      // }
     },
   });
 

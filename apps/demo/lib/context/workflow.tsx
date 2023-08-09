@@ -79,6 +79,7 @@ const notificationContent = [
           },
         ],
       },
+      { type: "paragraph" },
     ],
   },
 ];
@@ -244,6 +245,7 @@ const introductionContent = [
               },
             ],
           },
+          { type: "paragraph" },
         ],
       },
     ],
