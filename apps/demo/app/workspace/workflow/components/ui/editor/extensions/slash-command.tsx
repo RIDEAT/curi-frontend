@@ -25,10 +25,11 @@ import {
   CheckSquare,
 } from "lucide-react";
 import LoadingCircle from "../../icons/loading-circle";
-import { toast } from "sonner";
+
 import va from "@vercel/analytics";
 import Magic from "../../icons/magic";
 import { startImageUpload } from "../plugins/upload-images";
+import { toast } from "ui";
 
 const getPrevText = (
   editor: Editor,
@@ -91,10 +92,12 @@ const Command = Extension.create({
   },
 });
 
+const AI_COMMAND_TITLE = "AI 보조 쓰기";
+
 const getSuggestionItems = ({ query }: { query: string }) => {
   return [
     {
-      title: "AI 보조 쓰기",
+      title: AI_COMMAND_TITLE,
       description: "AI로 글을 확장하세요.",
       searchTerms: ["gpt"],
       icon: <Magic className="w-7" />,
@@ -274,13 +277,17 @@ const CommandList = ({
   range: any;
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isProcessingAI, setIsProcessingAI] = useState(false);
 
   const { complete, isLoading } = useCompletion({
-    id: "novel",
+    id: "curi_text_gpt",
     api: "/api/generate",
     onResponse: (response) => {
       if (response.status === 429) {
-        toast.error("You have reached your request limit for the day.");
+        toast({
+          title: "❌ AI 보조 쓰기를 사용할 수 없습니다.",
+          description: "일일 한도(일 40회)를 초과하였습니다.",
+        });
         // va.track("Rate Limit Reached");
         return;
       }
@@ -293,8 +300,11 @@ const CommandList = ({
         to: range.from + completion.length,
       });
     },
-    onError: () => {
-      toast.error("Something went wrong.");
+    onError: (error) => {
+      // toast({
+      //   title: "❌ AI 보조 쓰기를 사용할 수 없습니다.",
+      //   description: "잠시 후 다시 시도해주세요.",
+      // });
     },
   });
 
@@ -305,7 +315,9 @@ const CommandList = ({
       //   command: item.title,
       // });
       if (item) {
-        if (item.title === "AI 보조 쓰기") {
+        if (item.title === AI_COMMAND_TITLE) {
+          if (isProcessingAI) return;
+          setIsProcessingAI(true);
           complete(
             getPrevText(editor, {
               chars: 5000,
@@ -317,7 +329,7 @@ const CommandList = ({
         }
       }
     },
-    [complete, command, editor, items]
+    [complete, command, editor, items, isProcessingAI, setIsProcessingAI]
   );
 
   useEffect(() => {
@@ -376,7 +388,7 @@ const CommandList = ({
             onClick={() => selectItem(index)}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-md border border-stone-200 bg-white">
-              {item.title === " AI 보조 쓰기" && isLoading ? (
+              {item.title === AI_COMMAND_TITLE && isLoading ? (
                 <LoadingCircle />
               ) : (
                 item.icon
