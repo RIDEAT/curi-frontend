@@ -45,6 +45,7 @@ jobs:
           FIREBASE_MESSAGING_SENDER_ID: ${{vars.FIREBASE_MESSAGING_SENDER_ID}}
           FIREBASE_APP_ID: ${{vars.FIREBASE_APP_ID}}
           FIREBASE_MEASUREMENT_ID: ${{vars.FIREBASE_MEASUREMENT_ID}}
+          OPENAI_API_KEY: ${{vars.OPENAI_API_KEY}}
         run: |
           touch ./apps/demo/.env.local
           echo "${{ secrets.FIREBASE }}" > ./apps/demo/.env.local
