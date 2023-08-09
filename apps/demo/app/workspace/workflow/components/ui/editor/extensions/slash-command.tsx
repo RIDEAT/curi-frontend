@@ -92,15 +92,22 @@ const Command = Extension.create({
   },
 });
 
-const AI_COMMAND_TITLE = "AI 보조 쓰기";
+const AI_CHAT_COMMAND_TITLE = "AI 보조 쓰기";
+const AI_IMAGE_COMMAND_TITLE = "AI 이미지 생성";
 
 const getSuggestionItems = ({ query }: { query: string }) => {
   return [
     {
-      title: AI_COMMAND_TITLE,
+      title: AI_CHAT_COMMAND_TITLE,
       description: "AI로 글을 확장하세요.",
       searchTerms: ["gpt"],
       icon: <Magic className="w-7" />,
+    },
+    {
+      title: AI_IMAGE_COMMAND_TITLE,
+      description: "AI로 이미지를 생성하세요.",
+      searchTerms: ["image-gpt"],
+      icon: <ImageIcon size={18} />,
     },
     // {
     //   title: "Send Feedback",
@@ -279,9 +286,9 @@ const CommandList = ({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isProcessingAI, setIsProcessingAI] = useState(false);
 
-  const { complete, isLoading } = useCompletion({
+  const { complete: completeText, isLoading: isLoadingText } = useCompletion({
     id: "curi_text_gpt",
-    api: "/api/generate",
+    api: "/api/generate/text",
     onResponse: (response) => {
       if (response.status === 429) {
         toast({
@@ -300,11 +307,30 @@ const CommandList = ({
         to: range.from + completion.length,
       });
     },
-    onError: (error) => {
-      // toast({
-      //   title: "❌ AI 보조 쓰기를 사용할 수 없습니다.",
-      //   description: "잠시 후 다시 시도해주세요.",
-      // });
+  });
+  const { complete: completeImage, isLoading: isLoadingImage } = useCompletion({
+    id: "curi_image_gpt",
+    api: "/api/generate/image",
+    onResponse: (response) => {
+      if (response.status === 429) {
+        toast({
+          title: "❌ AI 이미지 생성 사용할 수 없습니다.",
+          description: "일일 한도(일 2회)를 초과하였습니다.",
+        });
+        // va.track("Rate Limit Reached");
+        return;
+      }
+      editor.chain().focus().deleteRange(range).run();
+    },
+    onFinish: (_prompt, completion) => {
+      // highlight the generated text
+      editor
+        ?.chain()
+        .focus()
+        .setImage({
+          src: completion,
+        })
+        .run();
     },
   });
 
@@ -315,10 +341,19 @@ const CommandList = ({
       //   command: item.title,
       // });
       if (item) {
-        if (item.title === AI_COMMAND_TITLE) {
+        if (item.title === AI_CHAT_COMMAND_TITLE) {
           if (isProcessingAI) return;
           setIsProcessingAI(true);
-          complete(
+          completeText(
+            getPrevText(editor, {
+              chars: 5000,
+              offset: 1,
+            })
+          );
+        } else if (item.title == AI_IMAGE_COMMAND_TITLE) {
+          if (isProcessingAI) return;
+          setIsProcessingAI(true);
+          completeImage(
             getPrevText(editor, {
               chars: 5000,
               offset: 1,
@@ -329,7 +364,15 @@ const CommandList = ({
         }
       }
     },
-    [complete, command, editor, items, isProcessingAI, setIsProcessingAI]
+    [
+      completeText,
+      completeImage,
+      command,
+      editor,
+      items,
+      isProcessingAI,
+      setIsProcessingAI,
+    ]
   );
 
   useEffect(() => {
@@ -388,7 +431,9 @@ const CommandList = ({
             onClick={() => selectItem(index)}
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-md border border-stone-200 bg-white">
-              {item.title === AI_COMMAND_TITLE && isLoading ? (
+              {(item.title === AI_CHAT_COMMAND_TITLE ||
+                item.title === AI_IMAGE_COMMAND_TITLE) &&
+              (isLoadingText || isLoadingImage) ? (
                 <LoadingCircle />
               ) : (
                 item.icon
