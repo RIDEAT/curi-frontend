@@ -4,6 +4,7 @@ import {
   SequenceBox,
   TimeBoxProps,
 } from "../../app/workspace/workflow/components/ui/timeline/components/sequence";
+import { main_ui_blob } from "../../public/image_blob";
 
 const notificationContent = [
   {
@@ -102,6 +103,14 @@ const introductionContent = [
                 text: "RIDEAT 팀 소개",
               },
             ],
+          },
+          {
+            type: "image",
+            attrs: {
+              src: main_ui_blob,
+              alt: null,
+              title: null,
+            },
           },
           {
             type: "paragraph",
