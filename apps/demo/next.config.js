@@ -25,4 +25,14 @@ module.exports = {
     NEXT_PUBLIC_MEASUREMENT_ID: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
     NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
   },
+  async redirects() {
+    return [
+      {
+        source: "/reservation/done",
+        destination:
+          "https://drive.google.com/file/d/1OtFcYjhKHco-AoZbSf6AQJ_Scq7av5RA/view?usp=sharing",
+        permanent: false,
+      },
+    ];
+  },
 };
