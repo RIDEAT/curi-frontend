@@ -8,7 +8,7 @@ function WorkflowTimeline({ timelineData }: WorkflowTimelineProps) {
   return (
     <>
       <div className="w-full h-screen overflow-scroll scrollbar-hide">
-        <div className="m-5 flex flex-col justify-center items-start">
+        <div className="m-5 flex flex-col justify-center items-start tour-workflow-timeline">
           {timelineData.map((data) => {
             return (
               <TimeBox

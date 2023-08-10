@@ -11,6 +11,14 @@ import workflow_mobile_1 from "../../../public/workflow_mobile_1.png";
 import workflow_mobile_2 from "../../../public/workflow_mobile_2.png";
 import workflow_mobile_3 from "../../../public/workflow_mobile_3.png";
 
+import dynamic from "next/dynamic";
+const WorkflowTour = dynamic(
+  () => import("../../../components/tours/workflow-tour"),
+  {
+    ssr: false,
+  }
+);
+
 export default function Workflow() {
   const timelineData = useAtomValue(timelineDataAtom);
   return (
@@ -20,6 +28,7 @@ export default function Workflow() {
         description="모든 신입사원의 공통 워크플로우입니다."
         bgColor="bg-stone-100"
       >
+        <WorkflowTour />
         <div className="hidden sm:block">
           <WorkflowTimeline timelineData={timelineData} />
         </div>

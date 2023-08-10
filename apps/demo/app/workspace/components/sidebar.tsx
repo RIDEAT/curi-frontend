@@ -25,6 +25,7 @@ const generalMenuList = [
     value: "workflow",
     label: "워크플로우",
     icon: (active?: boolean) => <WorkflowIcon active={active} />,
+    tourClass: "tour-workflow-tab",
   },
   {
     value: "dashboard",
@@ -109,7 +110,7 @@ export function Sidebar({ className }: SidebarProps) {
                     <Button
                       onClick={routingHandler}
                       variant={isActive ? "secondary" : "ghost"}
-                      className="w-full justify-start"
+                      className={cn("w-full justify-start", menu.tourClass)}
                       key={menu.value}
                       accessKey={menu.value}
                     >
