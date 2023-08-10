@@ -3,7 +3,7 @@ name: Deploy to Amazon ECR
 on:
   push:
     branches:
-      - main # main 브랜치에 push할 때
+      - main # main 브랜치에 push할 때 
 jobs:
   deploy:
     name: Deploy
