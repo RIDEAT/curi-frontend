@@ -62,7 +62,7 @@ export default function Home() {
               backgroundStyle2
             )}
           >
-            <WorkflowIntroduction />
+            <EditorIntroduction />
           </div>
           {/* <div className={cn("flex flex-col gap-2")}>
             <SubscriptionInfo />
@@ -129,22 +129,28 @@ function LandingHero() {
   );
 }
 
-function DemoLinkButton({ className }: { className?: string }) {
+function DemoLinkButton({
+  title = "무료로 시작하기",
+  className,
+}: {
+  title?: string;
+  className?: string;
+}) {
   return (
     <Link href="/workspace/workflow" className={"mr-6 sm:mr-10 md:mr-20"}>
       <Button
         className={cn(
-          "w-28 h-10 text-sm md:w-40 md:h-12 md:text-xl font-bold bg-violet-500 hover:bg-violet-700",
+          "w-32 h-10 text-sm md:w-40 md:h-12 md:text-xl font-bold bg-violet-500 hover:bg-violet-700 shadow-xl",
           className
         )}
       >
-        체험하기
+        {title}
       </Button>
     </Link>
   );
 }
 
-function WorkflowIntroduction() {
+function EditorIntroduction() {
   return (
     <div className="flex flex-col justify-start items-start ">
       <h1
@@ -154,14 +160,17 @@ function WorkflowIntroduction() {
           "from-blue-500 to-blue-300"
         )}
       >
-        <p className="hidden sm:block">온보딩 프로세스를 쉽게 설계하세요</p>
-        <p className="sm:hidden">온보딩 프로세스를</p>
-        <p className="sm:hidden">쉽게 설계하세요</p>
+        <p className="hidden sm:block">온보딩 컨텐츠를 쉽게 제작하세요</p>
+        <p className="sm:hidden">온보딩 컨텐츠를</p>
+        <p className="sm:hidden">쉽게 제작하세요</p>
       </h1>
       <h3 className="text-stone-700 text-sm sm:text-base md:text-lg font-semibold my-5 md:mb-10">
         <p>AI 어시스턴트를 활용하여 컨텐츠를 빠르게 제작하세요</p>
       </h3>
-      <DemoLinkButton className="bg-blue-500 hover:bg-blue-700" />
+      <DemoLinkButton
+        className="bg-blue-500 hover:bg-blue-700"
+        title="AI 사용해보기"
+      />
       <div className="mt-5">
         <Image
           alt="Curi Board UI"

@@ -47,7 +47,7 @@ function SequenceBox({ title, stakeholder, sequenceData }: SequenceBoxProps) {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center tour-workflow-sequence">
       <Sheet open={open} onOpenChange={setOpen}>
         <div className="w-[320px] h-[280px] bg-white rounded-lg shadow-md p-1">
           <div className="flex justify-between items-center h-[50px] p-4">

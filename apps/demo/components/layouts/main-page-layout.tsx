@@ -22,7 +22,9 @@ export function MainPageLayout({
       <div className="px-4 py-6 pb-0 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+            <h2 className="text-2xl font-semibold tracking-tight tour-workflow-title">
+              {title}
+            </h2>
             <p className="text-sm text-muted-foreground">{description}</p>
           </div>
         </div>

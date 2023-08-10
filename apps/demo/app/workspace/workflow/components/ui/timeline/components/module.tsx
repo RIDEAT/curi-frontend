@@ -22,6 +22,13 @@ import {
 import { TextModule } from "./modules/text-module";
 import { NotificationModule } from "./modules/notification-module";
 import { FormModule } from "./modules/form-module";
+import dynamic from "next/dynamic";
+const EditorTour = dynamic(
+  () => import("../../../../../../../components/tours/editor-tour"),
+  {
+    ssr: false,
+  }
+);
 
 export interface IModuleData {
   id: string;
@@ -58,8 +65,9 @@ function ModuleContent({ module }: { module: IModuleData }) {
   return (
     <SheetContent
       isBlur={true}
-      className="w-[800px] h-screen sm:w-[800px] sm:max-w-none overflow-scroll scrollbar-hide"
+      className="w-[800px] h-screen sm:w-[800px] sm:max-w-none overflow-scroll scrollbar-hide "
     >
+      <EditorTour />
       <SheetHeader className="flex flex-row justify-between">
         <div className="flex flex-col gap-2">
           <SheetTitle className=" text-xl">{module.title}</SheetTitle>
@@ -70,7 +78,7 @@ function ModuleContent({ module }: { module: IModuleData }) {
         <div className="mr-5">
           <Button
             variant="outline"
-            className="flex flex-row gap-2"
+            className="flex flex-row gap-2 tour-editor-preview"
             onClick={toggleHandler}
           >
             {togglePreview ? (
@@ -88,11 +96,13 @@ function ModuleContent({ module }: { module: IModuleData }) {
         </div>
       </SheetHeader>
       <Separator className="my-4" />
-      {getModuleComponentByType(module.type)({
-        content,
-        setContent,
-        togglePreview,
-      })}
+      <div className="tour-editor-ai">
+        {getModuleComponentByType(module.type)({
+          content,
+          setContent,
+          togglePreview,
+        })}
+      </div>
     </SheetContent>
   );
 }
@@ -100,7 +110,7 @@ function ModuleContent({ module }: { module: IModuleData }) {
 function ModuleBox({ type, title }: { type: ModuleType; title: string }) {
   return (
     <SheetTrigger asChild>
-      <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm border border-stone-200">
+      <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm border border-stone-200 tour-workflow-module">
         <div className="flex gap-3 items-center">
           {getModuleIcon(type)}
           <div className="text-md">{title}</div>
