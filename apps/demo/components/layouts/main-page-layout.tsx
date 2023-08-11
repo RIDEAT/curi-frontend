@@ -1,5 +1,6 @@
-import { Separator } from "ui";
+import { Button, Separator } from "ui";
 import { cn } from "ui/lib/utils";
+import { NewsLetterSubscribeButton } from "../../app/workspace/components/news-letter-subscribe-button";
 
 export function MainPageLayout({
   title,
@@ -27,6 +28,13 @@ export function MainPageLayout({
             </h2>
             <p className="text-sm text-muted-foreground">{description}</p>
           </div>
+
+          <NewsLetterSubscribeButton
+            title="우리 회사 워크플로우 만들기"
+            ringing={false}
+            btnColor=""
+            className="hidden sm:block"
+          />
         </div>
         <Separator className="my-4" />
       </div>
