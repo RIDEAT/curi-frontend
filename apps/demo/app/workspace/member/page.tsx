@@ -12,6 +12,7 @@ import ManagerTable, { EmployeeTable } from "./MemberTable";
 
 import member_mobile_1 from "../../../public/member_mobile_1.png";
 import member_mobile_2 from "../../../public/member_mobile_2.png";
+import { NewsLetterSubscribeButton } from "../components/news-letter-subscribe-button";
 
 const MemberTabsList = [
   {
@@ -51,10 +52,15 @@ export default function Member() {
               })}
             </TabsList>
             <div className="ml-auto mr-4">
-              <Button>
+              <NewsLetterSubscribeButton
+                title="우리 회사 직원 추가하기"
+                ringing={false}
+                btnColor=""
+              />
+              {/* <Button>
                 <PlusCircledIcon className="mr-2 h-4 w-4" />
                 멤버 추가
-              </Button>
+              </Button> */}
             </div>
           </div>
           {MemberTabsList.map((tab) => {
