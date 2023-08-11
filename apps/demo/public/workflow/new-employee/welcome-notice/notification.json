@@ -9,7 +9,13 @@
       {
         "type": "heading",
         "attrs": { "level": 2 },
-        "content": [{ "type": "text", "text": "**합격을 축하드립니다!**" }]
+        "content": [
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "합격을 축하드립니다!"
+          }
+        ]
       },
       {
         "type": "paragraph",

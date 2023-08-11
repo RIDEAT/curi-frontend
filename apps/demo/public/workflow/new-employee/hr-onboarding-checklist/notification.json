@@ -9,7 +9,13 @@
       {
         "type": "heading",
         "attrs": { "level": 2 },
-        "content": [{ "type": "text", "text": "**새로운 입사자가 있어요!**" }]
+        "content": [
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "새로운 입사자가 있어요!"
+          }
+        ]
       },
       {
         "type": "paragraph",

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useAtomValue } from "jotai";
 
 import { WorkflowTimeline } from "./components/ui/timeline/components/workflow";
-import { timelineDataAtom } from "../../../lib/context/workflow";
+// import { timelineDataAtom } from "../../../lib/context/workflow";
 import { MainPageLayout } from "../../../components/layouts/main-page-layout";
 
 import workflow_mobile_1 from "../../../public/workflow_mobile_1.png";
@@ -12,6 +12,7 @@ import workflow_mobile_2 from "../../../public/workflow_mobile_2.png";
 import workflow_mobile_3 from "../../../public/workflow_mobile_3.png";
 
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 const WorkflowTour = dynamic(
   () => import("../../../components/tours/workflow-tour"),
   {
@@ -19,8 +20,21 @@ const WorkflowTour = dynamic(
   }
 );
 
+import { loadWorkflowData } from "../../../lib/function/loadWorkflowData";
+
 export default function Workflow() {
-  const timelineData = useAtomValue(timelineDataAtom);
+  // const timelineData = useAtomValue(timelineDataAtom);
+  const [workflowData, setWorkflowData] = useState([]);
+
+  const loadWorkflow = async () => {
+    const workflowData = await loadWorkflowData();
+    setWorkflowData(workflowData[0].timeline);
+  };
+
+  useEffect(() => {
+    loadWorkflow();
+  }, []);
+
   return (
     <>
       <MainPageLayout
@@ -30,7 +44,7 @@ export default function Workflow() {
       >
         <WorkflowTour />
         <div className="hidden sm:block">
-          <WorkflowTimeline timelineData={timelineData} />
+          <WorkflowTimeline timelineData={workflowData} />
         </div>
         <div className="w-screen block sm:hidden font-semibold text-stone-600 p-4">
           <p>모바일 환경에서는 예시 이미지만 확인할 수 있습니다.</p>

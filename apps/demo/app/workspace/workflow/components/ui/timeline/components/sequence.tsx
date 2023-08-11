@@ -22,7 +22,7 @@ function TimeBox({ date, employeeSequence, managerSequence }: TimeBoxProps) {
       {employeeSequence ? employeeSequence : <EmptySequenceBox />}
       <div className="relative h-full">
         <TimeLineVerticalElement
-          date={date}
+          date={Number(date) < 0 ? date : Number(date) == 0 ? "-0" : "+" + date}
           left={!!employeeSequence}
           right={!!managerSequence}
         />
@@ -39,11 +39,18 @@ export interface SequenceBoxProps {
 }
 
 function SequenceBox({ title, stakeholder, sequenceData }: SequenceBoxProps) {
+  console.log("sequenceData: ", sequenceData);
+
   const [open, setOpen] = useState(false);
   const [currentId, setCurrentId] = useState(sequenceData[0].id);
+  console.log("currentId: ", currentId);
 
   const getModuleById = (id: string) => {
-    return sequenceData.find((data) => data.id === id);
+    console.log("id: ", id);
+    console.log("sequenceData info: ", sequenceData);
+    const resultModule = sequenceData.find((data) => data.id == id);
+    console.log("resultModule: ", resultModule);
+    return resultModule;
   };
 
   return (

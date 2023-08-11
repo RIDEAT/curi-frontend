@@ -9,7 +9,11 @@
         "type": "heading",
         "attrs": { "level": 2 },
         "content": [
-          { "type": "text", "text": "[버디]님과 함께하는 오늘의 To Do 리스트" }
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "[버디]님과 함께하는 오늘의 To Do 리스트"
+          }
         ]
       },
       {

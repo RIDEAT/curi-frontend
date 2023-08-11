@@ -1,10 +1,12 @@
-import { TimeBox, TimeBoxProps } from "./sequence";
+import { SequenceBox, TimeBox, TimeBoxProps } from "./sequence";
 
 export interface WorkflowTimelineProps {
-  timelineData: TimeBoxProps[];
+  // timelineData: TimeBoxProps[];
+  timelineData: any[];
 }
 
 function WorkflowTimeline({ timelineData }: WorkflowTimelineProps) {
+  console.log("timelineData: ", timelineData);
   return (
     <>
       <div className="w-full h-screen overflow-scroll scrollbar-hide">
@@ -12,10 +14,26 @@ function WorkflowTimeline({ timelineData }: WorkflowTimelineProps) {
           {timelineData.map((data) => {
             return (
               <TimeBox
-                key={data.date}
-                date={data.date}
-                employeeSequence={data.employeeSequence}
-                managerSequence={data.managerSequence}
+                key={data["day-offset"]}
+                date={data["day-offset"]}
+                employeeSequence={
+                  Object.keys(data.left).length ? (
+                    <SequenceBox
+                      title={data.left.title}
+                      stakeholder={data.left.role}
+                      sequenceData={data.left.modules || []}
+                    />
+                  ) : null
+                }
+                managerSequence={
+                  Object.keys(data.right).length ? (
+                    <SequenceBox
+                      title={data.right.title}
+                      stakeholder={data.right.role}
+                      sequenceData={data.right.modules || []}
+                    />
+                  ) : null
+                }
               />
             );
           })}

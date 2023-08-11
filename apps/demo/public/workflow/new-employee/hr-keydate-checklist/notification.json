@@ -10,7 +10,11 @@
         "type": "heading",
         "attrs": { "level": 2 },
         "content": [
-          { "type": "text", "text": "****새로운 팀원을 환영해주세요!****" }
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "새로운 팀원을 환영해주세요!"
+          }
         ]
       },
       {

@@ -10,7 +10,11 @@
         "type": "heading",
         "attrs": { "level": 4 },
         "content": [
-          { "type": "text", "text": "****1개월 온보딩 review & Quiz 안내****" }
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "1개월 온보딩 review & Quiz 안내"
+          }
         ]
       },
       {

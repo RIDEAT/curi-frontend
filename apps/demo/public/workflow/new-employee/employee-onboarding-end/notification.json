@@ -9,7 +9,13 @@
       {
         "type": "heading",
         "attrs": { "level": 4 },
-        "content": [{ "type": "text", "text": "****온보딩 마무리 안내****" }]
+        "content": [
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "온보딩 마무리 안내"
+          }
+        ]
       },
       {
         "type": "paragraph",
