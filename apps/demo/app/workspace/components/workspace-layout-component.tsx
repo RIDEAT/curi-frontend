@@ -2,6 +2,9 @@
 
 import { Provider } from "jotai";
 import { HeadBar, Sidebar } from "./sidebar";
+import { NewsLetterSubscribeButton } from "./news-letter-subscribe-button";
+import { DownloadIntroButton } from "./download-intro-button";
+import { LeftBottomButtons } from "./left-bottom-buttoms";
 
 export function WorkspaceLayoutComponent({
   children,
@@ -12,6 +15,7 @@ export function WorkspaceLayoutComponent({
     <>
       <Sidebar className="hidden max-w-[250px] lg:block" />
       <HeadBar className="lg:hidden" />
+      <LeftBottomButtons />
       <Provider>{children}</Provider>
     </>
   );

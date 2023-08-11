@@ -2,7 +2,7 @@
 
 import { cn } from "ui/lib/utils";
 
-import { Button, Input, Label } from "ui";
+import { Button, Input, Label, Separator } from "ui";
 import {
   BellIcon,
   GearIcon,
@@ -17,6 +17,8 @@ import { MemberIcon } from "../../../components/icons/MemberIcon";
 import { SubscriptionNewsletter } from "./subscription-newsletter";
 import { CuriExmapleLogo } from "../../../components/logos/curi-example-logo";
 import Link from "next/link";
+import { DownloadIntroButton } from "./download-intro-button";
+import { NewsLetterSubscribeButton } from "./news-letter-subscribe-button";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -37,11 +39,11 @@ const generalMenuList = [
     label: "멤버",
     icon: (active?: boolean) => <MemberIcon active={active} />,
   },
-  {
-    value: "report",
-    label: "리포트",
-    icon: (active?: boolean) => <ReportIcon active={active} />,
-  },
+  // {
+  //   value: "report",
+  //   label: "리포트",
+  //   icon: (active?: boolean) => <ReportIcon active={active} />,
+  // },
 ];
 
 const supportMenuList = [
@@ -68,11 +70,11 @@ const categoryList = [
     label: "general",
     items: generalMenuList,
   },
-  {
-    value: "support",
-    label: "support",
-    items: supportMenuList,
-  },
+  // {
+  //   value: "support",
+  //   label: "support",
+  //   items: supportMenuList,
+  // },
 ];
 
 export function Sidebar({ className }: SidebarProps) {
@@ -91,43 +93,49 @@ export function Sidebar({ className }: SidebarProps) {
 
   return (
     <div className={cn("pb-12", className)}>
-      <div className="space-y-4 py-4">
-        <div className="px-7 py-2">
-          <Link href="/">
-            <CuriExmapleLogo />
-          </Link>
-        </div>
-        {categoryList.map((category) => {
-          return (
-            <div className="px-3 py-2" key={category.value}>
-              <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                {category.label}
-              </h2>
-              <div className="space-y-1">
-                {category.items.map((menu) => {
-                  const isActive = currentMenu == menu.value;
-                  return (
-                    <Button
-                      onClick={routingHandler}
-                      variant={isActive ? "secondary" : "ghost"}
-                      className={cn("w-full justify-start", menu.tourClass)}
-                      key={menu.value}
-                      accessKey={menu.value}
-                    >
-                      {menu.icon(isActive)}
-                      <div
-                        className={cn("mx-2", isActive && "text-violet-700")}
+      <div className="h-full flex flex-col">
+        <div className="space-y-4 py-4">
+          <div className="px-7 py-2">
+            <Link href="/">
+              <CuriExmapleLogo />
+            </Link>
+          </div>
+          {categoryList.map((category) => {
+            return (
+              <div className="px-3 py-2" key={category.value}>
+                <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
+                  {category.label}
+                </h2>
+                <div className="space-y-1">
+                  {category.items.map((menu) => {
+                    const isActive = currentMenu == menu.value;
+                    return (
+                      <Button
+                        onClick={routingHandler}
+                        variant={isActive ? "secondary" : "ghost"}
+                        className={cn("w-full justify-start", menu.tourClass)}
+                        key={menu.value}
+                        accessKey={menu.value}
                       >
-                        {menu.label}
-                      </div>
-                    </Button>
-                  );
-                })}
+                        {menu.icon(isActive)}
+                        <div
+                          className={cn("mx-2", isActive && "text-violet-700")}
+                        >
+                          {menu.label}
+                        </div>
+                      </Button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
-        <SubscriptionNewsletter />
+            );
+          })}
+        </div>
+
+        {/* <div className="flex flex-col gap-2 px-4">
+          <NewsLetterSubscribeButton />
+          <DownloadIntroButton />
+        </div> */}
       </div>
     </div>
   );
@@ -150,12 +158,12 @@ export function HeadBar({ className }: SidebarProps) {
   return (
     <div className={cn("", className)}>
       <div className="py-4 flex items-center">
-        <div className="pl-4 pr-2 sm:px-7 py-2">
+        <div className="pl-4 pr-4 sm:px-7 py-2">
           <Link href="/">
             <CuriExmapleLogo size="xs" />
           </Link>
         </div>
-        <div className="w-full flex gap-0 sm:gap-2">
+        <div className="w-full flex gap-1 sm:gap-2">
           {generalMenuList.map((menu) => {
             const isActive = currentMenu == menu.value;
             return (
@@ -170,7 +178,11 @@ export function HeadBar({ className }: SidebarProps) {
               </Button>
             );
           })}
-          <SubscriptionNewsletter simple={true} />
+          {/* <SubscriptionNewsletter simple={true} /> */}
+          {/* <div className="hidden sm:flex items-center gap-2 w-full sm:min-w-[320px]">
+            <NewsLetterSubscribeButton />
+            <DownloadIntroButton />
+          </div> */}
         </div>
       </div>
     </div>
