@@ -1,0 +1,30 @@
+{
+  "id": 76,
+  "type": "notification",
+  "title": "[버디]님, [입사자]님의 개발 환경 설정을 도와주세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[버디]님, [입사자]님의 개발 환경 설정을 도와주세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "개발 환경 설정은 시작의 첫걸음입니다. [입사자]님에게 필요한 도움을 제공해주세요."
+          }
+        ]
+      }
+    ]
+  }
+}

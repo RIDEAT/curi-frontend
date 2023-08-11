@@ -1,0 +1,14 @@
+{
+  "id": 9,
+  "type": "sequence",
+  "title": "우리 팀과 함께하는 개발 환경 설정",
+  "day-offset": 1,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "learning.json",
+    "tips.json",
+    "finished.json"
+  ]
+}

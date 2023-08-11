@@ -1,0 +1,56 @@
+{
+  "id": 56,
+  "type": "text",
+  "title": "오늘의 To Do 리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "개발 도구 설치 (예: IDE, Git 등)" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "소스 코드 리포지터리 접근 권한 설정" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "개발 서버 접속 테스트" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "데이터베이스 연결 및 테스트" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "API 엔드포인트 확인" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "내부 도큐먼트 리뷰" }]
+          }
+        ]
+      }
+    ]
+  }
+}

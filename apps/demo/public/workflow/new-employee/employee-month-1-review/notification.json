@@ -1,0 +1,27 @@
+{
+  "id": 22,
+  "type": "notification",
+  "title": "1개월 온보딩 review & Quiz 안내",
+  "link-title": "리뷰하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          { "type": "text", "text": "****1개월 온보딩 review & Quiz 안내****" }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "안녕하세요 [입사자]님,\n\n[입사자]님의 첫 달을 마치신 것을 축하드립니다! 지난 한 달 동안의 경험과 학습 과정에 대해 함께 되돌아보고 앞으로의 계획에 대해 이야기하려고 합니다. 여러분의 의견과 피드백은 회사의 성장과 개선을 위해 매우 중요합니다."
+          }
+        ]
+      }
+    ]
+  }
+}

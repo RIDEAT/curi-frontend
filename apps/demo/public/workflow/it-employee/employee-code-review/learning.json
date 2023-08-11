@@ -1,0 +1,41 @@
+{
+  "id": 58,
+  "type": "text",
+  "title": "코드 리뷰와 페어 프로그래밍의 중요성",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [
+          { "type": "text", "text": "코드 리뷰와 페어 프로그래밍의 중요성" }
+        ]
+      },
+      {
+        "type": "orderedList",
+        "attrs": { "order": "decimal" },
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              { "type": "text", "text": "상호 피드백을 통한 지속적인 성장" }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              { "type": "text", "text": "코드 품질 향상과 버그 감소" }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              { "type": "text", "text": "팀원 간의 커뮤니케이션 및 협업 강화" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

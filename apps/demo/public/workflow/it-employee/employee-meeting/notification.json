@@ -1,0 +1,30 @@
+{
+  "id": 44,
+  "type": "notification",
+  "title": "[입사자]님, 팀의 기술 미팅에 참여해보세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[입사자]님, 팀의 기술 미팅에 참여해보세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "안녕하세요 [입사자]님,\n\n기술 미팅과 스프린트는 프로젝트의 방향성과 작업 흐름을 결정하는 중요한 시간입니다. 오늘은 그 과정에 참여하며 팀의 역동성을 경험해보세요."
+          }
+        ]
+      }
+    ]
+  }
+}

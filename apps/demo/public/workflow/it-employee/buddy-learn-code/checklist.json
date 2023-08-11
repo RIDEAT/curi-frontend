@@ -1,0 +1,39 @@
+{
+  "id": 75,
+  "type": "text",
+  "title": "오늘의 To Do 리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "주요 프로젝트 리포지터리 안내" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "코드의 주요 구조 및 모듈 소개" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "문서와 관련 리소스 제공" }]
+          }
+        ]
+      }
+    ]
+  }
+}

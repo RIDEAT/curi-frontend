@@ -1,0 +1,40 @@
+{
+  "id": 35,
+  "type": "text",
+  "title": "오늘의 To Do 리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "할당된 개발 업무 확인" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "개발 환경 및 브랜치 설정" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "코드 작성 및 로컬 테스트" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "코드 리뷰 요청 및 제출" }]
+          }
+        ]
+      }
+    ]
+  }
+}

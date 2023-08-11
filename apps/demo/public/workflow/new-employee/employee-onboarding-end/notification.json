@@ -1,0 +1,25 @@
+{
+  "id": 20,
+  "type": "notification",
+  "title": "온보딩 마무리 안내",
+  "link-title": "리뷰하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [{ "type": "text", "text": "****온보딩 마무리 안내****" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "안녕하세요 [입사자]님,\n\n[입사자]님이 회사에 합류한 지 벌써 2개월이 지났습니다. 이 시간 동안 수많은 경험과 학습을 함께하셨을 것이라 생각합니다. 그동안의 온보딩 과정을 정리하고, 앞으로의 경로에 대해서도 함께 논의하려고 합니다."
+          }
+        ]
+      }
+    ]
+  }
+}

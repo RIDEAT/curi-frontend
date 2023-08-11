@@ -1,0 +1,8 @@
+{
+  "id": 5,
+  "type": "sequence",
+  "title": "한 달 평가 및 피드백 제공",
+  "day-offset": 30,
+  "role": "buddy",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

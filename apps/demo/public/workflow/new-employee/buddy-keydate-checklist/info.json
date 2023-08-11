@@ -1,0 +1,8 @@
+{
+  "id": 11,
+  "type": "sequence",
+  "title": "버디 입사 체크리스트",
+  "day-offset": 0,
+  "role": "buddy",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

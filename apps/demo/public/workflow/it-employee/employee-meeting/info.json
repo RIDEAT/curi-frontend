@@ -1,0 +1,13 @@
+{
+  "id": 11,
+  "type": "sequence",
+  "title": "기술적 논의의 중요성",
+  "day-offset": 4,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "learning.json",
+    "finished.json"
+  ]
+}

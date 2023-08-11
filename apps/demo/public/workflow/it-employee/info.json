@@ -1,0 +1,22 @@
+{
+  "id": 2,
+  "type": "workflow",
+  "title": "신입 IT 직무 워크플로우",
+  "desc": "IT 직무 신입사원의 워크플로우 입니다.",
+  "sequences": [
+    "buddy-install-env",
+    "buddy-learn-code",
+    "buddy-code-review",
+    "buddy-meeting",
+    "buddy-write-code",
+    "buddy-weekly-review",
+    "buddy-month-1-review",
+    "employee-install-env",
+    "employee-learn-code",
+    "employee-code-review",
+    "employee-meeting",
+    "employee-write-code",
+    "employee-weekly-review",
+    "employee-month-1-review"
+  ]
+}

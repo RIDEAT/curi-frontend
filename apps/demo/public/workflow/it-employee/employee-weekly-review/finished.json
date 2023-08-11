@@ -1,0 +1,24 @@
+{
+  "id": 38,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "오늘의 코드 리뷰를 통해 팀의 코드 품질을 함께 높이는 경험을 하셨습니다. 지속적인 피드백은 우리 팀의 성장을 위한 중요한 과정입니다!"
+          }
+        ]
+      }
+    ]
+  }
+}

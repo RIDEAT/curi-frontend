@@ -1,0 +1,24 @@
+{
+  "id": 74,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[버디]님, [입사자]님의 온보딩 과정에 큰 도움을 주셔서 감사합니다! 함께 팀의 성장을 위해 노력해 나갑시다!"
+          }
+        ]
+      }
+    ]
+  }
+}

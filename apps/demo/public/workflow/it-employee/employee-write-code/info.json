@@ -1,0 +1,13 @@
+{
+  "id": 14,
+  "type": "sequence",
+  "title": "첫 코드 작성의 시작",
+  "day-offset": 5,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "learning.json",
+    "finished.json"
+  ]
+}

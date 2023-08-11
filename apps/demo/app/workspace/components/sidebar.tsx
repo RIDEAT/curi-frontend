@@ -164,6 +164,7 @@ export function HeadBar({ className }: SidebarProps) {
                 variant={isActive ? "secondary" : "ghost"}
                 key={menu.value}
                 accessKey={menu.value}
+                className={menu.tourClass}
               >
                 {menu.icon(isActive)}
               </Button>

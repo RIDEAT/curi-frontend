@@ -1,0 +1,24 @@
+{
+  "id": 25,
+  "type": "text",
+  "title": "[팀]이 일하는 방법에 대해 소개할게요!",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [
+          {
+            "type": "text",
+            "text": "**[팀]이 일하는 방법에 대해 소개할게요!**"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "알하는 방법 소개 콘텐츠" }]
+      }
+    ]
+  }
+}

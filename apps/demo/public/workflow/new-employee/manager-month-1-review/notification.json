@@ -1,0 +1,30 @@
+{
+  "id": 10,
+  "type": "notification",
+  "title": "[입사자]님의 1개월 온보딩 리뷰 안내",
+  "link-title": "리뷰하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[입사자]님의 1개월 온보딩 리뷰 안내****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "안녕하세요 [매니저님],\n\n[입사자]님이 입사한 지 벌써 한 달이 되었습니다. 이 중요한 시기에 매니저님의 지원과 피드백은 [입사자]님의 성장과 회사에의 적응에 큰 도움을 줄 것입니다."
+          }
+        ]
+      }
+    ]
+  }
+}

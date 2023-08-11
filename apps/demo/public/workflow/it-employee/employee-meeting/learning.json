@@ -1,0 +1,48 @@
+{
+  "id": 45,
+  "type": "text",
+  "title": "[팀]의 미팅 및 스프린트 문화",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "[팀]의 미팅 및 스프린트 문화" }]
+      },
+      {
+        "type": "orderedList",
+        "attrs": { "order": "decimal" },
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "개방성: 모든 의견이 중요하며, 존중받습니다."
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "협업: 팀원 모두가 함께 문제를 해결하고, 성장합니다."
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "지속적 피드백: 개선의 여지를 찾고, 함께 발전합니다."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

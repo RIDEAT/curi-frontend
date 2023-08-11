@@ -1,0 +1,30 @@
+{
+  "id": 79,
+  "type": "notification",
+  "title": "[버디]님, [입사자]님과 함께 코드 리뷰 및 페어 프로그래밍을 진행해주세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[버디]님, [입사자]님과 함께 코드 리뷰 및 페어 프로그래밍을 진행해주세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "코드 리뷰와 페어 프로그래밍은 팀원 간의 기술적 소통을 강화하는 좋은 방법입니다."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": 13,
+  "type": "sequence",
+  "title": "주간 코드 리뷰 세션",
+  "day-offset": 6,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "learning.json",
+    "finished.json"
+  ]
+}

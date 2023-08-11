@@ -1,0 +1,14 @@
+{
+  "id": 10,
+  "type": "sequence",
+  "title": "[팀]에 오신 것을 환영합니다!",
+  "day-offset": 0,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "introduce-team.json",
+    "introduce-work.json",
+    "finished.json"
+  ]
+}

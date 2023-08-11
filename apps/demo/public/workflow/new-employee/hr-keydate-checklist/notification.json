@@ -1,0 +1,45 @@
+{
+  "id": 15,
+  "type": "notification",
+  "title": "새로운 팀원을 환영해주세요!",
+  "link-title": "체크리스트 확인하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [
+          { "type": "text", "text": "****새로운 팀원을 환영해주세요!****" }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "안녕하세요 [HR] 님,"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "신규 팀원 [입사자] 님의 첫 입사 날입니다! [입사자] 님은 오늘부터 우리 팀에 합류하게 되었습니다. 이를 통해 우리 팀은 한층 더 다양하고 강력한 팀이 될 수 있을 것입니다."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "오늘 수행해야 할 몇 가지 주요 항목을 확인해주세요."
+          }
+        ]
+      }
+    ]
+  }
+}

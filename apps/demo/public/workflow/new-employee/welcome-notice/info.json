@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "type": "sequence",
+  "title": "합격 축하 및 안내 사항",
+  "day-offset": -7,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "introduce.json",
+    "checklist.json",
+    "finished.json"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": 4,
+  "type": "sequence",
+  "title": "기술 미팅 및 스프린트 참여 도움",
+  "day-offset": 4,
+  "role": "buddy",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

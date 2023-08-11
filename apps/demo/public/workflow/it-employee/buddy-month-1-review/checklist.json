@@ -1,0 +1,44 @@
+{
+  "id": 69,
+  "type": "text",
+  "title": "오늘의 To Do 리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "[입사자]님의 업무 성과 평가" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              {
+                "type": "text",
+                "text": "긍정적인 점 및 개선할 부분 피드백 제공"
+              }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "앞으로의 목표 및 계획 소개" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

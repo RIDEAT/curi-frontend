@@ -1,0 +1,42 @@
+{
+  "id": 49,
+  "type": "text",
+  "title": "[팀]의 코드 구조와 스타일 가이드",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [
+          { "type": "text", "text": "[팀]의 코드 구조와 스타일 가이드" }
+        ]
+      },
+      {
+        "type": "orderedList",
+        "attrs": { "order": "decimal" },
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              { "type": "text", "text": "주요 코드 구조 설명: [설명 내용]" }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "[팀]의 코드 스타일 가이드: [가이드 내용]"
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [{ "type": "text", "text": "문서화 방법: [방법 소개]" }]
+          }
+        ]
+      }
+    ]
+  }
+}

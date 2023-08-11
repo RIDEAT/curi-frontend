@@ -1,0 +1,46 @@
+{
+  "id": 29,
+  "type": "notification",
+  "title": "새로운 팀원을 환영해주세요!",
+  "link-title": "체크리스트 확인하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          { "type": "text", "text": "****새로운 팀원을 환영해주세요!****" }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "안녕하세요 [버디] 님,\n\n신규 팀원 [입사자] 님의 첫 입사 날입니다! [입사자] 님은 오늘부터 우리 팀에 합류하게 되었습니다. 이를 통해 우리 팀은 한층 더 다양하고 강력한 팀이 될 수 있을 것입니다."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[버디] 님께서는 [입사자] 님이 [팀]에서의 성공을 위해 필요한 모든 지원을 제공해주시는 것이 중요합니다."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": { "level": 3 },
+        "content": [
+          {
+            "type": "text",
+            "text": "오늘 수행해야 할 몇 가지 주요 항목을 확인해주세요."
+          }
+        ]
+      }
+    ]
+  }
+}

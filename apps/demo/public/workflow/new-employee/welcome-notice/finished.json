@@ -1,0 +1,57 @@
+{
+  "id": 3,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "**Done**" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[입사자]님, 입사 준비가 모두 완료되었습니다!\n\n이제 [날짜]부터 [팀]의 일원으로서 새로운 여정이 시작됩니다. 원활한 입사 과정을 위해, [시간]까지 출근해주시기 바랍니다. 입사 준비 과정 중에 궁금하셨던 사항이나 추가로 필요한 도움이 있으시다면 언제든지 저에게 연락주시기 바랍니다. 저희는 [입사자]님의 원활한 직장 생활을 위해 항상 도와드릴 준비가 되어 있습니다."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[팀]에 오신 것을 다시 한 번 환영합니다. 함께 새로운 도전을 시작하게 되어 기쁘며, 이후의 여정이 흥미진진하게 펼쳐질 것을 기대합니다."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "다시 한번, 환영합니다 [입사자 이름]님!" }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "감사합니다," }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          { "type": "text", "text": "[HR매니저의 이름]/[HR매니저의 직책]" }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "[HR매니저의 이메일]" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [{ "type": "text", "text": "[HR매니저의 연락처]" }]
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": 63,
+  "type": "text",
+  "title": "오늘의 To Do 리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "할당된 업무 및 요구사항 확인 지원" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "코드 스타일 및 팀 내 규칙 안내" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "진행 상황 및 질문 수용" }]
+          }
+        ]
+      }
+    ]
+  }
+}
