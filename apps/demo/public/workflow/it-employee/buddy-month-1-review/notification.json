@@ -1,0 +1,30 @@
+{
+  "id": 67,
+  "type": "notification",
+  "title": "[버디]님, [입사자]님의 한 달 평가 및 피드백을 제공해주세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[버디]님, [입사자]님의 한 달 평가 및 피드백을 제공해주세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "첫 달을 마무리하며, [입사자]님의 성장과 함께한 한 달을 되돌아보며 피드백을 제공해주세요."
+          }
+        ]
+      }
+    ]
+  }
+}

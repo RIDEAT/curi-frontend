@@ -1,0 +1,30 @@
+{
+  "id": 73,
+  "type": "notification",
+  "title": "[버디]님, [입사자]님에게 코드와 프로젝트 구조를 안내해주세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[버디]님, [입사자]님에게 코드와 프로젝트 구조를 안내해주세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "오늘은 [입사자]님에게 프로젝트의 기본 구조와 중요한 코드 부분을 안내하는 날입니다."
+          }
+        ]
+      }
+    ]
+  }
+}

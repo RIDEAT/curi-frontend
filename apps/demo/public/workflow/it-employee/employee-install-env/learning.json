@@ -1,0 +1,26 @@
+{
+  "id": 54,
+  "type": "text",
+  "title": "[팀]이 사용하는 개발 도구 및 플랫폼",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [
+          { "type": "text", "text": "[팀]이 사용하는 개발 도구 및 플랫폼" }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[팀의 주요 도구 및 플랫폼 소개]"
+          }
+        ]
+      }
+    ]
+  }
+}

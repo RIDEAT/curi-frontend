@@ -1,0 +1,44 @@
+{
+  "id": 78,
+  "type": "text",
+  "title": "오늘의 To Do 리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              {
+                "type": "text",
+                "text": "필요한 소프트웨어 및 도구 리스트 확인"
+              }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "설정 관련 문제 해결에 도움 주기" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "팀 내부 개발 환경 및 가이드라인 소개" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

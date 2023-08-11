@@ -1,5 +1,7 @@
-import React from "react";
-import JoyRide from "react-joyride";
+import { useAtom } from "jotai";
+import React, { useEffect } from "react";
+import JoyRide, { STATUS } from "react-joyride";
+import { editorTourAtom } from "../../lib/context/tour";
 
 const TOUR_STEPS = [
   {
@@ -29,13 +31,25 @@ const TOUR_STEPS = [
 ];
 
 const EditorTour = () => {
+  const [editorTour, setEditorTour] = useAtom(editorTourAtom);
+
+  const handleJoyrideCallback = (data) => {
+    const { action, index, status, type } = data;
+
+    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      setEditorTour(false);
+    }
+  };
+
   return (
     <>
       <JoyRide
+        callback={handleJoyrideCallback}
         steps={TOUR_STEPS}
         continuous={true}
         showSkipButton={false}
         showProgress={false}
+        run={editorTour}
         styles={{
           tooltipContainer: {
             textAlign: "left",

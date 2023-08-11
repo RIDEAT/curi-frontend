@@ -1,0 +1,8 @@
+{
+  "id": 8,
+  "type": "sequence",
+  "title": "온보딩 마무리",
+  "day-offset": 56,
+  "role": "employee",
+  "modules": ["notification.json", "finished.json"]
+}

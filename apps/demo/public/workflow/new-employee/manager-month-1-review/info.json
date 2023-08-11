@@ -1,0 +1,8 @@
+{
+  "id": 4,
+  "type": "sequence",
+  "title": "한달차 리뷰",
+  "day-offset": 28,
+  "role": "direct-manager",
+  "modules": ["notification.json", "finished.json"]
+}

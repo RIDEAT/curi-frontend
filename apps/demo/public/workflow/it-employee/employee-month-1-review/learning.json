@@ -1,0 +1,48 @@
+{
+  "id": 41,
+  "type": "text",
+  "title": "1개월의 중요성",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "1개월의 중요성" }]
+      },
+      {
+        "type": "orderedList",
+        "attrs": { "order": "decimal" },
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "초기 평가를 통한 방향성 설정: 당신의 강점과 개선 필요한 부분을 파악합니다."
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "팀과의 연결 강화: 팀과의 협업을 더욱 깊게 이해하고, 미래의 방향을 함께 설정합니다."
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "지속적 성장의 기회: 당신의 성장은 [팀]의 성장입니다. 함께 성장하는 방향을 설정해봅니다."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

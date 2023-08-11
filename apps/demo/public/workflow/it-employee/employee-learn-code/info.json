@@ -1,0 +1,13 @@
+{
+  "id": 10,
+  "type": "sequence",
+  "title": "소스 코드의 세계로!",
+  "day-offset": 2,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "learning.json",
+    "finished.json"
+  ]
+}

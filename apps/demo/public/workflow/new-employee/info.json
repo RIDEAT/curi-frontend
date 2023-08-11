@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "type": "workflow",
+  "title": "신입 공통 워크플로우",
+  "desc": "모든 신입사원의 공통 워크플로우 입니다.",
+  "sequences": [
+    "manager-onboarding-checklist",
+    "manager-week-1-review",
+    "manager-month-1-review",
+    "hr-onboarding-checklist",
+    "hr-keydate-checklist",
+    "buddy-keydate-checklist",
+    "welcome-notice",
+    "employee-keydate",
+    "employee-week-1-review",
+    "employee-month-1-review",
+    "employee-onboarding-end"
+  ]
+}

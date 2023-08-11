@@ -1,0 +1,8 @@
+{
+  "id": 2,
+  "type": "sequence",
+  "title": "개발 환경 설정 도움",
+  "day-offset": 1,
+  "role": "buddy",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

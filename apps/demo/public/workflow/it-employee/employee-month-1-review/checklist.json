@@ -1,0 +1,52 @@
+{
+  "id": 43,
+  "type": "text",
+  "title": "오늘의 To Do 리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              {
+                "type": "text",
+                "text": "1개월 동안의 활동 및 기술 평가 결과 확인"
+              }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "팀과의 1:1 피드백 시간" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "개인 성장 및 목표 설정 회의 참여" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              {
+                "type": "text",
+                "text": "[팀]의 중장기 비전 및 기술 로드맵 소개"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

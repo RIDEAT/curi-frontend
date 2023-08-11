@@ -1,0 +1,36 @@
+{
+  "id": 18,
+  "type": "notification",
+  "title": "1주차 온보딩 review & Quiz 안내",
+  "link-title": "리뷰하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [
+          { "type": "text", "text": "1주차 온보딩 review & Quiz 안내" }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "안녕하세요 [입사자]님,"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[입사자]님의 첫 주를 마치신 것을 축하드립니다! 함께한 한 주 동안 어떠셨는지, 그리고 앞으로 어떻게 진행될지에 대한 리뷰를 진행하려고 합니다. 여러분의 의견과 피드백은 팀의 성장을 위해 매우 중요하므로, 솔직하게 나누어주시기 바랍니다."
+          }
+        ]
+      }
+    ]
+  }
+}

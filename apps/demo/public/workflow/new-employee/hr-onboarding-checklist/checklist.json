@@ -1,0 +1,75 @@
+{
+  "id": 14,
+  "type": "text",
+  "title": "HR 온보딩 체크리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "HR 온보딩 체크리스트" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "신규 팀원 [입사자 이름]이 우리 팀에 합류하게 되어 매우 기쁘게 생각합니다. 그러나 그/그녀가 팀의 일원으로서 원활하게 업무를 수행할 수 있도록 돕기 위해, 첫 주 동안 온보딩 체크리스트를 준수하는 것이 중요합니다."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "다음은 [입사자 이름]의 온보딩을 지원하기 위한 주요 체크리스트입니다:"
+          }
+        ]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "웰컴 키트 및 장비 준비" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              { "type": "text", "text": "근로계약서 및 보안 유지 서약서 준비" }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "자리 지정" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "사원증 준비" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "회사 이메일 계정 생성" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "캘린더 초대" }]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [{ "type": "text", "text": "업무 툴 초대" }]
+          }
+        ]
+      }
+    ]
+  }
+}

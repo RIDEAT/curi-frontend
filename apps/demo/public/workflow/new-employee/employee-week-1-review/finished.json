@@ -1,0 +1,24 @@
+{
+  "id": 19,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[입사자]님, 우리는 [입사자]님의 성장과 발전을 위해 항상 옆에서 함께하고 있습니다. 여러분의 의견과 피드백을 통해 더 나은 환경을 만들어 나가고자 합니다. 감사합니다!"
+          }
+        ]
+      }
+    ]
+  }
+}

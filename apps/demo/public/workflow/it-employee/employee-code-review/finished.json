@@ -1,0 +1,24 @@
+{
+  "id": 59,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "오늘의 세션을 통해 팀의 코드 문화와 직접 개발하는 경험을 얻으셨기를 바랍니다. 궁금한 점이나 피드백은 언제든지 공유해주세요!"
+          }
+        ]
+      }
+    ]
+  }
+}

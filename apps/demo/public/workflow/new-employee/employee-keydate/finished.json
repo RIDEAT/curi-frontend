@@ -1,0 +1,24 @@
+{
+  "id": 27,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "온보딩 프로세스가 순조롭게 진행되길 바라며, [입사자]님의 첫날이 기분 좋은 날이 되기를 바랍니다. 다른 질문이나 도움이 필요하다면 언제든지 알려주세요!"
+          }
+        ]
+      }
+    ]
+  }
+}

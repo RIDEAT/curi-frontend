@@ -1,0 +1,8 @@
+{
+  "id": 7,
+  "type": "sequence",
+  "title": "코드 작성 지원",
+  "day-offset": 5,
+  "role": "buddy",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

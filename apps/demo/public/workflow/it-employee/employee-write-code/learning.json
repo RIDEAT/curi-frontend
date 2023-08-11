@@ -1,0 +1,48 @@
+{
+  "id": 33,
+  "type": "text",
+  "title": "[팀]의 개발 문화",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "[팀]의 개발 문화" }]
+      },
+      {
+        "type": "orderedList",
+        "attrs": { "order": "decimal" },
+        "content": [
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "품질 중심: 우리는 코드의 품질을 중요시하며, 항상 최선의 결과물을 추구합니다."
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "협업과 피드백: 서로의 코드를 리뷰하며 함께 성장하고, 지속적으로 피드백을 주고받습니다."
+              }
+            ]
+          },
+          {
+            "type": "listItem",
+            "content": [
+              {
+                "type": "text",
+                "text": "지속적 배움: 기술의 변화와 성장을 위해 항상 새로운 것을 배우려 노력합니다."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

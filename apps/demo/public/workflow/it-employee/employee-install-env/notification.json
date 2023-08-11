@@ -1,0 +1,30 @@
+{
+  "id": 53,
+  "type": "notification",
+  "title": "[입사자]님, 개발 환경을 시작해보세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[입사자]님, 개발 환경을 시작해보세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "오늘은 [입사자]님의 개발 환경 구축을 위한 날입니다. 제대로된 개발 환경이 구축되어 있으면 작업 효율이 크게 향상됩니다. 다양한 도구와 리소스를 활용하여 효과적으로 작업을 진행해봅시다."
+          }
+        ]
+      }
+    ]
+  }
+}

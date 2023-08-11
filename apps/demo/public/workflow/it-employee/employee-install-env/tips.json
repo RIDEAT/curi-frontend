@@ -1,0 +1,33 @@
+{
+  "id": 52,
+  "type": "text",
+  "title": "효과적인 개발 환경 구축 팁!",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "효과적인 개발 환경 구축 팁!" }]
+      },
+      {
+        "type": "orderedList",
+        "attrs": { "order": "decimal" },
+        "content": [
+          {
+            "type": "listItem",
+            "content": [{ "type": "text", "text": "[팁 내용 1]" }]
+          },
+          {
+            "type": "listItem",
+            "content": [{ "type": "text", "text": "[팁 내용 2]" }]
+          },
+          {
+            "type": "listItem",
+            "content": [{ "type": "text", "text": "[팁 내용 3]" }]
+          }
+        ]
+      }
+    ]
+  }
+}

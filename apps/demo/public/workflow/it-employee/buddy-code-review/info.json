@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "type": "sequence",
+  "title": "코드 리뷰 및 페어 프로그래밍 세션",
+  "day-offset": 3,
+  "role": "buddy",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

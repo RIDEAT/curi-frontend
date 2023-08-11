@@ -1,0 +1,30 @@
+{
+  "id": 57,
+  "type": "notification",
+  "title": "[입사자]님, 코드 리뷰를 통해 성장해보세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[입사자]님, 코드 리뷰를 통해 성장해보세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "오늘은 코드 리뷰와 페어 프로그래밍 세션에 참여하게 됩니다. 이 과정을 통해 팀원들과 함께 하는 개발의 묘미를 느껴보세요!"
+          }
+        ]
+      }
+    ]
+  }
+}

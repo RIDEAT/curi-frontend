@@ -1,0 +1,24 @@
+{
+  "id": 21,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[입사자]님, 지난 2개월 동안의 온보딩을 함께한 모든 순간들에 감사드립니다. 회사는 [입사자]님의 지속적인 성장과 발전을 응원하며, 그 과정에서 최선의 지원을 제공할 준비가 되어 있습니다. 앞으로도 우리는 함께 훌륭한 결과를 만들어나갈 것을 믿습니다. 감사합니다!"
+          }
+        ]
+      }
+    ]
+  }
+}

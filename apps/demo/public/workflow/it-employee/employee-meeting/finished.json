@@ -1,0 +1,24 @@
+{
+  "id": 46,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "미팅과 스프린트를 통해 팀의 작업 흐름과 커뮤니케이션 스타일을 경험하셨습니다. 생각하거나 제안하고 싶은 점이 있다면 팀과 공유해주세요!"
+          }
+        ]
+      }
+    ]
+  }
+}

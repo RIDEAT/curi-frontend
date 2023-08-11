@@ -1,0 +1,8 @@
+{
+  "id": 6,
+  "type": "sequence",
+  "title": "주간 코드 리뷰 지원",
+  "day-offset": 6,
+  "role": "buddy",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

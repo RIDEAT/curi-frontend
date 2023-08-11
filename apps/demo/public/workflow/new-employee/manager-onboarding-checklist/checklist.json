@@ -1,0 +1,95 @@
+{
+  "id": 9,
+  "type": "text",
+  "title": "온보딩 체크리스트",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "**매니저 온보딩 체크리스트**" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "신규 팀원 [입사자 이름]이 우리 팀에 합류하게 되어 매우 기쁘게 생각합니다. 그러나 그/그녀가 팀의 일원으로서 원활하게 업무를 수행할 수 있도록 돕기 위해, 첫 주 동안 온보딩 체크리스트를 준수하는 것이 중요합니다."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "다음은 [입사자 이름]의 온보딩을 지원하기 위한 주요 체크리스트입니다:"
+          }
+        ]
+      },
+      {
+        "type": "taskList",
+        "content": [
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  { "type": "text", "text": "**환영의 글**" },
+                  {
+                    "type": "text",
+                    "text": "\n입사 첫날을 시작으로, [입사자] 님에게 따뜻한 환영의 말을 전해주세요. 이는 팀에 속해 있다고 느끼게 하고, 조직 문화에 빠르게 적응하게 돕습니다."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  { "type": "text", "text": "**팀과의 만남 조정**" },
+                  {
+                    "type": "text",
+                    "text": "\n[입사자] 님과 팀의 다른 멤버들 사이의 커피 채팅을 조정하거나, 비공식적인 식사 회의를 계획해보세요. 이는 팀 구성원 간의 친밀감을 높이는 데 도움이 됩니다."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "taskItem",
+            "attrs": { "checked": false },
+            "content": [
+              {
+                "type": "paragraph",
+                "content": [
+                  { "type": "text", "text": "**목표 설정**" },
+                  {
+                    "type": "text",
+                    "text": "\n[입사자] 님의 첫 주와 첫 달 동안의 주요 업무 목표를 설정하세요. 이는 어떤 결과를 달성하기를 기대하는지 명확하게 이해하도록 돕습니다."
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "이 체크리스트는 [입사자] 님이 성공적으로 팀에 통합되고 [팀]에서의 경험을 최대한 활용할 수 있도록 돕는 데 중요합니다. 이 과정에서 필요한 도움이 있다면 언제든지 HR팀에 연락해주시기 바랍니다."
+          }
+        ]
+      }
+    ]
+  }
+}

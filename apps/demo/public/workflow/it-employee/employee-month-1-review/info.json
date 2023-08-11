@@ -1,0 +1,13 @@
+{
+  "id": 12,
+  "type": "sequence",
+  "title": "1개월 평가 및 피드백 세션",
+  "day-offset": 30,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "learning.json",
+    "finished.json"
+  ]
+}

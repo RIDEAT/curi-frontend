@@ -1,0 +1,30 @@
+{
+  "id": 61,
+  "type": "notification",
+  "title": "[버디]님, [입사자]님의 첫 코드 작성을 지원해주세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[버디]님, [입사자]님의 첫 코드 작성을 지원해주세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[입사자]님이 첫 코드를 작성하게 될 날입니다. 필요한 도움과 지원을 제공해주세요."
+          }
+        ]
+      }
+    ]
+  }
+}

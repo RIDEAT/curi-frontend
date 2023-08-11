@@ -1,0 +1,8 @@
+{
+  "id": 9,
+  "type": "sequence",
+  "title": "한달차 Review & Quiz",
+  "day-offset": 28,
+  "role": "employee",
+  "modules": ["notification.json", "finished.json"]
+}

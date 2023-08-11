@@ -1,0 +1,8 @@
+{
+  "id": 3,
+  "type": "sequence",
+  "title": "매니저 온보딩 체크리스트",
+  "day-offset": -5,
+  "role": "direct-manager",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

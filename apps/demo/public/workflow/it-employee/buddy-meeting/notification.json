@@ -1,0 +1,30 @@
+{
+  "id": 70,
+  "type": "notification",
+  "title": "[버디]님, [입사자]님을 기술 미팅 및 스프린트에 참여시켜주세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[버디]님, [입사자]님을 기술 미팅 및 스프린트에 참여시켜주세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[입사자]님이 팀의 기술 미팅 및 스프린트에 참여할 수 있도록 도와주세요."
+          }
+        ]
+      }
+    ]
+  }
+}

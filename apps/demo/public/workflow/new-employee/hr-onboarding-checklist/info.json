@@ -1,0 +1,8 @@
+{
+  "id": 5,
+  "type": "sequence",
+  "title": "HR 온보딩 체크리스트",
+  "day-offset": -7,
+  "role": "hr-manager",
+  "modules": ["notification.json", "checklist.json", "finished.json"]
+}

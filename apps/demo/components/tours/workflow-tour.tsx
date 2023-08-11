@@ -1,5 +1,7 @@
 import React from "react";
-import JoyRide from "react-joyride";
+import JoyRide, { STATUS } from "react-joyride";
+import { workflowTourAtom } from "../../lib/context/tour";
+import { useAtom } from "jotai";
 
 const TOUR_STEPS = [
   {
@@ -22,7 +24,7 @@ const TOUR_STEPS = [
         <p>워크플로우의 이름은 언제든지 바꿀 수 있어요!</p>
       </div>
     ),
-    disableBeacon: true,
+    // disableBeacon: true,
   },
   {
     title: <p>📝 타임라인 알아보기</p>,
@@ -65,13 +67,23 @@ const TOUR_STEPS = [
 ];
 
 const WorkflowTour = () => {
+  const [workflowTour, setWorkflowTour] = useAtom(workflowTourAtom);
+  const handleJoyrideCallback = (data) => {
+    const { action, index, status, type } = data;
+
+    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+      setWorkflowTour(false);
+    }
+  };
   return (
     <>
       <JoyRide
+        callback={handleJoyrideCallback}
         steps={TOUR_STEPS}
         continuous={true}
         showSkipButton={false}
         showProgress={false}
+        run={workflowTour}
         styles={{
           tooltipContainer: {
             textAlign: "left",

@@ -1,0 +1,24 @@
+{
+  "id": 6,
+  "type": "finished",
+  "title": "Done",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 2 },
+        "content": [{ "type": "text", "text": "Done" }]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[매니저님], [입사자]님의 성공적인 통합과 성장은 매니저님의 리더십과 지원에 크게 의존하게 됩니다. 지속적인 관심과 피드백을 통해 [입사자]님의 초반 경험을 더욱 뜻깊게 만들어 주실 것을 바랍니다. 감사합니다!"
+          }
+        ]
+      }
+    ]
+  }
+}

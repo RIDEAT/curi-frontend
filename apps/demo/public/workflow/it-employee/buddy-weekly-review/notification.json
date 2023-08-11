@@ -1,0 +1,30 @@
+{
+  "id": 64,
+  "type": "notification",
+  "title": "[버디]님, [입사자]님의 주간 코드 리뷰를 진행해주세요!",
+  "link-title": "체크하기",
+  "contents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "heading",
+        "attrs": { "level": 4 },
+        "content": [
+          {
+            "type": "text",
+            "text": "****[버디]님, [입사자]님의 주간 코드 리뷰를 진행해주세요!****"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "[입사자]님이 지난 주 동안 작성한 코드를 리뷰하고 피드백을 제공해주세요."
+          }
+        ]
+      }
+    ]
+  }
+}

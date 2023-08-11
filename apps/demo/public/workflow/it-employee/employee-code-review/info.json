@@ -1,0 +1,13 @@
+{
+  "id": 8,
+  "type": "sequence",
+  "title": "코드 리뷰와 함께 성장하기",
+  "day-offset": 3,
+  "role": "employee",
+  "modules": [
+    "notification.json",
+    "checklist.json",
+    "learning.json",
+    "finished.json"
+  ]
+}
