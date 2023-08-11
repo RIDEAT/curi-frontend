@@ -53,7 +53,6 @@ function EmailForm() {
       },
       body: JSON.stringify(data),
     });
-    console.log(response.status);
 
     router.replace("/reservation/done");
   }

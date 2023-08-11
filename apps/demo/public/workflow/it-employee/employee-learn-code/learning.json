@@ -9,7 +9,11 @@
         "type": "heading",
         "attrs": { "level": 2 },
         "content": [
-          { "type": "text", "text": "[팀]의 코드 구조와 스타일 가이드" }
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "[팀]의 코드 구조와 스타일 가이드"
+          }
         ]
       },
       {

@@ -8,6 +8,7 @@
       {
         "type": "heading",
         "attrs": { "level": 2 },
+        "marks": [{ "type": "bold" }],
         "content": [{ "type": "text", "text": "오늘의 To Do 리스트" }]
       },
       {

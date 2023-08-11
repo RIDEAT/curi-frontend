@@ -9,7 +9,11 @@
         "type": "heading",
         "attrs": { "level": 2 },
         "content": [
-          { "type": "text", "text": "[팀]이 사용하는 개발 도구 및 플랫폼" }
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "[팀]이 사용하는 개발 도구 및 플랫폼"
+          }
         ]
       },
       {

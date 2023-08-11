@@ -9,7 +9,11 @@
         "type": "heading",
         "attrs": { "level": 2 },
         "content": [
-          { "type": "text", "text": "코드 리뷰와 페어 프로그래밍의 중요성" }
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "코드 리뷰와 페어 프로그래밍의 중요성"
+          }
         ]
       },
       {

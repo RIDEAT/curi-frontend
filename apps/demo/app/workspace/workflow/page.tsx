@@ -21,14 +21,16 @@ const WorkflowTour = dynamic(
 );
 
 import { loadWorkflowData } from "../../../lib/function/loadWorkflowData";
+import { Button } from "ui";
 
 export default function Workflow() {
   // const timelineData = useAtomValue(timelineDataAtom);
   const [workflowData, setWorkflowData] = useState([]);
+  const [currentWorkflowId, setCurrentWorkflowId] = useState(0);
 
   const loadWorkflow = async () => {
     const workflowData = await loadWorkflowData();
-    setWorkflowData(workflowData[0].timeline);
+    setWorkflowData(workflowData);
   };
 
   useEffect(() => {
@@ -38,13 +40,27 @@ export default function Workflow() {
   return (
     <>
       <MainPageLayout
-        title="신입 공통 워크플로우"
-        description="모든 신입사원의 공통 워크플로우입니다."
+        title={workflowData[currentWorkflowId]?.title || "Workflow"}
+        description={workflowData[currentWorkflowId]?.desc || "Workflow"}
         bgColor="bg-stone-100"
       >
         <WorkflowTour />
         <div className="hidden sm:block">
-          <WorkflowTimeline timelineData={workflowData} />
+          <div className="pl-8">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setCurrentWorkflowId(
+                  (currentWorkflowId + 1) % workflowData.length
+                );
+              }}
+            >
+              다른 워크플로우 보기
+            </Button>
+          </div>
+          <WorkflowTimeline
+            timelineData={workflowData[currentWorkflowId]?.timeline || []}
+          />
         </div>
         <div className="w-screen block sm:hidden font-semibold text-stone-600 p-4">
           <p>모바일 환경에서는 예시 이미지만 확인할 수 있습니다.</p>

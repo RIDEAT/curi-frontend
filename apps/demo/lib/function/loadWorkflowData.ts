@@ -71,8 +71,6 @@ const loadWorkflowData = async () => {
       workflowData[index1]["timeline"].push(timeline);
   });
 
-  console.log(workflowData);
-
   return workflowData;
 };
 

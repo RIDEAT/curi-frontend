@@ -73,7 +73,7 @@ function ModuleContent({ module }: { module: IModuleData }) {
       <EditorTour />
       <SheetHeader className="flex flex-row justify-between">
         <div className="flex flex-col gap-2">
-          <SheetTitle className=" text-xl">{module.title}</SheetTitle>
+          <SheetTitle className="text-xl">{module.title}</SheetTitle>
           <SheetDescription>
             아래 에디터에서 모듈을 편집할 수 있습니다.
           </SheetDescription>

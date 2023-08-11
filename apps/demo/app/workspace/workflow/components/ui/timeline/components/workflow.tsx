@@ -6,7 +6,6 @@ export interface WorkflowTimelineProps {
 }
 
 function WorkflowTimeline({ timelineData }: WorkflowTimelineProps) {
-  console.log("timelineData: ", timelineData);
   return (
     <>
       <div className="w-full h-screen overflow-scroll scrollbar-hide">

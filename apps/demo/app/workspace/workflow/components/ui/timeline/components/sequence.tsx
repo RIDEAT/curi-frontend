@@ -39,17 +39,12 @@ export interface SequenceBoxProps {
 }
 
 function SequenceBox({ title, stakeholder, sequenceData }: SequenceBoxProps) {
-  console.log("sequenceData: ", sequenceData);
-
   const [open, setOpen] = useState(false);
   const [currentId, setCurrentId] = useState(sequenceData[0].id);
-  console.log("currentId: ", currentId);
 
   const getModuleById = (id: string) => {
-    console.log("id: ", id);
-    console.log("sequenceData info: ", sequenceData);
     const resultModule = sequenceData.find((data) => data.id == id);
-    console.log("resultModule: ", resultModule);
+
     return resultModule;
   };
 
@@ -58,7 +53,7 @@ function SequenceBox({ title, stakeholder, sequenceData }: SequenceBoxProps) {
       <Sheet open={open} onOpenChange={setOpen}>
         <div className="w-[320px] h-[280px] bg-white rounded-lg shadow-md p-1">
           <div className="flex justify-between items-center h-[50px] p-4">
-            <div className="text-lg font-medium">{title}</div>
+            <div className="text-base font-medium">{title}</div>
             {getStakeholderBadge(stakeholder)}
             {/* <div className="text-xs font-medium bg-yellow-200 p-1 pl-2 pr-2 rounded-md">
                 신입
