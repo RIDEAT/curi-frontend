@@ -8,7 +8,13 @@
       {
         "type": "heading",
         "attrs": { "level": 2 },
-        "content": [{ "type": "text", "text": "입사전 준비 사항" }]
+        "content": [
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "입사전 준비 사항"
+          }
+        ]
       },
       {
         "type": "paragraph",
@@ -24,7 +30,8 @@
         "content": [
           {
             "type": "text",
-            "text": "**필요 서류 목록:**"
+            "marks": [{ "type": "bold" }],
+            "text": "필요 서류 목록:"
           }
         ]
       },

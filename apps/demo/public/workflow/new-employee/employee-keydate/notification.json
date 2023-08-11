@@ -12,6 +12,7 @@
         "content": [
           {
             "type": "text",
+            "marks": [{ "type": "bold" }],
             "text": "[입사자] 님, 첫날에 오신 것을 환영합니다!"
           }
         ]

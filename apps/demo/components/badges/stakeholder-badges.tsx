@@ -8,7 +8,7 @@ function EmployeeBadge() {
   );
 }
 
-function ManagerBadge() {
+function DirectManagerBadge() {
   return (
     <Badge variant="outline" className="bg-violet-200">
       매니저
@@ -24,19 +24,39 @@ function BuddyBadge() {
   );
 }
 
-export type StakeholderType = "employee" | "manager" | "buddy";
+function HRBadge() {
+  return (
+    <Badge variant="outline" className="bg-orange-200">
+      HR
+    </Badge>
+  );
+}
+
+export type StakeholderType =
+  | "employee"
+  | "direct-manager"
+  | "buddy"
+  | "hr-manager";
 
 const getStakeholderBadge = (stackholder: StakeholderType) => {
   switch (stackholder) {
     case "employee":
       return <EmployeeBadge />;
-    case "manager":
-      return <ManagerBadge />;
+    case "direct-manager":
+      return <DirectManagerBadge />;
     case "buddy":
       return <BuddyBadge />;
+    case "hr-manager":
+      return <HRBadge />;
     default:
       return null;
   }
 };
 
-export { EmployeeBadge, ManagerBadge, BuddyBadge, getStakeholderBadge };
+export {
+  EmployeeBadge,
+  DirectManagerBadge,
+  BuddyBadge,
+  HRBadge,
+  getStakeholderBadge,
+};

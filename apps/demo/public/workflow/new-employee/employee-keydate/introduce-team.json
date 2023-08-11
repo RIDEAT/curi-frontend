@@ -9,7 +9,11 @@
         "type": "heading",
         "attrs": { "level": 2 },
         "content": [
-          { "type": "text", "text": "**다시 한번 [팀]에 대해 소개할게요!**" }
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "다시 한번 [팀]에 대해 소개할게요!"
+          }
         ]
       },
       {

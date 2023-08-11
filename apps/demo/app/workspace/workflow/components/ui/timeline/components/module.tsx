@@ -34,7 +34,7 @@ export interface IModuleData {
   id: string;
   type: ModuleType;
   title: string;
-  content: any;
+  contents: any;
 }
 
 const getModuleComponentByType = (type: ModuleType) => {
@@ -59,7 +59,10 @@ function ModuleContent({ module }: { module: IModuleData }) {
   };
 
   useEffect(() => {
-    setContent({ type: "doc", content: module.content });
+    module.contents.content.push({
+      type: "paragraph",
+    });
+    setContent({ type: "doc", content: [module.contents] });
   }, [module]);
 
   return (
@@ -70,7 +73,7 @@ function ModuleContent({ module }: { module: IModuleData }) {
       <EditorTour />
       <SheetHeader className="flex flex-row justify-between">
         <div className="flex flex-col gap-2">
-          <SheetTitle className=" text-xl">{module.title}</SheetTitle>
+          <SheetTitle className="text-xl">{module.title}</SheetTitle>
           <SheetDescription>
             아래 에디터에서 모듈을 편집할 수 있습니다.
           </SheetDescription>
@@ -110,7 +113,7 @@ function ModuleContent({ module }: { module: IModuleData }) {
 function ModuleBox({ type, title }: { type: ModuleType; title: string }) {
   return (
     <SheetTrigger asChild>
-      <div className="flex justify-between items-center w-full h-11  rounded-sm text-md font-medium bg-stone-100 p-2 shadow-sm border border-stone-200 tour-workflow-module">
+      <div className="flex justify-between items-center w-full h-11  rounded-sm text-sm font-medium bg-stone-100 p-2 shadow-sm border border-stone-200 tour-workflow-module">
         <div className="flex gap-3 items-center">
           {getModuleIcon(type)}
           <div className="text-md">{title}</div>

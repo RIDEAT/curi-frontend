@@ -8,7 +8,13 @@
       {
         "type": "heading",
         "attrs": { "level": 2 },
-        "content": [{ "type": "text", "text": "[팀]의 미팅 및 스프린트 문화" }]
+        "content": [
+          {
+            "type": "text",
+            "marks": [{ "type": "bold" }],
+            "text": "[팀]의 미팅 및 스프린트 문화"
+          }
+        ]
       },
       {
         "type": "orderedList",
