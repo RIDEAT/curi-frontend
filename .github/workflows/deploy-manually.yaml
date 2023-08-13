@@ -27,7 +27,7 @@ jobs:
 
       - name: Validate Git SHA or Tag
         run: |
-          if ! git rev-parse ${{ github.event.inputs.tag || git.sha }} > /dev/null 2>&1; then
+          if ! git rev-parse ${{ github.event.inputs.tag || github.sha }} > /dev/null 2>&1; then
             echo "Error: The provided tag or SHA is not valid."
             exit 1
           fi
