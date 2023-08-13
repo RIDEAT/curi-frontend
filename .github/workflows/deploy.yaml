@@ -10,6 +10,10 @@ on:
         description: 'Deployment Environment'
         required: true 
         default: 'dev'
+        type: choice
+        options:
+        - dev
+        - product
 jobs:
   deploy:
     name: Deploy
@@ -69,7 +73,7 @@ jobs:
           echo ${{ steps.login-ecr.outputs.registry }}
           echo ${{ steps.image-info.outputs.ecr_repository }}
           echo ${{ steps.image-info.outputs.image_tag }}
-          cd "curi-manifests/k8s_manifests/demo/overlays/${{ github.event.inputs.environment }}"
+          cd curi-manifests/k8s_manifests/demo/overlays/${{ github.event.inputs.environment || 'dev' }}
           kustomize edit set image ${{ steps.login-ecr.outputs.registry}}/${{ steps.image-info.outputs.ecr_repository }}=${{ steps.login-ecr.outputs.registry}}/${{ steps.image-info.outputs.ecr_repository }}:${{ steps.image-info.outputs.image_tag }}
           cat kustomization.yaml
 
