@@ -1,10 +1,20 @@
-name: Deploy to Amazon ECR
+name: Deploy Manually
 
 on:
-  push:
-    branches:
-      - main # main 브랜치에 push할 때 
-
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment Environment'
+        required: true 
+        default: 'dev'
+        type: choice
+        options:
+        - dev
+        - product
+      tag:
+        description: 'Deployment Tag(git sha)'
+        required: true 
+        type: string
 jobs:
   deploy:
     name: Deploy
@@ -14,6 +24,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Validate Git SHA or Tag
+        run: |
+          if ! git rev-parse ${{ github.event.inputs.tag || git.sha }} > /dev/null 2>&1; then
+            echo "Error: The provided tag or SHA is not valid."
+            exit 1
+          fi
 
       - name: Configure AWS credentials # AWS 로그인
         uses: aws-actions/configure-aws-credentials@v1
@@ -29,24 +46,9 @@ jobs:
       - name: Get image tag(verion)
         id: image
         run: |
-          VERSION=$(echo ${{ github.sha }} | cut -c1-8)
+          VERSION=$(echo ${{ github.event.inputs.environment || github.sha }} | cut -c1-8)
           echo VERSION=$VERSION
           echo "::set-output name=version::$VERSION"
-
-      - name: Build With Docker, and push image to Amazon ECR with tag
-        id: image-info
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: next/curi-demo
-          IMAGE_TAG: ${{ steps.image.outputs.version }}
-          
-        run: |
-          touch ./apps/demo/.env.local
-          echo "${{ secrets.FIREBASE }}" > ./apps/demo/.env.local
-          echo "::set-output name=ecr_repository::$ECR_REPOSITORY"
-          echo "::set-output name=image_tag::$IMAGE_TAG"
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f apps/demo/Dockerfile .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Setup Kustomize
         uses: imranismail/setup-kustomize@v1
@@ -60,12 +62,16 @@ jobs:
           path: curi-manifests
 
       - name: Update Kubernetes resources
+        env:
+          ECR_REPOSITORY: next/curi-demo
+          IMAGE_TAG: ${{ steps.image.outputs.version }}
+
         run: |
           echo ${{ steps.login-ecr.outputs.registry }}
-          echo ${{ steps.image-info.outputs.ecr_repository }}
-          echo ${{ steps.image-info.outputs.image_tag }}
-          cd curi-manifests/k8s_manifests/demo/overlays/dev
-          kustomize edit set image ${{ steps.login-ecr.outputs.registry}}/${{ steps.image-info.outputs.ecr_repository }}=${{ steps.login-ecr.outputs.registry}}/${{ steps.image-info.outputs.ecr_repository }}:${{ steps.image-info.outputs.image_tag }}
+          echo $ECR_REPOSITORY
+          echo $IMAGE_TAG
+          cd curi-manifests/k8s_manifests/demo/overlays/${{ github.event.inputs.environment }}
+          kustomize edit set image ${{ steps.login-ecr.outputs.registry}}/$ECR_REPOSITORY=${{ steps.login-ecr.outputs.registry}}/$ECR_REPOSITORY:$IMAGE_TAG
           cat kustomization.yaml
 
       - name: Commit files
@@ -73,5 +79,5 @@ jobs:
           cd curi-manifests
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
-          git commit -am "Update image tag"
+          git commit -am "Update ${{ github.event.inputs.environment }} image tag"
           git push -u origin main
