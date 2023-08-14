@@ -32,6 +32,7 @@ const emailSchema = z.object({
   email: z.string().email({
     message: "올바른 이메일 형식이 아닙니다.",
   }),
+  name: z.string(),
 });
 
 function EmailForm() {
@@ -41,6 +42,7 @@ function EmailForm() {
     resolver: zodResolver(emailSchema),
     defaultValues: {
       email: "",
+      name: "",
     },
   });
 
@@ -75,6 +77,21 @@ function EmailForm() {
                     <FormLabel className="flex gap-1">
                       <p>이메일</p>
                       <p className="text-red-500">*</p>
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="example@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <>
+                    <FormLabel className="flex gap-1">
+                      <p>이름</p>
                     </FormLabel>
                     <FormControl>
                       <Input placeholder="example@example.com" {...field} />
