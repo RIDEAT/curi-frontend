@@ -30,7 +30,7 @@ module.exports = {
       {
         source: "/reservation/done",
         destination:
-          "https://drive.google.com/file/d/1OtFcYjhKHco-AoZbSf6AQJ_Scq7av5RA/view?usp=sharing",
+          "https://drive.google.com/file/d/1mT_eeYfYpkVQ9HWnDG4sj_UZM_DVv5Jk/view?usp=sharing",
         permanent: false,
       },
     ];
