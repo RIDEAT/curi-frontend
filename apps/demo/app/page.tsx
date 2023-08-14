@@ -72,7 +72,7 @@ export default function Home() {
             <div className="text-stone-400 text-sm mt-5">© 2023 RIDEAT.</div>
             <div className="text-stone-400 text-sm mt-5">대표자 | 강민혁</div>
             <div className="text-stone-400 text-sm mt-2">
-              email : rideat63@gmail.com
+              email : curi_help@curiboard.com
             </div>
             <div className="text-stone-400 text-sm">phone : 010-3303-6681</div>
           </div>
