@@ -140,7 +140,7 @@ function DemoLinkButton({
     <Link href="/workspace/workflow" className={"mr-6 sm:mr-10 md:mr-20"}>
       <Button
         className={cn(
-          "w-32 h-10 text-sm md:w-40 md:h-12 md:text-xl font-bold bg-violet-500 hover:bg-violet-700 shadow-xl",
+          "w-32 h-10 text-sm md:w-40 md:h-12 md:text-base font-bold bg-violet-500 hover:bg-violet-700 shadow-xl",
           className
         )}
       >

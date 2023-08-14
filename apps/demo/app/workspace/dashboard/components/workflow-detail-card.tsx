@@ -153,8 +153,10 @@ function WorkflowDetailTable({ data }: { data: IMemberWorkspace[] }) {
       <TableBody>
         {data.map((row) => (
           <TableRow key={row.id}>
-            <TableCell className="font-medium">{row.name}</TableCell>
-            <TableCell className="text-center">{row.startDate}</TableCell>
+            <TableCell className="font-semibold">{row.name}</TableCell>
+            <TableCell className="text-center font-semibold">
+              {row.startDate}
+            </TableCell>
             <TableCell className="text-center">
               <div className="flex justify-center">
                 {getStatusIcon(row.status)}
@@ -166,10 +168,15 @@ function WorkflowDetailTable({ data }: { data: IMemberWorkspace[] }) {
                 color="bg-violet-600"
                 className="flex-1"
               />
-              <div>{Math.floor(row.progressRate * 100)} %</div>
+              <div className="font-semibold">
+                {Math.floor(row.progressRate * 100)} %
+              </div>
             </TableCell>
             <TableCell
-              className={cn(getTextColor(row.eNPS / 100), "text-center")}
+              className={cn(
+                getTextColor(row.eNPS / 100),
+                "text-center font-semibold"
+              )}
             >
               {row.eNPS} %
             </TableCell>

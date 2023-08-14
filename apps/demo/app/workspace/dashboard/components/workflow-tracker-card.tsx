@@ -101,7 +101,7 @@ function WorkflowTrackerTableDataRow({
       )}
       onClick={() => setSelectedWorkflowId(id)}
     >
-      <div className="col-span-2 flex justify-start items-center font-medium text-sm">
+      <div className="col-span-2 flex justify-start items-center font-semibold text-sm">
         {name}
       </div>
       <div
