@@ -94,7 +94,7 @@ function EmailForm() {
                       <p>이름</p>
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="example@example.com" {...field} />
+                      <Input placeholder="홍길동" {...field} />
                     </FormControl>
                     <FormMessage />
                   </>
