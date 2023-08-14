@@ -2,7 +2,10 @@ import { Badge } from "ui";
 
 function EmployeeBadge() {
   return (
-    <Badge variant="outline" className="bg-yellow-200">
+    <Badge
+      variant="outline"
+      className="w-[50px] flex justify-center bg-yellow-200"
+    >
       신입
     </Badge>
   );
@@ -10,7 +13,10 @@ function EmployeeBadge() {
 
 function DirectManagerBadge() {
   return (
-    <Badge variant="outline" className="bg-violet-200">
+    <Badge
+      variant="outline"
+      className="w-[60px] flex justify-center bg-violet-200"
+    >
       매니저
     </Badge>
   );
@@ -18,7 +24,10 @@ function DirectManagerBadge() {
 
 function BuddyBadge() {
   return (
-    <Badge variant="outline" className="bg-green-200">
+    <Badge
+      variant="outline"
+      className="w-[50px] flex justify-center bg-green-200"
+    >
       버디
     </Badge>
   );
@@ -26,7 +35,10 @@ function BuddyBadge() {
 
 function HRBadge() {
   return (
-    <Badge variant="outline" className="bg-orange-200">
+    <Badge
+      variant="outline"
+      className="w-[50px] flex justify-center bg-orange-200"
+    >
       HR
     </Badge>
   );

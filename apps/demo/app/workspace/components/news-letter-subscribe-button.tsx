@@ -29,7 +29,7 @@ function NewsLetterSubscribeButton({
           </div>
         )}
         <Button className={cn("w-full text-sm", btnColor)}>
-          <p>{title}</p>
+          <p className="font-semibold">{title}</p>
         </Button>
       </div>
     </Link>

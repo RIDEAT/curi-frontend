@@ -9,7 +9,7 @@ function DownloadIntroButton() {
           variant="outline"
           className="w-full border border-violet-600 text-sm"
         >
-          <p>5초만에 제품 설명서 받기</p>
+          <p className="font-semibold">5초만에 제품 설명서 받기</p>
         </Button>
       </div>
     </Link>
