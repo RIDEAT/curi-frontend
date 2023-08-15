@@ -3,9 +3,9 @@ name: Deploy back-office
 on:
   push:
     branches:
-      - main # main 브랜치에 push할 때 
+      - main # main 브랜치에 push할 때
     paths:
-      - 'apps/back-office/**' # apps/back-office 디렉토리에 변경이 있을 때
+      - "apps/back-office/**" # apps/back-office 디렉토리에 변경이 있을 때
 
 jobs:
   deploy:
@@ -41,10 +41,10 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: next/curi-back-office
           IMAGE_TAG: ${{ steps.image.outputs.version }}
-          
+
         run: |
           touch ./apps/back-office/.env.local
-          echo "${{ secrets.FIREBASE }}" > ./apps/back-office/.env.local
+          echo "${{ secrets.FIREBASE_PUBLIC }}" > ./apps/back-office/.env.local
           echo "::set-output name=ecr_repository::$ECR_REPOSITORY"
           echo "::set-output name=image_tag::$IMAGE_TAG"
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f apps/back-office/Dockerfile .

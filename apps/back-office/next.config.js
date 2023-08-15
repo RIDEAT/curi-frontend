@@ -7,6 +7,7 @@ module.exports = {
   experimental: {
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
+  env: {},
   async rewrites() {
     return [
       {
