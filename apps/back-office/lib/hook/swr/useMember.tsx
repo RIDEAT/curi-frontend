@@ -19,7 +19,8 @@ const useEmployees = (workspaceId: string) => {
           "employee",
         ]
       : null,
-    ([url, workspaceId, type]) => MemberAPI.getMany(workspaceId, type)
+    ([url, workspaceId, type]) =>
+      MemberAPI.getMany(workspaceId, type) as Promise<IEmployee[]>
   );
 
   const reloadEmployees = () => {

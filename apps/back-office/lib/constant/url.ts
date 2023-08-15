@@ -8,6 +8,7 @@ export const RESOURSE_API_URL = "https://api.curiboard.com";
 
 // WORKSPACE
 export const WORKSPACE_PATH = "/workspace";
+export const WORKSPACES_PATH = "/workspaces";
 
 // USER
 export const USER_PATH = "/user";

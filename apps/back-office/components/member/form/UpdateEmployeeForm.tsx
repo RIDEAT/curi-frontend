@@ -3,10 +3,10 @@ import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Button, Form, LoadingButton } from "ui";
+import { Form } from "ui";
 
 import { EmployeeFormType, IEmployee } from "member-types";
-import { employeeSchema, employeeSchemaType } from "./memberSchema";
+import { employeeSchemaType, getEmployeeSchema } from "./memberSchema";
 import { EmailField } from "./fields/EmailField";
 import { NameField } from "./fields/NameField";
 import { PhoneNumField } from "./fields/PhoneNumField";
@@ -17,6 +17,7 @@ import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 import { formatDate } from "../../../lib/utils/formatDate";
 import { MemberAPI } from "../../../lib/api/member";
 import { useEmployees } from "../../../lib/hook/swr/useMember";
+import { useWorkspaces } from "../../../lib/hook/swr/useWorkspaces";
 
 export function UpdateEmployeeForm({
   employee,
@@ -26,16 +27,20 @@ export function UpdateEmployeeForm({
   setOpen: (open: boolean) => void;
 }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
+  const { getRolesInWorkspace } = useWorkspaces();
   const { reloadEmployees } = useEmployees(currentWorkspaceId);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<employeeSchemaType>({
-    resolver: zodResolver(employeeSchema),
+    resolver: zodResolver(
+      getEmployeeSchema(getRolesInWorkspace(currentWorkspaceId))
+    ),
     defaultValues: {
       name: employee.name,
       email: employee.email,
       phoneNum: employee.phoneNum,
       startDate: new Date(employee.startDate),
       department: employee.department,
+      // TODO : role 추가
     },
   });
 

@@ -1,35 +1,35 @@
 import { IWorkspace } from "workspace-types";
-import { RESOURSE_API_URL, WORKSPACE_PATH } from "../constant/url";
+import {
+  RESOURSE_API_URL,
+  WORKSPACES_PATH,
+  WORKSPACE_PATH,
+} from "../constant/url";
 import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 
-interface IResponse {
-  list: {
-    status: string;
-    workspaceList: IWorkspace[];
-  };
-  user: {
-    id: string;
-  };
-}
-
 export const WorkspaceAPI = {
-  endPoint: RESOURSE_API_URL + WORKSPACE_PATH,
-  get: async () => {
+  workspaceEndPoint: RESOURSE_API_URL + WORKSPACE_PATH,
+  workspacesEndPoint: RESOURSE_API_URL + WORKSPACES_PATH,
+  getAll: async () => {
     const { response, result } = await fetcherWithToken(
-      WorkspaceAPI.endPoint,
-      (data: IResponse) => data.list.workspaceList
+      WorkspaceAPI.workspacesEndPoint
     );
-    return result;
+    return result as IWorkspace[];
+  },
+  getOne: async (id: string) => {
+    const { response, result } = await fetcherWithToken(
+      `${WorkspaceAPI.workspaceEndPoint}/${id}`
+    );
+    return result as IWorkspace;
   },
   create: async (name: string, emailId: string) => {
-    return await fetcherWithTokenAndBody(WorkspaceAPI.endPoint, {
+    return await fetcherWithTokenAndBody(WorkspaceAPI.workspaceEndPoint, {
       name,
       email: emailId + "@curi.work",
     });
   },
   update: async (id: string, name: string, emailId: string) => {
     return await fetcherWithTokenAndBody(
-      `${WorkspaceAPI.endPoint}/${id}`,
+      `${WorkspaceAPI.workspaceEndPoint}/${id}`,
       {
         name,
         email: emailId + "@curi.work",
@@ -39,7 +39,7 @@ export const WorkspaceAPI = {
   },
   delete: async (id: string) => {
     return await fetcherWithToken(
-      `${WorkspaceAPI.endPoint}/${id}`,
+      `${WorkspaceAPI.workspaceEndPoint}/${id}`,
       null,
       "DELETE"
     );

@@ -1,5 +1,7 @@
 import {
   EmployeeFormType,
+  IEmployee,
+  IManager,
   ManagerFormType,
   MemberFormType,
   MemberType,
@@ -25,12 +27,16 @@ export const MemberAPI = {
       (parsed) => {
         if (type == "manager") return parsed;
         return parsed.map((member: any) => {
-          const result = { ...member, startDate: member.detail.startDate };
+          const result = {
+            ...member,
+            startDate: member.detail.startDate,
+            managers: member.detail.managers,
+          };
           return result;
         });
       }
     );
-    return result;
+    return result as IEmployee[] | IManager[];
   },
   /* TODO : getOne으로 수정 form 띄우기 전에 데이터 검증 필요 */
   getOne: async (memberId: string) => {
