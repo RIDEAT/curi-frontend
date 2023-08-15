@@ -48,6 +48,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/package.json .
 
 COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/static ./apps/back-office/.next/static
+
 RUN ls -la
 
 # CMD ["node", "back-office/server.js"]
