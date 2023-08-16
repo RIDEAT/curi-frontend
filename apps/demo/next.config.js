@@ -33,6 +33,11 @@ module.exports = {
           "https://drive.google.com/file/d/1mT_eeYfYpkVQ9HWnDG4sj_UZM_DVv5Jk/view?usp=sharing",
         permanent: false,
       },
+      {
+        source: "/",
+        destination: "https://www.curiboard.com",
+        permanent: false,
+      },
     ];
   },
 };
