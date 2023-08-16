@@ -74,11 +74,15 @@ export default function RegisterForm() {
     },
   });
 
-  const register = async (email: string, password: string) => {
+  const register = async (
+    email: string,
+    password: string,
+    username: string
+  ) => {
     setIsLoading(true);
     setErrorMsg("");
     try {
-      await FirebaseAPI.register(email, password);
+      await FirebaseAPI.register(email, password, username);
       router.push("/signup/verify-email");
     } catch (err) {
       if (err.message) {
@@ -86,11 +90,12 @@ export default function RegisterForm() {
       } else {
         setErrorMsg("회원가입에 실패했습니다. 다시 시도해주세요.");
       }
+      setIsLoading(false);
     }
   };
 
   const onSubmit = async (data: z.infer<typeof RegisterFormSchema>) => {
-    await register(data.email, data.password);
+    await register(data.email, data.password, data.username);
   };
 
   return (

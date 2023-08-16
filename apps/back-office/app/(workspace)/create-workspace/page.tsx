@@ -1,8 +1,10 @@
 "use client";
 
-import { CreateWorkspaceForm } from "../../components/workspace/form/CreateWorkspaceForm";
+import withAuth from "../../../components/hoc/withAuth";
+import { CreateWorkspaceForm } from "../../../components/workspace/form/CreateWorkspaceForm";
 
-export default function CreateWorkspace() {
+export default withAuth(CreateWorkspace, "protected");
+function CreateWorkspace() {
   return (
     <>
       <div className="h-screen ">

@@ -4,7 +4,7 @@ import { MemberType } from "member-types";
 
 // -----------------------------
 // RESOURSE
-export const RESOURSE_API_URL = "https://api.curiboard.com";
+export const RESOURSE_API_URL = "https://api.dev.curiboard.com";
 
 // WORKSPACE
 export const WORKSPACE_PATH = "/workspace";
@@ -23,7 +23,7 @@ export const membersQueryWith = (workspaceId: string, type: MemberType) =>
 
 // -----------------------------
 // AUTH
-export const AUTH_API_URL = "https://auth.curiboard.com";
+export const AUTH_API_URL = "https://auth.dev.curiboard.com";
 
 export const AUTHROIZE_PATH = "/authorize";
 export const VERIFY_PATH = "/verify";

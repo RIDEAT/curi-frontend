@@ -40,6 +40,10 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
     };
 
     useEffect(() => {
+      console.log(
+        "localStore.isAuthenticated(): ",
+        localStore.isAuthenticated()
+      );
       if (localStore.isAuthenticated()) {
         if (routeRole == "auth") {
           router.push(HOME_ROUTE);

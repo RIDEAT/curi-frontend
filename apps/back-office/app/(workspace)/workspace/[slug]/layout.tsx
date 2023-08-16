@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import { CloseButton, OpenButton } from "ui";
-import { WorkspaceSidebar } from "../../../components/workspace/WorkspaceSideBar";
+import { WorkspaceSidebar } from "../../../../components/workspace/WorkspaceSideBar";
 
 export default function WorkspaceLayout({
   children,

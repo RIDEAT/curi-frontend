@@ -1,6 +1,6 @@
 "use client";
 
-import withAuth from "../../../../components/hoc/withAuth";
+import withAuth from "../../../../../components/hoc/withAuth";
 
 export default withAuth(DashBoard, "protected");
 function DashBoard() {

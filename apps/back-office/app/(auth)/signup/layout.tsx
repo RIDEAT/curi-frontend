@@ -1,6 +1,6 @@
 "use client";
 
-import RouterNav from "../../components/ui/navigations/RouterNav";
+import RouterNav from "../../../components/ui/navigations/RouterNav";
 
 export default function RouterLayout({
   children,
