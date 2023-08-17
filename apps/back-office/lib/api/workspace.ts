@@ -7,7 +7,6 @@ import {
 import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 
 export const WorkspaceAPI = {
-  workspaceEndPoint: RESOURSE_API_URL + WORKSPACE_PATH,
   workspacesEndPoint: RESOURSE_API_URL + WORKSPACES_PATH,
   getAll: async () => {
     const { response, result } = await fetcherWithToken(
@@ -17,29 +16,29 @@ export const WorkspaceAPI = {
   },
   getOne: async (id: string) => {
     const { response, result } = await fetcherWithToken(
-      `${WorkspaceAPI.workspaceEndPoint}/${id}`
+      `${WorkspaceAPI.workspacesEndPoint}/${id}`
     );
     return result as IWorkspace;
   },
   create: async (name: string, emailId: string) => {
-    return await fetcherWithTokenAndBody(WorkspaceAPI.workspaceEndPoint, {
+    return await fetcherWithTokenAndBody(WorkspaceAPI.workspacesEndPoint, {
       name,
-      email: emailId + "@curi.work",
+      email: emailId + "@curiboard.com",
     });
   },
   update: async (id: string, name: string, emailId: string) => {
     return await fetcherWithTokenAndBody(
-      `${WorkspaceAPI.workspaceEndPoint}/${id}`,
+      `${WorkspaceAPI.workspacesEndPoint}/${id}`,
       {
         name,
-        email: emailId + "@curi.work",
+        email: emailId + "@curiboard.com",
       },
       "PUT"
     );
   },
   delete: async (id: string) => {
     return await fetcherWithToken(
-      `${WorkspaceAPI.workspaceEndPoint}/${id}`,
+      `${WorkspaceAPI.workspacesEndPoint}/${id}`,
       null,
       "DELETE"
     );

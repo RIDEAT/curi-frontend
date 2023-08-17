@@ -10,12 +10,12 @@ import {
   LoadingButton,
 } from "ui";
 
-import { FirebaseAPI } from "../../lib/api/firebase";
+import { FirebaseAPI } from "../../../../lib/api/firebase";
 import { useRouter } from "next/navigation";
-import getAccessToken from "../../lib/utils/getAccessToken";
-import { UserAPI } from "../../lib/api/user";
+import getAccessToken from "../../../../lib/utils/getAccessToken";
+import { UserAPI } from "../../../../lib/api/user";
 
-export default function RegisterVerifyCard() {
+export function RegisterVerifyCard() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");

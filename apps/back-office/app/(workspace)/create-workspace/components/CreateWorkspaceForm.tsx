@@ -18,8 +18,8 @@ import {
   LoadingButton,
 } from "ui";
 
-import { WorkspaceAPI } from "../../../lib/api/workspace";
-import { workspaceSchema } from "./workspaceSchema";
+import { WorkspaceAPI } from "../../../../lib/api/workspace";
+import { workspaceSchema } from "../../../../components/workspace/form/workspaceSchema";
 
 export function CreateWorkspaceForm() {
   const router = useRouter();
@@ -89,7 +89,7 @@ export function CreateWorkspaceForm() {
                 <FormControl>
                   <Input placeholder="ex. example" {...field} />
                 </FormControl>
-                <div>@curi.work</div>
+                <div>@curiboard.com</div>
               </div>
               <FormDescription className="text-xs">
                 큐리에서 멤버와 연락을 주고 받을 이메일 주소입니다.

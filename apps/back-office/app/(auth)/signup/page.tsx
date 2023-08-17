@@ -1,6 +1,6 @@
 "use client";
 
-import RegisterForm from "../../../components/auth/form/RegisterForm";
+import RegisterForm from "./components/RegisterForm";
 import withAuth from "../../../components/hoc/withAuth";
 
 function Register() {

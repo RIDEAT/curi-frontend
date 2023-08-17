@@ -23,9 +23,9 @@ import {
   LoadingButton,
 } from "ui";
 
-import { AuthAPI } from "../../../lib/api/auth";
-import getAccessToken from "../../../lib/utils/getAccessToken";
-import { FirebaseAPI } from "../../../lib/api/firebase";
+import { AuthAPI } from "../../../../lib/api/auth";
+import getAccessToken from "../../../../lib/utils/getAccessToken";
+import { FirebaseAPI } from "../../../../lib/api/firebase";
 
 const LoginFormSchema = z.object({
   email: z.string().email({

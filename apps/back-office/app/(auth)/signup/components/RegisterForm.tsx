@@ -24,7 +24,7 @@ import {
   LoadingButton,
 } from "ui";
 
-import { FirebaseAPI } from "../../../lib/api/firebase";
+import { FirebaseAPI } from "../../../../lib/api/firebase";
 
 const RegisterFormSchema = z
   .object({
@@ -83,7 +83,7 @@ export default function RegisterForm() {
     setErrorMsg("");
     try {
       await FirebaseAPI.register(email, password, username);
-      router.push("/signup/verify-email");
+      router.push("/verify-email");
     } catch (err) {
       if (err.message) {
         setErrorMsg(err.message);

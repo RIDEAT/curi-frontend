@@ -1,6 +1,6 @@
 "use client";
 
-import LoginForm from "../../../components/auth/form/LoginForm";
+import LoginForm from "./components/LoginForm";
 import withAuth from "../../../components/hoc/withAuth";
 
 function Login() {

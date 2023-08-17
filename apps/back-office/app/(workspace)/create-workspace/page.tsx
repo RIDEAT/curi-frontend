@@ -1,7 +1,7 @@
 "use client";
 
 import withAuth from "../../../components/hoc/withAuth";
-import { CreateWorkspaceForm } from "../../../components/workspace/form/CreateWorkspaceForm";
+import { CreateWorkspaceForm } from "./components/CreateWorkspaceForm";
 
 export default withAuth(CreateWorkspace, "protected");
 function CreateWorkspace() {
