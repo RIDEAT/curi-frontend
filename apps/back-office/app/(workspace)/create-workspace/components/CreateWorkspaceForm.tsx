@@ -44,7 +44,7 @@ export function CreateWorkspaceForm() {
         toast({
           title: "워크스페이스가 생성되었습니다.",
         });
-        router.replace(`/workspace/${result.workspace.id}`);
+        router.replace(`/workspace/${result.id}`);
       }
     } catch (error) {
     } finally {
@@ -56,7 +56,7 @@ export function CreateWorkspaceForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-screen-md space-y-6"
+        className="w-full max-w-lg min-w-lg space-y-6"
       >
         <FormField
           control={form.control}

@@ -15,6 +15,11 @@ module.exports = {
       //   destination: "https://www.curiboard.com",
       //   permanent: false,
       // },
+      {
+        source: "/workspace/:slug/help",
+        destination: "https://v4pqp.channel.io/home",
+        permanent: false,
+      },
     ];
   },
 };

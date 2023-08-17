@@ -5,8 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { AuthAPI } from "../../lib/api/auth";
 import { localStore } from "../../lib/utils/localStore";
+import { LoadingCircle } from "ui";
 
-const HOME_ROUTE = "/";
+const WORKSPACE_ROUTE = "/workspace";
 const LOGIN_ROUTE = "/login";
 
 enum RouteRole {
@@ -40,13 +41,9 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
     };
 
     useEffect(() => {
-      console.log(
-        "localStore.isAuthenticated(): ",
-        localStore.isAuthenticated()
-      );
       if (localStore.isAuthenticated()) {
         if (routeRole == "auth") {
-          router.push(HOME_ROUTE);
+          router.push(WORKSPACE_ROUTE);
         } else {
           setIsLoading(false);
         }
@@ -66,7 +63,12 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
       if (routeRole == "public") setIsLoading(false);
     }, []);
 
-    if (isloading) return <div>loading...</div>;
+    if (isloading)
+      return (
+        <div className="w-screen h-screen flex justify-center items-center">
+          <LoadingCircle dimensions="w-10 h-10" />
+        </div>
+      );
     else {
       return <Component {...(props as T)} />;
     }

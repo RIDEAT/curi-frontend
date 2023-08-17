@@ -1,6 +1,6 @@
 "use client";
 
-import WorkspaceSelectorCollapsible from "../../../components/workspace/WorkspaceSelectorCollapsible";
+import WorkspaceSelectorCollapsible from "./components/WorkspaceSelectorCollapsible";
 import withAuth from "../../../components/hoc/withAuth";
 import RouterNav from "../../../components/ui/navigations/RouterNav";
 
