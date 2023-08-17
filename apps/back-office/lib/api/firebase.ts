@@ -4,6 +4,7 @@ import {
   reload,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 
 import { firebaseAuth } from "../firebase/firebaseClient";
@@ -12,13 +13,16 @@ export const FirebaseAPI = {
   /**
    * register with firebase auth
    */
-  register: async (email: string, password: string) => {
+  register: async (email: string, password: string, username: string) => {
     try {
       const { user } = await createUserWithEmailAndPassword(
         firebaseAuth,
         email,
         password
       );
+      await updateProfile(user, {
+        displayName: username,
+      });
       await sendEmailVerification(user);
 
       return true;
@@ -44,18 +48,17 @@ export const FirebaseAPI = {
    */
   login: async (email: string, password: string) => {
     try {
+      const userCredential: UserCredential = await signInWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password
+      );
       const isEmailVerified = await FirebaseAPI.checkEmailVerification();
 
       if (!isEmailVerified) {
         const emailVerifyError = new Error("이메일 인증을 완료해주세요.");
         throw emailVerifyError;
       }
-
-      const userCredential: UserCredential = await signInWithEmailAndPassword(
-        firebaseAuth,
-        email,
-        password
-      );
 
       return userCredential;
     } catch (error) {
@@ -125,6 +128,7 @@ export const FirebaseAPI = {
       return true;
     } catch (error) {
       console.error(error);
+      return false;
     }
   },
 };

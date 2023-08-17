@@ -8,12 +8,17 @@ module.exports = {
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
   env: {},
-  async rewrites() {
+  async redirects() {
     return [
+      // {
+      //   source: "/",
+      //   destination: "https://www.curiboard.com",
+      //   permanent: false,
+      // },
       {
-        source: "/get",
-        // destination: "http://localhost:8080/user/authorize",
-        destination: "https://auth.curiboard.com/auth/verify",
+        source: "/workspace/:slug/help",
+        destination: "https://v4pqp.channel.io/home",
+        permanent: false,
       },
     ];
   },

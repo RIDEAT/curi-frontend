@@ -37,3 +37,6 @@ export * from "./buttons/loadingButton";
 
 // draggable-list
 export * from "./draggable-list";
+
+// icons
+export * from "./icons";
