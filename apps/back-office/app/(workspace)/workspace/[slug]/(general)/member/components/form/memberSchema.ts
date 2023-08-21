@@ -31,7 +31,6 @@ const employeeSchema = baseSchema.extend({
 });
 
 export const getEmployeeSchema = (roles: IRole[]) => {
-  console.log("getEmployeeSchema roles: ", roles);
   const field = {};
   roles.forEach((role) => {
     field[role.name] = z.string({});

@@ -92,8 +92,6 @@ export function CreateEmployeeForm({
     }
   };
 
-  console.log(currentRoles);
-
   return (
     <Form {...form}>
       <form

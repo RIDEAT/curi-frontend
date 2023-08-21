@@ -19,13 +19,16 @@ export * from "./ui/menubar";
 export * from "./ui/navigation-menu";
 export * from "./ui/popover";
 export * from "./ui/progress";
+export * from "./ui/radio-group";
 export * from "./ui/scroll-area";
 export * from "./ui/select";
 export * from "./ui/separator";
 export * from "./ui/sheet";
 export * from "./ui/skeleton";
+export * from "./ui/switch";
 export * from "./ui/table";
 export * from "./ui/tabs";
+export * from "./ui/textarea";
 export * from "./ui/toast";
 export * from "./ui/toaster";
 export * from "./ui/use-toast";
@@ -40,3 +43,6 @@ export * from "./draggable-list";
 
 // icons
 export * from "./icons";
+
+// toasts
+export * from "./toasts";

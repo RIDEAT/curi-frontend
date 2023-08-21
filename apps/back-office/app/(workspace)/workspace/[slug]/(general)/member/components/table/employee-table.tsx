@@ -19,7 +19,6 @@ export function EmployeeTable() {
 
   useEffect(() => {
     if (currentWorkspaceId && workspaces) {
-      console.log(getEmployeeColumns(getRolesInWorkspace(currentWorkspaceId)));
       setEmployeeColumns(
         getEmployeeColumns(getRolesInWorkspace(currentWorkspaceId))
       );

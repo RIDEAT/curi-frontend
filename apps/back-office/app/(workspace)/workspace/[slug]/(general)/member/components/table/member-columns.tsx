@@ -56,7 +56,6 @@ const getRoleColumns = (roles: IRole[]) => {
 export const getEmployeeColumns = (
   roles: IRole[]
 ): ColumnDef<EmployeeColumnType>[] => {
-  console.log("getEmployeeColumns roles: ", roles);
   return [
     ...BaseInfoColumns,
     {

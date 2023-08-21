@@ -19,7 +19,7 @@ import {
 
 import { IWorkspace } from "workspace-types";
 import { WorkspaceAPI } from "../../../lib/api/workspace";
-import { workspaceSchema } from "./workspaceSchema";
+import { workspaceSchema } from "../../../app/(workspace)/create-workspace/components/workspaceSchema";
 
 export function UpdateWorkspaceForm({
   targetWorkspace,
@@ -33,7 +33,7 @@ export function UpdateWorkspaceForm({
     resolver: zodResolver(workspaceSchema),
     defaultValues: {
       workspaceName: targetWorkspace.name,
-      emailId: targetWorkspace.emailId,
+      emailId: targetWorkspace.email,
     },
   });
 
