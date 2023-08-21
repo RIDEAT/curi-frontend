@@ -1,9 +1,5 @@
 import { IRole, IWorkspace } from "workspace-types";
-import {
-  RESOURSE_API_URL,
-  WORKSPACES_PATH,
-  WORKSPACE_PATH,
-} from "../constant/url";
+import { RESOURSE_API_URL, WORKSPACES_PATH } from "../constant/url";
 import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 
 export const WorkspaceAPI = {

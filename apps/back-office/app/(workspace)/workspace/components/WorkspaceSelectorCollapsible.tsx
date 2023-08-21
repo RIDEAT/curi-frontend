@@ -9,6 +9,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
+  ErrorBadge,
   LoadingCircle,
 } from "ui";
 
@@ -38,7 +39,7 @@ export default function WorkspaceSelectorCollapsible() {
         <LoadingCircle />
       </div>
     );
-  if (error) return <div>error</div>;
+  if (error) return <ErrorBadge />;
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className="w-[350px]">
