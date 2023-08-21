@@ -7,7 +7,6 @@ const useCurrentWorkspace = () => {
   const pathname = usePathname();
   const [currentSlug, setCurrentSlug] = useState<string | null>(null);
 
-  console.log(pathname);
   useEffect(() => {
     if (pathname) {
       setCurrentSlug(extractSlug(pathname).toString());

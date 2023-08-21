@@ -19,7 +19,7 @@ import {
 } from "ui";
 
 import { WorkspaceAPI } from "../../../../lib/api/workspace";
-import { workspaceSchema } from "../../../../components/workspace/form/workspaceSchema";
+import { workspaceSchema } from "./workspaceSchema";
 
 export function CreateWorkspaceForm() {
   const router = useRouter();

@@ -24,7 +24,7 @@ import {
 import { IWorkspace } from "workspace-types";
 import extractSlug from "../../../../../lib/utils/extractSlug";
 import { useWorkspaces } from "../../../../../lib/hook/swr/useWorkspaces";
-import { WorkspaceSettingDialog } from "../../../../../components/workspace/WorkspaceSettingDialog";
+import { WorkspaceSettingButton } from "./workspace-setting-dialog";
 
 export default function WorkspaceCombo() {
   const [open, setOpen] = useState(false);
@@ -86,7 +86,10 @@ export default function WorkspaceCombo() {
               />
               <hr></hr>
               <CommandItem>
-                <WorkspaceSettingDialog targetWorkspace={selectedWorkspace} />
+                <WorkspaceSettingButton
+                  targetWorkspace={selectedWorkspace}
+                  setOpen={setOpen}
+                />
               </CommandItem>
               <hr></hr>
               <CommandItem>
@@ -146,7 +149,6 @@ function CommandItems({ selectedWorkspace, setSelectedWorkspace, setOpen }) {
         <CommandItem
           key={workspace.id}
           onSelect={(currentLabel) => {
-            console.log(currentLabel);
             setSelectedWorkspace((prev) => {
               if (currentLabel === prev.name) return prev;
               return workspaces?.find(

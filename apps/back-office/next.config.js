@@ -20,6 +20,11 @@ module.exports = {
         destination: "https://v4pqp.channel.io/home",
         permanent: false,
       },
+      {
+        source: "/workspace/:slug",
+        destination: "/workspace/:slug/workflow",
+        permanent: false,
+      },
     ];
   },
 };

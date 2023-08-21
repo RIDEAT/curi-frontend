@@ -14,25 +14,19 @@ const useWorkspaces = () => {
     WorkspaceAPI.getAll
   );
 
-  const getRolesInWorkspace = (workspaceId: string) => {
-    console.log("workspaceId: ", workspaceId);
-    console.log("data: ", data);
+  const getCurrentWorkspaceData = (workspaceId: string) => {
     const currentWorkspace = data?.filter(
       (workspace) => workspace.id == workspaceId
     );
-    console.log("currentWorkspace: ", currentWorkspace);
-    // const roles = currentWorkspace[0].roles;
-    const roles = [
-      {
-        id: 1,
-        name: "CEO",
-      },
-      {
-        id: 2,
-        name: "CTO",
-      },
-    ];
-    console.log("getRolesInWorkspace roles: ", roles);
+    return currentWorkspace?.[0];
+  };
+
+  const getRolesInWorkspace = (workspaceId: string) => {
+    const currentWorkspace = data?.filter(
+      (workspace) => workspace.id == workspaceId
+    );
+    data?.filter((workspace) => workspace.id == workspaceId);
+    const roles = currentWorkspace?.[0].roles;
     return roles;
   };
 
@@ -42,6 +36,7 @@ const useWorkspaces = () => {
     error,
     mutateWorkspace,
     getRolesInWorkspace,
+    getCurrentWorkspaceData,
   };
 };
 

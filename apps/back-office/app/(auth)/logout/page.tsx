@@ -10,11 +10,8 @@ import { useRouter } from "next/navigation";
 function Logout() {
   const router = useRouter();
   const logout = async () => {
-    const isLogouted = await FirebaseAPI.logout();
-    const response = await AuthAPI.logout();
-
-    console.log("isLogouted", isLogouted);
-    console.log("response", response);
+    await FirebaseAPI.logout();
+    await AuthAPI.logout();
   };
 
   useEffect(() => {

@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   BellIcon,
   GearIcon,
   QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
 
-import { Button, CuriLogo, DashboardIcon, MemberIcon, WorkflowIcon } from "ui";
+import { Button, DashboardIcon, MemberIcon, WorkflowIcon } from "ui";
 import { cn } from "ui/lib/utils";
 
 import { useCurrentMenu } from "../../../../../lib/hook/useCurrentMenu";

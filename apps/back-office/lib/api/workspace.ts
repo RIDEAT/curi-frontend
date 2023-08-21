@@ -1,4 +1,4 @@
-import { IWorkspace } from "workspace-types";
+import { IRole, IWorkspace } from "workspace-types";
 import {
   RESOURSE_API_URL,
   WORKSPACES_PATH,
@@ -35,6 +35,20 @@ export const WorkspaceAPI = {
       },
       "PUT"
     );
+  },
+  addRoles: async (id: string, roles: IRole[]) => {
+    const responses = [];
+    roles.forEach((role) => {
+      responses.push(
+        fetcherWithTokenAndBody(
+          `${WorkspaceAPI.workspacesEndPoint}/${id}/roles`,
+          {
+            name: role.name,
+          }
+        )
+      );
+    });
+    return await Promise.all(responses);
   },
   delete: async (id: string) => {
     return await fetcherWithToken(
