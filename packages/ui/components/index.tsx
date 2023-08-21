@@ -46,3 +46,6 @@ export * from "./icons";
 
 // toasts
 export * from "./toasts";
+
+// badges
+export * from "./badges";

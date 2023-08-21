@@ -15,6 +15,7 @@ import {
   Command,
   CommandGroup,
   CommandItem,
+  ErrorBadge,
   LoadingCircle,
   Popover,
   PopoverContent,
@@ -51,7 +52,7 @@ export default function WorkspaceCombo() {
         <LoadingCircle />
       </div>
     );
-  if (error) return <div>error</div>;
+  if (error) return <ErrorBadge />;
 
   return (
     <div className="w-full justify-start">
@@ -118,7 +119,7 @@ function CurrentWorkspaceLabel({ selectedWorkspace }) {
         <LoadingCircle />
       </div>
     );
-  if (error) return <div>error</div>;
+  if (error) return <ErrorBadge />;
 
   return (
     <div className="text-lg">
@@ -141,7 +142,7 @@ function CommandItems({ selectedWorkspace, setSelectedWorkspace, setOpen }) {
         <LoadingCircle />
       </div>
     );
-  if (error) return <div>error</div>;
+  if (error) return <ErrorBadge />;
 
   return (
     <>

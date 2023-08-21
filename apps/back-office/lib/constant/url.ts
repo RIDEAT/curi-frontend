@@ -21,6 +21,9 @@ export const MEMBER_MANAGER_PATH = MEMBER_PATH + "/manager";
 export const membersQueryWith = (workspaceId: string, type: MemberType) =>
   `?wid=${workspaceId}&type=${type}`;
 
+// WORKFLOW
+export const WORKFLOWS_PATH = "/workflows";
+
 // -----------------------------
 // AUTH
 export const AUTH_API_URL = "https://auth.dev.curiboard.com";
