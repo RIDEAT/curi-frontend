@@ -1,3 +1,9 @@
-export default function WorkflowEditor({ params }: { params: { id: string } }) {
-  return <div></div>;
+import { Timeline } from "./components/timeline";
+
+export default function WorkflowEditor() {
+  return (
+    <div>
+      <Timeline />
+    </div>
+  );
 }

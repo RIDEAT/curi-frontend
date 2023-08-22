@@ -10,6 +10,9 @@ export const RESOURSE_API_URL = "https://api.dev.curiboard.com";
 export const WORKSPACE_PATH = "/workspace";
 export const WORKSPACES_PATH = "/workspaces";
 
+// ROLE
+export const ROLES_PATH = "/roles";
+
 // USER
 export const USER_PATH = "/user";
 
@@ -23,6 +26,9 @@ export const membersQueryWith = (workspaceId: string, type: MemberType) =>
 
 // WORKFLOW
 export const WORKFLOWS_PATH = "/workflows";
+
+// SEQUENCE
+export const SEQUENCES_PATH = "/sequences";
 
 // -----------------------------
 // AUTH

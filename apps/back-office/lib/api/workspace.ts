@@ -32,12 +32,18 @@ export const WorkspaceAPI = {
       "PUT"
     );
   },
-  addRoles: async (id: string, roles: IRole[]) => {
+  getRoles: async (workspaceId: string) => {
+    const { response, result } = await fetcherWithToken(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/roles`
+    );
+    return result as IRole[];
+  },
+  addRoles: async (workspaceId: string, roles: IRole[]) => {
     const responses = [];
     roles.forEach((role) => {
       responses.push(
         fetcherWithTokenAndBody(
-          `${WorkspaceAPI.workspacesEndPoint}/${id}/roles`,
+          `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/roles`,
           {
             name: role.name,
           }

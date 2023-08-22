@@ -21,7 +21,7 @@ import {
 import { WorkspaceAPI } from "../../../../lib/api/workspace";
 import { workspaceSchema } from "./workspaceSchema";
 
-export function CreateWorkspaceForm() {
+export function WorkspaceCreateForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof workspaceSchema>>({
