@@ -13,8 +13,8 @@ export default function WorkflowEditorLayout({
   return (
     <div>
       <EditorTopBar />
-      <Separator className="my-2 mx-2" />
-      <div>{children}</div>
+      <Separator className="mt-2 mx-2" />
+      <div className="bg-stone-100">{children}</div>
     </div>
   );
 }

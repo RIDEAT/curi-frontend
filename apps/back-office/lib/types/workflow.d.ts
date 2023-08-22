@@ -14,6 +14,7 @@ declare module "workflow-types" {
     id: string;
     name: string;
     role: IRole;
+    dayOffset: number;
     modules: IModule[];
   }
   interface IWorkflow {

@@ -12,6 +12,7 @@ import {
 } from "ui";
 
 import { SequenceCreateForm } from "./sequence-create-form";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 function SequenceCreateDialog() {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,9 @@ function SequenceCreateDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">시퀀스 생성하기</Button>
+        <Button variant="outline">
+          <PlusIcon className="h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
