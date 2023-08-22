@@ -1,7 +1,7 @@
 "use client";
 
 import withAuth from "../../../components/hoc/withAuth";
-import { CreateWorkspaceForm } from "./components/CreateWorkspaceForm";
+import { WorkspaceCreateForm } from "./components/workspace-create-form";
 
 export default withAuth(CreateWorkspace, "protected");
 function CreateWorkspace() {
@@ -14,7 +14,7 @@ function CreateWorkspace() {
             회사 또는 팀 이름을 알려주세요.
           </h4>
           <div className="w-full flex justify-center">
-            <CreateWorkspaceForm />
+            <WorkspaceCreateForm />
           </div>
         </div>
       </div>
