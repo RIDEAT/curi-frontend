@@ -36,7 +36,7 @@ function WorkflowEditForm({
   setIsOpen: (open: boolean) => void;
 }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
-  const { workflowMutate } = useWorkflows();
+  const { workflowsMutate } = useWorkflows();
   const [requesting, setRequesting] = useState(false);
   const form = useForm<WorkflowEditFormValues>({
     resolver: zodResolver(workflowEditFormSchema),
@@ -54,7 +54,7 @@ function WorkflowEditForm({
         workflowId,
         data.name
       );
-      await workflowMutate();
+      await workflowsMutate();
       pushSuccessToast("워크플로우 수정", "워크플로우가 수정되었습니다.");
     } catch (error) {
       pushFailToast("워크플로우 수정 실패", "다시 시도해주세요.");

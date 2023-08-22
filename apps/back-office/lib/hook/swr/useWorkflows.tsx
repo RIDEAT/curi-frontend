@@ -16,7 +16,7 @@ const useWorkflows = () => {
     workflows: data,
     isLoading,
     error,
-    workflowMutate: mutate,
+    workflowsMutate: mutate,
   };
 };
 

@@ -48,14 +48,14 @@ export default function WorkspaceCombo() {
 
   if (isLoading)
     return (
-      <div>
+      <div className="w-full flex justify-center">
         <LoadingCircle />
       </div>
     );
   if (error) return <ErrorBadge />;
 
   return (
-    <div className="w-full justify-start">
+    <div className="w-full flex justify-start">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button

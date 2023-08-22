@@ -25,6 +25,12 @@ export const WorkflowAPI = {
     );
     return result as IWorkflow[];
   },
+  getOne: async (workspaceId: string, workflowId: string) => {
+    const { response, result } = await fetcherWithToken(
+      `${WorkflowAPI.getWorkflowsEndPoint(workspaceId)}/${workflowId}`
+    );
+    return result as IWorkflow;
+  },
   createWorkflow: async (workspaceId: string, name: string) => {
     const { response, result } = await fetcherWithTokenAndBody(
       WorkflowAPI.getWorkflowsEndPoint(workspaceId),

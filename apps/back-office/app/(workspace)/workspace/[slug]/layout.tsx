@@ -27,12 +27,13 @@ export default function WorkspaceLayout({
       >
         <WorkspaceSidebar />
       </div>
-      <div className="w-full">
-        {isSidebarOpen ? (
+      <div className="w-full mt-4">
+        {/* {isSidebarOpen ? (
           <CloseButton onClick={toggleSidebar} variant="ghost" />
         ) : (
           <OpenButton onClick={toggleSidebar} variant="ghost" />
-        )}
+        )} */}
+
         {children}
       </div>
     </div>

@@ -28,7 +28,7 @@ type WorkflowCreateFormValues = z.infer<typeof workflowCreateFormSchema>;
 
 function WorkflowCreateForm({ setOpen }: { setOpen: (open: boolean) => void }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
-  const { workflowMutate } = useWorkflows();
+  const { workflowsMutate } = useWorkflows();
   const [requesting, setRequesting] = useState(false);
   const form = useForm<WorkflowCreateFormValues>({
     resolver: zodResolver(workflowCreateFormSchema),
@@ -41,7 +41,7 @@ function WorkflowCreateForm({ setOpen }: { setOpen: (open: boolean) => void }) {
     try {
       setRequesting(true);
       await WorkflowAPI.createWorkflow(currentWorkspaceId, data.name);
-      await workflowMutate();
+      await workflowsMutate();
       pushSuccessToast("워크플로우 생성 완료", "워크플로우가 생성되었습니다.");
       setOpen(false);
       setRequesting(false);
