@@ -7,7 +7,7 @@ import type {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-import "./SortableItem.css";
+import "./sortable-item.css";
 
 interface Props {
   id: UniqueIdentifier;
