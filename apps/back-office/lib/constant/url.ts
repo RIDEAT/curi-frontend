@@ -4,7 +4,7 @@ import { MemberType } from "member-types";
 
 // -----------------------------
 // RESOURSE
-export const RESOURSE_API_URL = "https://api.dev.curiboard.com";
+export const RESOURSE_API_URL = "https://api.dev.onbird.team";
 
 // WORKSPACE
 export const WORKSPACE_PATH = "/workspace";
@@ -32,7 +32,7 @@ export const SEQUENCES_PATH = "/sequences";
 
 // -----------------------------
 // AUTH
-export const AUTH_API_URL = "https://auth.dev.curiboard.com";
+export const AUTH_API_URL = "https://auth.dev.onbird.team";
 
 export const AUTHROIZE_PATH = "/authorize";
 export const VERIFY_PATH = "/verify";

@@ -19,17 +19,8 @@ const useWorkflow = (workflowId: string) => {
     return num % 2 == 0 ? 1 : 0;
   };
 
-  const generateDayoffset = (sequences: ISequence[]) => {
-    return [...sequences].map((sequence, index) => {
-      return {
-        ...sequence,
-        dayOffset: index - returnOneorZeroRandom(index) - 10,
-      };
-    });
-  };
-
   const getSequences = () => {
-    const sequences = generateDayoffset(data?.sequences || ([] as ISequence[]));
+    const sequences = data?.sequences || ([] as ISequence[]);
     const sortedSequences = sequences.sort((a, b) => a.dayOffset - b.dayOffset);
 
     const separatedSequences = [] as ISequence[][];

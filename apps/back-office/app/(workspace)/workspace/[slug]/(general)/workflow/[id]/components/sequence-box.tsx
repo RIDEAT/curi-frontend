@@ -5,19 +5,19 @@ import { IModule } from "workflow-types";
 export interface SequenceBoxProps {
   title: string;
   stakeholder: string;
-  sequenceData: IModule[];
+  modules: IModule[];
 }
 
 function EmptySequenceBox() {
   return <div className="min-w-[320px] max-w-[320px] h-[280px]"></div>;
 }
 
-function SequenceBox({ title, stakeholder, sequenceData }: SequenceBoxProps) {
+function SequenceBox({ title, stakeholder, modules }: SequenceBoxProps) {
   const [open, setOpen] = useState(false);
-  const [currentId, setCurrentId] = useState(sequenceData[0]?.id);
+  const [currentId, setCurrentId] = useState(modules[0]?.id);
 
   const getModuleById = (id: string) => {
-    const resultModule = sequenceData.find((data) => data.id == id);
+    const resultModule = modules.find((data) => data.id == id);
 
     return resultModule;
   };
@@ -34,7 +34,7 @@ function SequenceBox({ title, stakeholder, sequenceData }: SequenceBoxProps) {
                 </div> */}
           </div>
           <DraggableList
-            data={sequenceData}
+            data={modules}
             renderItemContent={(type, title) => (
               // <ModuleBox type={type} title={title} />
               <div className="flex justify-center items-center">

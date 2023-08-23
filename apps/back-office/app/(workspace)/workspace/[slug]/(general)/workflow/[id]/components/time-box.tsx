@@ -77,7 +77,7 @@ function TimeBox({
             key={employeeSequence.id}
             title={employeeSequence.name}
             stakeholder={employeeSequence.role.name}
-            sequenceData={employeeSequence.modules}
+            modules={employeeSequence.modules}
           />
         ) : (
           <EmptySequenceBox />
@@ -96,7 +96,7 @@ function TimeBox({
             key={managerSequence.id}
             title={managerSequence.name}
             stakeholder={managerSequence.role.name}
-            sequenceData={managerSequence.modules}
+            modules={managerSequence.modules}
           />
         ) : (
           <EmptySequenceBox />
