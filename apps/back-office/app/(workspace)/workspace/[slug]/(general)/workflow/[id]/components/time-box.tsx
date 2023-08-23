@@ -75,6 +75,7 @@ function TimeBox({
         {employeeSequence ? (
           <SequenceBox
             key={employeeSequence.id}
+            sequenceId={employeeSequence.id}
             title={employeeSequence.name}
             stakeholder={employeeSequence.role.name}
             modules={employeeSequence.modules}
@@ -94,6 +95,7 @@ function TimeBox({
         {managerSequence ? (
           <SequenceBox
             key={managerSequence.id}
+            sequenceId={managerSequence.id}
             title={managerSequence.name}
             stakeholder={managerSequence.role.name}
             modules={managerSequence.modules}

@@ -19,7 +19,7 @@ function Timeline() {
   if (error) return <ErrorBadge />;
 
   return (
-    <div className="h-[90vh] overflow-scroll">
+    <div className="min-w-[800px] h-[90vh] overflow-scroll">
       <div className="w-full flex flex-col items-center">
         {filteredSequences.length > 0 &&
           filteredSequences?.map((sequences) => (

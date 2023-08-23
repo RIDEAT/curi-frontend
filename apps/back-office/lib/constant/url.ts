@@ -30,6 +30,9 @@ export const WORKFLOWS_PATH = "/workflows";
 // SEQUENCE
 export const SEQUENCES_PATH = "/sequences";
 
+// MODULE
+export const MODULES_PATH = "/modules";
+
 // -----------------------------
 // AUTH
 export const AUTH_API_URL = "https://auth.dev.onbird.team";

@@ -14,13 +14,8 @@ const useWorkflow = (workflowId: string) => {
     ([_, workflowId]) => WorkflowAPI.getOne(currentWorkspaceId, workflowId)
   );
 
-  // temporary
-  const returnOneorZeroRandom = (num: number) => {
-    return num % 2 == 0 ? 1 : 0;
-  };
-
   const getSequences = () => {
-    const sequences = data?.sequences || ([] as ISequence[]);
+    const sequences = [...data?.sequences] || ([] as ISequence[]);
     const sortedSequences = sequences.sort((a, b) => a.dayOffset - b.dayOffset);
 
     const separatedSequences = [] as ISequence[][];
