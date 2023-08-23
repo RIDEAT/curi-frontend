@@ -7,7 +7,7 @@ import { ErrorBadge, LoadingCircle } from "ui";
 
 function Timeline() {
   const { currentWorkflowId } = useCurrentWorkflow();
-  const { workflow, isLoading, error, filteredSequences } =
+  const { isLoading, error, filteredSequences } =
     useWorkflow(currentWorkflowId);
 
   if (isLoading)

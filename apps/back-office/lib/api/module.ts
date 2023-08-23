@@ -35,4 +35,27 @@ export const ModuleAPI = {
     );
     return result as IModule;
   },
+  update: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string,
+    moduleId: string,
+    moduleInfo: {
+      name: string;
+      type: ModuleType;
+      content: any;
+      order: number;
+    }
+  ) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      `${ModuleAPI.getModuleEndPoint(
+        workspaceId,
+        workflowId,
+        sequenceId
+      )}/${moduleId}`,
+      moduleInfo,
+      "PUT"
+    );
+    return result as IModule;
+  },
 };

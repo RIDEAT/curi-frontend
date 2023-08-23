@@ -6,6 +6,9 @@ declare module "workflow-types" {
     id: string;
     name: string;
     type: ModuleType;
+    order: number;
+    content: any; // request
+    // response
     contentId: {
       timestamp: number;
       date: string;

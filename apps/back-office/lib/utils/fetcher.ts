@@ -40,9 +40,13 @@ const fetcherWithTokenAndBody = async (
     credentials: "include",
     body: JSON.stringify(body),
   });
-  const result = await response.json();
-
-  return { response, result };
+  try {
+    const result = await response.json();
+    return { response, result };
+  } catch (error) {
+    const result = { status: "empty" };
+    return { response, result };
+  }
 };
 
 export { fetcherWithToken, fetcherWithTokenAndBody, fetcher };

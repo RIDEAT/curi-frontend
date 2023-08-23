@@ -14,7 +14,7 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 
-import "./SortableList.css";
+import "./sortable-list.css";
 
 import { DragHandle, SortableItem, SortableOverlay } from "./components";
 
@@ -26,12 +26,14 @@ interface Props<T extends BaseItem> {
   items: T[];
   onChange(items: T[]): void;
   renderItem(item: T): ReactNode;
+  onSortEnd(items: T[]): void;
 }
 
 export function SortableList<T extends BaseItem>({
   items,
   onChange,
   renderItem,
+  onSortEnd,
 }: Props<T>) {
   const [active, setActive] = useState<Active | null>(null);
   const activeItem = useMemo(
@@ -55,8 +57,17 @@ export function SortableList<T extends BaseItem>({
         if (over && active.id !== over?.id) {
           const activeIndex = items.findIndex(({ id }) => id === active.id);
           const overIndex = items.findIndex(({ id }) => id === over.id);
+          const result = arrayMove(items, activeIndex, overIndex).map(
+            (item, index) => {
+              return {
+                ...item,
+                order: index,
+              };
+            }
+          );
 
-          onChange(arrayMove(items, activeIndex, overIndex));
+          onChange(result);
+          onSortEnd(result);
         }
         setActive(null);
       }}
