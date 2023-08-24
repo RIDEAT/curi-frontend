@@ -32,7 +32,7 @@ const fetcherWithToken = async (
 const fetcherWithTokenAndBody = async (
   url: string,
   body: any,
-  type?: "POST" | "PUT"
+  type?: "POST" | "PUT" | "PATCH"
 ) => {
   const response = await fetch(url, {
     method: type || "POST",
