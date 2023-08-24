@@ -11,6 +11,7 @@ export function ManagerTable() {
         <BaseTable
           data={managers.sort((a, b) => (a.id > b.id ? -1 : 1))}
           columns={managerColumns}
+          type="manager"
         />
       )}
     </>

@@ -11,6 +11,7 @@ export function EmployeeTable() {
         <BaseTable
           data={employees.sort((a, b) => (a.id > b.id ? -1 : 1))}
           columns={employeeColumns}
+          type="employee"
         />
       )}
     </>

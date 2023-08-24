@@ -17,6 +17,9 @@ import {
 } from "@tanstack/react-table";
 
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
   Table,
   TableBody,
   TableCell,
@@ -27,15 +30,19 @@ import {
 
 import { DataTablePagination } from "../components/data-table-pagination";
 import { DataTableToolbar } from "../components/data-table-toolbar";
+import { CollapsibleMemberEditor } from "./collapsible-member-editor";
+import { MemberType } from "member-types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  type: MemberType;
 }
 
-export function BaseTable<TData, TValue>({
+export function BaseTable<TData extends { id?: string }, TValue>({
   columns,
   data,
+  type,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] =
@@ -92,21 +99,15 @@ export function BaseTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table
+                .getRowModel()
+                .rows.map((row) => (
+                  <CollapsibleMemberEditor
+                    row={row}
+                    key={row.original.id}
+                    type={type}
+                  />
+                ))
             ) : (
               <TableRow>
                 <TableCell

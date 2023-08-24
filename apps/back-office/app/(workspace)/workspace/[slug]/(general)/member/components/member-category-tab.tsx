@@ -21,13 +21,14 @@ import {
   useManagers,
 } from "../../../../../../../lib/hook/swr/useMembers";
 import { ManagerTable } from "./manager-table";
+import { format } from "date-fns";
 
 interface ITabs {
   value: MemberType;
   label: string;
 }
 
-export function MemberCategoryTab({ tasks }: { tasks: any }) {
+export function MemberCategoryTab() {
   const tabs = useRef([
     { value: "employee", label: "신입" },
     { value: "manager", label: "매니저" },
@@ -46,7 +47,7 @@ export function MemberCategoryTab({ tasks }: { tasks: any }) {
     const mockDataForEmployee = {
       name: "NAME",
       email: "ENTER@EMAIL.COM",
-      startDate: new Date().toISOString().slice(0, 10),
+      startDate: format(new Date(), "yyyy-mm-dd"),
     };
     const mockDataForManager = {
       name: "NAME",

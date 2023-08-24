@@ -83,9 +83,7 @@ export const MemberAPI = {
   updateEmployee: async (
     workspaceId: string,
     memberId: string,
-    employeeForm: {
-      // 추가해야함
-    }
+    employeeForm: any
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
       MemberAPI.getMembersEndPoint(workspaceId) +
@@ -93,23 +91,19 @@ export const MemberAPI = {
         "/" +
         memberId,
       employeeForm,
-      "PUT"
+      "PATCH"
     );
     return { response, result };
   },
   updateManager: async (
     workspaceId: string,
     memberId: string,
-    managerForm: {
-      name: string;
-      email: string;
-      // TODO : 더 넣어야 함
-    }
+    managerForm: any
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
       MemberAPI.getMembersEndPoint(workspaceId) + MANAGER_PATH + "/" + memberId,
       managerForm,
-      "PUT"
+      "PATCH"
     );
     return { response, result };
   },
