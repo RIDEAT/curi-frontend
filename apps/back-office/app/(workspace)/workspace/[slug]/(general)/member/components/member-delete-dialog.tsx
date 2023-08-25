@@ -35,8 +35,14 @@ export function MemberDeleteDialog({ memberId }: { memberId: string }) {
     }
   };
 
+  const enterKeyHandler = (e) => {
+    if (e.key === "Enter") {
+      deleteMember();
+    }
+  };
+
   return (
-    <AlertDialogContent>
+    <AlertDialogContent onKeyDown={enterKeyHandler}>
       <AlertDialogHeader>
         <AlertDialogTitle>멤버를 정말 삭제하시겠습니까?</AlertDialogTitle>
         <AlertDialogDescription>

@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import { useCurrentWorkspace } from "../useCurrentWorkspace";
 import { useWorkspaces } from "./useWorkspaces";
+import useSWR from "swr";
+import { WorkspaceAPI } from "../../api/workspace";
 
 const useCurrentRoles = () => {
   const { currentWorkspaceId } = useCurrentWorkspace();
-  const [currentRoles, setCurrentRoles] = useState([]);
-  const { getRolesInWorkspace } = useWorkspaces();
+  const { data, isLoading, error, mutate } = useSWR(
+    currentWorkspaceId
+      ? [`${WorkspaceAPI.getRoles(currentWorkspaceId)}`]
+      : null,
+    ([_]) => WorkspaceAPI.getRoles(currentWorkspaceId)
+  );
 
-  useEffect(() => {
-    if (currentWorkspaceId) {
-      setCurrentRoles(getRolesInWorkspace(currentWorkspaceId));
-    }
-  }, [currentWorkspaceId]);
-
-  return { currentRoles };
+  return {
+    currentRoles: data,
+    isLoading,
+    error,
+    currentRolesMutate: mutate,
+  };
 };
 
 export { useCurrentRoles };

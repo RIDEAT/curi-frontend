@@ -65,7 +65,9 @@ function SequenceCreateForm({ setOpen }: { setOpen: (open: boolean) => void }) {
       setRequesting(true);
       await SequenceAPI.createOne(currentWorkspaceId, currentWorkflowId, {
         name: data.name,
-        roleId: currentRoles.find((role) => role.name === data.role).id,
+        roleId: currentRoles
+          .find((role) => role.name === data.role)
+          .id.toString(),
         dayOffset: Number(data.dayOffset),
         prevSequenceId: data.prevSequence,
       });
@@ -117,19 +119,20 @@ function SequenceCreateForm({ setOpen }: { setOpen: (open: boolean) => void }) {
                     defaultValue={field.value}
                     className="flex flex-col space-y-1"
                   >
-                    {currentRoles.map((role) => (
-                      <FormItem
-                        className="flex items-center space-x-3 space-y-0"
-                        key={role.id}
-                      >
-                        <FormControl>
-                          <RadioGroupItem value={role.name} />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          {role.name}
-                        </FormLabel>
-                      </FormItem>
-                    ))}
+                    {currentRoles &&
+                      currentRoles?.map((role) => (
+                        <FormItem
+                          className="flex items-center space-x-3 space-y-0"
+                          key={role.id}
+                        >
+                          <FormControl>
+                            <RadioGroupItem value={role.name} />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {role.name}
+                          </FormLabel>
+                        </FormItem>
+                      ))}
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />

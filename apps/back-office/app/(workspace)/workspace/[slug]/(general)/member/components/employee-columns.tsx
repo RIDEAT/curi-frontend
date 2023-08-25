@@ -3,6 +3,14 @@ import { Employee } from "./employee-schema";
 import { Badge, Checkbox } from "ui";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
+import { IRole } from "workspace-types";
+
+const employeeActions = [
+  {
+    id: "actions",
+    cell: ({ row }) => <DataTableRowActions type="employee" row={row} />,
+  },
+];
 
 export const employeeColumns: ColumnDef<Employee>[] = [
   //   {
@@ -102,9 +110,32 @@ export const employeeColumns: ColumnDef<Employee>[] = [
       );
     },
   },
-
-  {
-    id: "actions",
-    cell: ({ row }) => <DataTableRowActions type="employee" row={row} />,
-  },
+  ...employeeActions,
 ];
+
+export const getDynamicEmployeeColumns = (roles: IRole[]) => {
+  const dynamicEmployeeColumns = [
+    ...employeeColumns,
+    ...roles
+      .map((role) => {
+        return {
+          accessorKey: role.name,
+          header: ({ column }) => (
+            <DataTableColumnHeader column={column} title={role.name} />
+          ),
+          cell: ({ row }) => {
+            return (
+              <div className="flex space-x-2">
+                <span className="max-w-[500px] truncate font-medium">
+                  {row.getValue(role.name)}
+                </span>
+              </div>
+            );
+          },
+        };
+      })
+      .filter((column) => column.accessorKey !== "신규입사자"),
+  ] as ColumnDef<Employee>[];
+
+  return dynamicEmployeeColumns;
+};

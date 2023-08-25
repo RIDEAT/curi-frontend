@@ -54,7 +54,7 @@ export const MemberAPI = {
       MemberAPI.getMembersEndPoint(workspaceId) + EMPLOYEE_PATH,
       {
         ...employeeFormData,
-        wid: workspaceId,
+        wid: Number(workspaceId),
         phoneNum: "010-0000-0000",
         department: "미정",
         managers: [],
