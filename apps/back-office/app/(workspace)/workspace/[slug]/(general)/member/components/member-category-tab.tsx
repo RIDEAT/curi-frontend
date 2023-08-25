@@ -47,7 +47,7 @@ export function MemberCategoryTab() {
     const mockDataForEmployee = {
       name: "NAME",
       email: "ENTER@EMAIL.COM",
-      startDate: format(new Date(), "yyyy-mm-dd"),
+      startDate: format(new Date(), "yyyy-MM-dd"),
     };
     const mockDataForManager = {
       name: "NAME",
@@ -66,7 +66,7 @@ export function MemberCategoryTab() {
 
   return (
     <Tabs defaultValue={tabs.current[0].value}>
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 justify-between items-center">
         <TabsList className="grid grid-cols-2 w-[250px]">
           {tabs.current.map((tab) => (
             <TabsTrigger
@@ -80,7 +80,8 @@ export function MemberCategoryTab() {
         </TabsList>
         {!requesting ? (
           <Button variant="outline" size="sm" onClick={createMember}>
-            <PlusIcon className="h-4 w-4" />
+            <PlusIcon className="h-4 w-4 mr-2" />
+            추가하기
           </Button>
         ) : (
           <Button variant="outline" size="sm" disabled>

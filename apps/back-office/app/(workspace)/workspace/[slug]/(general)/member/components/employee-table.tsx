@@ -1,6 +1,7 @@
+import { useCurrentRoles } from "../../../../../../../lib/hook/swr/useCurrentRoles";
 import { useEmployees } from "../../../../../../../lib/hook/swr/useMembers";
 import { BaseTable } from "./base-table";
-import { employeeColumns } from "./employee-columns";
+import { employeeColumns, getDynamicEmployeeColumns } from "./employee-columns";
 
 export function EmployeeTable() {
   const { employees } = useEmployees();

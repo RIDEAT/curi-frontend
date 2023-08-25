@@ -84,7 +84,7 @@ export function BaseTable<TData extends { id?: string }, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="border-violet-200">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -114,7 +114,7 @@ export function BaseTable<TData extends { id?: string }, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  멤버를 추가해주세요.
                 </TableCell>
               </TableRow>
             )}

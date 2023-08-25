@@ -1,6 +1,6 @@
 "use client";
 
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
+import { DotsHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Row } from "@tanstack/react-table";
 
 import { AlertDialog, AlertDialogTrigger, Button } from "ui";
@@ -16,6 +16,7 @@ import { MemberType } from "member-types";
 import { managerSchema } from "./manager-schema";
 import { MemberDeleteDialog } from "./member-delete-dialog";
 import { useState } from "react";
+import { Edit2Icon, Trash2Icon } from "lucide-react";
 
 interface DataTableRowActionsProps<TData> {
   type: MemberType;
@@ -34,35 +35,26 @@ export function DataTableRowActions<TData>({
   const [targetId, setTargetId] = useState("");
 
   return (
-    <DropdownMenu>
-      <AlertDialog>
-        <DropdownMenuTrigger asChild>
+    <AlertDialog>
+      <div className="flex gap-2">
+        <Button
+          variant="ghost"
+          className="m-0 flex justify-start h-8 hover:bg-stone-200"
+        >
+          <Edit2Icon className="h-4 w-4 text-stone-700 " />
+        </Button>
+        <AlertDialogTrigger asChild>
           <Button
             variant="ghost"
-            className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+            className="m-0 flex justify-start h-8 hover:bg-red-100"
+            onClick={() => setTargetId(member.id)}
           >
-            <DotsHorizontalIcon className="h-4 w-4" />
-            <span className="sr-only">Open menu</span>
+            <Trash2Icon className="h-4 w-4 text-red-500" />
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[50px]">
-          <DropdownMenuItem className="hover:cursor-pointer">
-            수정하기
-          </DropdownMenuItem>
-          <DropdownMenuItem className="p-0 text-red-500 focus:text-red-500 hover:cursor-pointer">
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="ghost"
-                className="w-full p-0 m-0 flex justify-start h-8"
-                onClick={() => setTargetId(member.id)}
-              >
-                <div className="ml-2">삭제하기</div>
-              </Button>
-            </AlertDialogTrigger>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
+        </AlertDialogTrigger>
+
         <MemberDeleteDialog memberId={targetId} />
-      </AlertDialog>
-    </DropdownMenu>
+      </div>
+    </AlertDialog>
   );
 }
