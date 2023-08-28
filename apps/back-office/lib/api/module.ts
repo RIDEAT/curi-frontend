@@ -1,4 +1,4 @@
-import { IModule, ModuleType } from "workflow-types";
+import { IModule } from "workflow-types";
 import {
   MODULES_PATH,
   RESOURSE_API_URL,
@@ -7,6 +7,7 @@ import {
   WORKSPACES_PATH,
 } from "../constant/url";
 import { fetcherWithTokenAndBody } from "../utils/fetcher";
+import { ModuleType } from "ui";
 
 export const ModuleAPI = {
   getModuleEndPoint: (
@@ -35,15 +36,13 @@ export const ModuleAPI = {
     );
     return result as IModule;
   },
-  update: async (
+  updateOrder: async (
     workspaceId: string,
     workflowId: string,
     sequenceId: string,
     moduleId: string,
     moduleInfo: {
       name: string;
-      type: ModuleType;
-      content: any;
       order: number;
     }
   ) => {
@@ -54,7 +53,7 @@ export const ModuleAPI = {
         sequenceId
       )}/${moduleId}`,
       moduleInfo,
-      "PUT"
+      "PATCH"
     );
     return result as IModule;
   },

@@ -7,7 +7,14 @@ const useCurrentWorkflow = () => {
 
   const extractId = (pathname: string) => {
     const splitted = pathname.split("/");
-    return splitted[splitted.length - 1];
+
+    const workflowIndex = splitted.indexOf("workflow");
+
+    if (workflowIndex !== -1 && splitted.length > workflowIndex + 1) {
+      return splitted[workflowIndex + 1];
+    }
+
+    return null;
   };
 
   useEffect(() => {

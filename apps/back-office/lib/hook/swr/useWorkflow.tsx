@@ -3,10 +3,15 @@ import { WorkflowAPI } from "../../api/workflow";
 import { useCurrentWorkspace } from "../useCurrentWorkspace";
 import { ISequence } from "workflow-types";
 import { useEffect, useState } from "react";
+import { IRole } from "workspace-types";
+import { EMPLOYEE_NAME } from "../../constant/role";
 
 const useWorkflow = (workflowId: string) => {
   const { currentWorkspaceId } = useCurrentWorkspace();
+
   const [filteredSequences, setFilteredSequences] = useState<ISequence[][]>([]);
+  const [requiredRoles, setRequiredRoles] = useState<IRole[]>([]);
+
   const { data, isLoading, error, mutate } = useSWR(
     workflowId
       ? [WorkflowAPI.getWorkflowsEndPoint(currentWorkspaceId), workflowId]
@@ -15,6 +20,8 @@ const useWorkflow = (workflowId: string) => {
   );
 
   const getSequences = () => {
+    if (!data) return [];
+
     const sequences = [...data?.sequences] || ([] as ISequence[]);
     const sortedSequences = sequences.sort((a, b) => a.dayOffset - b.dayOffset);
 
@@ -38,11 +45,15 @@ const useWorkflow = (workflowId: string) => {
   useEffect(() => {
     if (data) {
       setFilteredSequences(getSequences());
+      setRequiredRoles(
+        data.requiredRoles.filter((role) => role.name !== EMPLOYEE_NAME)
+      );
     }
   }, [data]);
 
   return {
     workflow: data,
+    requiredRoles,
     isLoading,
     error,
     workflowMutate: mutate,

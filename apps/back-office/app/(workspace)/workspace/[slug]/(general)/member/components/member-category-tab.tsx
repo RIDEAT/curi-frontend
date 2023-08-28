@@ -65,8 +65,8 @@ export function MemberCategoryTab() {
   };
 
   return (
-    <Tabs defaultValue={tabs.current[0].value}>
-      <div className="flex gap-2 justify-between items-center">
+    <Tabs defaultValue={tabs.current[0].value} className="h-full">
+      <div className="flex gap-2 items-center">
         <TabsList className="grid grid-cols-2 w-[250px]">
           {tabs.current.map((tab) => (
             <TabsTrigger

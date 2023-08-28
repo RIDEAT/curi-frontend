@@ -1,32 +1,34 @@
 import { FinishedIcon } from "./finished-icon";
 import { FormIcon } from "./form-icon";
 import { NotificationIcon } from "./notification-icon";
-import { QuizIcon } from "./quiz-icon";
-import { TextIcon } from "./text-icon";
-import { VideoIcon } from "./video-icon";
+import { NotionIcon } from "./notion-icon";
+import { YoutubeIcon } from "./youtube-icon";
 
 export type ModuleType =
-  | "finished"
-  | "form"
   | "notification"
-  | "quiz"
-  | "text"
-  | "video";
+  | "contents"
+  | "survey"
+  | "finished"
+  | "slack"
+  | "google_docs"
+  | "notion"
+  | "youtube"
+  | "google_form"
+  | "google_drive"
+  | "web_url";
 
 const getModuleIcon = (type: ModuleType) => {
   switch (type) {
     case "finished":
       return <FinishedIcon />;
-    case "form":
+    case "survey":
       return <FormIcon />;
     case "notification":
       return <NotificationIcon />;
-    case "quiz":
-      return <QuizIcon />;
-    case "text":
-      return <TextIcon />;
-    case "video":
-      return <VideoIcon />;
+    case "notion":
+      return <NotionIcon />;
+    case "youtube":
+      return <YoutubeIcon />;
     default:
       return <></>;
   }

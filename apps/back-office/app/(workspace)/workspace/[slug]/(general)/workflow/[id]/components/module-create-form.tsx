@@ -14,15 +14,17 @@ import {
   FormMessage,
   Input,
   LoadingButton,
+  ModuleType,
   RadioGroup,
   RadioGroupItem,
+  getModuleIcon,
   pushFailToast,
   pushSuccessToast,
 } from "ui";
 import { useState } from "react";
 import { useWorkflow } from "../../../../../../../../lib/hook/swr/useWorkflow";
 import { ModuleAPI } from "../../../../../../../../lib/api/module";
-import { IModule, ModuleType } from "workflow-types";
+import { IModule } from "workflow-types";
 import {
   moduleNameSchema,
   moduleTypeSchema,
@@ -31,14 +33,14 @@ import { BellIcon, BoxIcon } from "@radix-ui/react-icons";
 
 const moduleTypes = [
   {
-    value: "notification",
-    label: "알림",
-    icon: <BellIcon />,
+    value: "notion",
+    label: "노션",
+    icon: getModuleIcon("notion"),
   },
   {
-    value: "contents",
-    label: "컨텐츠",
-    icon: <BoxIcon />,
+    value: "youtube",
+    label: "youtube",
+    icon: getModuleIcon("youtube"),
   },
 ];
 
@@ -136,7 +138,7 @@ function ModuleCreateForm({
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex flex-col space-y-1"
+                    className="flex gap-6 flex-wrap"
                   >
                     {moduleTypes.map((type) => (
                       <FormItem
@@ -144,10 +146,12 @@ function ModuleCreateForm({
                         key={type.value}
                       >
                         <FormControl>
-                          <RadioGroupItem value={type.label} />
+                          <RadioGroupItem value={type.label}>
+                            <div>dd</div>
+                          </RadioGroupItem>
                         </FormControl>
                         <FormLabel className="font-normal">
-                          {type.label}
+                          {type.icon}
                         </FormLabel>
                       </FormItem>
                     ))}

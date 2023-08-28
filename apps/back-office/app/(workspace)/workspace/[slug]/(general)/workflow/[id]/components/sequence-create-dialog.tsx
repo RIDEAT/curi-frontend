@@ -21,7 +21,8 @@ function SequenceCreateDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
-          <PlusIcon className="h-4 w-4" />
+          <PlusIcon className="h-4 w-4 mr-2" />
+          New
         </Button>
       </DialogTrigger>
       <DialogContent>

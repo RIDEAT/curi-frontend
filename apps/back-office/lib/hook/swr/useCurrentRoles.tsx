@@ -3,6 +3,7 @@ import { useCurrentWorkspace } from "../useCurrentWorkspace";
 import { useWorkspaces } from "./useWorkspaces";
 import useSWR from "swr";
 import { WorkspaceAPI } from "../../api/workspace";
+import { EMPLOYEE_NAME } from "../../constant/role";
 
 const useCurrentRoles = () => {
   const { currentWorkspaceId } = useCurrentWorkspace();
@@ -15,6 +16,7 @@ const useCurrentRoles = () => {
 
   return {
     currentRoles: data,
+    managerRoles: data?.filter((role) => role.name !== EMPLOYEE_NAME),
     isLoading,
     error,
     currentRolesMutate: mutate,

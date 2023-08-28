@@ -37,7 +37,6 @@ function CollapsibleMemberEditor({
               onClick={() => setIsOpen(!isOpen)}
               className={cn(
                 "cursor-pointer",
-
                 isOpen ? "bg-violet-50 hover:bg-violet-50" : ""
               )}
             >
