@@ -25,7 +25,7 @@ function Slack({ code }: { code: string }) {
   }, []);
 
   const redirectToSetting = () => {
-    router.replace(`/workspace/${workspaceId}/setting`);
+    router.replace(`/workspace/${workspaceId}/setting/slack`);
   };
 
   const requestSlackConnection = async () => {
