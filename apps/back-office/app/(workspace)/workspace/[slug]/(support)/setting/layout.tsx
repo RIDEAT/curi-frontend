@@ -23,6 +23,10 @@ const sidebarNavItems = (slug: string) => [
     title: "구독 정보",
     href: `/workspace/${slug}/setting/billing`,
   },
+  {
+    title: "슬랙 연동",
+    href: `/workspace/${slug}/setting/slack`,
+  }
 ];
 
 interface SettingsLayoutProps {
