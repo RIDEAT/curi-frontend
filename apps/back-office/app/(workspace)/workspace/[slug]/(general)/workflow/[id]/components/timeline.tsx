@@ -24,7 +24,7 @@ function Timeline() {
       <div className="sticky top-0 ml-2">
         <SequenceCreateDialog />
       </div>
-      <div className="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center mt-2">
         {filteredSequences.length > 0 &&
           filteredSequences?.map((sequences) => (
             <TimeBoxes

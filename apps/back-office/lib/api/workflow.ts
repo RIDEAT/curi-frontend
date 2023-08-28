@@ -54,20 +54,24 @@ export const WorkflowAPI = {
   launch: async (
     workspaceId: string,
     workflowId: string,
-    memberId: number,
-    keyDate: string,
-    members: { memberId: string; roleId: string }[]
+    requestForm: {
+      memberId: number;
+      keyDate: string;
+      members: { memberId: string; roleId: string }[];
+    }[]
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
       `${WorkflowAPI.getWorkflowsEndPoint(workspaceId)}/${workflowId}/launch`,
-      {
-        memberId: Number(memberId),
-        keyDate: format(new Date(keyDate), "yyyy-MM-dd"),
-        members: members.map((member) => ({
+
+      requestForm.map((request) => ({
+        ...request,
+        keyDate: format(new Date(request.keyDate), "yyyy-MM-dd"),
+        members: request.members.map((member) => ({
           memberId: Number(member.memberId),
           roleId: Number(member.roleId),
         })),
-      },
+      })),
+
       "POST"
     );
     return { response, result };

@@ -6,6 +6,8 @@ import {
   Card,
   CardContent,
   CardHeader,
+  LoadingCircle,
+  Separator,
   pushFailToast,
 } from "ui";
 import { WorkflowLaunchForm } from "./components/workflow-launch-form";
@@ -23,6 +25,23 @@ export interface ILaunchTargetData {
   members: any[];
 }
 
+export interface ILaunchedResult {
+  name: string;
+  employees: {
+    id: string;
+    name: string;
+    email: string;
+    keyDate: string;
+    managers: { id: string; name: string; roleId: string; roleName: string }[];
+    department: string;
+    phoneNum: string;
+    type: string;
+  }[];
+  launchedSequenceResponses: {
+    name: string;
+  }[];
+}
+
 export default function Launch() {
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { currentWorkflowId } = useCurrentWorkflow();
@@ -36,12 +55,12 @@ export default function Launch() {
     },
   ] as ILaunchTargetData[]);
   const [filteredLaunchTargetData, setFilteredLaunchTargetData] = useState([]);
-  const [success, setSuccess] = useState(0);
-  const [failed, setFailed] = useState(0);
   const [isRequesting, setIsRequesting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [launchedResult, setLaunchedResult] = useState([]);
+  const [launchedResult, setLaunchedResult] = useState<ILaunchedResult>(
+    {} as ILaunchedResult
+  );
 
   const addMember = () => {
     setLaunchTargetData([
@@ -80,28 +99,21 @@ export default function Launch() {
     if (checkAllFieldsRequired()) {
       setIsRequesting(true);
       setIsSubmitted(true);
-      setSuccess(0);
-      setFailed(0);
 
-      for (let i = 0; i < filteredLaunchTargetData.length; i++) {
-        const data = filteredLaunchTargetData[i];
-        const { response, result } = await WorkflowAPI.launch(
-          currentWorkspaceId,
-          currentWorkflowId,
-          data.memberId,
-          data.keyDate,
-          data.members
-        );
+      const { response, result } = await WorkflowAPI.launch(
+        currentWorkspaceId,
+        currentWorkflowId,
+        filteredLaunchTargetData.map((data) => ({
+          keyDate: data.keyDate,
+          memberId: data.memberId,
+          members: data.members,
+        }))
+      );
 
-        if (response.status === 201) {
-          setSuccess((prev) => prev + 1);
-          console.log(response, result);
-          setLaunchedResult((prev) => [...prev, result]);
-        } else {
-          setFailed((prev) => prev + 1);
-          console.log(response, result);
-        }
+      if (response.status === 201) {
+        setLaunchedResult(result);
       }
+      setIsRequesting(false);
     } else {
       pushFailToast("모든 필드를 입력해주세요.", "필수 필드가 비어있습니다.");
     }
@@ -117,7 +129,7 @@ export default function Launch() {
   }, [launchTargetData]);
 
   return (
-    <div className="h-[90vh] p-5">
+    <div className="h-[91vh] p-5 overflow-scroll">
       <Card>
         {!isSubmitted ? (
           <>
@@ -161,7 +173,7 @@ export default function Launch() {
             <CardHeader>
               <div className="flex justify-between">
                 <div>
-                  <h3 className="text-lg font-bold hover:cursor-pointer">
+                  <h3 className="text-xl font-bold hover:cursor-pointer">
                     워크플로우 실행 완료
                   </h3>
                   <p className="text-sm text-gray-500">
@@ -172,7 +184,7 @@ export default function Launch() {
                 <div>
                   <Button
                     className="bg-violet-600 hover:bg-violet-700"
-                    onClick={() => setIsSubmitted(true)}
+                    onClick={() => setIsSubmitted(false)}
                   >
                     돌아가기
                   </Button>
@@ -181,33 +193,90 @@ export default function Launch() {
             </CardHeader>
             <CardContent>
               <>
-                {launchedResult.map((result) => (
-                  <Card key={result.id}>
-                    <CardHeader>
-                      <div className="flex justify-between">
-                        <div className="flex flex-col gap-2">
-                          <h3 className="text-lg font-bold hover:cursor-pointer">
-                            {result.name}
-                          </h3>
-                          <div className="flex gap-2 items-center">
-                            <Badge variant="outline">D-day (D-0)</Badge>
-                            <p className="text-sm text-gray-500">
-                              {result.keyDate}
-                            </p>
-                          </div>
-                        </div>
+                <Separator className="mb-4" />
+                {!isRequesting ? (
+                  <div className="flex justify-between">
+                    <div className="flex-1 flex flex-col gap-5 pr-2">
+                      <div className="flex flex-col gap-2">
+                        <div className="text-lg font-semibold">워크플로우</div>
+                        <Card className="font-semibold">
+                          <CardHeader>{launchedResult.name}</CardHeader>
+                        </Card>
                       </div>
-                    </CardHeader>
-                    <CardContent></CardContent>
-                    <div>id : {result.id}</div>
-                    <div>name : {result.name}</div>
-                    <div>email : {result.email}</div>
-                    <div>role : {result.role}</div>
-                    <div>keyDate : {result.keyDate}</div>
-                    <div>status : {result.status}</div>
-                    <div>message : {result.message}</div>
-                  </Card>
-                ))}
+                      <div className="flex flex-col gap-2">
+                        <div className="text-lg font-semibold">시퀀스</div>
+                        {launchedResult?.launchedSequenceResponses?.map(
+                          (sequence, index) => (
+                            <Card className="font-semibold" key={index}>
+                              <CardHeader className="p-4">
+                                {sequence.name}
+                              </CardHeader>
+                            </Card>
+                          )
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex-1 flex flex-col gap-2">
+                      <div className="text-lg font-semibold">신규입사자</div>
+                      {launchedResult?.employees?.map((employee) => (
+                        <Card key={employee.id}>
+                          <CardHeader>
+                            <div className="flex gap-2 items-center">
+                              <div className="font-semibold">
+                                {employee.name}
+                              </div>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="flex flex-col gap-2">
+                              <div className="flex gap-2 items-center">
+                                <Badge
+                                  className="w-[70px] flex justify-center"
+                                  variant="outline"
+                                >
+                                  D-Day
+                                </Badge>
+                                <div className="font-base text-sm">
+                                  {employee.keyDate}
+                                </div>
+                              </div>
+                              <div className="flex gap-2 items-center">
+                                <Badge
+                                  className="w-[70px] flex justify-center"
+                                  variant="outline"
+                                >
+                                  Email
+                                </Badge>
+                                <div className="font-base text-sm">
+                                  {employee.email}
+                                </div>
+                              </div>
+                              <Separator />
+                              {employee.managers?.map((manager) => (
+                                <div
+                                  className="flex gap-2 items-center"
+                                  key={manager.id}
+                                >
+                                  <Badge
+                                    className="w-fit flex justify-center"
+                                    variant="outline"
+                                  >
+                                    {manager.roleName}
+                                  </Badge>
+                                  <div className="font-base text-sm">
+                                    {manager.name}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <LoadingCircle />
+                )}
               </>
             </CardContent>
           </>

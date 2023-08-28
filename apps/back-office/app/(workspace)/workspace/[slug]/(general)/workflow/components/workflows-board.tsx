@@ -36,5 +36,4 @@ function WorkflowsBoard() {
   );
 }
 
-
 export { WorkflowsBoard };

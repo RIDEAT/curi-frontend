@@ -47,15 +47,13 @@ function SequenceBox({
               onChange={setModuleItems}
               onSortEnd={(moduleItems) => {
                 moduleItems.forEach((item, index) => {
-                  ModuleAPI.update(
+                  ModuleAPI.updateOrder(
                     currentWorkspaceId,
                     currentWorkflowId,
                     sequenceId,
                     item.id,
                     {
                       name: item.name,
-                      type: item.type,
-                      content: {}, // TODO : content
                       order: item.order,
                     }
                   );

@@ -1,7 +1,7 @@
 declare module "workflow-types" {
+  import { ModuleType } from "ui";
   import { IRole } from "workspace-types";
 
-  type ModuleType = "notification" | "contents" | "survey" | "finished";
   interface IModule {
     id: string;
     name: string;
