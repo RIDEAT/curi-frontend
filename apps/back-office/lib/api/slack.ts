@@ -1,5 +1,5 @@
 import { RESOURSE_API_URL, SLACK_OAUTH_PATH } from "../constant/url";
-import { fetcherWithTokenAndBody } from "../utils/fetcher";
+import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 
 export const SlackAPI = {
   oauth: async (code: string) => {
@@ -9,6 +9,15 @@ export const SlackAPI = {
         code: code,
       },
       "POST"
+    );
+    return result;
+  },
+
+  deleteAuth: async () => {
+    const { response, result } = await fetcherWithToken(
+      RESOURSE_API_URL + SLACK_OAUTH_PATH,
+      null,
+      "DELETE"
     );
     return result;
   },
