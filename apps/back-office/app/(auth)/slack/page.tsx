@@ -31,9 +31,10 @@ function Slack({ code }: { code: string }) {
   const requestSlackConnection = async () => {
     try {
       const result = await SlackAPI.oauth(code);
-      redirectToSetting();
+      console.log(result);
+      //redirectToSetting();
     } catch (error) {
-      redirectToSetting();
+      //redirectToSetting();
     }
   };
 
