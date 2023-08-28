@@ -1,10 +1,16 @@
-import { RESOURSE_API_URL, SLACK_OAUTH_PATH } from "../constant/url";
+import {
+  RESOURSE_API_URL,
+  SLACK_IS_AUTHORIZED,
+  SLACK_OAUTH_PATH,
+  SLACK_PATH,
+} from "../constant/url";
 import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 
 export const SlackAPI = {
+  slackEndPoint: RESOURSE_API_URL + SLACK_PATH,
   oauth: async (code: string) => {
     const { response, result } = await fetcherWithTokenAndBody(
-      RESOURSE_API_URL + SLACK_OAUTH_PATH,
+      SlackAPI.slackEndPoint + SLACK_OAUTH_PATH,
       {
         code: code,
       },
@@ -12,12 +18,17 @@ export const SlackAPI = {
     );
     return result;
   },
-
   deleteAuth: async () => {
     const { response, result } = await fetcherWithToken(
-      RESOURSE_API_URL + SLACK_OAUTH_PATH,
+      SlackAPI.slackEndPoint + SLACK_OAUTH_PATH,
       null,
       "DELETE"
+    );
+    return result;
+  },
+  isAuthorized: async () => {
+    const { response, result } = await fetcherWithToken(
+      SlackAPI.slackEndPoint + SLACK_IS_AUTHORIZED
     );
     return result;
   },
