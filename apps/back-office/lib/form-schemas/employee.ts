@@ -1,9 +1,10 @@
 import { z } from "zod";
+import { EMPLOYEE_NAME } from "../constant/role";
 
 const employeeNameSchema = z
   .string()
   .nonempty({
-    message: "신규입사자의 이름을 입력해주세요.",
+    message: `${EMPLOYEE_NAME}의 이름을 입력해주세요.`,
   })
   .max(30, {
     message: "이름은 30자 이내로 입력해주세요.",

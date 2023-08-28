@@ -34,7 +34,6 @@ function EditorTopBar() {
         </Button>
         <div className="text-xl font-semibold">{workflow?.name || ""}</div>
       </div>
-      <SequenceCreateDialog />
     </div>
   );
 }

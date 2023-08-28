@@ -29,6 +29,7 @@ function WorkflowsBoard() {
               workflowId={workflow.id}
               createdAt={workflow.createdDate}
               updatedAt={workflow.updatedDate}
+              requiredRoles={workflow.requiredRoles}
             />
           ))}
     </div>

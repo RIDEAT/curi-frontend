@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ISequence } from "workflow-types";
 import { TimeLineVerticalElement } from "./timeline-vertical-element";
 import { EmptySequenceBox, SequenceBox } from "./sequence-box";
+import { EMPLOYEE_NAME } from "../../../../../../../../lib/constant/role";
 
 export interface TimeBoxProps {
   date: string;
@@ -21,10 +22,10 @@ function TimeBoxes({ date, sequences }: TimeBoxProps) {
   useEffect(() => {
     if (sequences) {
       setEmployeeSequence(
-        sequences.filter((sequence) => sequence.role.name == "신규입사자")
+        sequences.filter((sequence) => sequence.role.name == EMPLOYEE_NAME)
       );
       setManagerSequence(
-        sequences.filter((sequence) => sequence.role.name != "신규입사자")
+        sequences.filter((sequence) => sequence.role.name != EMPLOYEE_NAME)
       );
     }
   }, [sequences]);

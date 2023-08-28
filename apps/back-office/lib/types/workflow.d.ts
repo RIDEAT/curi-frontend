@@ -28,5 +28,6 @@ declare module "workflow-types" {
     createdDate: Date;
     updatedDate: Date;
     sequences: ISequence[];
+    requiredRoles: IRole[];
   }
 }

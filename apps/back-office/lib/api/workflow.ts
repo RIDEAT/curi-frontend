@@ -5,6 +5,7 @@ import {
   WORKSPACES_PATH,
 } from "../constant/url";
 import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
+import { format } from "date-fns";
 
 export const WorkflowAPI = {
   getWorkflowsEndPoint: (workspaceId: string) => {
@@ -47,6 +48,27 @@ export const WorkflowAPI = {
       `${WorkflowAPI.getWorkflowsEndPoint(workspaceId)}/${workflowId}`,
       { name },
       "PUT"
+    );
+    return { response, result };
+  },
+  launch: async (
+    workspaceId: string,
+    workflowId: string,
+    memberId: number,
+    keyDate: string,
+    members: { memberId: string; roleId: string }[]
+  ) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      `${WorkflowAPI.getWorkflowsEndPoint(workspaceId)}/${workflowId}/launch`,
+      {
+        memberId: Number(memberId),
+        keyDate: format(new Date(keyDate), "yyyy-MM-dd"),
+        members: members.map((member) => ({
+          memberId: Number(member.memberId),
+          roleId: Number(member.roleId),
+        })),
+      },
+      "POST"
     );
     return { response, result };
   },

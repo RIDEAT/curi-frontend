@@ -4,6 +4,7 @@ import { Badge, Checkbox } from "ui";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 import { IRole } from "workspace-types";
+import { EMPLOYEE_NAME } from "../../../../../../../lib/constant/role";
 
 const employeeActions = [
   {
@@ -134,7 +135,7 @@ export const getDynamicEmployeeColumns = (roles: IRole[]) => {
           },
         };
       })
-      .filter((column) => column.accessorKey !== "신규입사자"),
+      .filter((column) => column.accessorKey !== EMPLOYEE_NAME),
   ] as ColumnDef<Employee>[];
 
   return dynamicEmployeeColumns;

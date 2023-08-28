@@ -20,8 +20,6 @@ export const MemberAPI = {
         (parsed) => {
           const employees = parsed as IEmployee[];
           return employees.map((employee) => {
-            employee.startDate = employee.detail.startDate;
-            employee.managers = employee.detail.managers;
             employee.id = employee.id.toString();
             return employee;
           });
@@ -51,13 +49,13 @@ export const MemberAPI = {
     }
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
-      MemberAPI.getMembersEndPoint(workspaceId) + EMPLOYEE_PATH,
+      MemberAPI.getMembersEndPoint(workspaceId),
       {
         ...employeeFormData,
         wid: Number(workspaceId),
         phoneNum: "010-0000-0000",
         department: "미정",
-        managers: [],
+        type: "employee",
       }
     );
     return { response, result };
@@ -70,12 +68,14 @@ export const MemberAPI = {
     }
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
-      MemberAPI.getMembersEndPoint(workspaceId) + MANAGER_PATH,
+      MemberAPI.getMembersEndPoint(workspaceId),
       {
         ...managerForm,
         wid: workspaceId,
         phoneNum: "010-0000-0000",
+        startDate: "2023-01-01",
         department: "미정",
+        type: "manager",
       }
     );
     return { response, result };
@@ -86,10 +86,7 @@ export const MemberAPI = {
     employeeForm: any
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
-      MemberAPI.getMembersEndPoint(workspaceId) +
-        EMPLOYEE_PATH +
-        "/" +
-        memberId,
+      MemberAPI.getMembersEndPoint(workspaceId) + "/" + memberId,
       employeeForm,
       "PATCH"
     );
@@ -101,7 +98,7 @@ export const MemberAPI = {
     managerForm: any
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
-      MemberAPI.getMembersEndPoint(workspaceId) + MANAGER_PATH + "/" + memberId,
+      MemberAPI.getMembersEndPoint(workspaceId) + "/" + memberId,
       managerForm,
       "PATCH"
     );

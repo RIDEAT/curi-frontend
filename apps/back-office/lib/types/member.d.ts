@@ -8,7 +8,6 @@ declare module "member-types" {
     email: string;
     phoneNum: string;
     department: string;
-    managers: IRelatedManagerInfo[];
     type: MemberType;
   }
 
@@ -21,10 +20,6 @@ declare module "member-types" {
 
   interface IEmployee extends IMember {
     startDate: string;
-    detail: {
-      startDate: string;
-      managers: IRelatedManagerInfo[];
-    };
   }
 
   interface IManager extends IMember {}
