@@ -37,6 +37,11 @@ export const SLACK_PATH = "/slack";
 export const SLACK_OAUTH_PATH = "/oauth";
 export const SLACK_IS_AUTHORIZED = "/isAuthorized";
 
+// GOOGLE
+export const GOOGLE_PATH = "/google";
+export const GOOGLE_OAUTH_PATH = "/oauth";
+export const GOOGLE_IS_AUTHORIZED = "/isAuthorized";
+
 // -----------------------------
 // AUTH
 export const AUTH_API_URL = "https://auth.dev.onbird.team";
