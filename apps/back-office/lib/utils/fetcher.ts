@@ -20,6 +20,7 @@ const fetcherWithToken = async (
     headers: await getHeaderWithAuth(),
     credentials: "include",
   });
+
   const result = await response.json();
 
   if (callback) {

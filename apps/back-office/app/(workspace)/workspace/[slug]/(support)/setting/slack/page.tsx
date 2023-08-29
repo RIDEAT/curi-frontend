@@ -14,24 +14,17 @@ import {
 import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWorkspace";
 import { SlackAPI } from "../../../../../../../lib/api/slack";
 import { useSlack } from "../../../../../../../lib/hook/swr/useSlack";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function SettingsDisplayPage() {
-  const router = useRouter();
   const { currentWorkspaceId } = useCurrentWorkspace();
-  const { isAuthorized, isLoading, error } = useSlack();
+  const { isAuthorized, isLoading, error, mutateSlack } = useSlack();
   const [isRequesting, setIsRequesting] = useState(false);
-
-  const redirectSlackIntegration = () => {
-    router.push(
-      "https://slack.com/oauth/v2/authorize?scope=channels%3Aread%2Cgroups%3Aread%2Cmpim%3Aread%2Cim%3Aread%2Cchat%3Awrite%2Cchannels%3Awrite.invites%2Cchannels%3Awrite.topic%2Cgroups%3Awrite%2Cmpim%3Awrite%2Cim%3Awrite%2Cchannels%3Amanage&amp;user_scope=&amp;redirect_uri=https%3A%2F%2Fapp.dev.onbird.team%2Fslack&amp;client_id=5305401263955.5790799264304"
-    );
-  };
 
   const deleteSlackPermission = async () => {
     setIsRequesting(true);
     await SlackAPI.deleteAuth();
+    await mutateSlack();
     setIsRequesting(false);
   };
 
