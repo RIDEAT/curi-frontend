@@ -49,3 +49,8 @@ export const VERIFY_PATH = "/verify";
 export const LOGOUT_PATH = "/logout";
 
 export const FIREBASE_PATH = "/firebase";
+
+// GOOGLE
+export const GOOGLE_PATH = "/google";
+export const GOOGLE_IS_AUTHORIZED = "/isAuthorized";
+
