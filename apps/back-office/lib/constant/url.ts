@@ -32,6 +32,9 @@ export const SEQUENCES_PATH = "/sequences";
 // MODULE
 export const MODULES_PATH = "/modules";
 
+// CONTENT
+export const CONTENT_PATH = "/content";
+
 // SLACK
 export const SLACK_PATH = "/slack";
 export const SLACK_OAUTH_PATH = "/oauth";
@@ -45,6 +48,9 @@ export const AUTHROIZE_PATH = "/authorize";
 export const VERIFY_PATH = "/verify";
 export const LOGOUT_PATH = "/logout";
 
+export const FIREBASE_PATH = "/firebase";
+
 // GOOGLE
 export const GOOGLE_PATH = "/google";
 export const GOOGLE_IS_AUTHORIZED = "/isAuthorized";
+

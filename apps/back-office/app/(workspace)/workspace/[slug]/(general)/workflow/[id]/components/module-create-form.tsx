@@ -13,10 +13,12 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  LoadingButton,
+  LoadingCircle,
   ModuleType,
+  NOTION_MODULE_VALUE,
   RadioGroup,
   RadioGroupItem,
+  YOUTUBE_MODULE_VALUE,
   getModuleIcon,
   pushFailToast,
   pushSuccessToast,
@@ -29,18 +31,17 @@ import {
   moduleNameSchema,
   moduleTypeSchema,
 } from "../../../../../../../../lib/form-schemas/module";
-import { BellIcon, BoxIcon } from "@radix-ui/react-icons";
 
 const moduleTypes = [
   {
-    value: "notion",
+    value: NOTION_MODULE_VALUE,
     label: "노션",
-    icon: getModuleIcon("notion", "lg"),
+    icon: getModuleIcon(NOTION_MODULE_VALUE, "lg"),
   },
   {
-    value: "youtube",
+    value: YOUTUBE_MODULE_VALUE,
     label: "youtube",
-    icon: getModuleIcon("youtube", "lg"),
+    icon: getModuleIcon(YOUTUBE_MODULE_VALUE, "lg"),
   },
 ];
 
@@ -171,7 +172,13 @@ function ModuleCreateForm({
               생성하기
             </Button>
           ) : (
-            <LoadingButton />
+            <Button
+              type="submit"
+              className="w-full bg-violet-600 hover:bg-violet-700"
+              disabled={true}
+            >
+              <LoadingCircle />
+            </Button>
           )}
         </div>
       </form>

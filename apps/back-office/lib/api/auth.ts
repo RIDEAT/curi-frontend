@@ -1,6 +1,7 @@
 import {
   AUTHROIZE_PATH,
   AUTH_API_URL,
+  FIREBASE_PATH,
   LOGOUT_PATH,
   VERIFY_PATH,
 } from "../constant/url";
@@ -13,14 +14,17 @@ export const AuthAPI = {
    */
   getTokens: async (accessToken: string) => {
     try {
-      const response = await fetch(AUTH_API_URL + AUTHROIZE_PATH, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + accessToken,
-        },
-        credentials: "include",
-      });
+      const response = await fetch(
+        AUTH_API_URL + AUTHROIZE_PATH + FIREBASE_PATH,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+          credentials: "include",
+        }
+      );
 
       if (!response.ok) {
         throw new Error("서버에서 토큰을 받아오지 못했습니다.");

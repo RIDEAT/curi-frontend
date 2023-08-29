@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Badge, getModuleIcon } from "ui";
+import { Badge, ModuleType, getModuleIcon } from "ui";
 
 import { IModule } from "workflow-types";
 import { SortableList } from "./sortable-list";
@@ -76,10 +76,7 @@ function SequenceBox({
                     onClick={moduleClickHandler}
                     className="hover:cursor-pointer hover:bg-stone-100"
                   >
-                    <div className="flex gap-2 ml-2 items-center">
-                      {getModuleIcon(item.type, "sm") || <TextIcon />}
-                      <p className="text-sm font-semibold">{item.name}</p>
-                    </div>
+                    <ModuleInfo type={item.type} name={item.name} />
                     <SortableList.DragHandle />
                   </SortableList.Item>
                 );
@@ -93,6 +90,15 @@ function SequenceBox({
           />
         </div>
       </div>
+    </div>
+  );
+}
+
+function ModuleInfo({ type, name }: { type: ModuleType; name: string }) {
+  return (
+    <div className="flex gap-2 ml-2 items-center">
+      {getModuleIcon(type, "sm") || <TextIcon />}
+      <p className="text-sm font-semibold">{name}</p>
     </div>
   );
 }
