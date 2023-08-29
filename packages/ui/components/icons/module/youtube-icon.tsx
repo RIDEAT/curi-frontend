@@ -1,11 +1,11 @@
-function YoutubeIcon() {
+function YoutubeIcon({ size = "sm" }: { size?: "sm" | "lg" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
-      width="70"
-      height="70"
+      width={size == "lg" ? "70" : "24"}
+      height={size == "lg" ? "70" : "24"}
       viewBox="0 0 48 48"
     >
       <path

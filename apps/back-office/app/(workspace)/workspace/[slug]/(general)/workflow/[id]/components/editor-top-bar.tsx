@@ -15,7 +15,8 @@ function EditorTopBar() {
   const { workflow, isLoading, error } = useWorkflow(currentWorkflowId);
 
   const goWorkflowManager = () => {
-    router.push(`/workspace/${currentWorkspaceId}/workflow`);
+    // router.push(`/workspace/${currentWorkspaceId}/workflow`);
+    router.back();
   };
 
   if (isLoading)

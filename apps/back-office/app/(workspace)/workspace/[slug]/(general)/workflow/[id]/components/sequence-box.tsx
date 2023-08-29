@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Badge } from "ui";
+import { Badge, getModuleIcon } from "ui";
 
 import { IModule } from "workflow-types";
 import { SortableList } from "./sortable-list";
@@ -7,6 +7,9 @@ import { ModuleCreateDialog } from "./module-create-dialog";
 import { ModuleAPI } from "../../../../../../../../lib/api/module";
 import { useCurrentWorkspace } from "../../../../../../../../lib/hook/useCurrentWorkspace";
 import { useCurrentWorkflow } from "../../../../../../../../lib/hook/useCurrentWorkflow";
+import { TextIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 export interface SequenceBoxProps {
   sequenceId: string;
   title: string;
@@ -24,11 +27,18 @@ function SequenceBox({
   stakeholder,
   modules,
 }: SequenceBoxProps) {
+  const router = useRouter();
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { currentWorkflowId } = useCurrentWorkflow();
   const [moduleItems, setModuleItems] = useState(
     [...modules].sort((a, b) => a.order - b.order)
   );
+
+  const moduleClickHandler = (e) => {
+    const currentModuleId = e.currentTarget.id;
+    const targetPath = `/workspace/${currentWorkspaceId}/workflow/${currentWorkflowId}/content/${sequenceId}/${currentModuleId}`;
+    router.push(targetPath);
+  };
 
   return (
     <div className="flex justify-center items-center">
@@ -59,14 +69,21 @@ function SequenceBox({
                   );
                 });
               }}
-              renderItem={(item) => (
-                <SortableList.Item id={item.id}>
-                  <p className="text-sm font-semibold ml-2 flex items-center">
-                    {item.name}
-                  </p>
-                  <SortableList.DragHandle />
-                </SortableList.Item>
-              )}
+              renderItem={(item) => {
+                return (
+                  <SortableList.Item
+                    id={item.id}
+                    onClick={moduleClickHandler}
+                    className="hover:cursor-pointer hover:bg-stone-100"
+                  >
+                    <div className="flex gap-2 ml-2 items-center">
+                      {getModuleIcon(item.type, "sm") || <TextIcon />}
+                      <p className="text-sm font-semibold">{item.name}</p>
+                    </div>
+                    <SortableList.DragHandle />
+                  </SortableList.Item>
+                );
+              }}
             />
           ) : null}
           <ModuleCreateDialog

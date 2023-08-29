@@ -35,12 +35,12 @@ const moduleTypes = [
   {
     value: "notion",
     label: "노션",
-    icon: getModuleIcon("notion"),
+    icon: getModuleIcon("notion", "lg"),
   },
   {
     value: "youtube",
     label: "youtube",
-    icon: getModuleIcon("youtube"),
+    icon: getModuleIcon("youtube", "lg"),
   },
 ];
 

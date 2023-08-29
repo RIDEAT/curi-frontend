@@ -17,7 +17,7 @@ export type ModuleType =
   | "google_drive"
   | "web_url";
 
-const getModuleIcon = (type: ModuleType) => {
+const getModuleIcon = (type: ModuleType, size?: "sm" | "lg") => {
   switch (type) {
     case "finished":
       return <FinishedIcon />;
@@ -26,9 +26,9 @@ const getModuleIcon = (type: ModuleType) => {
     case "notification":
       return <NotificationIcon />;
     case "notion":
-      return <NotionIcon />;
+      return <NotionIcon size={size} />;
     case "youtube":
-      return <YoutubeIcon />;
+      return <YoutubeIcon size={size} />;
     default:
       return <></>;
   }
