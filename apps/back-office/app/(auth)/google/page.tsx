@@ -22,10 +22,8 @@ function Google({ code }: { code: string }) {
   const requestGoogleConnection = async () => {
     try {
       await GoogleAPI.oauth(code);
-      redirectToLogin();
-    } catch (error) {
-      redirectToLogin();
-    }
+    } catch (error) {}
+    redirectToLogin();
   };
 
   useEffect(() => {

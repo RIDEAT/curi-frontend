@@ -1,20 +1,16 @@
 import {
-  RESOURSE_API_URL,
-  GOOGLE_OAUTH_PATH,
-  GOOGLE_PATH,
+  AUTH_API_URL,
+  AUTHROIZE_PATH,
   GOOGLE_IS_AUTHORIZED,
+  GOOGLE_PATH,
 } from "../constant/url";
 import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 
 export const GoogleAPI = {
-  googleEndPoint: RESOURSE_API_URL + GOOGLE_PATH,
+  googleEndPoint: AUTH_API_URL,
   oauth: async (code: string) => {
-    const { response, result } = await fetcherWithTokenAndBody(
-      GoogleAPI.googleEndPoint + GOOGLE_OAUTH_PATH,
-      {
-        code: code,
-      },
-      "POST"
+    const { response, result } = await fetcherWithToken(
+      GoogleAPI.googleEndPoint + AUTHROIZE_PATH + GOOGLE_PATH + "?code=" + code
     );
     return result;
   },
