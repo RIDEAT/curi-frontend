@@ -10,7 +10,8 @@ const pathMapper = {
   },
   "/signup": { path: "/login", display: "로그인" },
   "/logout": { path: "/login", display: "로그인" },
-  "/slack" : {path: "/slack", display: "슬랙연동"},
+  "/slack": { path: "/slack", display: "슬랙연동" },
+  "/google": { path: "/google", display: "구글연동" },
 };
 
 export default function RouterLayout({
