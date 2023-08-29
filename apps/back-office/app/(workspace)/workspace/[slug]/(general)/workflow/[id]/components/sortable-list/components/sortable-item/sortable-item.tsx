@@ -8,6 +8,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import "./sortable-item.css";
+import { cn } from "ui/lib/utils";
 
 interface Props {
   id: UniqueIdentifier;
@@ -25,7 +26,12 @@ const SortableItemContext = createContext<Context>({
   ref() {},
 });
 
-export function SortableItem({ children, id }: PropsWithChildren<Props>) {
+export function SortableItem({
+  children,
+  id,
+  onClick,
+  className,
+}: PropsWithChildren<Props> & { onClick?: (e) => void; className?: string }) {
   const {
     attributes,
     isDragging,
@@ -51,7 +57,13 @@ export function SortableItem({ children, id }: PropsWithChildren<Props>) {
 
   return (
     <SortableItemContext.Provider value={context}>
-      <li className="SortableItem" ref={setNodeRef} style={style}>
+      <li
+        className={cn("SortableItem", className)}
+        ref={setNodeRef}
+        style={style}
+        onClick={onClick}
+        id={id.toString()}
+      >
         {children}
       </li>
     </SortableItemContext.Provider>
