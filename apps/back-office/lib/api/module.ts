@@ -36,6 +36,26 @@ export const ModuleAPI = {
     );
     return result as IModule;
   },
+  updateName: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string,
+    moduleId: string,
+    moduleInfo: {
+      name: string;
+    }
+  ) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      `${ModuleAPI.getModuleEndPoint(
+        workspaceId,
+        workflowId,
+        sequenceId
+      )}/${moduleId}`,
+      moduleInfo,
+      "PATCH"
+    );
+    return result as IModule;
+  },
   updateOrder: async (
     workspaceId: string,
     workflowId: string,

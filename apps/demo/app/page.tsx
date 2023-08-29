@@ -6,10 +6,6 @@ import Image from "next/image";
 
 import {
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,

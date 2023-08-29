@@ -20,14 +20,9 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  LoadingButton,
+  LoadingCircle,
   RadioGroup,
   RadioGroupItem,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
   pushFailToast,
   pushSuccessToast,
 } from "ui";
@@ -185,7 +180,13 @@ function SequenceCreateForm({ setOpen }: { setOpen: (open: boolean) => void }) {
               생성하기
             </Button>
           ) : (
-            <LoadingButton />
+            <Button
+              type="submit"
+              className="w-full bg-violet-600 hover:bg-violet-700"
+              disabled={true}
+            >
+              <LoadingCircle />
+            </Button>
           )}
         </div>
       </form>

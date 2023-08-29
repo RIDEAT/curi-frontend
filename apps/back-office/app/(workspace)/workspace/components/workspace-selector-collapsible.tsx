@@ -15,7 +15,7 @@ import {
 
 import { useWorkspaces } from "../../../../lib/hook/swr/useWorkspaces";
 
-export default function WorkspaceSelectorCollapsible() {
+export function WorkspaceSelectorCollapsible() {
   const { workspaces, isLoading, error } = useWorkspaces();
   const [isRouteLoading, setIsRouteLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +59,7 @@ export default function WorkspaceSelectorCollapsible() {
         variant="outline"
         id={workspaces[0].id}
         onClick={onclickHandler}
+        disabled={isRouteLoading}
       >
         <p>{workspaces[0].name}</p>
         {isRouteLoading ? (
@@ -75,6 +76,7 @@ export default function WorkspaceSelectorCollapsible() {
             variant="outline"
             onClick={onclickHandler}
             id={workspace.id}
+            disabled={isRouteLoading}
           >
             <p>{workspace.name}</p>
             {isRouteLoading ? (

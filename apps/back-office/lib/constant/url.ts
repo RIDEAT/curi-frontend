@@ -32,6 +32,9 @@ export const SEQUENCES_PATH = "/sequences";
 // MODULE
 export const MODULES_PATH = "/modules";
 
+// CONTENT
+export const CONTENT_PATH = "/content";
+
 // SLACK
 export const SLACK_PATH = "/slack";
 export const SLACK_OAUTH_PATH = "/oauth";
@@ -44,3 +47,5 @@ export const AUTH_API_URL = "https://auth.dev.onbird.team";
 export const AUTHROIZE_PATH = "/authorize";
 export const VERIFY_PATH = "/verify";
 export const LOGOUT_PATH = "/logout";
+
+export const FIREBASE_PATH = "/firebase";

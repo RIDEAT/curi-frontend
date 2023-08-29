@@ -13,7 +13,7 @@ const useWorkflow = (workflowId: string) => {
   const [requiredRoles, setRequiredRoles] = useState<IRole[]>([]);
 
   const { data, isLoading, error, mutate } = useSWR(
-    workflowId
+    workflowId && currentWorkspaceId
       ? [WorkflowAPI.getWorkflowsEndPoint(currentWorkspaceId), workflowId]
       : null,
     ([_, workflowId]) => WorkflowAPI.getOne(currentWorkspaceId, workflowId)
