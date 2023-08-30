@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { UserAPI } from "../../../lib/api/user";
 import { AuthAPI } from "../../../lib/api/auth";
 
-export default withAuth(GooglePage, "protected");
+export default withAuth(GooglePage, "auth");
 function GooglePage() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
