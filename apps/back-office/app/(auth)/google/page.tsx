@@ -1,10 +1,11 @@
 "use client";
 
 import withAuth from "../../../components/hoc/withAuth";
-import { GoogleAPI } from "../../../lib/api/google";
+
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { UserAPI } from "../../../lib/api/user";
+import { AuthAPI } from "../../../lib/api/auth";
 
 export default withAuth(GooglePage, "protected");
 function GooglePage() {
@@ -15,18 +16,15 @@ function GooglePage() {
 
 function Google({ code }: { code: string }) {
   const router = useRouter();
-
-  const redirectToLogin = () => {
-    router.replace(`/login`);
-  };
-
   const requestGoogleConnection = async () => {
     try {
-      const result = await GoogleAPI.oauth(code);
-      // await UserAPI.register(result.email)
-      console.log(result.email);
-    } catch (error) {}
-    //redirectToLogin();
+      const result = await AuthAPI.getTokensForGoogle(code);
+      await UserAPI.register(result.userEmail);
+      console.log(result.userEmail);
+    } catch (error) {
+      console.log(error);
+    }
+    router.push("/login");
   };
 
   useEffect(() => {

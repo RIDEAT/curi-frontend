@@ -61,7 +61,7 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
     try {
       const userCredential = await FirebaseAPI.login(email, password);
       const accessToken = await getAccessToken(userCredential.user);
-      const isGetTokens = await AuthAPI.getTokens(accessToken);
+      const isGetTokens = await AuthAPI.getTokensForFirebase(accessToken);
 
       if (!isGetTokens) {
         setErrorMsg("로그인에 실패했습니다. 다시 시도해주세요.");

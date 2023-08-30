@@ -3,14 +3,8 @@ import { fetcherWithTokenAndBody } from "../utils/fetcher";
 import { AuthAPI } from "./auth";
 
 export const UserAPI = {
-  register: async (email: string, accessToken: string) => {
+  register: async (email: string) => {
     try {
-      const isGetTokens = await AuthAPI.getTokens(accessToken);
-
-      if (!isGetTokens) {
-        throw new Error("토큰을 받아오지 못했습니다.");
-      }
-
       const { response, result } = await fetcherWithTokenAndBody(
         RESOURSE_API_URL + USER_PATH,
         {

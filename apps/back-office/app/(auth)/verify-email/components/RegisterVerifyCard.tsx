@@ -14,6 +14,7 @@ import { FirebaseAPI } from "../../../../lib/api/firebase";
 import { useRouter } from "next/navigation";
 import getAccessToken from "../../../../lib/utils/getAccessToken";
 import { UserAPI } from "../../../../lib/api/user";
+import { AuthAPI } from "../../../../lib/api/auth";
 
 export function RegisterVerifyCard() {
   const router = useRouter();
@@ -34,7 +35,18 @@ export function RegisterVerifyCard() {
         setErrorMsg("이메일을 찾을 수 없습니다");
         return;
       }
-      UserAPI.register(email, accessToken);
+      const isGetTokens = await AuthAPI.getTokensForFirebase(accessToken);
+
+      if (!isGetTokens) {
+        throw new Error("토큰을 받아오지 못했습니다.");
+      }
+
+      const isRegistered = await UserAPI.register(email);
+
+      if (!isRegistered) {
+        setErrorMsg("유저 등록에 실패했습니다.");
+      }
+
       router.push("/login");
     } else {
       setErrorMsg("이메일 인증을 완료해주세요");
