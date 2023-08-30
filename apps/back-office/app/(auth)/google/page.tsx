@@ -4,6 +4,7 @@ import withAuth from "../../../components/hoc/withAuth";
 import { GoogleAPI } from "../../../lib/api/google";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { UserAPI } from "../../../lib/api/user";
 
 export default withAuth(GooglePage, "protected");
 function GooglePage() {
@@ -21,9 +22,11 @@ function Google({ code }: { code: string }) {
 
   const requestGoogleConnection = async () => {
     try {
-      await GoogleAPI.oauth(code);
+      const result = await GoogleAPI.oauth(code);
+      // await UserAPI.register(result.email)
+      console.log(result.email);
     } catch (error) {}
-    redirectToLogin();
+    //redirectToLogin();
   };
 
   useEffect(() => {
