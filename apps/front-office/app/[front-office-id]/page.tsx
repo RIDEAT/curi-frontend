@@ -36,7 +36,7 @@ export default function FrontOffice({
   }, [token]);
 
   return (
-    <div className="w-screen h-screen flex justify-center p-2">
+    <div className="w-screen h-screen flex justify-center items-center p-2">
       <SequenceLanding sequence={sequence} />
     </div>
   );

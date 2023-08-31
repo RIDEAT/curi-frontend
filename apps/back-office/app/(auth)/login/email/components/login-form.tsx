@@ -1,10 +1,11 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import GoogleButton from "react-google-button";
 
 import {
   Button,
@@ -20,13 +21,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  GoogleIcon,
   Input,
   LoadingButton,
 } from "ui";
 
-import { AuthAPI } from "../../../../lib/api/auth";
-import getAccessToken from "../../../../lib/utils/getAccessToken";
-import { FirebaseAPI } from "../../../../lib/api/firebase";
+import { AuthAPI } from "../../../../../lib/api/auth";
+import getAccessToken from "../../../../../lib/utils/getAccessToken";
+import { FirebaseAPI } from "../../../../../lib/api/firebase";
+import { GOOGLE_OAUTH_URL } from "../../../../../lib/constant/url";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 const LoginFormSchema = z.object({
   email: z.string().email({
@@ -80,6 +84,10 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
 
   const onSubmit = async (data: z.infer<typeof LoginFormSchema>) => {
     await login(data.email, data.password);
+  };
+
+  const redirectToGoogleRegister = () => {
+    router.replace(GOOGLE_OAUTH_URL);
   };
 
   return (
@@ -138,10 +146,7 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex justify-center">
-        <Link href="https://accounts.google.com/o/oauth2/v2/auth?client_id=1065165671986-lc7le3ju140a8snli27b02g6c2h1c7qh.apps.googleusercontent.com&redirect_uri=https://app.dev.onbird.team/google&response_type=code&scope=email">
-          <GoogleButton />
-        </Link>
+      <CardFooter className="flex flex-col">
         <div className="text-sm my-3">
           계정이 없으신가요?{" "}
           <Link href="/signup" className="text-blue-400">

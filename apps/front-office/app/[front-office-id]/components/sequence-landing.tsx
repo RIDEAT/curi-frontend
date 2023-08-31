@@ -10,27 +10,34 @@ function SequenceLanding({ sequence }) {
             <div className="text-2xl font-semibold">{sequence?.name}</div>
             {sequence?.status && <StatusIcon status={sequence?.status} />}
           </div>
-          <div>워크스페이스 이름 with </div>
         </div>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-wrap gap-2 font-semibold ">
+        <div className="flex flex-wrap gap-2 font-semibold mb-2">
+          환영합니다! 🔖
+        </div>
+        <div className="flex flex-wrap gap-2 font-semibold mb-4">
           <Badge variant="outline">{sequence?.assignedMember.name}</Badge>
           <div>님,</div>
           <Badge variant="outline">{sequence?.applyDate}</Badge>
           <div>에 할당받은 시퀀스를 시작하도록 하겠습니다!</div>
         </div>
+
         {sequence?.launchedModules?.length ? (
-          sequence?.launchedModules.map((module) => (
-            <Card className="mt-4" key={module.id}>
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <div className="text-lg font-semibold">{module.name}</div>
-                  <StatusIcon status={module.status} />
-                </div>
-              </CardHeader>
-            </Card>
-          ))
+          <div className="flex flex-col gap-2">
+            {sequence?.launchedModules.map((module, order) => (
+              <Button
+                variant="outline"
+                key={module.id}
+                accessKey={module.id}
+                id={order}
+                className="flex justify-between"
+              >
+                <div className="text-base font-semibold">{module.name}</div>
+                <StatusIcon status={module.status} />
+              </Button>
+            ))}
+          </div>
         ) : (
           <Card className="mt-4">
             <CardHeader>
@@ -40,10 +47,18 @@ function SequenceLanding({ sequence }) {
         )}
       </CardContent>
       <CardFooter>
-        <div className="w-full flex justify-end">
-          <Button variant="violet" className="mr-2 w-fit">
-            지금 바로 시작하기
-          </Button>
+        <div className="w-full flex justify-between items-end">
+          <div className="w-full">
+            <div className="flex gap-1 text-sm font-medium text-stone-400">
+              <div>{sequence?.workspaceResponse?.name}</div>
+              <div>with OnBird</div>
+            </div>
+          </div>
+          <div className="w-full flex justify-end">
+            <Button variant="violet" className="mr-2 w-fit">
+              지금 바로 시작하기
+            </Button>
+          </div>
         </div>
       </CardFooter>
     </Card>

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,7 +26,7 @@ import {
   LoadingButton,
 } from "ui";
 
-import { FirebaseAPI } from "../../../../lib/api/firebase";
+import { FirebaseAPI } from "../../../../../lib/api/firebase";
 
 const RegisterFormSchema = z
   .object({
