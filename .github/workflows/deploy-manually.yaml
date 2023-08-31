@@ -11,7 +11,7 @@ on:
         options:
         - back-office
         - demo
-        - view
+        - front-office
       environment:
         description: 'Deployment Environment'
         required: true 

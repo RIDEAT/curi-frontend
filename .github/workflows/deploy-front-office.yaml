@@ -1,11 +1,11 @@
-name: Deploy view
+name: Deploy Front Office
 
 on:
   push:
     branches:
       - main # main 브랜치에 push할 때
     paths:
-      - "apps/view/**" # apps/view 디렉토리에 변경이 있을 때
+      - "apps/front-office/**" # apps/front-office 디렉토리에 변경이 있을 때
 
 jobs:
   deploy:
@@ -39,15 +39,15 @@ jobs:
         id: image-info
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: next/curi-view
+          ECR_REPOSITORY: next/curi-front-office
           IMAGE_TAG: ${{ steps.image.outputs.version }}
 
         run: |
-          touch ./apps/view/.env.local
-          echo "${{ secrets.VIEW_ENV_LOCAL }}" > ./apps/view/.env.local
+          touch ./apps/front-office/.env.local
+          echo "${{ secrets.FRONT_OFFICE_ENV_LOCAL }}" > ./apps/front-office/.env.local
           echo "::set-output name=ecr_repository::$ECR_REPOSITORY"
           echo "::set-output name=image_tag::$IMAGE_TAG"
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f apps/view/Dockerfile .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f apps/front-office/Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Setup Kustomize
@@ -66,7 +66,7 @@ jobs:
           echo ${{ steps.login-ecr.outputs.registry }}
           echo ${{ steps.image-info.outputs.ecr_repository }}
           echo ${{ steps.image-info.outputs.image_tag }}
-          cd curi-manifests/k8s_manifests/view/overlays/dev
+          cd curi-manifests/k8s_manifests/front-office/overlays/dev
           kustomize edit set image ${{ steps.login-ecr.outputs.registry}}/${{ steps.image-info.outputs.ecr_repository }}=${{ steps.login-ecr.outputs.registry}}/${{ steps.image-info.outputs.ecr_repository }}:${{ steps.image-info.outputs.image_tag }}
           cat kustomization.yaml
 
