@@ -39,6 +39,10 @@ export interface ILaunchedResult {
   }[];
   launchedSequenceResponses: {
     name: string;
+    roleResponse: {
+      id: number;
+      name: string;
+    };
   }[];
 }
 
@@ -209,7 +213,12 @@ export default function Launch() {
                           (sequence, index) => (
                             <Card className="font-semibold" key={index}>
                               <CardHeader className="p-4">
-                                {sequence.name}
+                                <div className="flex gap-2">
+                                  <Badge variant="outline">
+                                    {sequence.roleResponse.name}
+                                  </Badge>
+                                  {sequence.name}
+                                </div>
                               </CardHeader>
                             </Card>
                           )

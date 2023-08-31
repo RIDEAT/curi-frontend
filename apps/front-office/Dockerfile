@@ -7,7 +7,7 @@ WORKDIR /app
 
 RUN yarn global add turbo@1.10.7
 COPY . .
-RUN turbo prune --scope="back-office" --docker
+RUN turbo prune --scope="front-office" --docker
 
 ## Builder
 
@@ -23,13 +23,14 @@ ENV NEXT_PUBLIC_ENV dev
 RUN yarn global add pnpm@8.5.0
 COPY .gitignore .gitignore
 COPY --from=pruner /app/out/json/ .
-COPY --from=pruner /app/out/pnpm-*.yaml .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=pruner /app/out/pnpm-workspace.yaml ./pnpm-workspace.yaml
 RUN pnpm install --frozen-lockfile
 
 COPY --from=pruner /app/out/full/ .
 COPY turbo.json turbo.json
 
-RUN pnpm build:back-office
+RUN pnpm build:front-office
 RUN ls -la
 
 ## Runner
@@ -42,15 +43,16 @@ RUN adduser --system --uid 1001 nextjs
 USER nextjs
 
 
-COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/next.config.js .
-COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/package.json .
+COPY --from=builder --chown=nextjs:nodejs /app/apps/front-office/next.config.js .
+COPY --from=builder --chown=nextjs:nodejs /app/apps/front-office/package.json .
 
-COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/static ./apps/back-office/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/front-office/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/front-office/.next/static ./apps/front-office/.next/static
+
 RUN ls -la
 
-# CMD ["node", "back-office/server.js"]
+# CMD ["node", "front-office/server.js"]
 # CMD ["ls" , "-la"]
 # CMD ["cd app &ls" , "-la"]
 # CMD cd app;ls -la
-CMD ["node", "./apps/back-office/server.js"]
+CMD ["node", "./apps/front-office/server.js"]
