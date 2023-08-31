@@ -50,3 +50,8 @@ export const LOGOUT_PATH = "/logout";
 
 export const FIREBASE_PATH = "/firebase";
 export const GOOGLE_PATH = "/google";
+
+// -----------------------------
+// External
+export const GOOGLE_OAUTH_URL =
+  "https://accounts.google.com/o/oauth2/v2/auth?client_id=1065165671986-lc7le3ju140a8snli27b02g6c2h1c7qh.apps.googleusercontent.com&redirect_uri=https://app.dev.onbird.team/google&response_type=code&scope=email";

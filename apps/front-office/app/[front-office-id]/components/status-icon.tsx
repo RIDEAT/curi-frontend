@@ -1,17 +1,27 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { Badge, InProgressIcon } from "ui";
-import { getStatusColor } from "../../../lib/util/getStatusColor";
+import {
+  CompletedIcon,
+  InProgressIcon,
+  MarkedAsCompletedIcon,
+  OverdueIcon,
+  PendingIcon,
+} from "ui";
+import { STATUS } from "ui/lib/constants";
 
 function StatusIcon({ status }: { status: string }) {
   switch (status) {
-    case "IN_PROGRESS":
+    case STATUS.IN_PROGRESS:
       return <InProgressIcon />;
+    case STATUS.COMPLETED:
+      return <CompletedIcon />;
+    case STATUS.TODO:
+      return <PendingIcon />;
+    case STATUS.OVERDUE:
+      return <OverdueIcon />;
+    case STATUS.MARKED_AS_COMPLETED:
+      return <MarkedAsCompletedIcon />;
 
     default:
       return <div>{status}</div>;
-      break;
   }
 }
 

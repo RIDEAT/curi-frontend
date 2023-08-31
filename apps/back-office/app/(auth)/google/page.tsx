@@ -20,7 +20,6 @@ function Google({ code }: { code: string }) {
     try {
       const result = await AuthAPI.getTokensForGoogle(code);
       await UserAPI.register(result.userEmail);
-      console.log(result.userEmail);
     } catch (error) {
       console.log(error);
     }
