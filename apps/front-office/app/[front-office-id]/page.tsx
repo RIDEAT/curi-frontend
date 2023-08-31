@@ -3,8 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FrontOfficeAPI } from "../../lib/api/frontOffice";
-import { Badge, Button, Card, CardContent, CardFooter, CardHeader } from "ui";
-import { StatusIcon } from "./components/status-icon";
 import { SequenceLanding } from "./components/sequence-landing";
 
 export default function FrontOffice({
