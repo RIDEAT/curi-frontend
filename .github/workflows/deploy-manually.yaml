@@ -11,6 +11,7 @@ on:
         options:
         - back-office
         - demo
+        - front-office
       environment:
         description: 'Deployment Environment'
         required: true 
@@ -20,7 +21,7 @@ on:
         - dev
         - product
       tag:
-        description: 'Deployment Tag(git sha)'
+        description: 'Deployment Tag(git sha, !!tags should be entered as tags in each ECR repository for respective services!!)'
         required: true 
         type: string
 jobs:
