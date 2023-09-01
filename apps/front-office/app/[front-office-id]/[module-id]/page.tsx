@@ -1,0 +1,214 @@
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { useLaunchedModule } from "../../../lib/hook/swr/useLaunchedModule";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  ErrorBadge,
+  LoadingCircle,
+  getModuleIcon,
+} from "ui";
+import { StatusIcon } from "../components/status-icon";
+import { useLaunchedSequence } from "../../../lib/hook/swr/useLaunchedSequence";
+import { getModuleContentComponents } from "./components/getModuleContentComponents";
+import { useEffect, useState } from "react";
+import { STATUS } from "ui/lib/constants";
+import { FrontOfficeAPI } from "../../../lib/api/frontOffice";
+
+export default function ModuleDisplay({
+  params,
+}: {
+  params: { "front-office-id": string; "module-id": string };
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
+  const { launchedModule, isLoading, error, launchedModuleMutate } =
+    useLaunchedModule(params["front-office-id"], params["module-id"], token);
+  const {
+    launchedSequence,
+    isLoading: isLoadingSequence,
+    error: errorSequence,
+    launchedSequenceMutate,
+  } = useLaunchedSequence(params["front-office-id"], token);
+
+  const [isFinal, setIsFinal] = useState(false);
+  const [isFirst, setIsFirst] = useState(false);
+  const [nextModuleId, setNextModuleId] = useState("");
+  const [previousModuleId, setPreviousModuleId] = useState("");
+
+  const checkInProgressModule = async () => {
+    const result = await FrontOfficeAPI.checkInProgressModule(
+      params["front-office-id"],
+      params["module-id"],
+      token
+    );
+    await launchedModuleMutate();
+    await launchedSequenceMutate();
+  };
+
+  const checkCompletedModule = async () => {
+    const result = await FrontOfficeAPI.checkCompletedModule(
+      params["front-office-id"],
+      params["module-id"],
+      token
+    );
+    await launchedModuleMutate();
+    await launchedSequenceMutate();
+  };
+
+  const isCheckThisModuleFinal = () => {
+    const launchedModules = launchedSequence?.launchedModules;
+    const launchedModulesLength = launchedModules.length;
+    const currentModuleIndex = launchedModules.findIndex(
+      (launchedModule) => launchedModule.id == params["module-id"]
+    );
+
+    if (currentModuleIndex + 1 === launchedModulesLength) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const isCheckThisModuleFirst = () => {
+    const launchedModules = launchedSequence?.launchedModules;
+    const currentModuleIndex = launchedModules.findIndex(
+      (launchedModule) => launchedModule.id == params["module-id"]
+    );
+
+    if (currentModuleIndex === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const getNextModuleId = () => {
+    const launchedModules = launchedSequence?.launchedModules;
+    const currentModuleIndex = launchedModules.findIndex(
+      (launchedModule) => launchedModule.id == params["module-id"]
+    );
+    const nextModuleId = launchedModules[currentModuleIndex + 1].id;
+    return nextModuleId;
+  };
+
+  const getPreviousModuleId = () => {
+    const launchedModules = launchedSequence?.launchedModules;
+    const currentModuleIndex = launchedModules.findIndex(
+      (launchedModule) => launchedModule.id == params["module-id"]
+    );
+    const previousModuleId = launchedModules[currentModuleIndex - 1].id;
+    return previousModuleId;
+  };
+
+  const redirectNextModule = async () => {
+    if (launchedModule?.launchedModuleResponse?.status !== STATUS.COMPLETED) {
+      await checkCompletedModule();
+    }
+    router.push(
+      "/" + params["front-office-id"] + "/" + nextModuleId + "?token=" + token
+    );
+  };
+
+  const redirectPreviousModule = async () => {
+    router.push(
+      "/" +
+        params["front-office-id"] +
+        "/" +
+        previousModuleId +
+        "?token=" +
+        token
+    );
+  };
+
+  const redirectSatisfactionSurvey = async () => {
+    await checkCompletedModule();
+    router.push(
+      "/" + params["front-office-id"] + "/satisfaction" + "?token=" + token
+    );
+  };
+
+  useEffect(() => {
+    if (launchedSequence) {
+      const isFinalModule = isCheckThisModuleFinal();
+      setIsFinal(isFinalModule);
+
+      if (isFinalModule) {
+        setNextModuleId("");
+
+        if (isCheckThisModuleFirst()) {
+          setPreviousModuleId("");
+          setIsFirst(true);
+        }
+      } else {
+        setNextModuleId(getNextModuleId());
+        const isFirstModule = isCheckThisModuleFirst();
+        setIsFirst(isFirstModule);
+
+        if (!isFirstModule) {
+          setPreviousModuleId(getPreviousModuleId());
+        }
+      }
+    }
+  }, [launchedSequence]);
+
+  useEffect(() => {
+    if (launchedModule?.launchedModuleResponse?.status === STATUS.TODO) {
+      checkInProgressModule();
+    }
+  }, [launchedModule?.launchedModuleResponse?.status]);
+
+  if (isLoading || isLoadingSequence) {
+    return <LoadingCircle />;
+  } else if (error || errorSequence) {
+    return <ErrorBadge />;
+  }
+
+  return (
+    <div className="w-screen h-screen flex justify-center items-center">
+      <Card className="h-3/4 min-w-[300px] w-1/2 max-w-[900px] flex flex-col">
+        <CardHeader>
+          <div className="flex gap-2 justify-between items-center">
+            <div className="flex gap-2 items-center">
+              {getModuleIcon(launchedModule?.launchedModuleResponse?.type)}
+              <div className="text-lg font-semibold">
+                {launchedModule?.launchedModuleResponse?.name}
+              </div>
+            </div>
+            <StatusIcon
+              status={launchedModule?.launchedModuleResponse?.status}
+            />
+          </div>
+        </CardHeader>
+        <CardContent>
+          {getModuleContentComponents(
+            launchedModule?.contentResponse.contents,
+            launchedModule?.contentResponse.type
+          )}
+        </CardContent>
+        <CardFooter className="h-full flex flex-col justify-end">
+          <div className="w-full flex justify-between">
+            <Button variant="outline" onClick={redirectPreviousModule}>
+              이전
+            </Button>
+            {!isFinal ? (
+              <Button variant="violet" onClick={redirectNextModule}>
+                다음
+              </Button>
+            ) : (
+              <Button variant="violet" onClick={redirectSatisfactionSurvey}>
+                완료
+              </Button>
+            )}
+          </div>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
