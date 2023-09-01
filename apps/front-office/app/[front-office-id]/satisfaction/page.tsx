@@ -122,7 +122,7 @@ export default function Satisfaction({
               isCheckSatisfaction?.isScored ? isCheckSatisfaction.score : score,
             ]}
             disabled={isCheckSatisfaction?.isScored}
-            className={"w-full"}
+            className={"w-full hover:cursor-pointer"}
           />
         </div>
         <div className="mt-4">
