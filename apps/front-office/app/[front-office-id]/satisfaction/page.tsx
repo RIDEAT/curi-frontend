@@ -17,6 +17,8 @@ import {
 import { LaunchedModuleList } from "../components/launched-module-list";
 import { FrontOfficeAPI } from "../../../lib/api/frontOffice";
 import { useIsCheckSatisfaction } from "../../../lib/hook/swr/useIsCheckSatisfaction";
+import { DisplayCardLayout } from "../components/display-card-layout";
+import { DisplayCardFooterLayout } from "../components/display-card-footer-layout";
 
 export default function Satisfaction({
   params,
@@ -82,81 +84,77 @@ export default function Satisfaction({
   }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <Card className="h-3/4 min-w-[300px] w-1/2 max-w-[900px] flex flex-col overflow-scroll">
-        <CardHeader>
-          <div>
-            <div className="text-2xl font-semibold">만족도 조사</div>
+    <DisplayCardLayout>
+      <CardHeader>
+        <div>
+          <div className="text-2xl font-semibold">만족도 조사</div>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="mb-4">
+          <div className="text-lg font-semibold">
+            {launchedSequence?.name} 시퀀스를 완료하셨나요?
           </div>
-        </CardHeader>
-        <CardContent>
-          <div className="mb-4">
-            <div className="text-lg font-semibold">
-              {launchedSequence?.name} 시퀀스를 완료하셨나요?
+        </div>
+        <LaunchedModuleList
+          sequence={launchedSequence}
+          frontOfficeId={params["front-office-id"]}
+          token={token}
+        />
+        <div className="text-xs font-medium text-stone-500 mt-2 mb-4">
+          위 모듈들을 모두 완료하셨다면, 만족도 조사를 진행해주세요.
+        </div>
+        <div className="text-base font-semibold mb-2">
+          <div className="w-full flex justify-between mb-4">
+            <div>만족도</div>
+            <div>
+              {isCheckSatisfaction?.isScored
+                ? isCheckSatisfaction.score
+                : score}
             </div>
           </div>
-          <LaunchedModuleList
-            sequence={launchedSequence}
-            frontOfficeId={params["front-office-id"]}
-            token={token}
+          <Slider
+            min={1}
+            max={10}
+            step={1}
+            onValueChange={scoreHandler}
+            value={[
+              isCheckSatisfaction?.isScored ? isCheckSatisfaction.score : score,
+            ]}
+            disabled={isCheckSatisfaction?.isScored}
+            className={"w-full"}
           />
-          <div className="text-xs font-medium text-stone-500 mt-2 mb-4">
-            위 모듈들을 모두 완료하셨다면, 만족도 조사를 진행해주세요.
+        </div>
+        <div className="mt-4">
+          <div className="w-full flex justify-between mb-4 text-base font-semibold">
+            <div>피드백 사항</div>
           </div>
-          <div className="text-base font-semibold mb-2">
-            <div className="w-full flex justify-between mb-4">
-              <div>만족도</div>
-              <div>
-                {isCheckSatisfaction?.isScored
-                  ? isCheckSatisfaction.score
-                  : score}
-              </div>
-            </div>
-            <Slider
-              min={1}
-              max={10}
-              step={1}
-              onValueChange={scoreHandler}
-              value={[
-                isCheckSatisfaction?.isScored
-                  ? isCheckSatisfaction.score
-                  : score,
-              ]}
-              disabled={isCheckSatisfaction?.isScored}
-              className={"w-full"}
-            />
-          </div>
-          <div className="mt-4">
-            <div className="w-full flex justify-between mb-4 text-base font-semibold">
-              <div>피드백 사항</div>
-            </div>
-            <Textarea
-              placeholder="시퀀스에 대한 피드백이 있다면 적어주세요. (선택)"
-              value={
-                isCheckSatisfaction?.isScored
-                  ? isCheckSatisfaction?.comment
-                  : comment
-              }
-              onInput={commentHandler}
-              disabled={isCheckSatisfaction?.isScored}
-            />
-          </div>
-        </CardContent>
-        <CardFooter className="h-full flex flex-col justify-end">
-          <div className="w-full flex justify-between">
-            {isActiveSatisfaction &&
-              (isCheckSatisfaction && isCheckSatisfaction?.isScored ? (
-                <Button className="w-full" variant="violet" disabled>
-                  제출됨
-                </Button>
-              ) : (
-                <Button className="w-full" variant="violet" onClick={onSubmit}>
-                  제출하기
-                </Button>
-              ))}
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
+          <Textarea
+            placeholder="시퀀스에 대한 피드백이 있다면 적어주세요. (선택)"
+            value={
+              isCheckSatisfaction?.isScored
+                ? isCheckSatisfaction?.comment
+                : comment
+            }
+            onInput={commentHandler}
+            disabled={isCheckSatisfaction?.isScored}
+          />
+        </div>
+      </CardContent>
+      <DisplayCardFooterLayout>
+        <div className="w-full flex justify-between">
+          {isActiveSatisfaction &&
+            (isCheckSatisfaction && isCheckSatisfaction?.isScored ? (
+              <Button className="w-full" variant="violet" disabled>
+                제출됨
+              </Button>
+            ) : (
+              <Button className="w-full" variant="violet" onClick={onSubmit}>
+                제출하기
+              </Button>
+            ))}
+        </div>
+      </DisplayCardFooterLayout>
+    </DisplayCardLayout>
   );
 }

@@ -18,6 +18,8 @@ import { getModuleContentComponents } from "./components/getModuleContentCompone
 import { useEffect, useState } from "react";
 import { STATUS } from "ui/lib/constants";
 import { FrontOfficeAPI } from "../../../lib/api/frontOffice";
+import { DisplayCardLayout } from "../components/display-card-layout";
+import { DisplayCardFooterLayout } from "../components/display-card-footer-layout";
 
 export default function ModuleDisplay({
   params,
@@ -171,44 +173,40 @@ export default function ModuleDisplay({
   }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <Card className="h-3/4 min-w-[300px] w-1/2 max-w-[900px] flex flex-col">
-        <CardHeader>
-          <div className="flex gap-2 justify-between items-center">
-            <div className="flex gap-2 items-center">
-              {getModuleIcon(launchedModule?.launchedModuleResponse?.type)}
-              <div className="text-lg font-semibold">
-                {launchedModule?.launchedModuleResponse?.name}
-              </div>
+    <DisplayCardLayout>
+      <CardHeader>
+        <div className="flex gap-2 justify-between items-center">
+          <div className="flex gap-2 items-center">
+            {getModuleIcon(launchedModule?.launchedModuleResponse?.type)}
+            <div className="text-lg font-semibold">
+              {launchedModule?.launchedModuleResponse?.name}
             </div>
-            <StatusIcon
-              status={launchedModule?.launchedModuleResponse?.status}
-            />
           </div>
-        </CardHeader>
-        <CardContent>
-          {getModuleContentComponents(
-            launchedModule?.contentResponse.contents,
-            launchedModule?.contentResponse.type
-          )}
-        </CardContent>
-        <CardFooter className="h-full flex flex-col justify-end">
-          <div className="w-full flex justify-between">
-            <Button variant="outline" onClick={redirectPreviousModule}>
-              이전
+          <StatusIcon status={launchedModule?.launchedModuleResponse?.status} />
+        </div>
+      </CardHeader>
+      <CardContent>
+        {getModuleContentComponents(
+          launchedModule?.contentResponse.contents,
+          launchedModule?.contentResponse.type
+        )}
+      </CardContent>
+      <DisplayCardFooterLayout>
+        <div className="w-full flex justify-between">
+          <Button variant="outline" onClick={redirectPreviousModule}>
+            이전
+          </Button>
+          {!isFinal ? (
+            <Button variant="violet" onClick={redirectNextModule}>
+              다음
             </Button>
-            {!isFinal ? (
-              <Button variant="violet" onClick={redirectNextModule}>
-                다음
-              </Button>
-            ) : (
-              <Button variant="violet" onClick={redirectSatisfactionSurvey}>
-                완료
-              </Button>
-            )}
-          </div>
-        </CardFooter>
-      </Card>
-    </div>
+          ) : (
+            <Button variant="violet" onClick={redirectSatisfactionSurvey}>
+              완료
+            </Button>
+          )}
+        </div>
+      </DisplayCardFooterLayout>
+    </DisplayCardLayout>
   );
 }
