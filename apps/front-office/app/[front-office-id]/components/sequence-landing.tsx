@@ -5,19 +5,36 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
+  CompletedIcon,
+  SlackIcon,
   getModuleIcon,
 } from "ui";
 import { StatusIcon } from "./status-icon";
 import { useRouter } from "next/navigation";
 import { LaunchedModuleList } from "./launched-module-list";
+import { useIsSlackIntegrated } from "../../../lib/hook/swr/useIsSlackIntegrated";
+import { FrontOfficeAPI } from "../../../lib/api/frontOffice";
+import { useEffect } from "react";
+import Link from "next/link";
+import { SLACK_MEMBER_OAUTH_URL } from "../../../lib/constant/url";
 
 function SequenceLanding({ sequence, frontOfficeId, token }) {
   const router = useRouter();
+
+  const { isSlackIntegrated, isLoading, error } = useIsSlackIntegrated(
+    frontOfficeId,
+    token
+  );
 
   const redirectToFirstModule = () => {
     const moduleId = sequence?.launchedModules[0].id;
     router.push(`/${frontOfficeId}/${moduleId}?token=${token}`);
   };
+
+  useEffect(() => {
+    if (frontOfficeId) localStorage.setItem("front-office-id", frontOfficeId);
+    if (token) localStorage.setItem("token", token);
+  }, [frontOfficeId, token]);
 
   return (
     <Card className="h-fit max-w-[900px]">
@@ -44,6 +61,34 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
           frontOfficeId={frontOfficeId}
           token={token}
         />
+        <div className="mt-2 w-full">
+          {isSlackIntegrated ? (
+            <Button disabled className="w-full">
+              <CompletedIcon />
+              <div>slack 연결 완료</div>
+            </Button>
+          ) : (
+            <Card className="bg-violet-100">
+              <CardHeader>
+                <div className="text-base font-semibold">slack connection</div>
+                <div className="text-sm font-medium text-stone-600">
+                  앞으로는 slack 연결을 통해 알림을 받을 수 있습니다.
+                </div>
+              </CardHeader>
+              <CardContent>
+                <Link href={SLACK_MEMBER_OAUTH_URL}>
+                  <Button
+                    className="w-full border-violet-400"
+                    variant="outline"
+                  >
+                    <SlackIcon />
+                    <div className="text-sm font-medium">slack 연결하기</div>
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          )}
+        </div>
       </CardContent>
       <CardFooter>
         <div className="w-full flex justify-between items-end">
