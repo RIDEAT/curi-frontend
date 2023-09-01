@@ -94,9 +94,9 @@ export default function ModuleDisplay({
 
   const checkAllModulesCompleted = () => {
     const launchedModules = launchedSequence?.launchedModules;
+    console.log(launchedModules);
     const isAllModulesCompleted = launchedModules.every(
-      (launchedModule) =>
-        launchedModule.launchedModuleResponse.status === STATUS.COMPLETED
+      (launchedModule) => launchedModule.status === STATUS.COMPLETED
     );
     return isAllModulesCompleted;
   };
