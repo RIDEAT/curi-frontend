@@ -11,6 +11,7 @@ import {
   ErrorBadge,
   LoadingCircle,
   getModuleIcon,
+  pushFailToast,
 } from "ui";
 import { StatusIcon } from "../components/status-icon";
 import { useLaunchedSequence } from "../../../lib/hook/swr/useLaunchedSequence";
@@ -91,6 +92,15 @@ export default function ModuleDisplay({
     }
   };
 
+  const checkAllModulesCompleted = () => {
+    const launchedModules = launchedSequence?.launchedModules;
+    const isAllModulesCompleted = launchedModules.every(
+      (launchedModule) =>
+        launchedModule.launchedModuleResponse.status === STATUS.COMPLETED
+    );
+    return isAllModulesCompleted;
+  };
+
   const getNextModuleId = () => {
     const launchedModules = launchedSequence?.launchedModules;
     const currentModuleIndex = launchedModules.findIndex(
@@ -130,6 +140,11 @@ export default function ModuleDisplay({
   };
 
   const redirectSatisfactionSurvey = async () => {
+    const isAllModulesCompleted = checkAllModulesCompleted();
+    if (!isAllModulesCompleted) {
+      pushFailToast("미완료된 모듈 존재", "모든 모듈을 완료해주세요.");
+      return;
+    }
     await checkCompletedModule();
     router.push(
       "/" + params["front-office-id"] + "/satisfaction" + "?token=" + token
