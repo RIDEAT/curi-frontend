@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Badge,
   Button,
   Calendar,
   ErrorBadge,
@@ -55,7 +56,7 @@ function WorkflowLaunchForm({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[150px]">{EMPLOYEE_NAME}</TableHead>
+            <TableHead className="w-[150px]">{"대상자"}</TableHead>
             <TableHead className="w-[100px]">D-Day (D-0)</TableHead>
             {requiredRoles &&
               requiredRoles.map((role) => (
@@ -173,7 +174,10 @@ function LaunchTableRow({
             {employees &&
               (employees.map((employee) => (
                 <SelectItem key={employee.id} value={employee.id}>
-                  {employee.name}
+                  <MemberSelectDisplay
+                    name={employee.name}
+                    email={employee.email}
+                  />
                 </SelectItem>
               )) as any)}
           </SelectContent>
@@ -250,11 +254,20 @@ function SelectRolesWithMember({
         {managers &&
           managers.map((manager) => (
             <SelectItem key={manager.id} value={manager.id}>
-              {manager.name}
+              <MemberSelectDisplay name={manager.name} email={manager.email} />
             </SelectItem>
           ))}
       </SelectContent>
     </Select>
+  );
+}
+
+function MemberSelectDisplay({ name, email }: { name: string; email: string }) {
+  return (
+    <div className="flex gap-2 items-center">
+      <div className="text-sm font-semibold">{name}</div>
+      <Badge variant="outline">{email}</Badge>
+    </div>
   );
 }
 

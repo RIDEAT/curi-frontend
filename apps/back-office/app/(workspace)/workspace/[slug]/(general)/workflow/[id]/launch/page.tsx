@@ -226,7 +226,7 @@ export default function Launch() {
                       </div>
                     </div>
                     <div className="flex-1 flex flex-col gap-2">
-                      <div className="text-lg font-semibold">신규입사자</div>
+                      <div className="text-lg font-semibold">대상자</div>
                       {launchedResult?.employees?.map((employee) => (
                         <Card key={employee.id}>
                           <CardHeader>

@@ -30,7 +30,7 @@ interface ITabs {
 
 export function MemberCategoryTab() {
   const tabs = useRef([
-    { value: "employee", label: "신입" },
+    { value: "employee", label: "일반" },
     { value: "manager", label: "매니저" },
   ] as ITabs[]);
 
