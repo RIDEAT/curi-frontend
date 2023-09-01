@@ -124,4 +124,37 @@ export const FrontOfficeAPI = {
     const result = await response.json();
     return result;
   },
+  getIsSlackIntegrated: async (frontOfficeId: string, token: string) => {
+    const response = await fetch(
+      FrontOfficeAPI.frontOfficeEndPoint + `/${frontOfficeId}/isAuthorized`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        credentials: "include",
+      }
+    );
+
+    const result = await response.json();
+    return result;
+  },
+  connectSlack: async (frontOfficeId: string, token: string, code: string) => {
+    const response = await fetch(
+      FrontOfficeAPI.frontOfficeEndPoint + `/${frontOfficeId}/oauth`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        credentials: "include",
+        body: JSON.stringify({ code }),
+      }
+    );
+
+    const result = await response.json();
+    return result;
+  },
 };
