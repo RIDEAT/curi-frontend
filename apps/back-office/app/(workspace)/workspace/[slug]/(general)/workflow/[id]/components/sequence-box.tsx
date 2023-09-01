@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Badge, ModuleType, getModuleIcon } from "ui";
+import {
+  Badge,
+  Card,
+  CardContent,
+  ModuleType,
+  Switch,
+  getModuleIcon,
+} from "ui";
 
 import { IModule } from "workflow-types";
 import { SortableList } from "./sortable-list";
@@ -7,14 +14,16 @@ import { ModuleCreateDialog } from "./module-create-dialog";
 import { ModuleAPI } from "../../../../../../../../lib/api/module";
 import { useCurrentWorkspace } from "../../../../../../../../lib/hook/useCurrentWorkspace";
 import { useCurrentWorkflow } from "../../../../../../../../lib/hook/useCurrentWorkflow";
-import { TextIcon } from "@radix-ui/react-icons";
+import { ChatBubbleIcon, TextIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { SequenceAPI } from "../../../../../../../../lib/api/sequence";
 export interface SequenceBoxProps {
   sequenceId: string;
   title: string;
   stakeholder: string;
   modules: IModule[];
+  satisfactionChecked: boolean;
 }
 
 function EmptySequenceBox() {
@@ -26,18 +35,37 @@ function SequenceBox({
   title,
   stakeholder,
   modules,
+  satisfactionChecked,
 }: SequenceBoxProps) {
   const router = useRouter();
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { currentWorkflowId } = useCurrentWorkflow();
+
   const [moduleItems, setModuleItems] = useState(
     [...modules].sort((a, b) => a.order - b.order)
   );
+  const [checked, setChecked] = useState(satisfactionChecked);
 
   const moduleClickHandler = (e) => {
     const currentModuleId = e.currentTarget.id;
     const targetPath = `/workspace/${currentWorkspaceId}/workflow/${currentWorkflowId}/content/${sequenceId}/${currentModuleId}`;
     router.push(targetPath);
+  };
+
+  const satisfactionCheckedHandler = async (checked: boolean) => {
+    setChecked(checked);
+    await SequenceAPI.update(
+      currentWorkspaceId,
+      currentWorkflowId,
+      sequenceId,
+      {
+        checkSatisfaction: checked,
+      }
+    );
+  };
+
+  const satisfactionSwitchHandler = (checked: boolean) => {
+    satisfactionCheckedHandler(checked);
   };
 
   return (
@@ -83,6 +111,18 @@ function SequenceBox({
               }}
             />
           ) : null}
+          <Card className="mt-2">
+            <CardContent className="flex justify-between p-2">
+              <div className="ml-1 flex gap-3 items-center text-sm font-semibold">
+                <ChatBubbleIcon className="w-5 h-5" />
+                <div>만족도 조사</div>
+              </div>
+              <Switch
+                checked={checked}
+                onCheckedChange={satisfactionSwitchHandler}
+              />
+            </CardContent>
+          </Card>
           <ModuleCreateDialog
             lastOrder={modules.length}
             sequenceId={sequenceId}

@@ -1,7 +1,24 @@
-import { Badge, Button, Card, CardContent, CardFooter, CardHeader } from "ui";
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  getModuleIcon,
+} from "ui";
 import { StatusIcon } from "./status-icon";
+import { useRouter } from "next/navigation";
+import { LaunchedModuleList } from "./launched-module-list";
 
-function SequenceLanding({ sequence }) {
+function SequenceLanding({ sequence, frontOfficeId, token }) {
+  const router = useRouter();
+
+  const redirectToFirstModule = () => {
+    const moduleId = sequence?.launchedModules[0].id;
+    router.push(`/${frontOfficeId}/${moduleId}?token=${token}`);
+  };
+
   return (
     <Card className="h-fit max-w-[900px]">
       <CardHeader>
@@ -22,29 +39,11 @@ function SequenceLanding({ sequence }) {
           <Badge variant="outline">{sequence?.applyDate}</Badge>
           <div>에 할당받은 시퀀스를 시작하도록 하겠습니다!</div>
         </div>
-
-        {sequence?.launchedModules?.length ? (
-          <div className="flex flex-col gap-2">
-            {sequence?.launchedModules.map((module, order) => (
-              <Button
-                variant="outline"
-                key={module.id}
-                accessKey={module.id}
-                id={order}
-                className="flex justify-between"
-              >
-                <div className="text-base font-semibold">{module.name}</div>
-                <StatusIcon status={module.status} />
-              </Button>
-            ))}
-          </div>
-        ) : (
-          <Card className="mt-4">
-            <CardHeader>
-              <div className="text-lg font-semibold">모듈이 없습니다.</div>
-            </CardHeader>
-          </Card>
-        )}
+        <LaunchedModuleList
+          sequence={sequence}
+          frontOfficeId={frontOfficeId}
+          token={token}
+        />
       </CardContent>
       <CardFooter>
         <div className="w-full flex justify-between items-end">
@@ -55,9 +54,15 @@ function SequenceLanding({ sequence }) {
             </div>
           </div>
           <div className="w-full flex justify-end">
-            <Button variant="violet" className="mr-2 w-fit">
-              지금 바로 시작하기
-            </Button>
+            {sequence?.launchedModules.length && (
+              <Button
+                variant="violet"
+                className="mr-2 w-fit"
+                onClick={redirectToFirstModule}
+              >
+                지금 바로 시작하기
+              </Button>
+            )}
           </div>
         </div>
       </CardFooter>

@@ -47,10 +47,10 @@ export const SequenceAPI = {
     workflowId: string,
     sequenceId: string,
     sequenceInfo: {
-      name: string;
-      roleId: string;
-      dayOffset: number;
-      prevSequenceId: number;
+      name?: string;
+      roleId?: string;
+      dayOffset?: number;
+      checkSatisfaction?: boolean;
     }
   ) => {
     const { response, result } = await fetcherWithTokenAndBody(
@@ -59,7 +59,7 @@ export const SequenceAPI = {
         workflowId
       )}/${sequenceId}`,
       sequenceInfo,
-      "PUT"
+      "PATCH"
     );
     return result as ISequence;
   },
