@@ -73,6 +73,14 @@ export default function Satisfaction({
     return <ErrorBadge />;
   }
 
+  if (!isCheckSatisfaction) {
+    return (
+      <div>
+        <LoadingCircle />
+      </div>
+    );
+  }
+
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <Card className="h-3/4 min-w-[300px] w-1/2 max-w-[900px] flex flex-col overflow-scroll">
@@ -99,7 +107,7 @@ export default function Satisfaction({
             <div className="w-full flex justify-between mb-4">
               <div>만족도</div>
               <div>
-                {isCheckSatisfaction.isScored
+                {isCheckSatisfaction?.isScored
                   ? isCheckSatisfaction.score
                   : score}
               </div>
@@ -110,11 +118,11 @@ export default function Satisfaction({
               step={1}
               onValueChange={scoreHandler}
               value={[
-                isCheckSatisfaction.isScored
+                isCheckSatisfaction?.isScored
                   ? isCheckSatisfaction.score
                   : score,
               ]}
-              disabled={isCheckSatisfaction.isScored}
+              disabled={isCheckSatisfaction?.isScored}
               className={"w-full"}
             />
           </div>
@@ -125,19 +133,19 @@ export default function Satisfaction({
             <Textarea
               placeholder="시퀀스에 대한 피드백이 있다면 적어주세요. (선택)"
               value={
-                isCheckSatisfaction.isScored
-                  ? isCheckSatisfaction.comment
+                isCheckSatisfaction?.isScored
+                  ? isCheckSatisfaction?.comment
                   : comment
               }
               onInput={commentHandler}
-              disabled={isCheckSatisfaction.isScored}
+              disabled={isCheckSatisfaction?.isScored}
             />
           </div>
         </CardContent>
         <CardFooter className="h-full flex flex-col justify-end">
           <div className="w-full flex justify-between">
             {isActiveSatisfaction &&
-              (isCheckSatisfaction && isCheckSatisfaction.isScored ? (
+              (isCheckSatisfaction && isCheckSatisfaction?.isScored ? (
                 <Button className="w-full" variant="violet" disabled>
                   제출됨
                 </Button>
