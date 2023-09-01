@@ -17,6 +17,8 @@ import { FrontOfficeAPI } from "../../../lib/api/frontOffice";
 import { useEffect } from "react";
 import Link from "next/link";
 import { SLACK_MEMBER_OAUTH_URL } from "../../../lib/constant/url";
+import { DisplayCardLayout } from "./display-card-layout";
+import { DisplayCardFooterLayout } from "./display-card-footer-layout";
 
 function SequenceLanding({ sequence, frontOfficeId, token }) {
   const router = useRouter();
@@ -37,7 +39,7 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
   }, [frontOfficeId, token]);
 
   return (
-    <Card className="h-fit max-w-[900px]">
+    <DisplayCardLayout>
       <CardHeader>
         <div className="flex flex-wrap justify-between">
           <div className="flex flex-wrap gap-4 items-center">
@@ -63,9 +65,9 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
         />
         <div className="mt-2 w-full">
           {isSlackIntegrated ? (
-            <Button disabled className="w-full">
+            <Button disabled className="w-full flex gap-2">
               <CompletedIcon />
-              <div>slack 연결 완료</div>
+              <div className="text-sm font-semibold">slack 연결 완료</div>
             </Button>
           ) : (
             <Card className="bg-violet-100">
@@ -90,10 +92,10 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
           )}
         </div>
       </CardContent>
-      <CardFooter>
+      <DisplayCardFooterLayout>
         <div className="w-full flex justify-between items-end">
           <div className="w-full">
-            <div className="flex gap-1 text-sm font-medium text-stone-400">
+            <div className="flex flex-wrap gap-1 text-sm font-medium text-stone-400">
               <div>{sequence?.workspaceResponse?.name}</div>
               <div>with OnBird</div>
             </div>
@@ -110,8 +112,8 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
             )}
           </div>
         </div>
-      </CardFooter>
-    </Card>
+      </DisplayCardFooterLayout>
+    </DisplayCardLayout>
   );
 }
 

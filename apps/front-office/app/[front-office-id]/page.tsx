@@ -27,12 +27,10 @@ export default function FrontOffice({
   }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center p-2">
-      <SequenceLanding
-        sequence={launchedSequence}
-        frontOfficeId={params["front-office-id"]}
-        token={token}
-      />
-    </div>
+    <SequenceLanding
+      sequence={launchedSequence}
+      frontOfficeId={params["front-office-id"]}
+      token={token}
+    />
   );
 }
