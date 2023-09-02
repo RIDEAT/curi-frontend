@@ -59,26 +59,33 @@ export const WorkspaceAPI = {
       "DELETE"
     );
   },
-  getLogoUrl: (workspaceId: string) => {
-    return `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo`;
-  },
-  updateLogo: async (workspaceId: string, fileName: string) => {
-    return await fetcherWithTokenAndBody(
-      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo?fileName=${fileName}`,
-      {},
-      "PUT"
+  getLogoImageUrl: async (workspaceId: string) => {
+    const { response, result } = await fetcherWithToken(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo`
     );
+    return result;
   },
-
-  uploadImageToS3: async (workspaceId: string, file: File) => {
+  getUploadLogoPresignedUrl: async (workspaceId: string, fileName: string) => {
     const { response, result } = await fetcherWithTokenAndBody(
-      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo?fileName=${file.name}`,
-      {},
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo?fileName=${fileName}`,
+      null,
       "PUT"
     );
+
+    if (!result.preSignedUrl) {
+      throw new Error("preSignedUrl is not found");
+    }
+
     const { preSignedUrl } = result;
-    const { response: response2, result: result2 } =
-      await fetcherWithTokenAndBody(preSignedUrl, file, "PUT");
-    return result2;
+
+    return preSignedUrl;
+  },
+  deleteLogo: async (workspaceId: string) => {
+    const { response, result } = await fetcherWithToken(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo`,
+      null,
+      "DELETE"
+    );
+    return result;
   },
 };

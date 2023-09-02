@@ -1,6 +1,5 @@
 import { Separator } from "ui";
-import { AppearanceForm } from "./appearance-form";
-import { LogoForm } from "./logo-form";
+import { LogoControlForm } from "./logo-control-form";
 
 export default function SettingsAppearancePage() {
   return (
@@ -12,8 +11,7 @@ export default function SettingsAppearancePage() {
         </p>
       </div>
       <Separator />
-      <AppearanceForm />
-      <LogoForm />
+      <LogoControlForm />
     </div>
   );
 }

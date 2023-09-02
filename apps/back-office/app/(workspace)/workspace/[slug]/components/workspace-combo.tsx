@@ -26,9 +26,11 @@ import { IWorkspace } from "workspace-types";
 import extractSlug from "../../../../../lib/utils/extractSlug";
 import { useWorkspaces } from "../../../../../lib/hook/swr/useWorkspaces";
 import { WorkspaceSettingButton } from "./workspace-setting-dialog";
+import { useCurrentLogo } from "../../../../../lib/hook/swr/useCurrentLogo";
 
 export default function WorkspaceCombo() {
   const [open, setOpen] = useState(false);
+  const { currentLogo, isLoading: isLogoLoading } = useCurrentLogo();
   const { workspaces, isLoading, error } = useWorkspaces();
   const [selectedWorkspace, setSelectedWorkspace] = useState<IWorkspace | null>(
     null
@@ -66,10 +68,9 @@ export default function WorkspaceCombo() {
           >
             <div className="flex justify-start items-center gap-2">
               <Avatar className="w-7 h-7">
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
+                {!isLogoLoading ? (
+                  <AvatarImage src={currentLogo?.signedUrl} alt="logo" />
+                ) : null}
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <CurrentWorkspaceLabel selectedWorkspace={selectedWorkspace} />
