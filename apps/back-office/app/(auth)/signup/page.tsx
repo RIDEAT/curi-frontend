@@ -23,13 +23,13 @@ function RegisterSelect() {
     <div className="w-screen h-[90vh] flex flex-col justify-center items-center">
       <div className="flex justify-center gap-3">
         <h1
-          className={`text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-violet-400`}
+          className={`text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-violet-400`}
         >
           HR이 일하는 새로운 방식
         </h1>
-        <h1 className={`text-3xl font-bold text-black`}>OnBird</h1>
+        <h1 className={`text-xl md:text-3xl font-bold text-black`}>OnBird</h1>
       </div>
-      <div className="w-full max-w-[400px] flex flex-col gap-3 mt-5">
+      <div className="w-full max-w-[250px] md:max-w-[400px] flex flex-col gap-3 mt-5">
         <Button
           variant="outline"
           className="flex justify-between items-center p-5"

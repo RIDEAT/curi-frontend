@@ -17,13 +17,6 @@ function Slack({ code }: { code: string }) {
   const router = useRouter();
   const [workspaceId, setWorkspaceId] = useState<number | null>(null);
 
-  useEffect(() => {
-    const savedWorkspaceId = localStorage.getItem("workspaceId");
-    if (savedWorkspaceId) {
-      setWorkspaceId(parseInt(savedWorkspaceId, 10));
-    }
-  }, []);
-
   const redirectToSetting = () => {
     router.replace(`/workspace/${workspaceId}/setting/slack`);
   };
@@ -36,6 +29,13 @@ function Slack({ code }: { code: string }) {
       redirectToSetting();
     }
   };
+
+  useEffect(() => {
+    const savedWorkspaceId = localStorage.getItem("workspaceId");
+    if (savedWorkspaceId) {
+      setWorkspaceId(parseInt(savedWorkspaceId, 10));
+    }
+  }, []);
 
   useEffect(() => {
     if (code && workspaceId) {

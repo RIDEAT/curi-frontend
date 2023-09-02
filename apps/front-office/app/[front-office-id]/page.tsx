@@ -4,6 +4,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FrontOfficeAPI } from "../../lib/api/frontOffice";
 import { SequenceLanding } from "./components/sequence-landing";
+import { useLaunchedSequence } from "../../lib/hook/swr/useLaunchedSequence";
+import { ErrorBadge, LoadingCircle } from "ui";
 
 export default function FrontOffice({
   params,
@@ -13,29 +15,22 @@ export default function FrontOffice({
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
-  const [sequence, setSequence] = useState(null);
+  const { launchedSequence, isLoading, error } = useLaunchedSequence(
+    params["front-office-id"],
+    token
+  );
 
-  const getSequenceData = async () => {
-    try {
-      const sequence = await FrontOfficeAPI.getSequence(
-        params["front-office-id"],
-        token
-      );
-      setSequence(sequence.launchedSequenceResponse);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (token) {
-      getSequenceData();
-    }
-  }, [token]);
+  if (isLoading) {
+    return <LoadingCircle />;
+  } else if (error) {
+    return <ErrorBadge />;
+  }
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center p-2">
-      <SequenceLanding sequence={sequence} />
-    </div>
+    <SequenceLanding
+      sequence={launchedSequence}
+      frontOfficeId={params["front-office-id"]}
+      token={token}
+    />
   );
 }
