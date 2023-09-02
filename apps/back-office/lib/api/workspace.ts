@@ -59,4 +59,33 @@ export const WorkspaceAPI = {
       "DELETE"
     );
   },
+  getLogoImageUrl: async (workspaceId: string) => {
+    const { response, result } = await fetcherWithToken(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo`
+    );
+    return result;
+  },
+  getUploadLogoPresignedUrl: async (workspaceId: string, fileName: string) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo?fileName=${fileName}`,
+      null,
+      "PUT"
+    );
+
+    if (!result.preSignedUrl) {
+      throw new Error("preSignedUrl is not found");
+    }
+
+    const { preSignedUrl } = result;
+
+    return preSignedUrl;
+  },
+  deleteLogo: async (workspaceId: string) => {
+    const { response, result } = await fetcherWithToken(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo`,
+      null,
+      "DELETE"
+    );
+    return result;
+  },
 };
