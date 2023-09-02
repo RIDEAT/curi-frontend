@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCurrentLogo } from "../../../../../../../lib/hook/swr/useCurrentLogo";
-import { Button, ErrorBadge, Input, LoadingCircle } from "ui";
+import { Button, ErrorBadge, Input, LoadingCircle, pushFailToast } from "ui";
 import { useState } from "react";
 import { WorkspaceAPI } from "../../../../../../../lib/api/workspace";
 import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWorkspace";
@@ -19,12 +19,38 @@ function LogoControlForm() {
     return URL.createObjectURL(file);
   };
 
+  const getFileTypeFromName = (fileName: string) => {
+    return fileName.split(".").pop() as "png" | "jpg" | "jpeg";
+  };
+
+  const getNewFileName = (type: "png" | "jpg" | "jpeg") => {
+    return `logo${currentWorkspaceId}${Number(new Date())}.${type}`;
+  };
+
+  const checkValidFileExtension = (fileName: string) => {
+    const extension = fileName.split(".").pop();
+    if (extension === "png" || extension === "jpg" || extension === "jpeg") {
+      return true;
+    }
+    return false;
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
-    console.log(file);
-    setPreviewLogoFile(file);
-    // upload file
-    // update currentLogo
+    if (!checkValidFileExtension(file.name)) {
+      pushFailToast(
+        "파일 형식 오류",
+        "png, jpg, jpeg 파일만 업로드 가능합니다."
+      );
+      return;
+    }
+    const blob: Blob = file.slice(0, file.size, "image/*");
+    const newFile = new File(
+      [blob],
+      getNewFileName(getFileTypeFromName(file.name)),
+      { type: "image/*" }
+    );
+    setPreviewLogoFile(newFile);
   };
 
   const uploadLogoToS3 = async (url: string, file: File) => {
