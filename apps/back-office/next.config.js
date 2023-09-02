@@ -7,6 +7,9 @@ module.exports = {
   experimental: {
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
+  images: {
+    domains: ["d3qwomveubih9v.cloudfront.net"],
+  },
   env: {},
   async redirects() {
     return [
