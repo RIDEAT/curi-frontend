@@ -59,4 +59,26 @@ export const WorkspaceAPI = {
       "DELETE"
     );
   },
+  getLogoUrl: (workspaceId: string) => {
+    return `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo`;
+  },
+  updateLogo: async (workspaceId: string, fileName: string) => {
+    return await fetcherWithTokenAndBody(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo?fileName=${fileName}`,
+      {},
+      "PUT"
+    );
+  },
+
+  uploadImageToS3: async (workspaceId: string, file: File) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      `${WorkspaceAPI.workspacesEndPoint}/${workspaceId}/logo?fileName=${file.name}`,
+      {},
+      "PUT"
+    );
+    const { preSignedUrl } = result;
+    const { response: response2, result: result2 } =
+      await fetcherWithTokenAndBody(preSignedUrl, file, "PUT");
+    return result2;
+  },
 };
