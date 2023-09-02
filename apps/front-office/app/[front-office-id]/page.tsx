@@ -21,8 +21,6 @@ export default function FrontOffice({
         params["front-office-id"],
         token
       );
-      console.log(sequence);
-      console.log(sequence.launchedSequenceResponse);
       setSequence(sequence.launchedSequenceResponse);
     } catch (error) {
       console.log(error);
