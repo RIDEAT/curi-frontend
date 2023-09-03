@@ -13,6 +13,7 @@ import {
   FormLabel,
   FormMessage,
   GOOGLE_DOCS_MODULE_VALUE,
+  GOOGLE_FORM_MODULE_VALUE,
   Input,
   LoadingCircle,
   ModuleType,
@@ -48,6 +49,11 @@ const moduleTypes = [
     value: GOOGLE_DOCS_MODULE_VALUE,
     label: "구글 문서",
     icon: getModuleIcon(GOOGLE_DOCS_MODULE_VALUE, "lg"),
+  },
+  {
+    value: GOOGLE_FORM_MODULE_VALUE,
+    label: "구글 설문",
+    icon: getModuleIcon(GOOGLE_FORM_MODULE_VALUE, "lg"),
   },
 ];
 
