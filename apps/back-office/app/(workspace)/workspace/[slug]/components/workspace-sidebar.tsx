@@ -11,7 +11,8 @@ import { cn } from "ui/lib/utils";
 import { useCurrentMenu } from "../../../../../lib/hook/useCurrentMenu";
 import WorkspaceCombo from "./workspace-combo";
 import { useCurrentWorkspace } from "../../../../../lib/hook/useCurrentWorkspace";
-
+import { useNotification } from "../../../../../lib/hook/swr/useNotifications";
+import UnreadCountBadge from "./notification-unreadcount-badge";
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const generalMenuList = (slug: string) => [
@@ -72,6 +73,7 @@ const categoryList = (slug: string) => [
 export function WorkspaceSidebar({ className }: SidebarProps) {
   const { currentMenu, setCurrentMenu } = useCurrentMenu();
   const { currentWorkspaceId } = useCurrentWorkspace();
+  const { unReadCnt } = useNotification();
   const router = useRouter();
 
   const routingHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -108,6 +110,7 @@ export function WorkspaceSidebar({ className }: SidebarProps) {
                           className="w-full justify-start"
                           key={menu.value}
                           accessKey={menu.value}
+                          style={{ alignItems: "center" }}
                         >
                           {menu.icon(isActive)}
                           <div
@@ -118,6 +121,9 @@ export function WorkspaceSidebar({ className }: SidebarProps) {
                           >
                             {menu.label}
                           </div>
+                          {menu.value === "notification" && unReadCnt > 0 && (
+                            <UnreadCountBadge count={unReadCnt} />
+                          )}
                         </Button>
                       );
                     })}

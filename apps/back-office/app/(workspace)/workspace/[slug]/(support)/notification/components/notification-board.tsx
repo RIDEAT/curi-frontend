@@ -67,6 +67,8 @@ export function NotificationBoard() {
     });
   }
 
+  console.log(notificationList);
+
   const formatRelativeTime = (timestamp) => {
     const now = Date.now();
     const notification = new Date(timestamp);
