@@ -20,6 +20,7 @@ import {
   NOTION_MODULE_VALUE,
   RadioGroup,
   RadioGroupItem,
+  WEB_URL_MODULE_VALUE,
   YOUTUBE_MODULE_VALUE,
   getModuleIcon,
   pushFailToast,
@@ -54,6 +55,11 @@ const moduleTypes = [
     value: GOOGLE_FORM_MODULE_VALUE,
     label: "구글 설문",
     icon: getModuleIcon(GOOGLE_FORM_MODULE_VALUE, "lg"),
+  },
+  {
+    value: WEB_URL_MODULE_VALUE,
+    label: "웹 URL",
+    icon: getModuleIcon(WEB_URL_MODULE_VALUE, "lg"),
   },
 ];
 

@@ -10,7 +10,7 @@ function DisplayCardLayout({
   if (fullScreen) {
     return (
       <Card
-        className={`h-full min-w-[300px] w-full  max-w-[900px] flex flex-col border-none sm:border-solid overflow-scroll`}
+        className={`h-full min-w-[300px] w-full  max-w-[900px] flex flex-col border-none sm:border-solid overflow-scroll scrollbar-hide`}
       >
         {children}
       </Card>
@@ -19,7 +19,7 @@ function DisplayCardLayout({
 
   return (
     <Card
-      className={`h-full sm:h-5/6 min-w-[300px] w-full sm:w-1/2 max-w-[900px] flex flex-col border-none sm:border-solid overflow-scroll`}
+      className={`h-full sm:h-5/6 min-w-[300px] w-full sm:w-1/2 max-w-[900px] flex flex-col border-none sm:border-solid overflow-scroll scrollbar-hide`}
     >
       {children}
     </Card>

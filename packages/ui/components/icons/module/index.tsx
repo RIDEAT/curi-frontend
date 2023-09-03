@@ -4,6 +4,7 @@ import { GoogleDocsIcon } from "./google-docs-icon";
 import { GoogleFormIcon } from "./google-form-icon";
 import { NotificationIcon } from "./notification-icon";
 import { NotionIcon } from "./notion-icon";
+import { WebUrlIcon } from "./web-url-icon";
 import { YoutubeIcon } from "./youtube-icon";
 
 export const NOTIFICATION_MODULE_VALUE = "notification";
@@ -47,6 +48,8 @@ const getModuleIcon = (type: ModuleType, size?: "sm" | "lg") => {
       return <GoogleDocsIcon size={size} />;
     case GOOGLE_FORM_MODULE_VALUE:
       return <GoogleFormIcon size={size} />;
+    case WEB_URL_MODULE_VALUE:
+      return <WebUrlIcon size={size} />;
     default:
       return <></>;
   }
@@ -63,3 +66,4 @@ export * from "./youtube-icon";
 export * from "./notion-icon";
 export * from "./google-docs-icon";
 export * from "./google-form-icon";
+export * from "./web-url-icon";

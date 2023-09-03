@@ -38,6 +38,7 @@ export interface ILaunchedResult {
     type: string;
   }[];
   launchedSequenceResponses: {
+    id: string;
     name: string;
     roleResponse: {
       id: number;
@@ -211,7 +212,10 @@ export default function Launch() {
                         <div className="text-lg font-semibold">시퀀스</div>
                         {launchedResult?.launchedSequenceResponses?.map(
                           (sequence, index) => (
-                            <Card className="font-semibold" key={index}>
+                            <Card
+                              className="font-semibold"
+                              key={sequence?.id + index}
+                            >
                               <CardHeader className="p-4">
                                 <div className="flex gap-2">
                                   <Badge variant="outline">
@@ -261,10 +265,10 @@ export default function Launch() {
                                 </div>
                               </div>
                               <Separator />
-                              {employee.managers?.map((manager) => (
+                              {employee.managers?.map((manager, index) => (
                                 <div
                                   className="flex gap-2 items-center"
-                                  key={manager.id}
+                                  key={manager.id + index}
                                 >
                                   <Badge
                                     className="w-fit flex justify-center"

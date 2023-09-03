@@ -3,12 +3,14 @@ import {
   GOOGLE_FORM_MODULE_VALUE,
   ModuleType,
   NOTION_MODULE_VALUE,
+  WEB_URL_MODULE_VALUE,
   YOUTUBE_MODULE_VALUE,
 } from "ui";
 import { NotionModuleContentForm } from "./modules/notion-module-content-form";
 import { YoutubeModuleContentForm } from "./modules/youtube-module-content-form";
 import { GoogleDocsModuleContentForm } from "./modules/google-docs-module-content-form";
 import { GoogleFormModuleContentForm } from "./modules/google-form-module-content-form";
+import { WebUrlModuleContentForm } from "./modules/web-url-module-content-form";
 
 const getModuleContentFormComponent = (
   type: ModuleType,
@@ -44,6 +46,14 @@ const getModuleContentFormComponent = (
     case GOOGLE_FORM_MODULE_VALUE:
       return (
         <GoogleFormModuleContentForm
+          content={content}
+          sequenceId={sequenceId}
+          moduleId={moduleId}
+        />
+      );
+    case WEB_URL_MODULE_VALUE:
+      return (
+        <WebUrlModuleContentForm
           content={content}
           sequenceId={sequenceId}
           moduleId={moduleId}
