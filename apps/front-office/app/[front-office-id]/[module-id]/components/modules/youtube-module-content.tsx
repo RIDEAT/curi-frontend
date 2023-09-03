@@ -1,17 +1,15 @@
+import { useEffect, useState } from "react";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import YouTube, { YouTubeProps } from "react-youtube";
 import Link from "next/link";
 import {
   Button,
   Card,
-  CardContent,
   CardHeader,
   LoadingCircle,
-  NOTION_MODULE_VALUE,
   YOUTUBE_MODULE_VALUE,
   getModuleIcon,
 } from "ui";
-import YouTube, { YouTubeProps } from "react-youtube";
-import { useEffect, useState } from "react";
 
 function YoutubeModuleContent({ contents }) {
   const [youtubeKey, setYoutubeKey] = useState("");
