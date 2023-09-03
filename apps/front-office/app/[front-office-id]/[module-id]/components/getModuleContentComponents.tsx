@@ -3,12 +3,14 @@ import {
   GOOGLE_FORM_MODULE_VALUE,
   ModuleType,
   NOTION_MODULE_VALUE,
+  WEB_URL_MODULE_VALUE,
   YOUTUBE_MODULE_VALUE,
 } from "ui";
 import { NotionModuleContent } from "./modules/notion-module-content";
 import { YoutubeModuleContent } from "./modules/youtube-module-content";
 import { GoogleDocsModuleContent } from "./modules/google-docs-module-content";
 import { GoogleFormModuleContent } from "./modules/google-form-module-content";
+import { WebUrlModuleContent } from "./modules/web-url-module-content";
 
 const getModuleContentComponents = (contents: any, type: ModuleType) => {
   switch (type) {
@@ -26,6 +28,9 @@ const getModuleContentComponents = (contents: any, type: ModuleType) => {
 
     case GOOGLE_FORM_MODULE_VALUE:
       return <GoogleFormModuleContent contents={contents} />;
+
+    case WEB_URL_MODULE_VALUE:
+      return <WebUrlModuleContent contents={contents} />;
 
     default:
       return <div>no matching module type</div>;

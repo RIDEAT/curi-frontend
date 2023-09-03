@@ -63,8 +63,10 @@ export default function ModuleDisplay({
       params["module-id"],
       token
     );
-    await launchedModuleMutate();
-    await launchedSequenceMutate();
+    const moduleMutated = await launchedModuleMutate();
+    const sequenceMutated = await launchedSequenceMutate();
+
+    return result;
   };
 
   const isCheckThisModuleFinal = () => {
@@ -96,6 +98,14 @@ export default function ModuleDisplay({
 
   const checkAllModulesCompleted = () => {
     const launchedModules = launchedSequence?.launchedModules;
+    const launchedModulesLength = launchedModules.length;
+
+    if (launchedModulesLength == 1) {
+      return true;
+    }
+
+    launchedModules.pop();
+
     const isAllModulesCompleted = launchedModules.every(
       (launchedModule) => launchedModule.status === STATUS.COMPLETED
     );
@@ -142,7 +152,7 @@ export default function ModuleDisplay({
 
   const redirectSatisfactionSurvey = async () => {
     setIsRedirecting(true);
-    await checkCompletedModule();
+    const result = await checkCompletedModule();
     const isAllModulesCompleted = checkAllModulesCompleted();
     if (!isAllModulesCompleted) {
       pushFailToast("미완료된 모듈 존재", "모든 모듈을 완료해주세요.");
