@@ -21,7 +21,7 @@ export default function Slack() {
     try {
       await FrontOfficeAPI.connectSlack(frontOfficeId, token, code);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     redirectToSequence();
   };

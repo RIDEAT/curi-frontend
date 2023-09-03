@@ -87,16 +87,14 @@ function NotionModuleContentForm({ content, sequenceId, moduleId }) {
         </div>
         <div className="w-full flex justify-end">
           {!requesting ? (
-            <Button
-              type="submit"
-              className="w-fit bg-violet-600 hover:bg-violet-700"
-            >
+            <Button type="submit" variant="violet" className="w-fit">
               저장하기
             </Button>
           ) : (
             <Button
               type="submit"
-              className="w-fit bg-violet-600 hover:bg-violet-700"
+              variant="violet"
+              className="w-fit"
               disabled={true}
             >
               <LoadingCircle />
