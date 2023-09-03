@@ -40,6 +40,10 @@ export const SLACK_PATH = "/slack";
 export const SLACK_OAUTH_PATH = "/oauth";
 export const SLACK_IS_AUTHORIZED = "/isAuthorized";
 
+// NOTIFICATION
+export const NOTIFICATION_PATH = "/notifications";
+export const MARK_AS_READ_PATH = "/mark-as-read";
+
 // -----------------------------
 // AUTH
 export const AUTH_API_URL = "https://auth.dev.onbird.team";
