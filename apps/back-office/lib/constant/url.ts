@@ -42,6 +42,7 @@ export const SLACK_IS_AUTHORIZED = "/isAuthorized";
 
 // NOTIFICATION
 export const NOTIFICATION_PATH = "/notifications";
+export const MARK_AS_READ_PATH = "/mark-as-read";
 
 // -----------------------------
 // AUTH

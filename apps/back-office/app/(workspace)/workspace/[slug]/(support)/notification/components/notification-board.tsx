@@ -1,7 +1,7 @@
 import { useNotification } from "../../../../../../../lib/hook/swr/useNotifications";
 import { NotificationAPI } from "../../../../../../../lib/api/notification";
 import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWorkspace";
-
+import "./notification-board.css";
 import {
   ErrorBadge,
   LoadingCircle,
@@ -12,13 +12,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "ui";
 
@@ -28,14 +21,15 @@ import { useState, useCallback, useEffect } from "react";
 export function NotificationBoard() {
   const { notifications, isLoading, error, mutateNotification } =
     useNotification();
-  const [selectedNotification, setSelectedNotification] = useState(null);
+  const [willBeDeletedNotification, setWillBeDeletedNotification] =
+    useState(null);
+
   const { currentWorkspaceId } = useCurrentWorkspace();
 
   const handleDeleteClick = useCallback((notification) => {
-    setSelectedNotification(notification);
+    setWillBeDeletedNotification(notification);
   }, []);
 
-  // Function to handle notification deletion
   const deleteNotification = async (notification) => {
     try {
       await NotificationAPI.deleteNotification(
@@ -49,11 +43,11 @@ export function NotificationBoard() {
   };
 
   useEffect(() => {
-    if (selectedNotification) {
-      deleteNotification(selectedNotification);
-      setSelectedNotification(null);
+    if (willBeDeletedNotification) {
+      deleteNotification(willBeDeletedNotification);
+      setWillBeDeletedNotification(null);
     }
-  }, [selectedNotification, deleteNotification]);
+  }, [willBeDeletedNotification, deleteNotification]);
 
   if (isLoading) {
     return <LoadingCircle />;
@@ -61,7 +55,38 @@ export function NotificationBoard() {
     return <ErrorBadge />;
   }
 
-  const notificationList = notifications || [];
+  let notificationList = notifications || [];
+
+  if (notificationList.length > 0) {
+    notificationList = [...notificationList].sort((a, b) =>
+      b.timestamp.localeCompare(a.timestamp)
+    );
+    notificationList.forEach((notification) => {
+      if (!notification.read)
+        NotificationAPI.markAsRead(currentWorkspaceId, notification.id);
+    });
+  }
+
+  const formatRelativeTime = (timestamp) => {
+    const now = Date.now();
+    const notification = new Date(timestamp);
+    const notificationTime = notification.getTime() + 32400000;
+
+    const diffInSeconds = Math.floor((now - notificationTime) / 1000);
+
+    if (diffInSeconds < 60) {
+      return "방금";
+    } else if (diffInSeconds < 3600) {
+      const minutes = Math.floor(diffInSeconds / 60);
+      return `${minutes}분 전`;
+    } else if (diffInSeconds < 86400) {
+      const hours = Math.floor(diffInSeconds / 3600);
+      return `${hours}시간 전`;
+    } else {
+      const days = Math.floor(diffInSeconds / 86400);
+      return `${days}일 전`;
+    }
+  };
 
   return (
     <div>
@@ -75,12 +100,15 @@ export function NotificationBoard() {
           }}
         >
           <div>
-            <AlertTitle>Heads up!</AlertTitle>
+            <AlertTitle>{notification.title}</AlertTitle>
             <AlertDescription>{notification.contents}</AlertDescription>
+            <AlertDescription style={{ fontSize: "12px", color: "gray" }}>
+              {formatRelativeTime(notification.timestamp)}
+            </AlertDescription>
           </div>
           <div>
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger asChild className="hover-icon">
                 <MoreVertical />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56">
