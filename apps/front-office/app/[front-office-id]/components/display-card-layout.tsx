@@ -1,8 +1,20 @@
 import { Card } from "ui";
 
-function DisplayCardLayout({ children }: { children: React.ReactNode }) {
+function DisplayCardLayout({
+  children,
+  fullScreen = false,
+}: {
+  children: React.ReactNode;
+  fullScreen?: boolean;
+}) {
   return (
-    <Card className="h-full sm:h-5/6 min-w-[300px] w-full sm:w-1/2 max-w-[900px] flex flex-col border-none sm:border-solid overflow-scroll">
+    <Card
+      className={`h-full sm:${
+        fullScreen ? "h-full" : "h-5/6"
+      } min-w-[300px] w-full sm:${
+        fullScreen ? "w-full" : "w-1/2"
+      } max-w-[900px] flex flex-col border-none sm:border-solid overflow-scroll`}
+    >
       {children}
     </Card>
   );

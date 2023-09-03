@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Badge,
   Card,
@@ -68,6 +68,25 @@ function SequenceBox({
     satisfactionCheckedHandler(checked);
   };
 
+  const moduleOrderUpdateHandler = (moduleItems) => {
+    moduleItems.forEach((item, index) => {
+      ModuleAPI.updateOrder(
+        currentWorkspaceId,
+        currentWorkflowId,
+        sequenceId,
+        item.id,
+        {
+          name: item.name,
+          order: item.order,
+        }
+      );
+    });
+  };
+
+  useEffect(() => {
+    setModuleItems([...modules].sort((a, b) => a.order - b.order));
+  }, [modules]);
+
   return (
     <div className="flex justify-center items-center">
       <div
@@ -83,20 +102,7 @@ function SequenceBox({
             <SortableList
               items={moduleItems}
               onChange={setModuleItems}
-              onSortEnd={(moduleItems) => {
-                moduleItems.forEach((item, index) => {
-                  ModuleAPI.updateOrder(
-                    currentWorkspaceId,
-                    currentWorkflowId,
-                    sequenceId,
-                    item.id,
-                    {
-                      name: item.name,
-                      order: item.order,
-                    }
-                  );
-                });
-              }}
+              onSortEnd={moduleOrderUpdateHandler}
               renderItem={(item) => {
                 return (
                   <SortableList.Item

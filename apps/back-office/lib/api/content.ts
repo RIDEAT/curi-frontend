@@ -72,4 +72,23 @@ export const ContentAPI = {
     );
     return result;
   },
+  patchGoogleDocs: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string,
+    moduleId: string,
+    form: { url: string; description: string }
+  ) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      ContentAPI.getContentEndPoint(
+        workspaceId,
+        workflowId,
+        sequenceId,
+        moduleId
+      ) + "/google_docs",
+      { content: form },
+      "PATCH"
+    );
+    return { response, result };
+  },
 };

@@ -6,7 +6,7 @@ import {
   WORKFLOWS_PATH,
   WORKSPACES_PATH,
 } from "../constant/url";
-import { fetcherWithTokenAndBody } from "../utils/fetcher";
+import { fetcherWithToken, fetcherWithTokenAndBody } from "../utils/fetcher";
 import { ModuleType } from "ui";
 
 export const ModuleAPI = {
@@ -76,5 +76,22 @@ export const ModuleAPI = {
       "PATCH"
     );
     return result as IModule;
+  },
+  deleteOne: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string,
+    moduleId: string
+  ) => {
+    const { response, result } = await fetcherWithToken(
+      `${ModuleAPI.getModuleEndPoint(
+        workspaceId,
+        workflowId,
+        sequenceId
+      )}/${moduleId}`,
+      null,
+      "DELETE"
+    );
+    return result;
   },
 };

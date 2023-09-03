@@ -23,26 +23,26 @@ import {
 } from "ui";
 import { ContentAPI } from "../../../../../../../../../../../../../lib/api/content";
 
-const youtubeModuleUpdateFormSchema = z.object({
+const GoogleDocsModuleUpdateFormSchema = z.object({
   url: z.string().url(),
   description: z.string().max(500, {
     message: "상세 설명은 500자 이하로 입력해주세요.",
   }),
 });
 
-type YoutubeModuleUpdateFormValues = z.infer<
-  typeof youtubeModuleUpdateFormSchema
+type GoogleDocsModuleUpdateFormValues = z.infer<
+  typeof GoogleDocsModuleUpdateFormSchema
 >;
 
-function YoutubeModuleContentForm({ content, sequenceId, moduleId }) {
+function GoogleDocsModuleContentForm({ content, sequenceId, moduleId }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { currentWorkflowId } = useCurrentWorkflow();
   const { contentMutate } = useContent(sequenceId, moduleId);
 
   const [requesting, setRequesting] = useState(false);
 
-  const form = useForm<YoutubeModuleUpdateFormValues>({
-    resolver: zodResolver(youtubeModuleUpdateFormSchema),
+  const form = useForm<GoogleDocsModuleUpdateFormValues>({
+    resolver: zodResolver(GoogleDocsModuleUpdateFormSchema),
     defaultValues: {
       url: content.url || "",
       description: content.description || "",
@@ -52,7 +52,7 @@ function YoutubeModuleContentForm({ content, sequenceId, moduleId }) {
   const onSubmit = async (data) => {
     try {
       setRequesting(true);
-      await ContentAPI.patchYoutube(
+      const { response, result } = await ContentAPI.patchGoogleDocs(
         currentWorkspaceId,
         currentWorkflowId,
         sequenceId,
@@ -62,11 +62,16 @@ function YoutubeModuleContentForm({ content, sequenceId, moduleId }) {
           description: data.description,
         }
       );
+
+      if (!response.ok) {
+        throw new Error();
+      }
+
       await contentMutate();
-      pushSuccessToast("저장 완료", "유튜브 영상이 저장되었습니다.");
+      pushSuccessToast("저장 완료", "구글 문서가 저장되었습니다.");
       setRequesting(false);
     } catch (e) {
-      pushFailToast("저장 실패", "유튜브 영상을 저장하지 못했습니다.");
+      pushFailToast("저장 실패", "구글 문서를 저장하지 못했습니다.");
       setRequesting(false);
     }
   };
@@ -81,10 +86,10 @@ function YoutubeModuleContentForm({ content, sequenceId, moduleId }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-lg font-semibold">
-                  Youtube URL
+                  구글 문서 URL
                 </FormLabel>
                 <FormDescription>
-                  전달할 Youtube 영상의 URL을 입력해주세요.
+                  전달할 구글 문서의 URL을 입력해주세요.
                 </FormDescription>
                 <FormControl>
                   <Input {...field} />
@@ -104,7 +109,7 @@ function YoutubeModuleContentForm({ content, sequenceId, moduleId }) {
                 <FormDescription></FormDescription>
                 <FormControl>
                   <Textarea
-                    placeholder="전달할 Youtube 영상의 안내 문구를 입력해주세요. (선택)"
+                    placeholder="전달할 구글 문서의 안내 문구를 입력해주세요. (선택)"
                     className="resize-none"
                     {...field}
                   />
@@ -135,4 +140,4 @@ function YoutubeModuleContentForm({ content, sequenceId, moduleId }) {
   );
 }
 
-export { YoutubeModuleContentForm };
+export { GoogleDocsModuleContentForm };
