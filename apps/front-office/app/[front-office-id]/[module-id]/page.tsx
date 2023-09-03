@@ -146,6 +146,7 @@ export default function ModuleDisplay({
     const isAllModulesCompleted = checkAllModulesCompleted();
     if (!isAllModulesCompleted) {
       pushFailToast("미완료된 모듈 존재", "모든 모듈을 완료해주세요.");
+      setIsRedirecting(false);
       return;
     }
     router.push(

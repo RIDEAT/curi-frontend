@@ -91,4 +91,23 @@ export const ContentAPI = {
     );
     return { response, result };
   },
+  patchGoogleForm: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string,
+    moduleId: string,
+    form: { url: string; description: string }
+  ) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      ContentAPI.getContentEndPoint(
+        workspaceId,
+        workflowId,
+        sequenceId,
+        moduleId
+      ) + "/google_form",
+      { content: form },
+      "PATCH"
+    );
+    return result;
+  },
 };
