@@ -79,7 +79,7 @@ function TimeBox({
             sequenceId={employeeSequence.id}
             title={employeeSequence.name}
             stakeholder={employeeSequence.role.name}
-            modules={employeeSequence.modules}
+            modules={[...employeeSequence.modules]}
             satisfactionChecked={employeeSequence.checkSatisfaction}
           />
         ) : (
@@ -100,7 +100,7 @@ function TimeBox({
             sequenceId={managerSequence.id}
             title={managerSequence.name}
             stakeholder={managerSequence.role.name}
-            modules={managerSequence.modules}
+            modules={[...managerSequence.modules]}
             satisfactionChecked={managerSequence.checkSatisfaction}
           />
         ) : (

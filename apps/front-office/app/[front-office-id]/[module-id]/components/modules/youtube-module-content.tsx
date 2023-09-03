@@ -10,6 +10,8 @@ import {
   YOUTUBE_MODULE_VALUE,
   getModuleIcon,
 } from "ui";
+import { ModuleDescriptionCard } from "./module-description-card";
+import { ExternalServiceLinkButton } from "./external-service-link-button";
 
 function YoutubeModuleContent({ contents }) {
   const [youtubeKey, setYoutubeKey] = useState("");
@@ -36,26 +38,14 @@ function YoutubeModuleContent({ contents }) {
       </div>
       <div>
         {contents?.description && (
-          <Card className="mt-4 mb-4 bg-violet-50">
-            <CardHeader className="text-sm font-medium">
-              🔉 {contents?.description}
-            </CardHeader>
-          </Card>
+          <ModuleDescriptionCard description={contents?.description} />
         )}
       </div>
       {contents.url ? (
-        <Link href={contents?.url} target="_blank">
-          <Button
-            variant="outline"
-            className="w-full mt-4 flex justify-between items-center"
-          >
-            <div className="flex gap-2 items-center">
-              {getModuleIcon(YOUTUBE_MODULE_VALUE)}
-              <div>유튜브에서 보기</div>
-            </div>
-            <ArrowRightIcon className="w-4 h-4 text-stone-500" />
-          </Button>
-        </Link>
+        <ExternalServiceLinkButton url={contents.url}>
+          {getModuleIcon(YOUTUBE_MODULE_VALUE)}
+          <div>유튜브에서 보기</div>
+        </ExternalServiceLinkButton>
       ) : (
         <LoadingCircle />
       )}

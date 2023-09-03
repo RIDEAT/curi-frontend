@@ -264,9 +264,11 @@ function SelectRolesWithMember({
 
 function MemberSelectDisplay({ name, email }: { name: string; email: string }) {
   return (
-    <div className="flex gap-2 items-center">
-      <div className="text-sm font-semibold">{name}</div>
-      <Badge variant="outline">{email}</Badge>
+    <div className="flex items-center flex-wrap">
+      <div className="text-sm font-semibold mr-2">{name}</div>
+      <Badge variant="outline" className="text-xs font-medium hidden xl:block">
+        {email}
+      </Badge>
     </div>
   );
 }

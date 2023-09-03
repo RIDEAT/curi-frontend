@@ -4,7 +4,10 @@ import { useRouter } from "next/navigation";
 import { useContent } from "../../../../../../../../../../../../lib/hook/swr/useContent";
 import { useCallback, useEffect, useState } from "react";
 import {
+  AlertDialog,
+  AlertDialogTrigger,
   Button,
+  Dialog,
   ErrorBadge,
   Form,
   FormControl,
@@ -16,18 +19,21 @@ import {
   Separator,
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   getModuleIcon,
 } from "ui";
 import { getModuleContentFormComponent } from "./getModuleContentFormComponent";
-import { SaveIcon } from "lucide-react";
+import { SaveIcon, Trash2Icon } from "lucide-react";
 import { z } from "zod";
 import { moduleNameSchema } from "../../../../../../../../../../../../lib/form-schemas/module";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ModuleAPI } from "../../../../../../../../../../../../lib/api/module";
 import { useWorkflow } from "../../../../../../../../../../../../lib/hook/swr/useWorkflow";
+import { TrashIcon } from "@radix-ui/react-icons";
+import { ModuleDeleteDialog } from "./module-delete-dialog";
 
 const moduleNameUpdateFormSchema = z.object({
   name: moduleNameSchema,
@@ -89,7 +95,10 @@ function ModuleContentEditor({
     <Sheet open={open} onOpenChange={onDismiss}>
       {content && (
         <>
-          <SheetContent isBlur className="w-[500px] min-w-[500px]">
+          <SheetContent
+            isBlur
+            className="flex flex-col w-[500px] min-w-[500px]"
+          >
             <SheetHeader>
               <SheetTitle className="flex gap-2 items-center">
                 <div>{getModuleIcon(content.type) || content.type}</div>
@@ -135,6 +144,26 @@ function ModuleContentEditor({
                 sid,
                 mid
               )}
+            </div>
+            <div className="w-full h-full flex justify-start items-end">
+              <AlertDialog>
+                <AlertDialogTrigger
+                  asChild
+                  className="w-full flex justify-start"
+                >
+                  <Button
+                    variant="outline"
+                    className="m-0 w-fit  flex justify-center h-8 outline-red-500 hover:bg-red-100"
+                  >
+                    <Trash2Icon className="h-4 w-4 text-red-500" />
+                  </Button>
+                </AlertDialogTrigger>
+                <ModuleDeleteDialog
+                  sequenceId={sid}
+                  moduleId={mid}
+                  setOpen={onDismiss}
+                />
+              </AlertDialog>
             </div>
           </SheetContent>
         </>

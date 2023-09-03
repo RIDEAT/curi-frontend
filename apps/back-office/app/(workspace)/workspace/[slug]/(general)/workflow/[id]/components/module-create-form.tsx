@@ -12,6 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  GOOGLE_DOCS_MODULE_VALUE,
   Input,
   LoadingCircle,
   ModuleType,
@@ -42,6 +43,11 @@ const moduleTypes = [
     value: YOUTUBE_MODULE_VALUE,
     label: "youtube",
     icon: getModuleIcon(YOUTUBE_MODULE_VALUE, "lg"),
+  },
+  {
+    value: GOOGLE_DOCS_MODULE_VALUE,
+    label: "구글 문서",
+    icon: getModuleIcon(GOOGLE_DOCS_MODULE_VALUE, "lg"),
   },
 ];
 
@@ -148,7 +154,7 @@ function ModuleCreateForm({
                       >
                         <FormControl>
                           <RadioGroupItem value={type.label}>
-                            <div>dd</div>
+                            <div>{type.label}</div>
                           </RadioGroupItem>
                         </FormControl>
                         <FormLabel className="font-normal">

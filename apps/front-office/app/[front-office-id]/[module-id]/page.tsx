@@ -9,6 +9,7 @@ import {
   CardFooter,
   CardHeader,
   ErrorBadge,
+  GOOGLE_DOCS_MODULE_VALUE,
   LoadingCircle,
   getModuleIcon,
   pushFailToast,
@@ -190,7 +191,11 @@ export default function ModuleDisplay({
   }
 
   return (
-    <DisplayCardLayout>
+    <DisplayCardLayout
+      fullScreen={
+        launchedModule?.contentResponse.type == GOOGLE_DOCS_MODULE_VALUE
+      }
+    >
       <CardHeader>
         <div className="flex gap-2 justify-between items-center">
           <div className="flex gap-2 items-center">

@@ -1,6 +1,12 @@
-import { ModuleType, NOTION_MODULE_VALUE, YOUTUBE_MODULE_VALUE } from "ui";
+import {
+  GOOGLE_DOCS_MODULE_VALUE,
+  ModuleType,
+  NOTION_MODULE_VALUE,
+  YOUTUBE_MODULE_VALUE,
+} from "ui";
 import { NotionModuleContentForm } from "./modules/notion-module-content-form";
 import { YoutubeModuleContentForm } from "./modules/youtube-module-content-form";
+import { GoogleDocsModuleContentForm } from "./modules/google-docs-module-content-form";
 
 const getModuleContentFormComponent = (
   type: ModuleType,
@@ -20,6 +26,14 @@ const getModuleContentFormComponent = (
     case YOUTUBE_MODULE_VALUE:
       return (
         <YoutubeModuleContentForm
+          content={content}
+          sequenceId={sequenceId}
+          moduleId={moduleId}
+        />
+      );
+    case GOOGLE_DOCS_MODULE_VALUE:
+      return (
+        <GoogleDocsModuleContentForm
           content={content}
           sequenceId={sequenceId}
           moduleId={moduleId}

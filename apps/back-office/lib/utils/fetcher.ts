@@ -21,13 +21,18 @@ const fetcherWithToken = async (
     credentials: "include",
   });
 
-  const result = await response.json();
+  try {
+    const result = await response.json();
 
-  if (callback) {
-    return { response, result: callback(result) };
+    if (callback) {
+      return { response, result: callback(result) };
+    }
+
+    return { response, result };
+  } catch (error) {
+    const result = { status: "empty" };
+    return { response, result };
   }
-
-  return { response, result };
 };
 
 const fetcherWithTokenAndBody = async (
@@ -41,6 +46,7 @@ const fetcherWithTokenAndBody = async (
     credentials: "include",
     body: JSON.stringify(body),
   });
+
   try {
     const result = await response.json();
     return { response, result };
