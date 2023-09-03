@@ -21,7 +21,7 @@ function Google({ code }: { code: string }) {
       const result = await AuthAPI.getTokensForGoogle(code);
       await UserAPI.register(result.userEmail);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     router.push("/login");
   };

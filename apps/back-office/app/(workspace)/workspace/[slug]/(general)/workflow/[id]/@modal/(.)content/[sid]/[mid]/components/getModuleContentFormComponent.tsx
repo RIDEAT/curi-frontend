@@ -18,7 +18,13 @@ const getModuleContentFormComponent = (
         />
       );
     case YOUTUBE_MODULE_VALUE:
-      return <YoutubeModuleContentForm content={content} />;
+      return (
+        <YoutubeModuleContentForm
+          content={content}
+          sequenceId={sequenceId}
+          moduleId={moduleId}
+        />
+      );
     default:
       break;
   }

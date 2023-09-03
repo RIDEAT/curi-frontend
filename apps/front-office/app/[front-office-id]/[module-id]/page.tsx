@@ -44,6 +44,7 @@ export default function ModuleDisplay({
   const [isFirst, setIsFirst] = useState(false);
   const [nextModuleId, setNextModuleId] = useState("");
   const [previousModuleId, setPreviousModuleId] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const checkInProgressModule = async () => {
     const result = await FrontOfficeAPI.checkInProgressModule(
@@ -94,7 +95,6 @@ export default function ModuleDisplay({
 
   const checkAllModulesCompleted = () => {
     const launchedModules = launchedSequence?.launchedModules;
-    console.log(launchedModules);
     const isAllModulesCompleted = launchedModules.every(
       (launchedModule) => launchedModule.status === STATUS.COMPLETED
     );
@@ -140,15 +140,17 @@ export default function ModuleDisplay({
   };
 
   const redirectSatisfactionSurvey = async () => {
+    setIsRedirecting(true);
+    await checkCompletedModule();
     const isAllModulesCompleted = checkAllModulesCompleted();
     if (!isAllModulesCompleted) {
       pushFailToast("미완료된 모듈 존재", "모든 모듈을 완료해주세요.");
       return;
     }
-    await checkCompletedModule();
     router.push(
       "/" + params["front-office-id"] + "/satisfaction" + "?token=" + token
     );
+    setIsRedirecting(false);
   };
 
   useEffect(() => {
@@ -216,8 +218,12 @@ export default function ModuleDisplay({
               다음
             </Button>
           ) : (
-            <Button variant="violet" onClick={redirectSatisfactionSurvey}>
-              완료
+            <Button
+              variant="violet"
+              onClick={redirectSatisfactionSurvey}
+              disabled={isRedirecting}
+            >
+              {isRedirecting ? <LoadingCircle /> : "완료"}
             </Button>
           )}
         </div>
