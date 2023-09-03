@@ -12,6 +12,7 @@ const useNotification = () => {
   );
   return {
     notifications: data,
+    unReadCnt: data?.filter((notification) => !notification.read).length,
     isLoading,
     error,
     mutateNotification: mutate,
