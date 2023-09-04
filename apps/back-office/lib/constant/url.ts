@@ -44,6 +44,12 @@ export const SLACK_IS_AUTHORIZED = "/isAuthorized";
 export const NOTIFICATION_PATH = "/notifications";
 export const MARK_AS_READ_PATH = "/mark-as-read";
 
+// DASHBOARD
+export const DASHBOARD_PATH = "/dashboard";
+
+// ALERT
+export const ALERT_PATH = "/alerts";
+
 // -----------------------------
 // AUTH
 export const AUTH_API_URL = "https://auth.dev.onbird.team";
