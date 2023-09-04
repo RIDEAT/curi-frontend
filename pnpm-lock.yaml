@@ -85,6 +85,9 @@ importers:
       react-beautiful-dnd:
         specifier: ^13.1.1
         version: 13.1.1(react-dom@18.2.0)(react@18.2.0)
+      react-device-frameset:
+        specifier: ^1.3.4
+        version: 1.3.4(react@18.2.0)
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
