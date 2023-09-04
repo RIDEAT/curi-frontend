@@ -1,6 +1,16 @@
 import useSWR from "swr";
 import { NotificationAPI } from "../../api/notification";
 import { useCurrentWorkspace } from "../useCurrentWorkspace";
+import { useEffect, useState } from "react";
+
+interface INotification {
+  contents: string;
+  id: string;
+  read: boolean;
+  timestamp: string;
+  title: string;
+  workspaceId: string;
+}
 
 const useNotification = () => {
   const { currentWorkspaceId } = useCurrentWorkspace();
@@ -10,12 +20,37 @@ const useNotification = () => {
       : null,
     ([_]) => NotificationAPI.getNotifications(currentWorkspaceId)
   );
+
+  const [unReadCnt, setUnReadCnt] = useState(0);
+  const [reversedNotifications, setReversedNotifications] = useState<
+    INotification[]
+  >([]);
+
+  const resetUnReadCnt = () => {
+    setUnReadCnt(0);
+  };
+
+  const mutateNotification = async () => {
+    resetUnReadCnt();
+    const result = await mutate();
+    return result;
+  };
+
+  useEffect(() => {
+    if (data) {
+      setUnReadCnt(data.filter((notification) => !notification.read).length);
+      setReversedNotifications([...data].reverse());
+    }
+  }, [data]);
+
   return {
-    notifications: data,
-    unReadCnt: data?.filter((notification) => !notification.read).length,
+    notifications: data as INotification[],
+    reversedNotifications,
+    unReadCnt,
     isLoading,
     error,
-    mutateNotification: mutate,
+    mutateNotification,
+    resetUnReadCnt,
   };
 };
 

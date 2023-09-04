@@ -17,6 +17,7 @@ import { useWorkflow } from "../../../../../../../../lib/hook/swr/useWorkflow";
 import { useCurrentWorkflow } from "../../../../../../../../lib/hook/useCurrentWorkflow";
 import { WorkflowAPI } from "../../../../../../../../lib/api/workflow";
 import { useCurrentWorkspace } from "../../../../../../../../lib/hook/useCurrentWorkspace";
+import { useNotification } from "../../../../../../../../lib/hook/swr/useNotifications";
 
 export interface ILaunchTargetData {
   valid: boolean;
@@ -51,6 +52,8 @@ export default function Launch() {
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { currentWorkflowId } = useCurrentWorkflow();
   const { requiredRoles, isLoading, error } = useWorkflow(currentWorkflowId);
+  const { mutateNotification } = useNotification();
+
   const [launchTargetData, setLaunchTargetData] = useState([
     {
       valid: true,
@@ -118,6 +121,8 @@ export default function Launch() {
       if (response.status === 201) {
         setLaunchedResult(result);
       }
+
+      const mutatedNotification = await mutateNotification();
       setIsRequesting(false);
     } else {
       pushFailToast("모든 필드를 입력해주세요.", "필수 필드가 비어있습니다.");
