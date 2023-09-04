@@ -19,7 +19,6 @@ export const NotificationAPI = {
     return result;
   },
   deleteNotification: async (workspaceId: string, notificationId: string) => {
-    console.log("in delete notification workspaceId", workspaceId);
     const { response, result } = await fetcherWithToken(
       NotificationAPI.getNotificationEndPoint(workspaceId) +
         "/" +

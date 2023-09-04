@@ -23,7 +23,7 @@ export function TopTitleDesc({
           {SideButton}
         </div>
         <Separator className="my-4" />
-        <div className="h-full overflow-scroll">{children}</div>
+        <div className="h-full overflow-scroll scrollbar-hide">{children}</div>
       </div>
     </div>
   );

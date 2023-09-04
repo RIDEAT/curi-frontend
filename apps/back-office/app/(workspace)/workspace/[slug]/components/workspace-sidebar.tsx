@@ -100,7 +100,6 @@ const categoryList = (slug: string) => [
 export function WorkspaceSidebar({ className }: SidebarProps) {
   const { currentMenu, setCurrentMenu } = useCurrentMenu();
   const { currentWorkspaceId } = useCurrentWorkspace();
-  const { unReadCnt } = useNotification();
   const router = useRouter();
 
   const [open, setOpen] = useState("child");
@@ -156,7 +155,6 @@ export function WorkspaceSidebar({ className }: SidebarProps) {
                                       menu={child}
                                       routingHandler={routingHandler}
                                       isActive={isActive}
-                                      unReadCnt={unReadCnt}
                                       key={child.value}
                                     />
                                   );
@@ -173,7 +171,6 @@ export function WorkspaceSidebar({ className }: SidebarProps) {
                           menu={menu}
                           routingHandler={routingHandler}
                           isActive={isActive}
-                          unReadCnt={unReadCnt}
                           key={menu.value}
                         />
                       );
@@ -192,12 +189,10 @@ function SideButtonLink({
   menu,
   routingHandler,
   isActive,
-  unReadCnt,
 }: {
   menu: any;
   routingHandler: any;
   isActive: boolean;
-  unReadCnt: number;
 }) {
   return (
     <Button
@@ -212,9 +207,7 @@ function SideButtonLink({
       <div className={cn("mx-2", isActive && "text-violet-700")}>
         {menu.label}
       </div>
-      {menu.value === "notification" && unReadCnt > 0 && (
-        <UnreadCountBadge count={unReadCnt} />
-      )}
+      {menu.value === "notification" && <UnreadCountBadge />}
     </Button>
   );
 }

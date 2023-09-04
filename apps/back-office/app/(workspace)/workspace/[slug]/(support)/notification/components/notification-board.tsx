@@ -1,53 +1,47 @@
 import { useNotification } from "../../../../../../../lib/hook/swr/useNotifications";
-import { NotificationAPI } from "../../../../../../../lib/api/notification";
 import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWorkspace";
-import "./notification-board.css";
-import {
-  ErrorBadge,
-  LoadingCircle,
-  Alert,
-  AlertDescription,
-  AlertTitle,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "ui";
-
-import { MoreVertical } from "lucide-react";
-import { useState, useCallback, useEffect } from "react";
+import { ErrorBadge, SpreadCircleIcon, LoadingCircle } from "ui";
+import { formatRelativeTime } from "../../../../../../../lib/utils/formatRelativeTime";
+import { cn } from "ui/lib/utils";
+import { useEffect } from "react";
+import { NotificationAPI } from "../../../../../../../lib/api/notification";
 
 export function NotificationBoard() {
-  const { notifications, isLoading, error, mutateNotification } =
-    useNotification();
-  const [willBeDeletedNotification, setWillBeDeletedNotification] =
-    useState(null);
-
   const { currentWorkspaceId } = useCurrentWorkspace();
+  const {
+    reversedNotifications,
+    isLoading,
+    error,
+    mutateNotification,
+    unReadCnt,
+    resetUnReadCnt,
+  } = useNotification();
 
-  const handleDeleteClick = useCallback((notification) => {
-    setWillBeDeletedNotification(notification);
-  }, []);
+  const destroy = async () => {
+    if (reversedNotifications.length) {
+      [...reversedNotifications]
+        .filter((notification) => !notification.read)
+        .forEach(async (unReadNotification) => {
+          await NotificationAPI.markAsRead(
+            currentWorkspaceId,
+            unReadNotification.id
+          );
+        });
 
-  const deleteNotification = async (notification) => {
-    try {
-      await NotificationAPI.deleteNotification(
-        currentWorkspaceId,
-        notification.id
-      );
-      mutateNotification();
-    } catch (error) {
-      console.error("Error deleting notification:", error);
+      const result = await mutateNotification();
+      return result;
     }
   };
 
   useEffect(() => {
-    if (willBeDeletedNotification) {
-      deleteNotification(willBeDeletedNotification);
-      setWillBeDeletedNotification(null);
+    if (unReadCnt) {
+      resetUnReadCnt();
     }
-  }, [willBeDeletedNotification, deleteNotification]);
+
+    return () => {
+      destroy();
+    };
+  }, [reversedNotifications]);
 
   if (isLoading) {
     return <LoadingCircle />;
@@ -55,77 +49,65 @@ export function NotificationBoard() {
     return <ErrorBadge />;
   }
 
-  let notificationList = notifications || [];
-
-  if (notificationList.length > 0) {
-    notificationList = [...notificationList].sort((a, b) =>
-      b.timestamp.localeCompare(a.timestamp)
-    );
-    notificationList.forEach((notification) => {
-      if (!notification.read)
-        NotificationAPI.markAsRead(currentWorkspaceId, notification.id);
-    });
-  }
-
-  console.log(notificationList);
-
-  const formatRelativeTime = (timestamp) => {
-    const now = Date.now();
-    const notification = new Date(timestamp);
-    const notificationTime = notification.getTime() + 32400000;
-
-    const diffInSeconds = Math.floor((now - notificationTime) / 1000);
-
-    if (diffInSeconds < 60) {
-      return "방금";
-    } else if (diffInSeconds < 3600) {
-      const minutes = Math.floor(diffInSeconds / 60);
-      return `${minutes}분 전`;
-    } else if (diffInSeconds < 86400) {
-      const hours = Math.floor(diffInSeconds / 3600);
-      return `${hours}시간 전`;
-    } else {
-      const days = Math.floor(diffInSeconds / 86400);
-      return `${days}일 전`;
-    }
-  };
-
   return (
-    <div>
-      {notificationList.map((notification, index) => (
-        <Alert
-          key={index}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            <AlertTitle>{notification.title}</AlertTitle>
-            <AlertDescription>{notification.contents}</AlertDescription>
-            <AlertDescription style={{ fontSize: "12px", color: "gray" }}>
-              {formatRelativeTime(notification.timestamp)}
-            </AlertDescription>
-          </div>
-          <div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild className="hover-icon">
-                <MoreVertical />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuGroup>
-                  <DropdownMenuItem
-                    onClick={() => handleDeleteClick(notification)}
+    <div className="overflow-scroll scrollbar-hide flex flex-col h-full">
+      {reversedNotifications &&
+        reversedNotifications.map((notification) => {
+          return (
+            <div
+              className="h-full flex items-center justify-between px-4 py-2"
+              key={notification.id}
+            >
+              <div className="h-full flex items-start space-x-2">
+                <div className="h-full flex flex-col items-center mt-1">
+                  <div>
+                    {notification.read ? (
+                      <SpreadCircleIcon color="#9c9c9cda" />
+                    ) : (
+                      <SpreadCircleIcon />
+                    )}
+                  </div>
+                  {notification.read ? (
+                    <div className="h-full w-[2px] bg-[#9c9c9cda] mt-1"></div>
+                  ) : (
+                    <div className="h-full w-[2px] bg-[#00D94A] mt-1"></div>
+                  )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h3
+                    className={cn(
+                      "text-sm font-semibold",
+                      !notification.read ? "text-green-500" : "text-gray-800"
+                    )}
                   >
-                    <span>알림 삭제하기</span>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </Alert>
-      ))}
+                    {notification.title}
+                  </h3>
+                  <p
+                    className={cn(
+                      "text-xs font-normal",
+                      !notification.read
+                        ? "text-gray-800 font-medium"
+                        : "text-gray-400"
+                    )}
+                  >
+                    {notification.contents}
+                  </p>
+
+                  <p
+                    className={cn(
+                      "text-xs font-normal",
+                      !notification.read
+                        ? "text-gray-800 font-medium"
+                        : "text-gray-400"
+                    )}
+                  >
+                    {formatRelativeTime(notification.timestamp)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 }
