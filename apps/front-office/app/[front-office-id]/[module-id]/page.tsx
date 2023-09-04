@@ -97,7 +97,7 @@ export default function ModuleDisplay({
   };
 
   const checkAllModulesCompleted = () => {
-    const launchedModules = launchedSequence?.launchedModules;
+    const launchedModules = [...(launchedSequence?.launchedModules || [])];
     const launchedModulesLength = launchedModules.length;
 
     if (launchedModulesLength == 1) {
