@@ -5,7 +5,18 @@ import {
   QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
 
-import { Button, DashboardIcon, MemberIcon, WorkflowIcon } from "ui";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  AnalysisIcon,
+  Button,
+  DashboardIcon,
+  ManagementIcon,
+  MemberIcon,
+  WorkflowIcon,
+} from "ui";
 import { cn } from "ui/lib/utils";
 
 import { useCurrentMenu } from "../../../../../lib/hook/useCurrentMenu";
@@ -13,6 +24,7 @@ import WorkspaceCombo from "./workspace-combo";
 import { useCurrentWorkspace } from "../../../../../lib/hook/useCurrentWorkspace";
 import { useNotification } from "../../../../../lib/hook/swr/useNotifications";
 import UnreadCountBadge from "./notification-unreadcount-badge";
+import { useState } from "react";
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const generalMenuList = (slug: string) => [
@@ -23,16 +35,31 @@ const generalMenuList = (slug: string) => [
     icon: (active?: boolean) => <WorkflowIcon active={active} />,
   },
   {
-    value: "dashboard",
-    label: "대시보드",
-    path: `/workspace/${slug}/dashboard`,
-    icon: (active?: boolean) => <DashboardIcon active={active} />,
-  },
-  {
     value: "member",
     label: "멤버",
     path: `/workspace/${slug}/member`,
     icon: (active?: boolean) => <MemberIcon active={active} />,
+  },
+  {
+    value: "dashboard",
+    type: "accordion",
+    label: "대시보드",
+    path: `/workspace/${slug}/dashboard`,
+    icon: (active?: boolean) => <DashboardIcon active={active} />,
+    children: [
+      {
+        value: "analysis",
+        label: "분석",
+        path: `/workspace/${slug}/analysis`,
+        icon: (active?: boolean) => <AnalysisIcon active={active} />,
+      },
+      {
+        value: "management",
+        label: "관리",
+        path: `/workspace/${slug}/management`,
+        icon: (active?: boolean) => <ManagementIcon active={active} />,
+      },
+    ],
   },
 ];
 
@@ -76,6 +103,8 @@ export function WorkspaceSidebar({ className }: SidebarProps) {
   const { unReadCnt } = useNotification();
   const router = useRouter();
 
+  const [open, setOpen] = useState("child");
+
   const routingHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.currentTarget;
     const menu = target.accessKey;
@@ -102,29 +131,51 @@ export function WorkspaceSidebar({ className }: SidebarProps) {
                   </h2>
                   <div className="space-y-1">
                     {category.items.map((menu) => {
+                      if (menu.type == "accordion") {
+                        return (
+                          <Accordion
+                            type="single"
+                            collapsible
+                            className="w-full data-[state]:open"
+                            value={open}
+                            onValueChange={setOpen}
+                            key={menu.value}
+                          >
+                            <AccordionItem value="child">
+                              <AccordionTrigger className="p-0">
+                                <div className="flex gap-2 text-sm items-center px-4 py-2">
+                                  <div>{menu.icon()}</div>
+                                  <div>{menu.label}</div>
+                                </div>
+                              </AccordionTrigger>
+                              <AccordionContent className="pl-6">
+                                {menu.children.map((child) => {
+                                  const isActive = currentMenu == child.value;
+                                  return (
+                                    <SideButtonLink
+                                      menu={child}
+                                      routingHandler={routingHandler}
+                                      isActive={isActive}
+                                      unReadCnt={unReadCnt}
+                                      key={child.value}
+                                    />
+                                  );
+                                })}
+                              </AccordionContent>
+                            </AccordionItem>
+                          </Accordion>
+                        );
+                      }
+
                       const isActive = currentMenu == menu.value;
                       return (
-                        <Button
-                          onClick={routingHandler}
-                          variant={isActive ? "secondary" : "ghost"}
-                          className="w-full justify-start"
+                        <SideButtonLink
+                          menu={menu}
+                          routingHandler={routingHandler}
+                          isActive={isActive}
+                          unReadCnt={unReadCnt}
                           key={menu.value}
-                          accessKey={menu.value}
-                          style={{ alignItems: "center" }}
-                        >
-                          {menu.icon(isActive)}
-                          <div
-                            className={cn(
-                              "mx-2",
-                              isActive && "text-violet-700"
-                            )}
-                          >
-                            {menu.label}
-                          </div>
-                          {menu.value === "notification" && unReadCnt > 0 && (
-                            <UnreadCountBadge count={unReadCnt} />
-                          )}
-                        </Button>
+                        />
                       );
                     })}
                   </div>
@@ -134,5 +185,36 @@ export function WorkspaceSidebar({ className }: SidebarProps) {
         </div>
       </div>
     </div>
+  );
+}
+
+function SideButtonLink({
+  menu,
+  routingHandler,
+  isActive,
+  unReadCnt,
+}: {
+  menu: any;
+  routingHandler: any;
+  isActive: boolean;
+  unReadCnt: number;
+}) {
+  return (
+    <Button
+      onClick={routingHandler}
+      variant={isActive ? "secondary" : "ghost"}
+      className="w-full justify-start"
+      key={menu.value}
+      accessKey={menu.value}
+      style={{ alignItems: "center" }}
+    >
+      {menu.icon(isActive)}
+      <div className={cn("mx-2", isActive && "text-violet-700")}>
+        {menu.label}
+      </div>
+      {menu.value === "notification" && unReadCnt > 0 && (
+        <UnreadCountBadge count={unReadCnt} />
+      )}
+    </Button>
   );
 }

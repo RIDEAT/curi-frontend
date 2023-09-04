@@ -14,7 +14,7 @@ function Workflow() {
         description="모든 워크플로우를 조회하고, 워크플로우로 온보딩을 시작할 수 있습니다."
         SideButton={<WorkflowCreateDialog />}
       >
-        <div className="h-full overflow-scroll pb-5">
+        <div className="h-full overflow-scroll scrollbar-hide pb-5">
           <WorkflowsBoard />
         </div>
       </TopTitleDesc>
