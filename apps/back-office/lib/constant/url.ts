@@ -4,7 +4,7 @@ import { MemberType } from "member-types";
 
 // -----------------------------
 // RESOURSE
-export const RESOURSE_API_URL = "https://api.dev.onbird.team";
+export const RESOURSE_API_URL = process.env.NEXT_PUBLIC_RESOURSE_API_URL;
 
 // WORKSPACE
 export const WORKSPACE_PATH = "/workspace";
@@ -46,7 +46,7 @@ export const MARK_AS_READ_PATH = "/mark-as-read";
 
 // -----------------------------
 // AUTH
-export const AUTH_API_URL = "https://auth.dev.onbird.team";
+export const AUTH_API_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;
 
 export const AUTHROIZE_PATH = "/authorize";
 export const VERIFY_PATH = "/verify";
