@@ -139,7 +139,7 @@ export default function Launch() {
   }, [launchTargetData]);
 
   return (
-    <div className="h-[91vh] p-5 overflow-scroll">
+    <div className="h-[91vh] p-5 overflow-scroll scrollbar-hide">
       <Card>
         {!isSubmitted ? (
           <>

@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { Button } from "ui";
+import { Button } from "../../ui/button";
 
 function ExternalServiceLinkButton({
   url,
