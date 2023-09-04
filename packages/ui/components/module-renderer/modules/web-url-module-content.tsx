@@ -1,20 +1,24 @@
-import { GOOGLE_DOCS_MODULE_VALUE, LoadingCircle, getModuleIcon } from "ui";
+import {
+  LoadingCircle,
+  WEB_URL_MODULE_VALUE,
+  getModuleIcon,
+} from "../../icons";
 import { ExternalServiceLinkButton } from "./external-service-link-button";
 import { ModuleDescriptionCard } from "./module-description-card";
 
-function GoogleDocsModuleContent({ contents }) {
+function WebUrlModuleContent({ contents }: { contents: any }) {
   return (
     <div>
       {contents.url && (
-        <div className="hidden sm:block">
+        <div>
           <iframe src={contents.url} width="100%" height="600px" />
         </div>
       )}
       <ModuleDescriptionCard description={contents?.description} />
       {contents.url ? (
         <ExternalServiceLinkButton url={contents.url}>
-          {getModuleIcon(GOOGLE_DOCS_MODULE_VALUE)}
-          <div>구글 문서에서 보기</div>
+          {getModuleIcon(WEB_URL_MODULE_VALUE)}
+          <div>새 창에서 보기</div>
         </ExternalServiceLinkButton>
       ) : (
         <LoadingCircle />
@@ -23,4 +27,4 @@ function GoogleDocsModuleContent({ contents }) {
   );
 }
 
-export { GoogleDocsModuleContent };
+export { WebUrlModuleContent };

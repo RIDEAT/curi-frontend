@@ -1,8 +1,12 @@
-import { LoadingCircle, WEB_URL_MODULE_VALUE, getModuleIcon } from "ui";
+import {
+  GOOGLE_FORM_MODULE_VALUE,
+  LoadingCircle,
+  getModuleIcon,
+} from "../../icons";
 import { ExternalServiceLinkButton } from "./external-service-link-button";
 import { ModuleDescriptionCard } from "./module-description-card";
 
-function WebUrlModuleContent({ contents }) {
+function GoogleFormModuleContent({ contents }: { contents: any }) {
   return (
     <div>
       {contents.url && (
@@ -13,8 +17,8 @@ function WebUrlModuleContent({ contents }) {
       <ModuleDescriptionCard description={contents?.description} />
       {contents.url ? (
         <ExternalServiceLinkButton url={contents.url}>
-          {getModuleIcon(WEB_URL_MODULE_VALUE)}
-          <div>새 창에서 보기</div>
+          {getModuleIcon(GOOGLE_FORM_MODULE_VALUE)}
+          <div>구글 문서에서 보기</div>
         </ExternalServiceLinkButton>
       ) : (
         <LoadingCircle />
@@ -23,4 +27,4 @@ function WebUrlModuleContent({ contents }) {
   );
 }
 
-export { WebUrlModuleContent };
+export { GoogleFormModuleContent };

@@ -52,3 +52,6 @@ export * from "./toasts";
 
 // badges
 export * from "./badges";
+
+// module-renderer
+export * from "./module-renderer";

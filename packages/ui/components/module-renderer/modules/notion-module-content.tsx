@@ -1,9 +1,8 @@
-import { ArrowRightIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { Button, LoadingCircle, NOTION_MODULE_VALUE, getModuleIcon } from "ui";
+import { NOTION_MODULE_VALUE, getModuleIcon } from "../../icons";
 import { ExternalServiceLinkButton } from "./external-service-link-button";
+import { Button } from "../../ui/button";
 
-function NotionModuleContent({ contents }) {
+function NotionModuleContent({ contents }: { contents: any }) {
   return (
     <div>
       {contents.notionUrl ? (

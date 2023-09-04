@@ -97,7 +97,7 @@ function SequenceBox({
           <div className="text-base font-semibold">{title}</div>
           {<Badge className="bg-violet-500">{stakeholder}</Badge>}
         </div>
-        <div className="px-2 py-2 overflow-scroll">
+        <div className="px-2 py-2 overflow-scroll scrollbar-hide">
           {modules.length > 0 ? (
             <SortableList
               items={moduleItems}

@@ -11,12 +11,13 @@ import {
   ErrorBadge,
   GOOGLE_DOCS_MODULE_VALUE,
   LoadingCircle,
+  getModuleContentComponents,
   getModuleIcon,
   pushFailToast,
 } from "ui";
 import { StatusIcon } from "../components/status-icon";
 import { useLaunchedSequence } from "../../../lib/hook/swr/useLaunchedSequence";
-import { getModuleContentComponents } from "./components/getModuleContentComponents";
+
 import { useEffect, useState } from "react";
 import { STATUS } from "ui/lib/constants";
 import { FrontOfficeAPI } from "../../../lib/api/frontOffice";

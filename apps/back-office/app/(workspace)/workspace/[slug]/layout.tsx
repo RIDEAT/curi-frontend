@@ -19,7 +19,7 @@ export default function WorkspaceLayout({
   };
 
   return (
-    <div className="w-screen h-screen flex">
+    <div className="w-screen h-screen flex overflow-scroll scrollbar-hide">
       <div
         className={`min-w-[220px] max-w-[220px] shadow-[inset_0_-20px_60px_-30px_rgba(0,0,0,0.2)] ${
           isSidebarOpen ? "" : "hidden"

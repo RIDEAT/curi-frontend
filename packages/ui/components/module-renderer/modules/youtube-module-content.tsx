@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
 import YouTube, { YouTubeProps } from "react-youtube";
-import Link from "next/link";
+
+import { ModuleDescriptionCard } from "./module-description-card";
+import { ExternalServiceLinkButton } from "./external-service-link-button";
 import {
-  Button,
-  Card,
-  CardHeader,
   LoadingCircle,
   YOUTUBE_MODULE_VALUE,
   getModuleIcon,
-} from "ui";
-import { ModuleDescriptionCard } from "./module-description-card";
-import { ExternalServiceLinkButton } from "./external-service-link-button";
+} from "../../icons";
 
-function YoutubeModuleContent({ contents }) {
+function YoutubeModuleContent({ contents }: { contents: any }) {
   const [youtubeKey, setYoutubeKey] = useState("");
 
   const opts: YouTubeProps["opts"] = {
@@ -27,7 +23,7 @@ function YoutubeModuleContent({ contents }) {
   useEffect(() => {
     if (contents?.url) {
       const url = new URL(contents?.url);
-      setYoutubeKey(url.searchParams.get("v"));
+      setYoutubeKey(url.searchParams.get("v") || "");
     }
   }, [contents]);
 
