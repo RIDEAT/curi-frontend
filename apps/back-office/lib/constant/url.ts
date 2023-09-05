@@ -1,8 +1,5 @@
 // export const API_URL = "http://localhost:8080";
-import dotenv from "dotenv";
 import { MemberType } from "member-types";
-
-dotenv.config();
 
 // -----------------------------
 // RESOURSE
