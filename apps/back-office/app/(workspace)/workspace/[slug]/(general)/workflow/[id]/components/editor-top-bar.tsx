@@ -10,7 +10,6 @@ import { SequenceCreateDialog } from "./sequence-create-dialog";
 
 function EditorTopBar() {
   const router = useRouter();
-  const { currentWorkspaceId } = useCurrentWorkspace();
   const { currentWorkflowId } = useCurrentWorkflow();
   const { workflow, isLoading, error } = useWorkflow(currentWorkflowId);
 
