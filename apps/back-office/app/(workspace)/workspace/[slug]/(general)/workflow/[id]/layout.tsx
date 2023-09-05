@@ -1,6 +1,4 @@
-import { ChevronLeftIcon } from "@radix-ui/react-icons";
-import { StepBackIcon } from "lucide-react";
-import { Button, Separator } from "ui";
+import { Separator } from "ui";
 import { EditorTopBar } from "./components/editor-top-bar";
 
 export default function WorkflowEditorLayout(props: {
