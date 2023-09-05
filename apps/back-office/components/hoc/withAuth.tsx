@@ -30,10 +30,10 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
 
     const checkAuth = async () => {
       const isValidToken = await AuthAPI.validateToken();
+      console.log("isValidToken: ", isValidToken);
 
       if (!isValidToken) {
         await AuthAPI.logout();
-
         return false;
       }
 
@@ -41,14 +41,17 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
     };
 
     useEffect(() => {
-      if (localStore.isAuthenticated()) {
-        if (routeRole == "auth") {
-          router.push(WORKSPACE_ROUTE);
-        } else {
-          setIsLoading(false);
-        }
-      } else {
-        if (routeRole == "protected") {
+      setIsLoading(true);
+    }, []);
+
+    console.log(routeRole);
+
+    useEffect(() => {
+      switch (routeRole) {
+        case "public":
+          setIsLoading(true);
+          break;
+        case "protected":
           checkAuth().then((isValidate) => {
             if (!isValidate) {
               router.push(`${LOGIN_ROUTE}?redirect=${pathname}`);
@@ -56,20 +59,57 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
               setIsLoading(false);
             }
           });
-        }
-        setIsLoading(false);
+          break;
+        case "auth":
+          if (localStore.isAuthenticated()) {
+            checkAuth().then((isValidate) => {
+              if (!isValidate) {
+                router.push(`${LOGIN_ROUTE}?redirect=${pathname}`);
+              } else {
+                router.push(WORKSPACE_ROUTE);
+              }
+            });
+            setIsLoading(false);
+          } else {
+            setIsLoading(false);
+          }
+          break;
+        default:
+          setIsLoading(false);
+          break;
       }
+
+      // if (localStore.isAuthenticated()) {
+      //   if (routeRole == "auth") {
+      //     router.push(WORKSPACE_ROUTE);
+      //   } else {
+      //     setIsLoading(false);
+      //   }
+      // } else {
+      //   if (routeRole == "protected") {
+      //     console.log("routeRole: ", routeRole);
+
+      //     checkAuth().then((isValidate) => {
+      //       if (!isValidate) {
+      //         router.push(`${LOGIN_ROUTE}?redirect=${pathname}`);
+      //       } else {
+      //         setIsLoading(false);
+      //       }
+      //     });
+      //   }
+      //   setIsLoading(false);
+      // }
 
       if (routeRole == "public") setIsLoading(false);
     }, []);
 
-    if (isloading)
+    if (isloading) {
       return (
         <div className="w-screen h-screen flex justify-center items-center">
           <LoadingCircle dimensions="w-10 h-10" />
         </div>
       );
-    else {
+    } else {
       return <Component {...(props as T)} />;
     }
   };
