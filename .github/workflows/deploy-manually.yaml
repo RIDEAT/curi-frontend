@@ -6,7 +6,7 @@ on:
       service:
         description: 'Service Name'
         required: true
-        default: 'demo'
+        default: ''
         type: choice
         options:
         - back-office
@@ -71,14 +71,14 @@ jobs:
 
       - name: Update Kubernetes resources
         env:
-          ECR_REPOSITORY: next/curi-demo
+          ECR_REPOSITORY: next/curi-${{ github.event.inputs.service }}
           IMAGE_TAG: ${{ steps.image.outputs.version }}
 
         run: |
           echo ${{ steps.login-ecr.outputs.registry }}
           echo $ECR_REPOSITORY
           echo $IMAGE_TAG
-          cd curi-manifests/k8s_manifests/demo/overlays/${{ github.event.inputs.environment }}
+          cd curi-manifests/k8s_manifests/${{ github.event.inputs.service }}/overlays/${{ github.event.inputs.environment }}
           kustomize edit set image ${{ steps.login-ecr.outputs.registry}}/$ECR_REPOSITORY=${{ steps.login-ecr.outputs.registry}}/$ECR_REPOSITORY:$IMAGE_TAG
           cat kustomization.yaml
 
@@ -87,5 +87,5 @@ jobs:
           cd curi-manifests
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
-          git commit -am "Update ${{ github.event.inputs.environment }} image tag"
+          git commit -am "Update ${{ github.event.inputs.service }} ${{ github.event.inputs.environment }} image tag"
           git push -u origin main
