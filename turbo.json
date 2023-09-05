@@ -6,6 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
+        "NEXT_PUBLIC_APP_URL",
         "NEXT_PUBLIC_RESOURSE_API_URL",
         "NEXT_PUBLIC_AUTH_API_URL",
         "FIREBASE_API_KEY",
@@ -35,6 +36,7 @@
     "start": {
       "dependsOn": ["^start"],
       "env": [
+        "NEXT_PUBLIC_APP_URL",
         "NEXT_PUBLIC_RESOURSE_API_URL",
         "NEXT_PUBLIC_AUTH_API_URL",
         "FIREBASE_API_KEY",
