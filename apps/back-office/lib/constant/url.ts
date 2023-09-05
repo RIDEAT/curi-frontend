@@ -4,7 +4,7 @@ import { MemberType } from "member-types";
 
 // -----------------------------
 // RESOURSE
-export const RESOURSE_API_URL = process.env.NEXT_PUBLIC_RESOURSE_API_URL;
+export const RESOURSE_API_URL = process.env.RESOURSE_API_URL;
 
 // WORKSPACE
 export const WORKSPACE_PATH = "/workspace";
@@ -52,7 +52,7 @@ export const ALERT_PATH = "/alerts";
 
 // -----------------------------
 // AUTH
-export const AUTH_API_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;
+export const AUTH_API_URL = process.env.AUTH_API_URL;
 
 export const AUTHROIZE_PATH = "/authorize";
 export const VERIFY_PATH = "/verify";
@@ -63,7 +63,7 @@ export const GOOGLE_PATH = "/google";
 
 // -----------------------------
 // External
-export const GOOGLE_OAUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=1065165671986-lc7le3ju140a8snli27b02g6c2h1c7qh.apps.googleusercontent.com&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/google&response_type=code&scope=email`;
+export const GOOGLE_OAUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=1065165671986-lc7le3ju140a8snli27b02g6c2h1c7qh.apps.googleusercontent.com&redirect_uri=${process.env.APP_URL}/google&response_type=code&scope=email`;
 
 export const SLACK_OAUTH_URL =
   "https://slack.com/oauth/v2/authorize?scope=channels%3Aread%2Cgroups%3Aread%2Cmpim%3Aread%2Cim%3Aread%2Cchat%3Awrite%2Cchannels%3Awrite.invites%2Cchannels%3Awrite.topic%2Cgroups%3Awrite%2Cmpim%3Awrite%2Cim%3Awrite%2Cchannels%3Amanage&amp;user_scope=&amp;redirect_uri=https%3A%2F%2Fapp.dev.onbird.team%2Fslack&amp;client_id=5305401263955.5790799264304";
