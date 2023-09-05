@@ -30,7 +30,6 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
 
     const checkAuth = async () => {
       const isValidToken = await AuthAPI.validateToken();
-      console.log("isValidToken: ", isValidToken);
 
       if (!isValidToken) {
         await AuthAPI.logout();
@@ -43,8 +42,6 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
     useEffect(() => {
       setIsLoading(true);
     }, []);
-
-    console.log(routeRole);
 
     useEffect(() => {
       switch (routeRole) {
@@ -78,27 +75,6 @@ export default function withAuth<T extends withAuthProps = withAuthProps>(
           setIsLoading(false);
           break;
       }
-
-      // if (localStore.isAuthenticated()) {
-      //   if (routeRole == "auth") {
-      //     router.push(WORKSPACE_ROUTE);
-      //   } else {
-      //     setIsLoading(false);
-      //   }
-      // } else {
-      //   if (routeRole == "protected") {
-      //     console.log("routeRole: ", routeRole);
-
-      //     checkAuth().then((isValidate) => {
-      //       if (!isValidate) {
-      //         router.push(`${LOGIN_ROUTE}?redirect=${pathname}`);
-      //       } else {
-      //         setIsLoading(false);
-      //       }
-      //     });
-      //   }
-      //   setIsLoading(false);
-      // }
 
       if (routeRole == "public") setIsLoading(false);
     }, []);
