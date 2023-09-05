@@ -29,7 +29,7 @@ import {
   TableRow,
 } from "ui";
 
-import { DataTablePagination } from "../components/data-table-pagination";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
