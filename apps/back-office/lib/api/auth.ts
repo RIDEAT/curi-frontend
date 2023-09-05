@@ -100,13 +100,15 @@ export const AuthAPI = {
         AUTH_API_URL + LOGOUT_PATH
       );
 
+      localStore.removeAuthToken();
+
       if (response.ok) {
-        localStore.removeAuthToken();
         return true;
       }
 
       return false;
     } catch (error) {
+      localStore.removeAuthToken();
       console.error(error);
     }
   },

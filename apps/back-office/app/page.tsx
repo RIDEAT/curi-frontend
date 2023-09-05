@@ -5,8 +5,10 @@ import Link from "next/link";
 import { Button } from "ui";
 
 import LendingNav from "../components/ui/navigations/LendingNav";
+import withAuth from "../components/hoc/withAuth";
 
-export default function Home() {
+export default withAuth(Home, "protected");
+function Home() {
   return (
     <>
       <div className="w-screen flex flex-col justify-center">
