@@ -1,5 +1,5 @@
 import { RESOURSE_API_URL, USER_PATH } from "../constant/url";
-import { fetcherWithTokenAndBody } from "../utils/fetcher";
+import { fetcherWithTokenAndBody, fetcherWithToken } from "../utils/fetcher";
 import { AuthAPI } from "./auth";
 
 export const UserAPI = {
@@ -21,5 +21,11 @@ export const UserAPI = {
     } catch (error) {
       console.error(error);
     }
+  },
+  getOne: async () => {
+    const { response, result } = await fetcherWithToken(
+      `${RESOURSE_API_URL}${USER_PATH}`
+    );
+    return result;
   },
 };
