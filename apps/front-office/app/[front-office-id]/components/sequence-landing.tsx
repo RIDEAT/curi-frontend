@@ -3,22 +3,19 @@ import {
   Button,
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CompletedIcon,
   SlackIcon,
-  getModuleIcon,
 } from "ui";
 import { StatusIcon } from "./status-icon";
 import { useRouter } from "next/navigation";
 import { LaunchedModuleList } from "./launched-module-list";
 import { useIsSlackIntegrated } from "../../../lib/hook/swr/useIsSlackIntegrated";
-import { FrontOfficeAPI } from "../../../lib/api/frontOffice";
 import { useEffect } from "react";
 import Link from "next/link";
-import { SLACK_MEMBER_OAUTH_URL } from "../../../lib/constant/url";
 import { DisplayCardLayout } from "./display-card-layout";
 import { DisplayCardFooterLayout } from "./display-card-footer-layout";
+import { FRONT_OFFICE_SLACK_CONNECT_URL } from "../../../lib/constant/url";
 
 function SequenceLanding({ sequence, frontOfficeId, token }) {
   const router = useRouter();
@@ -78,10 +75,7 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
                 </div>
               </CardHeader>
               <CardContent>
-                <Link
-                  prefetch={false}
-                  href={process.env.FRONT_OFFICE_SLACK_CONNECT_URL}
-                >
+                <Link prefetch={false} href={FRONT_OFFICE_SLACK_CONNECT_URL}>
                   <Button
                     className="w-full border-violet-400"
                     variant="outline"
