@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 export function AlertTable() {
   const { alerts } = useAlerts();
-  console.log(alerts);
 
   const mappedAlerts = [];
   let mock_id = 0;
@@ -34,11 +33,6 @@ export function AlertTable() {
       mappedAlerts.push({ id, name, role, sequence, workflow, overdue });
     });
   }
-
-  console.log("mappedAlerts: ", mappedAlerts);
-  useEffect(() => {
-    console.log("alerts: ", alerts);
-  }, [alerts]);
 
   return (
     <>{alerts && <BaseTable data={mappedAlerts} columns={alertColumns} />}</>

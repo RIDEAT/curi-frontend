@@ -1,13 +1,11 @@
-import {
-  CompletedIcon,
-  InProgressIcon,
-  MarkedAsCompletedIcon,
-  OverdueIcon,
-  PendingIcon,
-} from "ui";
-import { STATUS } from "ui/lib/constants";
+import { STATUS } from "../../../lib/constants";
+import { CompletedIcon } from "./completed-icon";
+import { InProgressIcon } from "./in-progress-icon";
+import { MarkedAsCompletedIcon } from "./marked-as-completed-icon";
+import { OverdueIcon } from "./overdue-icon";
+import { PendingIcon } from "./pending-icon";
 
-function StatusIcon({ status }: { status: string }) {
+function getStatusIcon(status: string) {
   switch (status) {
     case STATUS.IN_PROGRESS:
       return <InProgressIcon />;
@@ -25,4 +23,4 @@ function StatusIcon({ status }: { status: string }) {
   }
 }
 
-export { StatusIcon };
+export { getStatusIcon };

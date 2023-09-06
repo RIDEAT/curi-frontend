@@ -69,13 +69,7 @@ export function BaseTable<TData extends { id?: string }, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  console.log("comlumns");
-  console.log(columns);
 
-  console.log("data");
-  console.log(data);
-
-  console.log("rows: ", table.getRowModel().rows);
   return (
     <div className="space-y-4">
       <div className="rounded-md border">
