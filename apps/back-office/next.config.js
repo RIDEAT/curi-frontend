@@ -26,6 +26,7 @@ module.exports = {
     NEXT_PUBLIC_RESOURSE_API_URL: process.env.NEXT_PUBLIC_RESOURSE_API_URL,
     NEXT_PUBLIC_AUTH_API_URL: process.env.NEXT_PUBLIC_AUTH_API_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    BACK_OFFICE_SLACK_CONNECT_URL: process.env.BACK_OFFICE_SLACK_CONNECT_URL,
   },
   async redirects() {
     return [

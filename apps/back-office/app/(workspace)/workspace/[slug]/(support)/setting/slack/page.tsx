@@ -76,7 +76,7 @@ export default function SettingsDisplayPage() {
             </Button>
           ) : (
             <>
-              <Link href="https://slack.com/oauth/v2/authorize?scope=channels%3Aread%2Cgroups%3Aread%2Cmpim%3Aread%2Cim%3Aread%2Cchat%3Awrite%2Cchannels%3Awrite.invites%2Cchannels%3Awrite.topic%2Cgroups%3Awrite%2Cmpim%3Awrite%2Cim%3Awrite%2Cchannels%3Amanage&amp;user_scope=&amp;redirect_uri=https%3A%2F%2Fapp.dev.onbird.team%2Fslack&amp;client_id=5305401263955.5790799264304">
+              <Link href={process.env.BACK_OFFICE_SLACK_CONNECT_URL}>
                 <Button variant="outline">
                   <SlackIcon />
                   연결하기

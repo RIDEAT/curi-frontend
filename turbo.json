@@ -6,6 +6,8 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
+        "BACK_OFFICE_SLACK_CONNECT_URL",
+        "FRONT_OFFICE_SLACK_CONNECT_URL",
         "APP_URL",
         "RESOURSE_API_URL",
         "AUTH_API_URL",
@@ -39,6 +41,8 @@
     "start": {
       "dependsOn": ["^start"],
       "env": [
+        "BACK_OFFICE_SLACK_CONNECT_URL",
+        "FRONT_OFFICE_SLACK_CONNECT_URL",
         "NEXT_PUBLIC_APP_URL",
         "NEXT_PUBLIC_RESOURSE_API_URL",
         "NEXT_PUBLIC_AUTH_API_URL",
