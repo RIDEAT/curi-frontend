@@ -45,7 +45,6 @@ jobs:
         run: |
           touch ./apps/front-office/.env.local
           echo "${{ secrets.FRONT_OFFICE_ENV_LOCAL }}" > ./apps/front-office/.env.local
-          
           echo "::set-output name=ecr_repository::$ECR_REPOSITORY"
           echo "::set-output name=image_tag::$IMAGE_TAG"
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f apps/front-office/Dockerfile .
