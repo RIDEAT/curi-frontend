@@ -20,6 +20,7 @@ export function RegisterVerifyCard() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -28,6 +29,7 @@ export function RegisterVerifyCard() {
     const user = await FirebaseAPI.getCurrentUser();
     const isVerified = await FirebaseAPI.checkEmailVerification();
     const email = await FirebaseAPI.getUserEmail();
+    const name = await FirebaseAPI.getUserName();
     const accessToken = await getAccessToken(user);
 
     if (isVerified) {
@@ -57,6 +59,12 @@ export function RegisterVerifyCard() {
   useEffect(() => {
     FirebaseAPI.getUserEmail().then((email) => {
       setEmail(email);
+    });
+  }, []);
+
+  useEffect(() => {
+    FirebaseAPI.getUserName().then((name) => {
+      setName(name);
     });
   }, []);
 
