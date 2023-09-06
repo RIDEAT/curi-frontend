@@ -1,11 +1,7 @@
 "use client";
 
-import { Provider } from "jotai";
-
-import { Toaster } from "ui";
 import "ui/styles/globals.css";
-
-import { BaseSWRProvider } from "../lib/provider/swr-provider";
+import { BodyLayout } from "./components/body-layout";
 
 export default function RootLayout({
   children,
@@ -14,11 +10,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="favicon" href="/favicon.ico" />
+      </head>
       <body suppressHydrationWarning={true}>
-        <BaseSWRProvider>
-          <Provider>{children}</Provider>
-          <Toaster />
-        </BaseSWRProvider>
+        <BodyLayout>{children}</BodyLayout>
       </body>
     </html>
   );
