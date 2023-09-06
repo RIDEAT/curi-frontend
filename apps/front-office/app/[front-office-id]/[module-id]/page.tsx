@@ -13,9 +13,9 @@ import {
   LoadingCircle,
   getModuleContentComponents,
   getModuleIcon,
+  getStatusIcon,
   pushFailToast,
 } from "ui";
-import { StatusIcon } from "../components/status-icon";
 import { useLaunchedSequence } from "../../../lib/hook/swr/useLaunchedSequence";
 
 import { useEffect, useState } from "react";
@@ -216,7 +216,7 @@ export default function ModuleDisplay({
               {launchedModule?.launchedModuleResponse?.name}
             </div>
           </div>
-          <StatusIcon status={launchedModule?.launchedModuleResponse?.status} />
+          {getStatusIcon(launchedModule?.launchedModuleResponse?.status)}
         </div>
       </CardHeader>
       <CardContent>

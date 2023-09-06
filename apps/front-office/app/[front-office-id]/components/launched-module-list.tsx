@@ -1,5 +1,4 @@
-import { Button, Card, CardHeader, getModuleIcon } from "ui";
-import { StatusIcon } from "./status-icon";
+import { Button, Card, CardHeader, getModuleIcon, getStatusIcon } from "ui";
 import { useRouter } from "next/navigation";
 
 function LaunchedModuleList({ sequence, frontOfficeId, token }) {
@@ -26,7 +25,7 @@ function LaunchedModuleList({ sequence, frontOfficeId, token }) {
                 {getModuleIcon(module.type)}
                 <div className="text-base font-semibold">{module.name}</div>
               </div>
-              <StatusIcon status={module.status} />
+              {getStatusIcon(module.status)}
             </Button>
           ))}
         </div>
