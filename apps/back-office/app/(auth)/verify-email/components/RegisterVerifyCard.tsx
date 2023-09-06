@@ -43,7 +43,7 @@ export function RegisterVerifyCard() {
         throw new Error("토큰을 받아오지 못했습니다.");
       }
 
-      const isRegistered = await UserAPI.register(email);
+      const isRegistered = await UserAPI.register(email, name);
 
       if (!isRegistered) {
         setErrorMsg("유저 등록에 실패했습니다.");
