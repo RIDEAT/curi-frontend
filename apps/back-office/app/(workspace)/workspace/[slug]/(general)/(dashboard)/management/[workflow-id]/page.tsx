@@ -10,7 +10,7 @@ function LaunchedWorkflowDetail({
   params: { "workflow-id": string };
 }) {
   return (
-    <div>
+    <div className="p-4">
       <ManagementDetailMemberTable workflowId={params["workflow-id"]} />
     </div>
   );

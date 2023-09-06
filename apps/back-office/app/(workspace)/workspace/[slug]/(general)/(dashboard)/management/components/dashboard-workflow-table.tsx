@@ -26,7 +26,7 @@ function DashboardWorkflowTable() {
 
   const redirectHandler = (e) => {
     const targetId = e.currentTarget.id;
-    console.log(targetId);
+
     router.push(`/workspace/${currentWorkspaceId}/management/${targetId}`);
   };
 

@@ -11,14 +11,9 @@ export const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-console.log("@firebaseConfig: ", firebaseConfig);
-
 const firebaseApp = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp();
 const firebaseAuth = getAuth(firebaseApp);
-
-console.log("@firebaseApp: ", firebaseApp);
-console.log("@firebaseAuth: ", firebaseAuth);
 
 export { firebaseApp, firebaseAuth };

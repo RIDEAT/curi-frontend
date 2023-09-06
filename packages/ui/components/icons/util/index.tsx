@@ -5,3 +5,4 @@ export * from "./marked-as-completed-icon";
 export * from "./overdue-icon";
 export * from "./pending-icon";
 export * from "./spread-circle-icon";
+export * from "./getStatusIcon";

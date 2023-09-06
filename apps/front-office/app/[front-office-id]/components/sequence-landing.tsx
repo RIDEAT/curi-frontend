@@ -6,8 +6,8 @@ import {
   CardHeader,
   CompletedIcon,
   SlackIcon,
+  getStatusIcon,
 } from "ui";
-import { StatusIcon } from "./status-icon";
 import { useRouter } from "next/navigation";
 import { LaunchedModuleList } from "./launched-module-list";
 import { useIsSlackIntegrated } from "../../../lib/hook/swr/useIsSlackIntegrated";
@@ -41,7 +41,7 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
         <div className="flex flex-wrap justify-between">
           <div className="flex flex-wrap gap-4 items-center">
             <div className="text-2xl font-semibold">{sequence?.name}</div>
-            {sequence?.status && <StatusIcon status={sequence?.status} />}
+            {sequence?.status && getStatusIcon(sequence?.status)}
           </div>
         </div>
       </CardHeader>
