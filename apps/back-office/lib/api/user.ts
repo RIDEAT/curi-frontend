@@ -8,7 +8,8 @@ export const UserAPI = {
       const { response, result } = await fetcherWithTokenAndBody(
         RESOURSE_API_URL + USER_PATH,
         {
-          email,
+          email: email,
+          name: "test",
         }
       );
 

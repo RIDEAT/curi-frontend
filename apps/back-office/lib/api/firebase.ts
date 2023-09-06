@@ -119,6 +119,14 @@ export const FirebaseAPI = {
       console.error(error);
     }
   },
+  getUserName: async () => {
+    try {
+      await reload(firebaseAuth.currentUser);
+      return firebaseAuth.currentUser.displayName;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   /**
    * logout from firebase auth
    */
