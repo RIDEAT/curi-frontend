@@ -78,7 +78,9 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
                 </div>
               </CardHeader>
               <CardContent>
-                <Link href="https://slack.com/oauth/v2/authorize?scope=chat%3Awrite&amp;user_scope=&amp;redirect_uri=https%3A%2F%2Fview.dev.onbird.team%2Fslack&amp;client_id=5305401263955.5790799264304">
+                <Link
+                  href={`https://slack.com/oauth/v2/authorize?scope=chat%3Awrite&amp;user_scope=&amp;redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}%2Fslack&amp;client_id=5305401263955.5790799264304`}
+                >
                   <Button
                     className="w-full border-violet-400"
                     variant="outline"

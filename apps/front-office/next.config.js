@@ -7,5 +7,8 @@ module.exports = {
   experimental: {
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
-  env: {},
+  env: {
+    NEXT_PUBLIC_RESOURSE_API_URL: process.env.NEXT_PUBLIC_RESOURSE_API_URL,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+  },
 };
