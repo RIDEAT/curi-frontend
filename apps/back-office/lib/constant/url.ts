@@ -65,7 +65,7 @@ export const GOOGLE_PATH = "/google";
 
 // -----------------------------
 // External
-export const GOOGLE_OAUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=1065165671986-lc7le3ju140a8snli27b02g6c2h1c7qh.apps.googleusercontent.com&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/google&response_type=code&scope=email+profile`;
+export const GOOGLE_OAUTH_URL = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_URL;
 console.log(GOOGLE_OAUTH_URL);
 
 export const SLACK_OAUTH_URL =
