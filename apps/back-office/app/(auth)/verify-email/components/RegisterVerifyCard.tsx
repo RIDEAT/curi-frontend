@@ -49,7 +49,7 @@ export function RegisterVerifyCard() {
         setErrorMsg("유저 등록에 실패했습니다.");
       }
 
-      router.push("/login");
+      router.push("/user-info");
     } else {
       setErrorMsg("이메일 인증을 완료해주세요");
     }

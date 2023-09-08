@@ -23,7 +23,7 @@ function Google({ code }: { code: string }) {
     } catch (error) {
       console.error(error);
     }
-    router.push("/login");
+    router.push("/user-info");
   };
 
   useEffect(() => {
