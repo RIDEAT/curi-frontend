@@ -5,6 +5,7 @@ import { useCurrentWorkspace } from "../../../../../../../../lib/hook/useCurrent
 import { useCurrentWorkflow } from "../../../../../../../../lib/hook/useCurrentWorkflow";
 import {
   Button,
+  CONTENTS_MODULE_VALUE,
   Form,
   FormControl,
   FormDescription,
@@ -36,6 +37,11 @@ import {
 } from "../../../../../../../../lib/form-schemas/module";
 
 const moduleTypes = [
+  {
+    value: CONTENTS_MODULE_VALUE,
+    label: "컨텐츠",
+    icon: getModuleIcon(CONTENTS_MODULE_VALUE, "lg"),
+  },
   {
     value: NOTION_MODULE_VALUE,
     label: "노션",
@@ -157,7 +163,7 @@ function ModuleCreateForm({
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    className="flex gap-6 flex-wrap"
+                    className="grid grid-cols-2 gap-4"
                   >
                     {moduleTypes.map((type) => (
                       <FormItem
@@ -170,7 +176,12 @@ function ModuleCreateForm({
                           </RadioGroupItem>
                         </FormControl>
                         <FormLabel className="font-normal">
-                          {type.icon}
+                          <div className="flex gap-4 items-center">
+                            <div>{type.icon}</div>
+                            <div className="text-base font-medium">
+                              {type.label}
+                            </div>
+                          </div>
                         </FormLabel>
                       </FormItem>
                     ))}

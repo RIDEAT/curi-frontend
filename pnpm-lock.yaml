@@ -555,6 +555,51 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.9.3
         version: 8.9.3(react-dom@18.2.0)(react@18.2.0)
+      '@tiptap/core':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/extension-color':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/extension-text-style@2.0.3)
+      '@tiptap/extension-highlight':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/extension-horizontal-rule':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
+      '@tiptap/extension-image':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/extension-link':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
+      '@tiptap/extension-placeholder':
+        specifier: 2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
+      '@tiptap/extension-task-item':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
+      '@tiptap/extension-task-list':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/extension-text-style':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/extension-underline':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/pm':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)
+      '@tiptap/react':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
+      '@tiptap/starter-kit':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/pm@2.0.3)
+      '@tiptap/suggestion':
+        specifier: ^2.0.3
+        version: 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
       class-variance-authority:
         specifier: ^0.6.0
         version: 0.6.0(typescript@4.9.5)
@@ -582,6 +627,9 @@ importers:
       react-youtube:
         specifier: ^10.1.0
         version: 10.1.0(react@18.2.0)
+      sonner:
+        specifier: ^0.6.1
+        version: 0.6.1(react-dom@18.2.0)(react@18.2.0)
       tailwind-merge:
         specifier: ^1.13.2
         version: 1.13.2
@@ -591,6 +639,15 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.6
         version: 1.0.6(tailwindcss@3.3.2)
+      tippy.js:
+        specifier: ^6.3.7
+        version: 6.3.7
+      tiptap-markdown:
+        specifier: ^0.8.1
+        version: 0.8.1(@tiptap/core@2.0.3)
+      use-debounce:
+        specifier: ^9.0.4
+        version: 9.0.4(react@18.2.0)
       zod:
         specifier: ^3.21.4
         version: 3.21.4

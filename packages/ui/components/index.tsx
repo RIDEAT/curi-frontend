@@ -55,3 +55,6 @@ export * from "./badges";
 
 // module-renderer
 export * from "./module-renderer";
+
+// editor
+export * from "./editor";
