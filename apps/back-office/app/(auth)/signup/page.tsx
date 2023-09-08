@@ -7,16 +7,13 @@ import { MailIcon } from "lucide-react";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import { GOOGLE_OAUTH_URL } from "../../../lib/constant/url";
+import Link from "next/link";
 
 function RegisterSelect() {
   const router = useRouter();
 
   const redirectToEmailRegister = () => {
     router.push("/signup/email");
-  };
-
-  const redirectToGoogleRegister = () => {
-    router.replace(GOOGLE_OAUTH_URL);
   };
 
   return (
@@ -43,19 +40,20 @@ function RegisterSelect() {
           </div>
           <ArrowRightIcon className="w-4 h-4 text-stone-500" />
         </Button>
-        <Button
-          variant="outline"
-          className="flex justify-between items-center p-5"
-          onClick={redirectToGoogleRegister}
-        >
-          <div className="flex justify-start gap-2 items-center">
-            <GoogleIcon />
-            <div className="text-sm font-semibold text-stone-600 ml-2">
-              구글 계정으로 회원가입
+        <Link href={GOOGLE_OAUTH_URL} className="w-full">
+          <Button
+            variant="outline"
+            className="w-full flex justify-between items-center p-5"
+          >
+            <div className="flex justify-start gap-2 items-center">
+              <GoogleIcon />
+              <div className="text-sm font-semibold text-stone-600 ml-2">
+                구글 계정으로 회원가입
+              </div>
             </div>
-          </div>
-          <ArrowRightIcon className="w-4 h-4 text-stone-500" />
-        </Button>
+            <ArrowRightIcon className="w-4 h-4 text-stone-500" />
+          </Button>
+        </Link>
       </div>
     </div>
   );
