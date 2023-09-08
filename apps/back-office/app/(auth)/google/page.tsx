@@ -19,7 +19,7 @@ function Google({ code }: { code: string }) {
   const requestGoogleConnection = async () => {
     try {
       const result = await AuthAPI.getTokensForGoogle(code);
-      await UserAPI.register(result.userEmail);
+      await UserAPI.register(result.userEmail, result.name);
     } catch (error) {
       console.error(error);
     }

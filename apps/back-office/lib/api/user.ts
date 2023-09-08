@@ -3,12 +3,13 @@ import { fetcherWithTokenAndBody } from "../utils/fetcher";
 import { AuthAPI } from "./auth";
 
 export const UserAPI = {
-  register: async (email: string) => {
+  register: async (email: string, name: string) => {
     try {
       const { response, result } = await fetcherWithTokenAndBody(
         RESOURSE_API_URL + USER_PATH,
         {
-          email,
+          email: email,
+          name: name,
         }
       );
 
