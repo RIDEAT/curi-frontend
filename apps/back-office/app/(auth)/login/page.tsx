@@ -16,6 +16,10 @@ function Login() {
     router.push("/login/email");
   };
 
+  const redirectToWithoutPwRegister = () => {
+    router.push("/login/without-pw");
+  };
+
   return (
     <div className="w-screen h-[90vh] flex flex-col justify-center items-center">
       <div className="flex justify-center gap-3">
@@ -40,6 +44,7 @@ function Login() {
           </div>
           <ArrowRightIcon className="w-4 h-4 text-stone-500" />
         </Button>
+
         <Link href={GOOGLE_OAUTH_URL} className="w-full">
           <Button
             variant="outline"

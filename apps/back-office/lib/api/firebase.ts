@@ -5,9 +5,20 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
   updateProfile,
+  getAuth,
+  sendSignInLinkToEmail,
 } from "firebase/auth";
 
 import { firebaseAuth } from "../firebase/firebaseClient";
+
+const actionCodeSettings = {
+  // URL you want to redirect back to. The domain (www.example.com) for this
+  // URL must be in the authorized domains list in the Firebase Console.
+  //url: "https://app.dev.workplug.team/user-info",
+  url: "http://localhost:3000/user-info",
+  // This must be true.
+  handleCodeInApp: true,
+};
 
 export const FirebaseAPI = {
   /**
@@ -127,6 +138,20 @@ export const FirebaseAPI = {
       console.error(error);
     }
   },
+
+  /**
+   * send email link without password
+   */
+  sendEmailLink: async (email: string) => {
+    try {
+      const auth = getAuth();
+      await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+      window.localStorage.setItem("emailForSignIn", email);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
   /**
    * logout from firebase auth
    */
