@@ -15,7 +15,6 @@ import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWor
 import { SlackAPI } from "../../../../../../../lib/api/slack";
 import { useSlack } from "../../../../../../../lib/hook/swr/useSlack";
 import Link from "next/link";
-import { SLACK_OAUTH_URL } from "../../../../../../../lib/constant/url";
 
 export default function SettingsDisplayPage() {
   const { currentWorkspaceId } = useCurrentWorkspace();

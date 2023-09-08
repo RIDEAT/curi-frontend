@@ -4,7 +4,6 @@ import withAuth from "../../../components/hoc/withAuth";
 import { SlackAPI } from "../../../lib/api/slack";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCurrentWorkspace } from "../../../lib/hook/useCurrentWorkspace";
 
 export default withAuth(SlackPage, "protected");
 function SlackPage() {
