@@ -66,4 +66,3 @@ export const GOOGLE_PATH = "/google";
 // -----------------------------
 // External
 export const GOOGLE_OAUTH_URL = process.env.NEXT_PUBLIC_GOOGLE_OAUTH_URL;
-console.log("GOOGLE_OAUTH_URL: ", GOOGLE_OAUTH_URL);
