@@ -129,4 +129,23 @@ export const ContentAPI = {
     );
     return result;
   },
+  patchContents: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string,
+    moduleId: string,
+    form: { content: any }
+  ) => {
+    const { response, result } = await fetcherWithTokenAndBody(
+      ContentAPI.getContentEndPoint(
+        workspaceId,
+        workflowId,
+        sequenceId,
+        moduleId
+      ) + "/contents",
+      { content: form },
+      "PATCH"
+    );
+    return result;
+  },
 };

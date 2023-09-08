@@ -1,3 +1,4 @@
+import { ContentsIcon } from "./contents-icon";
 import { FinishedIcon } from "./finished-icon";
 import { FormIcon } from "./form-icon";
 import { GoogleDocsIcon } from "./google-docs-icon";
@@ -50,6 +51,8 @@ const getModuleIcon = (type: ModuleType, size?: "sm" | "lg") => {
       return <GoogleFormIcon size={size} />;
     case WEB_URL_MODULE_VALUE:
       return <WebUrlIcon size={size} />;
+    case CONTENTS_MODULE_VALUE:
+      return <ContentsIcon size={size} />;
     default:
       return <></>;
   }
@@ -67,3 +70,4 @@ export * from "./notion-icon";
 export * from "./google-docs-icon";
 export * from "./google-form-icon";
 export * from "./web-url-icon";
+export * from "./contents-icon";

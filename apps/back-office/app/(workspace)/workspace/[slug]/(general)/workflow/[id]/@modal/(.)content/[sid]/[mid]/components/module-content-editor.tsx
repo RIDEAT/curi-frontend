@@ -102,7 +102,7 @@ function ModuleContentEditor({
         <>
           <SheetContent
             isBlur
-            className="flex flex-col w-[500px] min-w-[500px] h-full"
+            className="flex flex-col w-[500px] min-w-[500px] md:w-[700px] md:min-w-[700px] h-full"
           >
             <SheetHeader>
               <SheetTitle className="flex gap-2 items-center">
