@@ -6,4 +6,5 @@ import {
 
 export const workspaceSchema = z.object({
   workspaceName: workspaceNameSchema,
+  emailId: workspaceEmailSchema,
 });
