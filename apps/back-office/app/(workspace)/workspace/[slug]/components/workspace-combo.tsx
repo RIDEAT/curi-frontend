@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { PlusIcon } from "@radix-ui/react-icons";
+import { PlusIcon, ExitIcon } from "@radix-ui/react-icons";
 
 import { cn } from "ui/lib/utils";
 import {
@@ -101,6 +101,16 @@ export default function WorkspaceCombo() {
                 >
                   <p>워크스페이스 생성하기</p>
                   <PlusIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Link>
+              </CommandItem>
+              <hr></hr>
+              <CommandItem>
+                <Link
+                  href="/logout"
+                  className="w-full px-3 flex justify-between items-center"
+                >
+                  <p>로그아웃</p>
+                  <ExitIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Link>
               </CommandItem>
             </CommandGroup>
