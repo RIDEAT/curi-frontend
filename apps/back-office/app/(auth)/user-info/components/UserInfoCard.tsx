@@ -104,6 +104,10 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
       });
       setIsReseted(true);
     }
+
+    if (currentUser.currentUser.phoneNum) {
+      router.replace(nextRoute);
+    }
   }, [currentUser]);
 
   return (
