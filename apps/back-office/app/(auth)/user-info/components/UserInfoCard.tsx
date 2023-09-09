@@ -52,40 +52,6 @@ const UserFormSchema = z.object({
   required_agreement: z.boolean(),
 });
 
-function TermsOfServiceHoverCard({
-  title,
-  descriptions,
-}: {
-  title: string;
-  descriptions: string[];
-}) {
-  return (
-    <HoverCard>
-      <HoverCardTrigger asChild>
-        <Button variant="link" className=" text-gray-500">
-          약관보기
-        </Button>
-      </HoverCardTrigger>
-      <HoverCardContent className="w-96">
-        <div className="flex justify-between space-x-4">
-          <div className="space-y-1">
-            <h4 className="text-lg font-semibold">{title}</h4>
-            <Separator />
-            {descriptions.map((description, index) => (
-              <p className="text-sm" key={index}>
-                {description}
-              </p>
-            ))}
-            <div className="flex items-center pt-2">
-              <span className="text-xs text-muted-foreground">2023-08-14</span>
-            </div>
-          </div>
-        </div>
-      </HoverCardContent>
-    </HoverCard>
-  );
-}
-
 export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
   const router = useRouter();
   const currentUser = useCurrentUser();
@@ -225,22 +191,12 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
                   </FormControl>
                   <div>
                     <FormLabel>
-                      (필수) 뉴스레터 발송을 위한 개인정보를 수집·이용하는데
-                      동의합니다.
-                      <TermsOfServiceHoverCard
-                        title="뉴스레터 발송을 위한 개인정보 수집·이용 동의서"
-                        descriptions={[
-                          "RIDEAT은 뉴스레터 발송을 위해 아래와 같이 개인정보를 수집∙이용하며, 동의하신 수신 방법에 대해서만 홍보∙마케팅 정보를 발송합니다.",
-                          "-",
-                          "※ 귀하는 개인정보 처리 위탁에 동의를 거부할 권리가 있으며, 동의를 거부할 경우 뉴스레터를 받아 보실 수 없습니다.",
-                          "-",
-                          "개인정보 수집‧이용 내역",
-                          "필수항목 : 이메일(E-mail)",
-                          "선택항목 : 이름",
-                          "수집목적 : 뉴스레터 발송",
-                          "보유기간 : 정보 주체의 동의 철회 시 까지",
-                        ]}
-                      />
+                      (필수) 개인정보를 수집·이용하는데 동의합니다.
+                      <Link href={"/legal/terms-and-conditions"}>
+                        <Button variant="link" className=" text-gray-500">
+                          약관보기
+                        </Button>
+                      </Link>
                     </FormLabel>
                   </div>
                 </FormItem>
