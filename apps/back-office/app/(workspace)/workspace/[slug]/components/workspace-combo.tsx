@@ -168,7 +168,7 @@ function CommandItems({ selectedWorkspace, setSelectedWorkspace, setOpen }) {
               );
             });
             setOpen(false);
-            router.push(`/workspace/${workspace.id}/dashboard`);
+            router.push(`/workspace/${workspace.id}/workflow`);
           }}
         >
           <Check
