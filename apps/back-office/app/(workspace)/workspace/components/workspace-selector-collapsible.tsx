@@ -57,11 +57,11 @@ export function WorkspaceSelectorCollapsible() {
       <Button
         className="w-full flex justify-between items-center px-4 py-2 font-mono text-sm shadow-sm rounded-md border"
         variant="outline"
-        id={workspaces[0].id}
+        id={workspaces[0]?.id}
         onClick={onclickHandler}
         disabled={isRouteLoading}
       >
-        <p>{workspaces[0].name}</p>
+        <p>{workspaces[0]?.name}</p>
         {isRouteLoading ? (
           <LoadingCircle />
         ) : (
@@ -69,23 +69,24 @@ export function WorkspaceSelectorCollapsible() {
         )}
       </Button>
       <CollapsibleContent className="space-y-2 py-2">
-        {workspaces.slice(1).map((workspace) => (
-          <Button
-            key={workspace.id}
-            className="w-full flex justify-between items-center px-4 py-2 font-mono text-sm shadow-sm rounded-md border"
-            variant="outline"
-            onClick={onclickHandler}
-            id={workspace.id}
-            disabled={isRouteLoading}
-          >
-            <p>{workspace.name}</p>
-            {isRouteLoading ? (
-              <LoadingCircle />
-            ) : (
-              <ArrowRightIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-            )}
-          </Button>
-        ))}
+        {workspaces.length &&
+          workspaces.slice(1).map((workspace) => (
+            <Button
+              key={workspace.id}
+              className="w-full flex justify-between items-center px-4 py-2 font-mono text-sm shadow-sm rounded-md border"
+              variant="outline"
+              onClick={onclickHandler}
+              id={workspace.id}
+              disabled={isRouteLoading}
+            >
+              <p>{workspace.name}</p>
+              {isRouteLoading ? (
+                <LoadingCircle />
+              ) : (
+                <ArrowRightIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              )}
+            </Button>
+          ))}
       </CollapsibleContent>
     </Collapsible>
   );
