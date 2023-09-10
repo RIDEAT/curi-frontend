@@ -29,6 +29,7 @@ import {
   HoverCardTrigger,
   HoverCardContent,
   Separator,
+  ErrorBadge,
 } from "ui";
 
 import { ArrowRightIcon } from "@radix-ui/react-icons";
@@ -54,7 +55,7 @@ const UserFormSchema = z.object({
 
 export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
   const router = useRouter();
-  const currentUser = useCurrentUser();
+  const { currentUser, isLoading, error } = useCurrentUser();
 
   const [isRequesting, setIsRequesting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -64,11 +65,11 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
     resolver: zodResolver(UserFormSchema),
 
     defaultValues: {
-      email: currentUser.currentUser?.email || "",
-      name: currentUser.currentUser?.name || "",
+      email: "",
+      name: "",
       phoneNum: "",
       company: "",
-      required_agreement: false,
+      required_agreement: true,
     },
   });
 
@@ -94,18 +95,34 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
   };
 
   useEffect(() => {
-    if (currentUser.currentUser && !isReseted) {
+    if (currentUser && !isReseted) {
       form.reset({
-        email: currentUser.currentUser.userId,
-        name: currentUser.currentUser.name,
-        // phoneNum: "",
-        // company: "",
-        // required_agreement: false,
+        email: currentUser?.userId || "",
+        name: currentUser?.name || "",
+        phoneNum: currentUser?.phoneNum || "",
+        company: currentUser?.company || "",
+        required_agreement: true,
       });
 
       setIsReseted(true);
+
+      const formData = form.getValues();
+      if (
+        formData.name &&
+        formData.email &&
+        formData.phoneNum &&
+        formData.company
+      ) {
+        router.replace(nextRoute);
+      }
     }
   }, [currentUser]);
+
+  if (isLoading) {
+    return <LoadingButton />;
+  } else if (error) {
+    return <ErrorBadge />;
+  }
 
   return (
     <Card className="w-2/3 max-w-screen-md">
