@@ -209,9 +209,19 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
                   </FormControl>
                   <div>
                     <FormLabel>
-                      (필수) 개인정보를 수집·이용하는데 동의합니다.
-                      <Link href={"/legal/terms-and-conditions"}>
-                        <Button variant="link" className=" text-gray-500">
+                      (선택) 마케팅 정보 수신에 동의합니다.
+                      <Link
+                        href="https://www.workplug.team/legal/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(
+                            "https://www.workplug.team/legal/privacy"
+                          );
+                        }}
+                      >
+                        <Button variant="link" className="text-gray-500">
                           약관보기
                         </Button>
                       </Link>
