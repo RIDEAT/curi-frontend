@@ -70,7 +70,7 @@ export function WorkspaceCreateForm() {
                 <Input placeholder="ex. curi " {...field} />
               </FormControl>
               <FormDescription className="text-xs">
-                큐리에서 사용될 워크스페이스의 명칭이 됩니다. (2글자 이상,
+                워크플러그에서 사용될 워크스페이스의 명칭이 됩니다. (2글자 이상,
                 20글자 이하)
               </FormDescription>
               <FormMessage className="text-xs" />
@@ -92,7 +92,7 @@ export function WorkspaceCreateForm() {
                 <div>@curiboard.com</div>
               </div>
               <FormDescription className="text-xs">
-                큐리에서 멤버와 연락을 주고 받을 이메일 주소입니다.
+                워크플러그에서 멤버와 연락을 주고 받을 이메일 주소입니다.
               </FormDescription>
               <FormMessage className="text-xs" />
             </FormItem>

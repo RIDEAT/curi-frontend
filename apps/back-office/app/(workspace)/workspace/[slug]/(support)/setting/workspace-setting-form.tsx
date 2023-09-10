@@ -84,7 +84,7 @@ export function WorkspaceSettingForm({
             <FormItem>
               <FormLabel>워크스페이스 명</FormLabel>
               <FormControl>
-                <Input placeholder="ex.큐리" {...field} />
+                <Input placeholder="ex.워크플러그" {...field} />
               </FormControl>
               <FormDescription>
                 워크스페이스의 명칭입니다. (2글자 이상, 20글자 이하)
@@ -101,12 +101,12 @@ export function WorkspaceSettingForm({
               <FormLabel>워크스페이스 이메일</FormLabel>
               <FormControl>
                 <div className="flex gap-2 items-center">
-                  <Input placeholder="ex.큐리" {...field} />
+                  <Input placeholder="ex.워크플러그" {...field} />
                   <div>@curiboard.com</div>
                 </div>
               </FormControl>
               <FormDescription>
-                큐리 서비스에서 워크스페이스 내의 멤버에게 보내지는 이메일
+                워크플러그 서비스에서 워크스페이스 내의 멤버에게 보내지는 이메일
                 주소입니다.
               </FormDescription>
               <FormMessage />

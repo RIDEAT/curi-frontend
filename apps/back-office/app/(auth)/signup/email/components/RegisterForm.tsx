@@ -24,6 +24,7 @@ import {
   FormMessage,
   Input,
   LoadingButton,
+  Checkbox,
 } from "ui";
 
 import { FirebaseAPI } from "../../../../../lib/api/firebase";
@@ -50,6 +51,10 @@ const RegisterFormSchema = z
     password2: z.string().min(8, {
       message: "비밀번호는 8글자 이상이어야 합니다.",
     }),
+    required_agreement: z.boolean().refine((value) => value, {
+      message: "필수 약관에 동의해야 합니다.",
+      path: ["required_agreement"],
+    }),
   })
   .refine(
     (data) => {
@@ -73,6 +78,7 @@ export default function RegisterForm() {
       email: "",
       password: "",
       password2: "",
+      required_agreement: true,
     },
   });
 
@@ -174,6 +180,41 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="required_agreement"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-2 shadow">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange as any}
+                    />
+                  </FormControl>
+                  <div>
+                    <FormLabel>
+                      (필수) 개인정보를 수집·이용하는데 동의합니다.
+                      <Link
+                        href="https://www.workplug.team/legal/terms-and-conditions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(
+                            "https://www.workplug.team/legal/terms-and-conditions"
+                          );
+                        }}
+                      >
+                        <Button variant="link" className="text-gray-500">
+                          약관보기
+                        </Button>
+                      </Link>
+                    </FormLabel>
+                  </div>
+                </FormItem>
+              )}
+            />
+
             <div className="grid gap-2 text-destructive text-xs">
               <p>{errorMsg}</p>
             </div>
