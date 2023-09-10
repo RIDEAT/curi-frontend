@@ -7,6 +7,8 @@ on:
     paths:
       - "apps/front-office/**" # apps/front-office 디렉토리에 변경이 있을 때
       - ".github/workflows/deploy-front-office.yaml"
+      - "packages/**"
+
 jobs:
   deploy:
     name: Deploy
