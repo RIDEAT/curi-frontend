@@ -37,7 +37,12 @@ export const UserAPI = {
       console.error(error);
     }
   },
-  updateUser: async (name: string, phoneNum: string, company: string) => {
+  updateUser: async (
+    name: string,
+    phoneNum: string,
+    company: string,
+    agreeWithMarketing: boolean
+  ) => {
     try {
       const { response, result } = await fetcherWithTokenAndBody(
         RESOURSE_API_URL + USER_PATH,
@@ -45,6 +50,7 @@ export const UserAPI = {
           name: name,
           phoneNum: phoneNum,
           company: company,
+          agreeWithMarketing: agreeWithMarketing,
         },
         "PUT"
       );

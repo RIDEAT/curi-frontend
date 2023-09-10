@@ -36,6 +36,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { Car } from "lucide-react";
 import { useCurrentUser } from "../../../../lib/hook/swr/useCurrentUser";
 import { UserAPI } from "../../../../lib/api/user";
+import { userInfo } from "os";
 
 const UserFormSchema = z.object({
   name: z.string().min(2, {
@@ -82,7 +83,12 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
     clearErrorMsg();
 
     try {
-      await UserAPI.updateUser(data.name, data.phoneNum, data.company);
+      await UserAPI.updateUser(
+        data.name,
+        data.phoneNum,
+        data.company,
+        data.required_agreement
+      );
 
       router.replace(nextRoute);
     } catch (err) {
@@ -101,9 +107,10 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
         name: currentUser?.name || "",
         phoneNum: currentUser?.phoneNum || "",
         company: currentUser?.company || "",
-        required_agreement: true,
+        required_agreement: currentUser?.agreeWithMarketing || true,
       });
 
+      console.log(currentUser);
       setIsReseted(true);
 
       const formData = form.getValues();
