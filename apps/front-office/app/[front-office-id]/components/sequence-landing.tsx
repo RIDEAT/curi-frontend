@@ -94,7 +94,7 @@ function SequenceLanding({ sequence, frontOfficeId, token }) {
           <div className="w-full">
             <div className="flex flex-wrap gap-1 text-sm font-medium text-stone-400">
               <div>{sequence?.workspaceResponse?.name}</div>
-              <div>with OnBird</div>
+              <div>with Workplug</div>
             </div>
           </div>
           <div className="w-full flex justify-end">

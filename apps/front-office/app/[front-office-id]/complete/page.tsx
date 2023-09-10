@@ -58,7 +58,7 @@ export default function Complete({
         <div className="text-base font-medium">감사합니다</div>
         <div className="flex gap-1 text-sm font-medium text-stone-400">
           <div>{launchedSequence?.workspaceResponse?.name}</div>
-          <div>with OnBird</div>
+          <div>with Workplug</div>
         </div>
       </DisplayCardFooterLayout>
     </DisplayCardLayout>

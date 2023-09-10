@@ -198,16 +198,9 @@ export default function RegisterForm() {
                         href="https://www.workplug.team/legal/terms-and-conditions"
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.open(
-                            "https://www.workplug.team/legal/terms-and-conditions"
-                          );
-                        }}
+                        className="text-gray-500 p-4"
                       >
-                        <Button variant="link" className="text-gray-500">
-                          약관보기
-                        </Button>
+                        약관보기
                       </Link>
                     </FormLabel>
                   </div>
