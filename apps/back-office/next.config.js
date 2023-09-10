@@ -37,6 +37,11 @@ module.exports = {
       //   permanent: false,
       // },
       {
+        source: "/",
+        destination: "/login",
+        permanent: false,
+      },
+      {
         source: "/workspace/:slug/help",
         destination: "https://v4pqp.channel.io/home",
         permanent: false,
