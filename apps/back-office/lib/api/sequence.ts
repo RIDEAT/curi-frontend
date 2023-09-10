@@ -63,4 +63,23 @@ export const SequenceAPI = {
     );
     return result as ISequence;
   },
+  delete: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string
+  ) => {
+    try {
+      const { response, result } = await fetcherWithToken(
+        `${SequenceAPI.getSeqeuencesEndPoint(
+          workspaceId,
+          workflowId
+        )}/${sequenceId}`,
+        null,
+        "DELETE"
+      );
+      return { response, result };
+    } catch (error) {
+      return { response: error.response, result: null };
+    }
+  },
 };

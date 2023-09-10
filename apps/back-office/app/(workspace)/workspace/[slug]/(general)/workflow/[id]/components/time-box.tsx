@@ -81,6 +81,7 @@ function TimeBox({
             stakeholder={employeeSequence.role.name}
             modules={[...employeeSequence.modules]}
             satisfactionChecked={employeeSequence.checkSatisfaction}
+            date={date}
           />
         ) : (
           <EmptySequenceBox />
@@ -102,6 +103,7 @@ function TimeBox({
             stakeholder={managerSequence.role.name}
             modules={[...managerSequence.modules]}
             satisfactionChecked={managerSequence.checkSatisfaction}
+            date={date}
           />
         ) : (
           <EmptySequenceBox />
