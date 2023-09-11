@@ -1,3 +1,3 @@
-export const EMPLOYEE_NAME = "신규입사자";
-export const HR_NAME = "HR매니저";
-export const BUDDY_NAME = "담당사수";
+export const EMPLOYEE_NAME = "대상자";
+export const HR_NAME = "HR";
+export const BUDDY_NAME = "버디";
