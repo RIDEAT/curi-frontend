@@ -9,16 +9,16 @@ import { useRouter } from "next/navigation";
 
 function Logout() {
   const router = useRouter();
+
   const logout = async () => {
-    await FirebaseAPI.logout();
-    await AuthAPI.logout();
+    const isAuthLogouted = await AuthAPI.logout();
+    router.replace("/login");
   };
 
   useEffect(() => {
     if (localStore.getAuthToken()) {
       logout();
     }
-    router.replace("/");
   }, []);
 
   return (
