@@ -102,7 +102,7 @@ export function WorkspaceSettingForm({
               <FormControl>
                 <div className="flex gap-2 items-center">
                   <Input placeholder="ex.워크플러그" {...field} />
-                  <div>@curiboard.com</div>
+                  <div>@workplug.com</div>
                 </div>
               </FormControl>
               <FormDescription>

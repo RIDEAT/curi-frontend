@@ -28,7 +28,7 @@ export default function LendingNav() {
       <div className="flex justify-start ">
         <div className="flex justify-center items-center">
           <Link href="/" className="p-3 bg-yellow-400">
-            CURI
+            workplug
           </Link>
         </div>
       </div>

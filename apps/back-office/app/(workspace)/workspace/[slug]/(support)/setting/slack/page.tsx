@@ -45,7 +45,7 @@ export default function SettingsDisplayPage() {
       <div>
         <h3 className="text-lg font-medium">외부 서비스 연동</h3>
         <p className="text-sm text-muted-foreground">
-          온버드에 다양한 외부 서비스를 연동할 수 있습니다.
+          워크플러그에 다양한 외부 서비스를 연동할 수 있습니다.
         </p>
       </div>
       <Separator />
@@ -53,8 +53,8 @@ export default function SettingsDisplayPage() {
         <CardHeader>
           <div className="text-lg font-semibold">Slack 연동</div>
           <p className="text-sm text-muted-foreground">
-            온버드의 다양한 알림(워크플로우 진행 현황, 멤버 관리 등)을 Slack으로
-            받을 수 있습니다.
+            워크플러그의 다양한 알림(워크플로우 진행 현황, 멤버 관리 등)을
+            Slack으로 받을 수 있습니다.
           </p>
         </CardHeader>
         <CardContent>

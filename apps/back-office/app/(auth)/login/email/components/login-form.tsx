@@ -110,7 +110,7 @@ export default function LoginForm({ nextRoute }: { nextRoute: string }) {
                     이메일 주소
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="example@curi.work" {...field} />
+                    <Input placeholder="example@workplug.work" {...field} />
                   </FormControl>
                   <FormMessage className="text-xs" />
                 </FormItem>

@@ -31,11 +31,6 @@ module.exports = {
   },
   async redirects() {
     return [
-      // {
-      //   source: "/",
-      //   destination: "https://www.curiboard.com",
-      //   permanent: false,
-      // },
       {
         source: "/",
         destination: "/login",
