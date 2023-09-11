@@ -8,7 +8,7 @@ module.exports = {
     outputFileTracingRoot: path.join(__dirname, "../../"),
   },
   images: {
-    domains: ["d3qwomveubih9v.cloudfront.net"],
+    domains: ["d3qwomveubih9v.cloudfront.net", "d104q3ppxju555.cloudfront.net"],
   },
   env: {
     NEXT_PUBLIC_GOOGLE_OAUTH_URL: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_URL,
