@@ -18,11 +18,11 @@ function RegisterSelect() {
 
   return (
     <div className="w-screen h-[90vh] flex flex-col justify-center items-center">
-      <div className="flex justify-center gap-3">
+      <div className="flex flex-col items-center justify-center gap-3">
         <h1
           className={`text-xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-violet-400`}
         >
-          HR이 일하는 새로운 방식
+          동료와 연결되는 새로운 방식
         </h1>
         <h1 className={`text-xl md:text-3xl font-bold text-black`}>Workplug</h1>
       </div>

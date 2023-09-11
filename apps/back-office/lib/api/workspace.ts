@@ -19,7 +19,7 @@ export const WorkspaceAPI = {
   create: async (name: string, emailId: string) => {
     return await fetcherWithTokenAndBody(WorkspaceAPI.workspacesEndPoint, {
       name,
-      email: emailId + "@curiboard.com",
+      email: emailId + "@workplug.com",
     });
   },
   update: async (id: string, name: string, emailId: string) => {
@@ -27,7 +27,7 @@ export const WorkspaceAPI = {
       `${WorkspaceAPI.workspacesEndPoint}/${id}`,
       {
         name,
-        email: emailId + "@curiboard.com",
+        email: emailId + "@workplug.com",
       },
       "PUT"
     );
