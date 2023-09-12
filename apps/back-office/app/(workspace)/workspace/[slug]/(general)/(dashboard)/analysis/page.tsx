@@ -19,7 +19,7 @@ function Analysis() {
             </span>
           </div>
           <div className="text-2xl text-yellow-500 font-semibold">
-            Comming Soon!
+            Coming Soon!
           </div>
         </div>
       </TopTitleDesc>
