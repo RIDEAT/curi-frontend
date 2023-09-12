@@ -143,8 +143,11 @@ function SequenceCreateForm({ setOpen }: { setOpen: (open: boolean) => void }) {
                   실행 일자
                 </FormLabel>
                 <FormDescription className="text-xs">
-                  시퀀스가 실행되는 날짜를 설정합니다. 0일은 입사일입니다.
-                  -10일은 입사일 10일 전입니다.
+                  <p>시퀀스가 실행되는 일자를 설정합니다.</p>
+                  <p>
+                    0일은 실행시 지정하는 일자, -10일은 실행 일자 기준 10일
+                    전입니다.
+                  </p>
                 </FormDescription>
                 <div className="w-[250px] flex gap-2 items-center">
                   <FormLabel className="min-w-[100px]">입사일 기준</FormLabel>
