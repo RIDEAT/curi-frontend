@@ -10,30 +10,29 @@ import {
 } from "ui";
 
 import { WorkflowCreateForm } from "./workflow-create-form";
+import { TemplateWorkflowList } from "./template-workflow-list";
 
-function WorkflowCreateDialog() {
+function WorkflowImportDialog() {
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="border-0">
-          새 워크플로우 생성하기
-        </Button>
+        <Button variant="outline">워크플로우 템플릿 가져오기</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>새 워크플로우 생성</DialogTitle>
+          <DialogTitle>워크플로우 템플릿 가져오기</DialogTitle>
           <DialogDescription>
-            워크플로우의 이름을 입력해주세요.
+            워크플로우 템플릿을 선택해주세요.
           </DialogDescription>
         </DialogHeader>
         <div className="py-6">
-          <WorkflowCreateForm setOpen={setOpen} />
+          <TemplateWorkflowList setOpen={setOpen} />
         </div>
       </DialogContent>
     </Dialog>
   );
 }
 
-export { WorkflowCreateDialog };
+export { WorkflowImportDialog };

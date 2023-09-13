@@ -49,6 +49,9 @@ export const LAUNCHED_WORKFLOWS_PATH = "/launchedworkflows";
 // DASHBOARD
 export const DASHBOARD_PATH = "/dashboard";
 
+// Template
+export const TEMPLATES_PATH = "/templates";
+
 // ALERT
 export const ALERT_PATH = "/alerts";
 
