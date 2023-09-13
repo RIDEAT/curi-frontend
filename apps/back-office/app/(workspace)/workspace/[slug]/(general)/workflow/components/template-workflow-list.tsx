@@ -33,29 +33,27 @@ function TemplateWorkflowList({
   const [isRequesting, setIsRequesting] = useState(false);
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { workflowsMutate } = useWorkflows();
-  const { templateWorkflows, isLoading, error, mutateTemplateWorkflows } =
-    useTemplateWorkflows();
+  const { templateWorkflows, isLoading, error } = useTemplateWorkflows();
 
   const importHandler = async (e) => {
     try {
       setIsRequesting(true);
-      const templateWorkflwoId = e.currentTarget.id;
+      const templateWorkflowId = e.currentTarget.id;
       await TemplateWorkflowAPI.importTemplateWorkflow(
         currentWorkspaceId,
-        templateWorkflwoId
+        templateWorkflowId
       );
       await workflowsMutate();
       pushSuccessToast(
         "워크플로우 가져오기 성공",
         "워크플로우를 설계해보세요."
       );
-      setOpen(false);
-      setIsRequesting(false);
     } catch (error) {
       pushFailToast("워크플로우 가져오기 실패", "다시 시도해주세요.");
-      setOpen(false);
-      setIsRequesting(false);
     }
+
+    setOpen(false);
+    setIsRequesting(false);
   };
 
   if (isLoading) {
@@ -81,7 +79,7 @@ function TemplateWorkflowList({
         </TableRow>
       </TableHeader>
       <TableBody className="text-sm font-medium">
-        {!isRequesting && templateWorkflows?.length ? (
+        {templateWorkflows?.length ? (
           templateWorkflows?.map((workflow) => (
             <TableRow
               key={workflow.id}
@@ -90,7 +88,7 @@ function TemplateWorkflowList({
             >
               <TableCell>{workflow.name}</TableCell>
               <TableCell className="flex justify-end">
-                <Button onClick={importHandler}>
+                <Button id={workflow.id} onClick={importHandler}>
                   <ImportIcon className="w-5 h-5" />
                 </Button>
               </TableCell>
