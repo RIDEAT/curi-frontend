@@ -150,7 +150,7 @@ function SequenceCreateForm({ setOpen }: { setOpen: (open: boolean) => void }) {
                   </p>
                 </FormDescription>
                 <div className="w-[250px] flex gap-2 items-center">
-                  <FormLabel className="min-w-[100px]">입사일 기준</FormLabel>
+                  <FormLabel className="min-w-[100px]">D-Day 기준</FormLabel>
                   <FormControl className="min-w-[100px]">
                     <Input type="number" {...field} />
                   </FormControl>
