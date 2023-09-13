@@ -9,7 +9,6 @@ import {
   DialogTrigger,
 } from "ui";
 
-import { WorkflowCreateForm } from "./workflow-create-form";
 import { TemplateWorkflowList } from "./template-workflow-list";
 
 function WorkflowImportDialog() {
@@ -22,9 +21,11 @@ function WorkflowImportDialog() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>워크플로우 템플릿 가져오기</DialogTitle>
+          <DialogTitle className="text-xl">
+            워크플로우 템플릿 가져오기
+          </DialogTitle>
           <DialogDescription>
-            워크플로우 템플릿을 선택해주세요.
+            가져올 워크플로우 템플릿을 선택해주세요.
           </DialogDescription>
         </DialogHeader>
         <div className="py-6">

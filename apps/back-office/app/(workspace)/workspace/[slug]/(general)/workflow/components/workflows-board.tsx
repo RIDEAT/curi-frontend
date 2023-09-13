@@ -1,6 +1,7 @@
 import { ErrorBadge, LoadingCircle } from "ui";
 import { WorkflowDisplayCard } from "./workflow-display-card";
 import { useWorkflows } from "../../../../../../../lib/hook/swr/useWorkflows";
+import { WorkflowCreateDialog } from "./workflow-create-dialog";
 
 function WorkflowsBoard() {
   const { workflows, isLoading, error } = useWorkflows();
@@ -15,6 +16,7 @@ function WorkflowsBoard() {
 
   return (
     <div className="flex flex-wrap gap-5">
+      <WorkflowCreateDialog />
       {workflows &&
         workflows
           .sort(

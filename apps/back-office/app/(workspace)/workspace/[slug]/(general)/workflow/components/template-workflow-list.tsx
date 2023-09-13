@@ -23,15 +23,14 @@ import { TemplateWorkflowAPI } from "../../../../../../../lib/api/templateWorkfl
 import { useCurrentWorkflow } from "../../../../../../../lib/hook/useCurrentWorkflow";
 import { useWorkflows } from "../../../../../../../lib/hook/swr/useWorkflows";
 import { useState } from "react";
+import { ImportIcon } from "lucide-react";
 
 function TemplateWorkflowList({
   setOpen,
 }: {
   setOpen: (open: boolean) => void;
 }) {
-  const router = useRouter();
-
-  const [requesting, setRequesting] = useState(false);
+  const [isRequesting, setIsRequesting] = useState(false);
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { workflowsMutate } = useWorkflows();
   const { templateWorkflows, isLoading, error, mutateTemplateWorkflows } =
@@ -39,7 +38,7 @@ function TemplateWorkflowList({
 
   const importHandler = async (e) => {
     try {
-      setRequesting(true);
+      setIsRequesting(true);
       const templateWorkflwoId = e.currentTarget.id;
       await TemplateWorkflowAPI.importTemplateWorkflow(
         currentWorkspaceId,
@@ -51,11 +50,11 @@ function TemplateWorkflowList({
         "워크플로우를 설계해보세요."
       );
       setOpen(false);
-      setRequesting(false);
+      setIsRequesting(false);
     } catch (error) {
       pushFailToast("워크플로우 가져오기 실패", "다시 시도해주세요.");
       setOpen(false);
-      setRequesting(false);
+      setIsRequesting(false);
     }
   };
 
@@ -65,23 +64,36 @@ function TemplateWorkflowList({
     <ErrorBadge />;
   }
 
+  if (isRequesting) {
+    return (
+      <div className="w-full h-full justify-center items-center">
+        <LoadingCircle />
+      </div>
+    );
+  }
+
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[250px] min-w-[250px]">워크플로우</TableHead>
+          <TableHead className="text-right"></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody className="text-sm font-medium">
-        {templateWorkflows?.length ? (
+        {!isRequesting && templateWorkflows?.length ? (
           templateWorkflows?.map((workflow) => (
             <TableRow
               key={workflow.id}
               id={workflow.id}
-              onClick={importHandler}
-              className="cursor-pointer"
+              className="hover:bg-inherit"
             >
               <TableCell>{workflow.name}</TableCell>
+              <TableCell className="flex justify-end">
+                <Button onClick={importHandler}>
+                  <ImportIcon className="w-5 h-5" />
+                </Button>
+              </TableCell>
             </TableRow>
           ))
         ) : (
