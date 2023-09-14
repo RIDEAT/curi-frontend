@@ -27,10 +27,9 @@ import {
 } from "ui";
 import { Input } from "ui";
 import { workspaceRolesSchema } from "../../../../../../../lib/form-schemas/workspace";
-import { IRole, IWorkspace } from "workspace-types";
-import { useEffect, useState } from "react";
+import { IRole } from "workspace-types";
+import { useState } from "react";
 import { WorkspaceAPI } from "../../../../../../../lib/api/workspace";
-import { useWorkspaces } from "../../../../../../../lib/hook/swr/useWorkspaces";
 import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWorkspace";
 import { useCurrentRoles } from "../../../../../../../lib/hook/swr/useCurrentRoles";
 
@@ -42,7 +41,8 @@ type WorkspaceSettingFormValues = z.infer<typeof workspaceSettingFormSchema>;
 
 export function WorkflowRoleSettingForm() {
   const { currentWorkspaceId } = useCurrentWorkspace();
-  const { currentRoles, isLoading, error } = useCurrentRoles();
+  const { currentRoles, isLoading, error, currentRolesMutate } =
+    useCurrentRoles();
 
   const [requesting, setRequesting] = useState(false);
   const form = useForm<WorkspaceSettingFormValues>({
@@ -62,7 +62,7 @@ export function WorkflowRoleSettingForm() {
     const newRoleTypes = data.roles.filter((role) => role.name !== "");
     setRequesting(true);
     await WorkspaceAPI.addRoles(currentWorkspaceId, newRoleTypes as IRole[]);
-
+    await currentRolesMutate();
     pushSuccessToast("역할 추가 성공", "역할을 추가했습니다.");
 
     setRequesting(false);
