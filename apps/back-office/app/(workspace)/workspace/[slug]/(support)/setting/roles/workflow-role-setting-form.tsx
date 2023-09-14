@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
@@ -12,7 +11,10 @@ import {
   Card,
   CardContent,
   CardHeader,
+  ErrorBadge,
   LoadingButton,
+  LoadingCircle,
+  pushSuccessToast,
 } from "ui";
 import {
   Form,
@@ -24,15 +26,13 @@ import {
   FormMessage,
 } from "ui";
 import { Input } from "ui";
-import { toast } from "ui";
-import {
-  workspaceEmailSchema,
-  workspaceNameSchema,
-  workspaceRolesSchema,
-} from "../../../../../../../lib/form-schemas/workspace";
+import { workspaceRolesSchema } from "../../../../../../../lib/form-schemas/workspace";
 import { IRole, IWorkspace } from "workspace-types";
 import { useEffect, useState } from "react";
 import { WorkspaceAPI } from "../../../../../../../lib/api/workspace";
+import { useWorkspaces } from "../../../../../../../lib/hook/swr/useWorkspaces";
+import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWorkspace";
+import { useCurrentRoles } from "../../../../../../../lib/hook/swr/useCurrentRoles";
 
 const workspaceSettingFormSchema = z.object({
   roles: workspaceRolesSchema,
@@ -40,12 +40,10 @@ const workspaceSettingFormSchema = z.object({
 
 type WorkspaceSettingFormValues = z.infer<typeof workspaceSettingFormSchema>;
 
-export function WorkflowRoleSettingForm({
-  currentWorkspaceData,
-}: {
-  currentWorkspaceData: IWorkspace;
-}) {
-  const [newRoles, setNewRoles] = useState<IRole[]>([]);
+export function WorkflowRoleSettingForm() {
+  const { currentWorkspaceId } = useCurrentWorkspace();
+  const { currentRoles, isLoading, error } = useCurrentRoles();
+
   const [requesting, setRequesting] = useState(false);
   const form = useForm<WorkspaceSettingFormValues>({
     resolver: zodResolver(workspaceSettingFormSchema),
@@ -55,43 +53,25 @@ export function WorkflowRoleSettingForm({
     mode: "onBlur",
   });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "roles",
     control: form.control,
   });
 
   const onSubmit = async (data: WorkspaceSettingFormValues) => {
+    const newRoleTypes = data.roles.filter((role) => role.name !== "");
     setRequesting(true);
-    await WorkspaceAPI.addRoles(currentWorkspaceData.id, data.roles as IRole[]);
+    await WorkspaceAPI.addRoles(currentWorkspaceId, newRoleTypes as IRole[]);
 
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    pushSuccessToast("역할 추가 성공", "역할을 추가했습니다.");
 
     setRequesting(false);
+    remove();
   };
 
   const addRole = () => {
-    setNewRoles((prev) => [...prev, { id: Math.random(), name: "" }]);
     append({ id: Math.random(), name: "" });
   };
-
-  // useEffect(() => {
-  //   if (currentWorkspaceData) {
-  //     form.reset({
-  //       roles: currentWorkspaceData?.roles,
-  //     });
-  //   }
-  // }, [currentWorkspaceData]);
-
-  if (!currentWorkspaceData) {
-    return null;
-  }
 
   return (
     <Form {...form}>
@@ -104,11 +84,17 @@ export function WorkflowRoleSettingForm({
               </div>
             </CardHeader>
             <CardContent>
-              {currentWorkspaceData?.roles.map((role) => (
-                <Badge key={role.id} className="mr-2 mb-2">
-                  {role.name}
-                </Badge>
-              ))}
+              {isLoading ? (
+                <LoadingCircle />
+              ) : error ? (
+                <ErrorBadge />
+              ) : (
+                currentRoles?.map((role) => (
+                  <Badge key={role.id} className="mr-2 mb-2">
+                    {role.name}
+                  </Badge>
+                ))
+              )}
             </CardContent>
           </Card>
           {fields.map((field, index) => (
@@ -144,7 +130,11 @@ export function WorkflowRoleSettingForm({
           </Button>
         </div>
         {!requesting ? (
-          <Button type="submit">저장하기</Button>
+          fields.length ? (
+            <Button type="submit">저장하기</Button>
+          ) : (
+            <Button disabled>저장하기</Button>
+          )
         ) : (
           <LoadingButton />
         )}
