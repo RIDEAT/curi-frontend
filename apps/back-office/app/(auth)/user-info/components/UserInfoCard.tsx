@@ -110,15 +110,13 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
         required_agreement: currentUser?.agreeWithMarketing || true,
       });
 
-      console.log(currentUser);
       setIsReseted(true);
 
-      const formData = form.getValues();
       if (
-        formData.name &&
-        formData.email &&
-        formData.phoneNum &&
-        formData.company
+        currentUser?.userId &&
+        currentUser?.name &&
+        currentUser?.phoneNum &&
+        currentUser?.company
       ) {
         router.replace(nextRoute);
       }
@@ -221,16 +219,9 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
                         href="https://www.workplug.team/legal/privacy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          window.open(
-                            "https://www.workplug.team/legal/privacy"
-                          );
-                        }}
+                        className="text-gray-500 p-4"
                       >
-                        <Button variant="link" className="text-gray-500">
-                          약관보기
-                        </Button>
+                        약관보기
                       </Link>
                     </FormLabel>
                   </div>
