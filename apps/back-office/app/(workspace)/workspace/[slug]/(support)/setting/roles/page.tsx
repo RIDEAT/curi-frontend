@@ -6,8 +6,6 @@ import { useCurrentWorkspace } from "../../../../../../../lib/hook/useCurrentWor
 import { useWorkspaces } from "../../../../../../../lib/hook/swr/useWorkspaces";
 
 export default function SettingsAccountPage() {
-  const { currentWorkspaceId } = useCurrentWorkspace();
-  const { getCurrentWorkspaceData } = useWorkspaces();
   return (
     <div className="space-y-6">
       <div>
@@ -17,9 +15,7 @@ export default function SettingsAccountPage() {
         </p>
       </div>
       <Separator />
-      <WorkflowRoleSettingForm
-        currentWorkspaceData={getCurrentWorkspaceData(currentWorkspaceId)}
-      />
+      <WorkflowRoleSettingForm />
     </div>
   );
 }
