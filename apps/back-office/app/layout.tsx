@@ -2,19 +2,20 @@
 
 import "ui/styles/globals.css";
 import { BodyLayout } from "./components/body-layout";
-
-import { Metadata, ResolvingMetadata } from "next";
-
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+import * as amplitude from "@amplitude/analytics-browser";
+import { useEffect } from "react";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_APP_URL == "https://app.workplug.team") {
+      amplitude.init("c31ecdbfeec86ce28279a07cbb92086e");
+    }
+  }, []);
+
   return (
     <html lang="en">
       <head>
