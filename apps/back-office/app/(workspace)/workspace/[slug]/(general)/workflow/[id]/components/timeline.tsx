@@ -2,6 +2,7 @@
 
 import { useWorkflow } from "../../../../../../../../lib/hook/swr/useWorkflow";
 import { useCurrentWorkflow } from "../../../../../../../../lib/hook/useCurrentWorkflow";
+import { ChatbotDialog } from "./chatbot-dialog";
 import { SequenceCreateDialog } from "./sequence-create-dialog";
 import { TimeBoxes } from "./time-box";
 import { ErrorBadge, LoadingCircle } from "ui";
@@ -23,6 +24,8 @@ function Timeline() {
     <div className="min-w-[800px] h-[90vh] overflow-scroll scrollbar-hide">
       <div className="sticky top-0 ml-2">
         <SequenceCreateDialog />
+        <div className="my-2"></div>
+        <ChatbotDialog />
       </div>
       <div className="w-full flex flex-col items-center mt-2">
         {filteredSequences.length > 0 &&
