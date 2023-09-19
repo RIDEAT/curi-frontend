@@ -55,6 +55,10 @@ export const TEMPLATES_PATH = "/templates";
 // ALERT
 export const ALERT_PATH = "/alerts";
 
+// CHATBOT
+export const QUESTION_PATH = "/chat";
+export const TEXT_TO_CHATBOT_PATH = "/text-to-ai";
+
 // -----------------------------
 // AUTH
 export const AUTH_API_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;

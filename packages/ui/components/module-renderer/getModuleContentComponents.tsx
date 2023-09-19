@@ -3,6 +3,7 @@ import { YoutubeModuleContent } from "./modules/youtube-module-content";
 import { GoogleDocsModuleContent } from "./modules/google-docs-module-content";
 import { GoogleFormModuleContent } from "./modules/google-form-module-content";
 import { WebUrlModuleContent } from "./modules/web-url-module-content";
+import { QuizModuleContent } from "./modules/quiz-module-content";
 import {
   CONTENTS_MODULE_VALUE,
   GOOGLE_DOCS_MODULE_VALUE,
@@ -11,6 +12,7 @@ import {
   NOTION_MODULE_VALUE,
   WEB_URL_MODULE_VALUE,
   YOUTUBE_MODULE_VALUE,
+  QUIZ_MODULE_VALUE,
 } from "../icons";
 import { ContentsModuleContent } from "./modules/contents-module-content";
 
@@ -36,6 +38,9 @@ const getModuleContentComponents = (contents: any, type: ModuleType) => {
 
     case CONTENTS_MODULE_VALUE:
       return <ContentsModuleContent contents={contents} />;
+
+    case QUIZ_MODULE_VALUE:
+      return <QuizModuleContent contents={contents} />;
 
     default:
       return <div>no matching module type</div>;

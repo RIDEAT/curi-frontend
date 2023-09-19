@@ -23,6 +23,7 @@ import {
   RadioGroupItem,
   WEB_URL_MODULE_VALUE,
   YOUTUBE_MODULE_VALUE,
+  QUIZ_MODULE_VALUE,
   getModuleIcon,
   pushFailToast,
   pushSuccessToast,

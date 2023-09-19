@@ -5,6 +5,7 @@ import { GoogleDocsIcon } from "./google-docs-icon";
 import { GoogleFormIcon } from "./google-form-icon";
 import { NotificationIcon } from "./notification-icon";
 import { NotionIcon } from "./notion-icon";
+import { QuizIcon } from "./quiz-icon";
 import { WebUrlIcon } from "./web-url-icon";
 import { YoutubeIcon } from "./youtube-icon";
 
@@ -19,6 +20,7 @@ export const YOUTUBE_MODULE_VALUE = "youtube";
 export const GOOGLE_FORM_MODULE_VALUE = "google_form";
 export const GOOGLE_DRIVE_MODULE_VALUE = "google_drive";
 export const WEB_URL_MODULE_VALUE = "web_url";
+export const QUIZ_MODULE_VALUE = "quiz";
 
 export type ModuleType =
   | "notification"
@@ -31,7 +33,8 @@ export type ModuleType =
   | "youtube"
   | "google_form"
   | "google_drive"
-  | "web_url";
+  | "web_url"
+  | "quiz";
 
 const getModuleIcon = (type: ModuleType, size?: "sm" | "lg") => {
   switch (type) {
@@ -53,6 +56,8 @@ const getModuleIcon = (type: ModuleType, size?: "sm" | "lg") => {
       return <WebUrlIcon size={size} />;
     case CONTENTS_MODULE_VALUE:
       return <ContentsIcon size={size} />;
+    case QUIZ_MODULE_VALUE:
+      return <QuizIcon />;
     default:
       return <></>;
   }
