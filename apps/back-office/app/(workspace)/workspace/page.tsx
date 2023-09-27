@@ -3,9 +3,17 @@
 import { WorkspaceSelectorCollapsible } from "./components/workspace-selector-collapsible";
 import withAuth from "../../../components/hoc/withAuth";
 import RouterNav from "../../../components/ui/navigations/RouterNav";
+import { useCurrentUser } from "../../../lib/hook/swr/useCurrentUser";
+import { useEffect } from "react";
 
 export default withAuth(SelectWorkspace, "protected");
 function SelectWorkspace() {
+  const { currentUserMutate } = useCurrentUser();
+
+  useEffect(() => {
+    currentUserMutate();
+  }, []);
+
   return (
     <>
       <div className="flex flex-col">

@@ -12,25 +12,8 @@ import { ChatbotAPI } from "../../../../../../../../lib/api/chatbot";
 
 import { useCurrentWorkspace } from "../../../../../../../../lib/hook/useCurrentWorkspace";
 import { useCurrentWorkflow } from "../../../../../../../../lib/hook/useCurrentWorkflow";
-import {
-  Button,
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Input,
-  LoadingCircle,
-  RadioGroup,
-  RadioGroupItem,
-  pushFailToast,
-  pushSuccessToast,
-} from "ui";
+import { Button, LoadingCircle, pushFailToast, pushSuccessToast } from "ui";
 import { useState } from "react";
-import { useCurrentRoles } from "../../../../../../../../lib/hook/swr/useCurrentRoles";
-import { useWorkflow } from "../../../../../../../../lib/hook/swr/useWorkflow";
 
 function ChatbotCreateForm() {
   const { currentWorkspaceId } = useCurrentWorkspace();
@@ -45,7 +28,7 @@ function ChatbotCreateForm() {
         currentWorkspaceId,
         currentWorkflowId
       );
-      console.log(result);
+
       pushSuccessToast("챗봇 학습 완료", "챗봇이 학습되었습니다.");
       setRequesting(false);
     } catch (error) {

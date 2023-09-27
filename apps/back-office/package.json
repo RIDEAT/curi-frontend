@@ -16,6 +16,8 @@
     "@dnd-kit/sortable": "^7.0.2",
     "@dnd-kit/utilities": "^3.2.1",
     "@faker-js/faker": "^8.0.2",
+    "@hackler/javascript-sdk": "^11.22.1",
+    "@hackler/react-sdk": "^11.22.1",
     "@hookform/resolvers": "^3.1.1",
     "@next/env": "^13.4.19",
     "@radix-ui/react-dropdown-menu": "^2.0.5",

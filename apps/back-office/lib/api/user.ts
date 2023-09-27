@@ -3,10 +3,11 @@ import { fetcherWithTokenAndBody, fetcherWithToken } from "../utils/fetcher";
 import { AuthAPI } from "./auth";
 
 export const UserAPI = {
+  userEndPoint: RESOURSE_API_URL + USER_PATH,
   register: async (email: string, name: string) => {
     try {
       const { response, result } = await fetcherWithTokenAndBody(
-        RESOURSE_API_URL + USER_PATH,
+        UserAPI.userEndPoint,
         {
           email: email,
           name: name,
@@ -24,9 +25,7 @@ export const UserAPI = {
   },
   getOne: async () => {
     try {
-      const { response, result } = await fetcherWithToken(
-        RESOURSE_API_URL + USER_PATH
-      );
+      const { response, result } = await fetcherWithToken(UserAPI.userEndPoint);
 
       if (!response.ok) {
         throw new Error("회원정보를 가져오는데 실패했습니다.");
@@ -45,7 +44,7 @@ export const UserAPI = {
   ) => {
     try {
       const { response, result } = await fetcherWithTokenAndBody(
-        RESOURSE_API_URL + USER_PATH,
+        UserAPI.userEndPoint,
         {
           name: name,
           phoneNum: phoneNum,

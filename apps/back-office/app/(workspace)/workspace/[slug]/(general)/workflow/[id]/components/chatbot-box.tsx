@@ -27,7 +27,6 @@ import {
   pushSuccessToast,
 } from "ui";
 import { useState } from "react";
-import { useCurrentRoles } from "../../../../../../../../lib/hook/swr/useCurrentRoles";
 import { ChatbotAPI } from "../../../../../../../../lib/api/chatbot";
 
 const chatBotFormSchema = z.object({
@@ -39,7 +38,6 @@ type ChatbotFormValue = z.infer<typeof chatBotFormSchema>;
 function ChatbotBox({ setOpen }: { setOpen: (open: boolean) => void }) {
   const { currentWorkspaceId } = useCurrentWorkspace();
   const { currentWorkflowId } = useCurrentWorkflow();
-  const { currentRoles } = useCurrentRoles();
   const [requesting, setRequesting] = useState(false);
   const form = useForm<ChatbotFormValue>({
     resolver: zodResolver(chatBotFormSchema),
@@ -53,7 +51,6 @@ function ChatbotBox({ setOpen }: { setOpen: (open: boolean) => void }) {
         currentWorkflowId,
         data.message
       );
-      console.log(result);
 
       pushSuccessToast("챗봇 답변", result.message);
       setOpen(false);
