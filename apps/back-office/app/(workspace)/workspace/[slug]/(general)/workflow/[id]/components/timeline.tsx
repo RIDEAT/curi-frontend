@@ -6,6 +6,7 @@ import { ChatbotDialog } from "./chatbot-dialog";
 import { SequenceCreateDialog } from "./sequence-create-dialog";
 import { TimeBoxes } from "./time-box";
 import { ErrorBadge, LoadingCircle } from "ui";
+import { HackleFeature } from "@hackler/react-sdk";
 
 function Timeline() {
   const { currentWorkflowId } = useCurrentWorkflow();
@@ -25,7 +26,9 @@ function Timeline() {
       <div className="sticky top-0 ml-2">
         <SequenceCreateDialog />
         <div className="my-2"></div>
-        <ChatbotDialog />
+        <HackleFeature featureKey={4}>
+          {(featureOn) => (featureOn ? <ChatbotDialog /> : <div></div>)}
+        </HackleFeature>
       </div>
       <div className="w-full flex flex-col items-center mt-2">
         {filteredSequences.length > 0 &&

@@ -6,6 +6,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
+        "HACKLE_BROWSER_SDK_KEY",
         "NEXT_PUBLIC_GOOGLE_OAUTH_URL",
         "BACK_OFFICE_SLACK_CONNECT_URL",
         "FRONT_OFFICE_SLACK_CONNECT_URL",
@@ -42,6 +43,7 @@
     "start": {
       "dependsOn": ["^start"],
       "env": [
+        "HACKLE_BROWSER_SDK_KEY",
         "NEXT_PUBLIC_GOOGLE_OAUTH_URL",
         "BACK_OFFICE_SLACK_CONNECT_URL",
         "FRONT_OFFICE_SLACK_CONNECT_URL",

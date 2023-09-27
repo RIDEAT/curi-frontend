@@ -6,12 +6,15 @@ import { FirebaseAPI } from "../../../lib/api/firebase";
 import { AuthAPI } from "../../../lib/api/auth";
 import { localStore } from "../../../lib/utils/localStore";
 import { useRouter } from "next/navigation";
+import { useHackle } from "../../../lib/hook/useHackle";
 
 function Logout() {
   const router = useRouter();
+  const { resetHackleState } = useHackle();
 
   const logout = async () => {
     const isAuthLogouted = await AuthAPI.logout();
+    resetHackleState();
     router.replace("/login");
   };
 
