@@ -151,6 +151,12 @@ function LaunchTableRow({
     setLaunchTargetData(newLaunchTargetData);
   };
 
+  const handleSelectOpenChange = (open: boolean) => {
+    if (open && (!employees || employees.length === 0)) {
+      alert("대상자에 할당할 멤버가 없습니다. 좌측 멤버 탭에서 추가해주세요!");
+    }
+  };
+
   useEffect(() => {
     if (launchTargetData) {
       const newLaunchTargetData = [...launchTargetData];
@@ -164,6 +170,7 @@ function LaunchTableRow({
     <TableRow>
       <TableCell>
         <Select
+          onOpenChange={handleSelectOpenChange}
           onValueChange={setMember}
           value={launchTargetData[index].memberId}
         >
@@ -239,8 +246,17 @@ function SelectRolesWithMember({
   stakeholdersHandler: any;
   managers: any;
 }) {
+  const handleSelectWithRoleOpenChange = (open: boolean) => {
+    if (open && (!managers || managers.length === 0)) {
+      alert(
+        `${role.name}에 할당할 매니저가 없습니다. 좌측 멤버 탭에서 매니저를 추가해주세요!`
+      );
+    }
+  };
+
   return (
     <Select
+      onOpenChange={handleSelectWithRoleOpenChange}
       onValueChange={(memberId) => stakeholdersHandler(memberId, role.id)}
       key={`${index}_${role.id}`}
       value={
