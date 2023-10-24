@@ -168,7 +168,7 @@ export default function Launch() {
               <>
                 <Button variant="outline" onClick={addMember} className="mb-2">
                   <PlusIcon className="h-4 w-4 mr-2" />
-                  유저 추가하기
+                  멤버 추가하기
                 </Button>
                 <WorkflowLaunchForm
                   launchTargetData={launchTargetData}
@@ -236,6 +236,7 @@ export default function Launch() {
                     </div>
                     <div className="flex-1 flex flex-col gap-2">
                       <div className="text-lg font-semibold">대상자</div>
+
                       {launchedResult?.employees?.map((employee) => (
                         <Card key={employee.id}>
                           <CardHeader>
