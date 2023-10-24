@@ -65,13 +65,11 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
 
   // currentUserMutate 호출 시 로딩 상태를 설정
   const handleCurrentUserMutate = async () => {
-    console.log("handleCurrentUserMutate");
     try {
       await currentUserMutate();
     } catch (err) {
       console.error("Error mutating currentUser:", err);
     } finally {
-      console.log("Finish handleCurrentUserMutate");
     }
   };
 
