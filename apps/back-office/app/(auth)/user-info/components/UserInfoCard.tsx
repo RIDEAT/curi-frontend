@@ -56,11 +56,28 @@ const UserFormSchema = z.object({
 
 export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
   const router = useRouter();
-  const { currentUser, isLoading, error } = useCurrentUser();
+  const { currentUser, isLoading, error, currentUserMutate } = useCurrentUser();
 
   const [isRequesting, setIsRequesting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [isReseted, setIsReseted] = useState(false);
+  const [isMutating, setIsMutating] = useState(true); // currentUserMutate 호출 중 로딩 상태를 관리하기 위한 상태
+
+  // currentUserMutate 호출 시 로딩 상태를 설정
+  const handleCurrentUserMutate = async () => {
+    console.log("handleCurrentUserMutate");
+    try {
+      await currentUserMutate();
+    } catch (err) {
+      console.error("Error mutating currentUser:", err);
+    } finally {
+      console.log("Finish handleCurrentUserMutate");
+    }
+  };
+
+  useEffect(() => {
+    handleCurrentUserMutate();
+  }, []);
 
   const form = useForm<z.infer<typeof UserFormSchema>>({
     resolver: zodResolver(UserFormSchema),
@@ -101,7 +118,15 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
   };
 
   useEffect(() => {
-    if (currentUser && !isReseted) {
+    if (
+      currentUser?.userId &&
+      currentUser?.name &&
+      currentUser?.phoneNum &&
+      currentUser?.company
+    ) {
+      router.replace(nextRoute);
+    } else if (currentUser && !isReseted) {
+      setIsMutating(false);
       form.reset({
         email: currentUser?.userId || "",
         name: currentUser?.name || "",
@@ -111,19 +136,10 @@ export default function UserInfoCard({ nextRoute }: { nextRoute: string }) {
       });
 
       setIsReseted(true);
-
-      if (
-        currentUser?.userId &&
-        currentUser?.name &&
-        currentUser?.phoneNum &&
-        currentUser?.company
-      ) {
-        router.replace(nextRoute);
-      }
     }
   }, [currentUser]);
 
-  if (isLoading) {
+  if (isLoading || isMutating) {
     return <LoadingButton />;
   } else if (error) {
     return <ErrorBadge />;
