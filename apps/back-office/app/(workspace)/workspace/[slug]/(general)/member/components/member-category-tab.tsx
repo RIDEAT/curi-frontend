@@ -78,6 +78,7 @@ export function MemberCategoryTab() {
             </TabsTrigger>
           ))}
         </TabsList>
+
         {!requesting ? (
           <Button variant="outline" size="sm" onClick={createMember}>
             <PlusIcon className="h-4 w-4 mr-2" />
@@ -89,6 +90,19 @@ export function MemberCategoryTab() {
           </Button>
         )}
       </div>
+      <TabsContent value="employee">
+        <p className="text-sm text-muted-foreground">
+          워크플로우를 통한 온보딩이 필요한 멤버들입니다. 신규 입사자, 신규
+          프로젝트 참여자 등이 해당됩니다.
+        </p>
+      </TabsContent>
+      <TabsContent value="manager">
+        <p className="text-sm text-muted-foreground">
+          워크플로우의 진행을 도와주는 역할입니다. 프로젝트 매니저, 진행자가
+          여기에 해당됩니다.
+        </p>
+      </TabsContent>
+
       {tabs.current.map((tab) => (
         <TabsContent value={tab.value} key={tab.value}>
           <>{tab.value === "manager" ? <ManagerTable /> : <EmployeeTable />}</>
