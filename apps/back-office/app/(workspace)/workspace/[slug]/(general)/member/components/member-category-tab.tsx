@@ -92,14 +92,14 @@ export function MemberCategoryTab() {
       </div>
       <TabsContent value="employee">
         <p className="text-sm text-muted-foreground">
-          워크플로우를 통한 온보딩이 필요한 멤버들입니다. 신규 입사자, 신규
-          프로젝트 참여자 등이 해당됩니다.
+          워크플로우를 통한 온보딩이 필요한 멤버들입니다. 워크플로우의
+          대상자이며 신규 입사자, 신규 프로젝트 참여자 등이 해당됩니다.
         </p>
       </TabsContent>
       <TabsContent value="manager">
         <p className="text-sm text-muted-foreground">
-          워크플로우의 진행을 도와주는 역할입니다. 프로젝트 매니저, 진행자가
-          여기에 해당됩니다.
+          워크플로우의 진행을 도와주는 역할입니다. 버디, HR 매니저, 프로젝트
+          매니저가 여기에 해당됩니다.
         </p>
       </TabsContent>
 

@@ -164,17 +164,17 @@ export default function Launch() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex flex-col items-center">
               <>
-                <Button variant="outline" onClick={addMember} className="mb-2">
-                  <PlusIcon className="h-4 w-4 mr-2" />
-                  멤버 추가하기
-                </Button>
                 <WorkflowLaunchForm
                   launchTargetData={launchTargetData}
                   setLaunchTargetData={setLaunchTargetData}
                   filteredLaunchTargetData={filteredLaunchTargetData}
                 />
+                <Button variant="outline" onClick={addMember} className="mt-2">
+                  <PlusIcon className="h-4 w-4 mr-2" />
+                  멤버 추가하기
+                </Button>
               </>
             </CardContent>
           </>
