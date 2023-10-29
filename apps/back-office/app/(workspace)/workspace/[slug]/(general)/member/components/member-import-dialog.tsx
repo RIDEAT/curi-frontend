@@ -103,6 +103,9 @@ function MemberImportDialog() {
   useEffect(() => {
     if (memberArray.length > 0) {
       toServer();
+      setFile(undefined);
+    } else {
+      console.log("memberArray is empty");
     }
   }, [memberArray]);
 
