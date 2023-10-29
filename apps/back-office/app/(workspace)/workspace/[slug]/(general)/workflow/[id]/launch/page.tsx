@@ -172,8 +172,7 @@ export default function Launch() {
                   filteredLaunchTargetData={filteredLaunchTargetData}
                 />
                 <Button variant="outline" onClick={addMember} className="mt-2">
-                  <PlusIcon className="h-4 w-4 mr-2" />
-                  멤버 추가하기
+                  <PlusIcon className="h-4 w-4" />
                 </Button>
               </>
             </CardContent>

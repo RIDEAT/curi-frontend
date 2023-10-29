@@ -22,6 +22,7 @@ import {
 } from "../../../../../../../lib/hook/swr/useMembers";
 import { ManagerTable } from "./manager-table";
 import { format } from "date-fns";
+import { MemberImportDialog } from "./member-import-dialog";
 
 interface ITabs {
   value: MemberType;
@@ -66,29 +67,33 @@ export function MemberCategoryTab() {
 
   return (
     <Tabs defaultValue={tabs.current[0].value} className="h-full">
-      <div className="flex gap-2 items-center">
-        <TabsList className="grid grid-cols-2 w-[250px]">
-          {tabs.current.map((tab) => (
-            <TabsTrigger
-              value={tab.value}
-              key={tab.value}
-              onClick={() => setCurrentTab(tab.value)}
-            >
-              {tab.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+      <div className="flex gap-2 items-center justify-between">
+        <div className="flex gap-2 items-center">
+          <TabsList className="grid grid-cols-2 w-[250px]">
+            {tabs.current.map((tab) => (
+              <TabsTrigger
+                value={tab.value}
+                key={tab.value}
+                onClick={() => setCurrentTab(tab.value)}
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-        {!requesting ? (
-          <Button variant="outline" size="sm" onClick={createMember}>
-            <PlusIcon className="h-4 w-4 mr-2" />
-            추가하기
-          </Button>
-        ) : (
-          <Button variant="outline" size="sm" disabled>
-            <LoadingCircle />
-          </Button>
-        )}
+          {!requesting ? (
+            <Button variant="outline" size="sm" onClick={createMember}>
+              <PlusIcon className="h-4 w-4 mr-2" />
+              추가하기
+            </Button>
+          ) : (
+            <Button variant="outline" size="sm" disabled>
+              <LoadingCircle />
+            </Button>
+          )}
+        </div>
+
+        <MemberImportDialog />
       </div>
       <TabsContent value="employee">
         <p className="text-sm text-muted-foreground">

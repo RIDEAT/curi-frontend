@@ -1,4 +1,4 @@
-import { IEmployee, IManager, MemberType } from "member-types";
+import { IEmployee, IManager, MemberType, IMember } from "member-types";
 import {
   EMPLOYEE_PATH,
   MANAGER_PATH,
@@ -77,6 +77,24 @@ export const MemberAPI = {
         department: "미정",
         type: "manager",
       }
+    );
+    return { response, result };
+  },
+
+  createAll: async (workspaceId: string, members: IMember[]) => {
+    const bodyData = members.map((member) => ({
+      wid: member.wid,
+      name: member.name,
+      email: member.email,
+      phoneNum: member.phoneNum,
+      department: member.department,
+      type: member.type,
+      startDate: "2000-10-01",
+    }));
+
+    const { response, result } = await fetcherWithTokenAndBody(
+      MemberAPI.getMembersEndPoint(workspaceId) + "/csv",
+      bodyData
     );
     return { response, result };
   },

@@ -50,6 +50,7 @@ export const employeeColumns: ColumnDef<Employee>[] = [
       );
     },
   },
+  /*
   {
     accessorKey: "startDate",
     header: ({ column }) => (
@@ -64,7 +65,7 @@ export const employeeColumns: ColumnDef<Employee>[] = [
         </div>
       );
     },
-  },
+  },*/
 
   {
     accessorKey: "email",
