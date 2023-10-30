@@ -20,9 +20,12 @@ import {
 
 import { WorkspaceAPI } from "../../../../lib/api/workspace";
 import { workspaceSchema } from "./workspaceSchema";
+import { MemberAPI } from "../../../../lib/api/member";
+import { useCurrentUser } from "../../../../lib/hook/swr/useCurrentUser";
 
 export function WorkspaceCreateForm() {
   const router = useRouter();
+  const { currentUser } = useCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof workspaceSchema>>({
     resolver: zodResolver(workspaceSchema),
@@ -44,6 +47,11 @@ export function WorkspaceCreateForm() {
         toast({
           title: "워크스페이스가 생성되었습니다.",
         });
+        await MemberAPI.createManager(result.id, {
+          name: currentUser?.name,
+          email: currentUser?.userId,
+        });
+
         router.replace(`/workspace/${result.id}`);
       }
     } catch (error) {

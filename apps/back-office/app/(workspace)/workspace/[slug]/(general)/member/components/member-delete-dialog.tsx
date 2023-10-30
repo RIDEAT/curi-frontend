@@ -25,13 +25,22 @@ export function MemberDeleteDialog({ memberId }: { memberId: string }) {
 
   const deleteMember = async () => {
     try {
-      await MemberAPI.delete(currentWorkspaceId, memberId);
+      const { response, result } = await MemberAPI.delete(
+        currentWorkspaceId,
+        memberId
+      );
+      if (response.ok === false) {
+        throw new Error("워크플로우에 할당된 멤버는 삭제할 수 없습니다.");
+      }
       await employeeMutate();
       await managerMutate();
 
       pushSuccessToast("멤버 삭제 완료", "멤버를 삭제했습니다.");
     } catch (error) {
-      pushFailToast("멤버 삭제 실패", "멤버를 삭제하지 못했습니다.");
+      pushFailToast(
+        "멤버 삭제 실패",
+        error.message || "멤버를 삭제하지 못했습니다."
+      );
     }
   };
 

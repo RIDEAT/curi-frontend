@@ -128,6 +128,6 @@ export const MemberAPI = {
       null,
       "DELETE"
     );
-    return result;
+    return { response, result };
   },
 };
