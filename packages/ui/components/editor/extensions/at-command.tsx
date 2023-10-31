@@ -11,8 +11,6 @@ import Suggestion from "@tiptap/suggestion";
 import { ReactRenderer } from "@tiptap/react";
 import { PluginKey } from "@tiptap/pm/state";
 
-import { useCurrentRoles } from "../../../../../apps/back-office/lib/hook/swr/useCurrentRoles";
-import { useCurrentWorkspace } from "../../../../../apps/back-office/lib/hook/useCurrentWorkspace";
 import { WorkflowAPI } from "../../../../../apps/back-office/lib/api/workflow";
 
 // import { useCompletion } from "ai/react";
@@ -362,13 +360,8 @@ const CommandList = ({
   editor: any;
   range: any;
 }) => {
-  const { currentWorkspaceId } = useCurrentWorkspace();
-  const { currentRoles } = useCurrentRoles();
-
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isProcessingAI, setIsProcessingAI] = useState(false);
-
-  console.log(items);
 
   // const { complete: completeText, isLoading: isLoadingText } = useCompletion({
   //   id: "curi_text_gpt",
