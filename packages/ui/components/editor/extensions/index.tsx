@@ -12,6 +12,7 @@ import { Markdown } from "tiptap-markdown";
 import Highlight from "@tiptap/extension-highlight";
 
 import SlashCommand from "./slash-command";
+import AtCommand from "./at-command";
 import { InputRule } from "@tiptap/core";
 import UploadImagesPlugin from "../plugins/upload-images";
 
@@ -106,11 +107,12 @@ export const TiptapExtensions = [
       if (node.type.name === "heading") {
         return `Heading ${node.attrs.level}`;
       }
-      return "'/'를 눌러 간편하게 커맨드를 사용하세요.";
+      return "'@'를 눌러 멤버 역할을 표시하세요. '/'를 눌러 간편하게 커맨드를 사용하세요.";
     },
     includeChildren: true,
   }),
   SlashCommand,
+  AtCommand,
   TiptapUnderline,
   TextStyle,
   Color,

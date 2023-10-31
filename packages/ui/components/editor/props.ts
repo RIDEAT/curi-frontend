@@ -10,7 +10,11 @@ export const TiptapEditorProps: EditorProps = {
       // prevent default event listeners from firing when slash command is active
       if (["ArrowUp", "ArrowDown", "Enter"].includes(event.key)) {
         const slashCommand = document.querySelector("#slash-command");
+        const atCommand = document.querySelector("#at-command");
         if (slashCommand) {
+          return true;
+        }
+        if (atCommand) {
           return true;
         }
       }

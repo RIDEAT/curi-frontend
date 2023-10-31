@@ -118,6 +118,7 @@ function ModuleContentEditor({
                     </div>
                   ) : (
                     <div className="flex gap-2">
+                      hi
                       <Form {...form}>
                         <form
                           onSubmit={form.handleSubmit(onSubmit)}
