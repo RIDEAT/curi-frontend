@@ -22,6 +22,7 @@ import {
 } from "../../../../../../../lib/hook/swr/useMembers";
 import { ManagerTable } from "./manager-table";
 import { format } from "date-fns";
+import { MemberImportDialog } from "./member-import-dialog";
 
 interface ITabs {
   value: MemberType;
@@ -66,29 +67,47 @@ export function MemberCategoryTab() {
 
   return (
     <Tabs defaultValue={tabs.current[0].value} className="h-full">
-      <div className="flex gap-2 items-center">
-        <TabsList className="grid grid-cols-2 w-[250px]">
-          {tabs.current.map((tab) => (
-            <TabsTrigger
-              value={tab.value}
-              key={tab.value}
-              onClick={() => setCurrentTab(tab.value)}
-            >
-              {tab.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {!requesting ? (
-          <Button variant="outline" size="sm" onClick={createMember}>
-            <PlusIcon className="h-4 w-4 mr-2" />
-            추가하기
-          </Button>
-        ) : (
-          <Button variant="outline" size="sm" disabled>
-            <LoadingCircle />
-          </Button>
-        )}
+      <div className="flex gap-2 items-center justify-between">
+        <div className="flex gap-2 items-center">
+          <TabsList className="grid grid-cols-2 w-[250px]">
+            {tabs.current.map((tab) => (
+              <TabsTrigger
+                value={tab.value}
+                key={tab.value}
+                onClick={() => setCurrentTab(tab.value)}
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {!requesting ? (
+            <Button variant="outline" size="sm" onClick={createMember}>
+              <PlusIcon className="h-4 w-4 mr-2" />
+              추가하기
+            </Button>
+          ) : (
+            <Button variant="outline" size="sm" disabled>
+              <LoadingCircle />
+            </Button>
+          )}
+        </div>
+
+        <MemberImportDialog />
       </div>
+      <TabsContent value="employee">
+        <p className="text-sm text-muted-foreground">
+          워크플로우를 통한 온보딩이 필요한 멤버들입니다. 워크플로우의
+          대상자이며 신규 입사자, 신규 프로젝트 참여자 등이 해당됩니다.
+        </p>
+      </TabsContent>
+      <TabsContent value="manager">
+        <p className="text-sm text-muted-foreground">
+          워크플로우의 진행을 도와주는 역할입니다. 버디, HR 매니저, 프로젝트
+          매니저가 여기에 해당됩니다.
+        </p>
+      </TabsContent>
+
       {tabs.current.map((tab) => (
         <TabsContent value={tab.value} key={tab.value}>
           <>{tab.value === "manager" ? <ManagerTable /> : <EmployeeTable />}</>
