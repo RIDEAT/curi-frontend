@@ -11,7 +11,7 @@ import Suggestion from "@tiptap/suggestion";
 import { ReactRenderer } from "@tiptap/react";
 import { PluginKey } from "@tiptap/pm/state";
 
-import { WorkflowAPI } from "../../../../../apps/back-office/lib/api/workflow";
+//import { WorkflowAPI } from "../../../../../apps/back-office/lib/api/workflow";
 
 // import { useCompletion } from "ai/react";
 import tippy from "tippy.js";
@@ -110,8 +110,8 @@ const getSuggestionItems = async ({ query }: { query: string }) => {
   const workspaceId = segments[4];
   const workflowId = segments[6];
 
-  const workflow = await WorkflowAPI.getOne(workspaceId, workflowId);
-
+  // const workflow = await WorkflowAPI.getOne(workspaceId, workflowId);
+  const workflow = { requiredRoles: [] };
   console.log("현재 URL:", currentURL);
   console.log("현재 id:", workspaceId);
 
