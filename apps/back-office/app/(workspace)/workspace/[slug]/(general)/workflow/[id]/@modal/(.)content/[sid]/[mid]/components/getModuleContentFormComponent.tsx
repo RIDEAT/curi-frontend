@@ -1,4 +1,5 @@
 import {
+  ATTACHMENT_MODULE_VALUE,
   CONTENTS_MODULE_VALUE,
   GOOGLE_DOCS_MODULE_VALUE,
   GOOGLE_FORM_MODULE_VALUE,
@@ -13,6 +14,7 @@ import { GoogleDocsModuleContentForm } from "./modules/google-docs-module-conten
 import { GoogleFormModuleContentForm } from "./modules/google-form-module-content-form";
 import { WebUrlModuleContentForm } from "./modules/web-url-module-content-form";
 import { ContentsModuleContentForm } from "./modules/contents-module-content-form";
+import { AttachmentsModuleContentForm } from "./modules/attachments-module-content-form";
 
 const getModuleContentFormComponent = (
   type: ModuleType,
@@ -64,6 +66,14 @@ const getModuleContentFormComponent = (
     case CONTENTS_MODULE_VALUE:
       return (
         <ContentsModuleContentForm
+          content={content}
+          sequenceId={sequenceId}
+          moduleId={moduleId}
+        />
+      );
+    case ATTACHMENT_MODULE_VALUE:
+      return (
+        <AttachmentsModuleContentForm
           content={content}
           sequenceId={sequenceId}
           moduleId={moduleId}

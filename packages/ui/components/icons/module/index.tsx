@@ -1,3 +1,4 @@
+import { AttachmentsIcon } from "./attachments-icon";
 import { ContentsIcon } from "./contents-icon";
 import { FinishedIcon } from "./finished-icon";
 import { FormIcon } from "./form-icon";
@@ -20,6 +21,7 @@ export const YOUTUBE_MODULE_VALUE = "youtube";
 export const GOOGLE_FORM_MODULE_VALUE = "google_form";
 export const GOOGLE_DRIVE_MODULE_VALUE = "google_drive";
 export const WEB_URL_MODULE_VALUE = "web_url";
+export const ATTACHMENT_MODULE_VALUE = "attachments";
 export const QUIZ_MODULE_VALUE = "quiz";
 
 export type ModuleType =
@@ -34,6 +36,7 @@ export type ModuleType =
   | "google_form"
   | "google_drive"
   | "web_url"
+  | "attachments"
   | "quiz";
 
 const getModuleIcon = (type: ModuleType, size?: "sm" | "lg") => {
@@ -56,6 +59,8 @@ const getModuleIcon = (type: ModuleType, size?: "sm" | "lg") => {
       return <WebUrlIcon size={size} />;
     case CONTENTS_MODULE_VALUE:
       return <ContentsIcon size={size} />;
+    case ATTACHMENT_MODULE_VALUE:
+      return <AttachmentsIcon size={size} />;
     case QUIZ_MODULE_VALUE:
       return <QuizIcon />;
     default:
@@ -76,3 +81,4 @@ export * from "./google-docs-icon";
 export * from "./google-form-icon";
 export * from "./web-url-icon";
 export * from "./contents-icon";
+export * from "./attachments-icon";

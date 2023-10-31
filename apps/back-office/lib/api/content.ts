@@ -129,6 +129,39 @@ export const ContentAPI = {
     );
     return result;
   },
+  patchAttachemnts: async (
+    workspaceId: string,
+    workflowId: string,
+    sequenceId: string,
+    moduleId: string,
+    form: {
+      attachments_list: { id: number; name: string }[];
+      description: string;
+    }
+  ) => {
+    const attachmentsInfo = form.attachments_list.map((attachment) => {
+      // return { fileName: attachment?.name };
+      return attachment?.name;
+    });
+
+    console.log(attachmentsInfo);
+    const { response, result } = await fetcherWithTokenAndBody(
+      ContentAPI.getContentEndPoint(
+        workspaceId,
+        workflowId,
+        sequenceId,
+        moduleId
+      ) + "/attachments",
+      {
+        content: {
+          attachments: attachmentsInfo,
+          description: form.description,
+        },
+      },
+      "PATCH"
+    );
+    return result;
+  },
   patchContents: async (
     workspaceId: string,
     workflowId: string,

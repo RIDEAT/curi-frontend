@@ -27,6 +27,7 @@ import {
   getModuleIcon,
   pushFailToast,
   pushSuccessToast,
+  ATTACHMENT_MODULE_VALUE,
 } from "ui";
 import { useState } from "react";
 import { useWorkflow } from "../../../../../../../../lib/hook/swr/useWorkflow";
@@ -67,6 +68,11 @@ const moduleTypes = [
     value: WEB_URL_MODULE_VALUE,
     label: "웹 URL",
     icon: getModuleIcon(WEB_URL_MODULE_VALUE, "lg"),
+  },
+  {
+    value: ATTACHMENT_MODULE_VALUE,
+    label: "파일 제출",
+    icon: getModuleIcon(ATTACHMENT_MODULE_VALUE, "lg"),
   },
 ];
 
@@ -177,8 +183,8 @@ function ModuleCreateForm({
                           </RadioGroupItem>
                         </FormControl>
                         <FormLabel className="font-normal">
-                          <div className="flex gap-4 items-center">
-                            <div>{type.icon}</div>
+                          <div className="flex justify-between items-center">
+                            <div className="w-20">{type.icon}</div>
                             <div className="text-base font-medium">
                               {type.label}
                             </div>

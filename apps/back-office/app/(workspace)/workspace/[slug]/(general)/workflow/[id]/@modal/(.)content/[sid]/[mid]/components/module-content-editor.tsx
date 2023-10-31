@@ -148,7 +148,7 @@ function ModuleContentEditor({
               </SheetTitle>
               <Separator className="mb-4" />
             </SheetHeader>
-            <div className="h-full mt-4 overflow-scroll scrollbar-hide">
+            <div className="h-full mt-4 px-2 overflow-scroll scrollbar-hide">
               {!isPreview
                 ? getModuleContentFormComponent(
                     content.type,
