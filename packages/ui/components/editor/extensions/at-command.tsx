@@ -11,6 +11,10 @@ import Suggestion from "@tiptap/suggestion";
 import { ReactRenderer } from "@tiptap/react";
 import { PluginKey } from "@tiptap/pm/state";
 
+import { useCurrentRoles } from "../../../../../apps/back-office/lib/hook/swr/useCurrentRoles";
+import { useCurrentWorkspace } from "../../../../../apps/back-office/lib/hook/useCurrentWorkspace";
+import { WorkflowAPI } from "../../../../../apps/back-office/lib/api/workflow";
+
 // import { useCompletion } from "ai/react";
 import tippy from "tippy.js";
 import {
@@ -25,6 +29,9 @@ import {
   Image as ImageIcon,
   Code,
   CheckSquare,
+  MailsIcon,
+  Mail,
+  PersonStanding,
 } from "lucide-react";
 // import LoadingCircle from "../../icons/loading-circle";
 
@@ -32,6 +39,7 @@ import {
 // import Magic from "../../icons/magic";
 import { startImageUpload } from "../plugins/upload-images";
 import { toast } from "../../ui/use-toast";
+import { ro } from "date-fns/locale";
 
 const getPrevText = (
   editor: Editor,
@@ -65,11 +73,11 @@ interface CommandProps {
 }
 
 const Command = Extension.create({
-  name: "slash-command",
+  name: "at-command",
   addOptions() {
     return {
       suggestion: {
-        char: "/",
+        char: "@",
         command: ({
           editor,
           range,
@@ -87,7 +95,7 @@ const Command = Extension.create({
   addProseMirrorPlugins() {
     return [
       Suggestion({
-        pluginKey: new PluginKey("slash-command"),
+        pluginKey: new PluginKey("at-command"),
         editor: this.editor,
         ...this.options.suggestion,
       }),
@@ -98,8 +106,62 @@ const Command = Extension.create({
 const AI_CHAT_COMMAND_TITLE = "AI 보조 쓰기";
 const AI_IMAGE_COMMAND_TITLE = "AI 이미지 생성";
 
-const getSuggestionItems = ({ query }: { query: string }) => {
+const getSuggestionItems = async ({ query }: { query: string }) => {
+  const currentURL = window.location.href;
+  const segments = currentURL.split("/");
+  const workspaceId = segments[4];
+  const workflowId = segments[6];
+
+  const workflow = await WorkflowAPI.getOne(workspaceId, workflowId);
+
+  console.log("현재 URL:", currentURL);
+  console.log("현재 id:", workspaceId);
+
+  console.log(workflow.requiredRoles);
+
+  const roleItems = [];
+
+  workflow.requiredRoles.forEach((role) => {
+    // 이름 정보 추가
+    roleItems.push({
+      title: role.name + " 이름",
+      description: role.name + "의 이름을 나타냅니다.",
+      icon: <PersonStanding size={18} />,
+      command: ({ editor, range }: CommandProps) => {
+        editor
+          .chain()
+          .focus()
+          .deleteRange(range)
+          .setCode()
+          .insertContent("{" + role.name + ".이름}")
+          .unsetCode()
+          .run();
+      },
+      // 다른 필요한 설정들을 추가하세요
+    });
+
+    // 이메일 정보 추가
+    roleItems.push({
+      title: role.name + " 이메일",
+      description: role.name + "의 이메일을 나타냅니다.",
+      icon: <Mail size={18} />, // 이메일 아이콘 예시
+      command: ({ editor, range }: CommandProps) => {
+        editor
+          .chain()
+          .focus()
+          .deleteRange(range)
+          .setCode()
+          .insertContent("{" + role.name + ".이메일}")
+          .unsetCode()
+          .run();
+      },
+      // 다른 필요한 설정들을 추가하세요
+    });
+  });
+  console.log("roleItems: ", roleItems);
+
   return [
+    ...roleItems,
     // {
     //   title: AI_CHAT_COMMAND_TITLE,
     //   description: "AI로 글을 확장하세요.",
@@ -121,132 +183,146 @@ const getSuggestionItems = ({ query }: { query: string }) => {
     //     window.open("/feedback", "_blank");
     //   },
     // },
-    {
-      title: "텍스트",
-      description: "일반 크기의 문자를 입력하세요.",
-      searchTerms: ["p", "paragraph"],
-      icon: <Text size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .toggleNode("paragraph", "paragraph")
-          .run();
-      },
-    },
-    {
-      title: "체크 항목",
-      description: "체크 항목을 만드세요.",
-      searchTerms: ["todo", "task", "list", "check", "checkbox"],
-      icon: <CheckSquare size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).toggleTaskList().run();
-      },
-    },
-    {
-      title: "제목 1",
-      description: "가장 큰 크기의 제목",
-      searchTerms: ["title", "big", "large"],
-      icon: <Heading1 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .setNode("heading", { level: 1 })
-          .run();
-      },
-    },
-    {
-      title: "제목 2",
-      description: "중간 크기의 제목",
-      searchTerms: ["subtitle", "medium"],
-      icon: <Heading2 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .setNode("heading", { level: 2 })
-          .run();
-      },
-    },
-    {
-      title: "제목 3",
-      description: "작은 크기의 제목",
-      searchTerms: ["subtitle", "small"],
-      icon: <Heading3 size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .setNode("heading", { level: 3 })
-          .run();
-      },
-    },
-    {
-      title: "일반 목록",
-      description: "항목을 구분하세요.",
-      searchTerms: ["unordered", "point"],
-      icon: <List size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).toggleBulletList().run();
-      },
-    },
-    {
-      title: "순서 목록",
-      description: "항목을 순서대로 구분하세요.",
-      searchTerms: ["ordered"],
-      icon: <ListOrdered size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).toggleOrderedList().run();
-      },
-    },
-    {
-      title: "인용",
-      description: "인용문을 입력하세요.",
-      searchTerms: ["blockquote"],
-      icon: <TextQuote size={18} />,
-      command: ({ editor, range }: CommandProps) =>
-        editor
-          .chain()
-          .focus()
-          .deleteRange(range)
-          .toggleNode("paragraph", "paragraph")
-          .toggleBlockquote()
-          .run(),
-    },
-    {
-      title: "코드 블록",
-      description: "코드 블록을 입력하세요.",
-      searchTerms: ["codeblock"],
-      icon: <Code size={18} />,
-      command: ({ editor, range }: CommandProps) =>
-        editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
-    },
-    {
-      title: "이미지",
-      description: "이미지를 업로드하세요.",
-      searchTerms: ["photo", "picture", "media"],
-      icon: <ImageIcon size={18} />,
-      command: ({ editor, range }: CommandProps) => {
-        editor.chain().focus().deleteRange(range).run();
-        // upload image
-        const input = document.createElement("input");
-        input.type = "file";
-        input.accept = "image/*";
-        input.onchange = async () => {
-          if (input.files?.length) {
-            const file = input.files[0];
-            const pos = editor.view.state.selection.from;
-            startImageUpload(file, editor.view, pos);
-          }
-        };
-        input.click();
-      },
-    },
+    // {
+    //   title: "텍스",
+    //   description: "일반 크기의 문자를 입력하세요.",
+    //   searchTerms: ["p", "paragraph"],
+    //   icon: <Text size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor
+    //       .chain()
+    //       .focus()
+    //       .deleteRange(range)
+    //       .toggleNode("paragraph", "paragraph")
+    //       .run();
+    //   },
+    // },
+    // {
+    //   title: "텍스트",
+    //   description: "일반 크기의 문자를 입력하세요.",
+    //   searchTerms: ["p", "paragraph"],
+    //   icon: <Text size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor
+    //       .chain()
+    //       .focus()
+    //       .deleteRange(range)
+    //       .toggleNode("paragraph", "paragraph")
+    //       .run();
+    //   },
+    // },
+    // {
+    //   title: "체크 항목",
+    //   description: "체크 항목을 만드세요.",
+    //   searchTerms: ["todo", "task", "list", "check", "checkbox"],
+    //   icon: <CheckSquare size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).toggleTaskList().run();
+    //   },
+    // },
+    // {
+    //   title: "제목 1",
+    //   description: "가장 큰 크기의 제목",
+    //   searchTerms: ["title", "big", "large"],
+    //   icon: <Heading1 size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor
+    //       .chain()
+    //       .focus()
+    //       .deleteRange(range)
+    //       .setNode("heading", { level: 1 })
+    //       .run();
+    //   },
+    // },
+    // {
+    //   title: "제목 2",
+    //   description: "중간 크기의 제목",
+    //   searchTerms: ["subtitle", "medium"],
+    //   icon: <Heading2 size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor
+    //       .chain()
+    //       .focus()
+    //       .deleteRange(range)
+    //       .setNode("heading", { level: 2 })
+    //       .run();
+    //   },
+    // },
+    // {
+    //   title: "제목 3",
+    //   description: "작은 크기의 제목",
+    //   searchTerms: ["subtitle", "small"],
+    //   icon: <Heading3 size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor
+    //       .chain()
+    //       .focus()
+    //       .deleteRange(range)
+    //       .setNode("heading", { level: 3 })
+    //       .run();
+    //   },
+    // },
+    // {
+    //   title: "일반 목록",
+    //   description: "항목을 구분하세요.",
+    //   searchTerms: ["unordered", "point"],
+    //   icon: <List size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).toggleBulletList().run();
+    //   },
+    // },
+    // {
+    //   title: "순서 목록",
+    //   description: "항목을 순서대로 구분하세요.",
+    //   searchTerms: ["ordered"],
+    //   icon: <ListOrdered size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).toggleOrderedList().run();
+    //   },
+    // },
+    // {
+    //   title: "인용",
+    //   description: "인용문을 입력하세요.",
+    //   searchTerms: ["blockquote"],
+    //   icon: <TextQuote size={18} />,
+    //   command: ({ editor, range }: CommandProps) =>
+    //     editor
+    //       .chain()
+    //       .focus()
+    //       .deleteRange(range)
+    //       .toggleNode("paragraph", "paragraph")
+    //       .toggleBlockquote()
+    //       .run(),
+    // },
+    // {
+    //   title: "코드 블록",
+    //   description: "코드 블록을 입력하세요.",
+    //   searchTerms: ["codeblock"],
+    //   icon: <Code size={18} />,
+    //   command: ({ editor, range }: CommandProps) =>
+    //     editor.chain().focus().deleteRange(range).toggleCodeBlock().run(),
+    // },
+    // {
+    //   title: "이미지",
+    //   description: "이미지를 업로드하세요.",
+    //   searchTerms: ["photo", "picture", "media"],
+    //   icon: <ImageIcon size={18} />,
+    //   command: ({ editor, range }: CommandProps) => {
+    //     editor.chain().focus().deleteRange(range).run();
+    //     // upload image
+    //     const input = document.createElement("input");
+    //     input.type = "file";
+    //     input.accept = "image/*";
+    //     input.onchange = async () => {
+    //       if (input.files?.length) {
+    //         const file = input.files[0];
+    //         const pos = editor.view.state.selection.from;
+    //         startImageUpload(file, editor.view, pos);
+    //       }
+    //     };
+    //     input.click();
+    //   },
+    // },
   ].filter((item) => {
     if (typeof query === "string" && query.length > 0) {
       const search = query.toLowerCase();
@@ -286,8 +362,13 @@ const CommandList = ({
   editor: any;
   range: any;
 }) => {
+  const { currentWorkspaceId } = useCurrentWorkspace();
+  const { currentRoles } = useCurrentRoles();
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isProcessingAI, setIsProcessingAI] = useState(false);
+
+  console.log(items);
 
   // const { complete: completeText, isLoading: isLoadingText } = useCompletion({
   //   id: "curi_text_gpt",
@@ -381,6 +462,7 @@ const CommandList = ({
   useEffect(() => {
     const navigationKeys = ["ArrowUp", "ArrowDown", "Enter"];
     const onKeyDown = (e: KeyboardEvent) => {
+      console.log(e.key);
       if (navigationKeys.includes(e.key)) {
         e.preventDefault();
         if (e.key === "ArrowUp") {
@@ -420,7 +502,7 @@ const CommandList = ({
 
   return items.length > 0 ? (
     <div
-      id="slash-command"
+      id="at-command"
       ref={commandListContainer}
       className="z-50 h-auto max-h-[330px] w-72 overflow-y-auto rounded-md border border-stone-200 bg-white px-1 py-2 shadow-md transition-all"
     >
@@ -435,12 +517,12 @@ const CommandList = ({
           >
             <div className="flex h-10 w-10 items-center justify-center rounded-md border border-stone-200 bg-white">
               {/* {(item.title === AI_CHAT_COMMAND_TITLE ||
-                item.title === AI_IMAGE_COMMAND_TITLE) &&
-              (isLoadingText || isLoadingImage) ? (
-                <LoadingCircle />
-              ) : (
-                item.icon
-              )} */}
+                  item.title === AI_IMAGE_COMMAND_TITLE) &&
+                (isLoadingText || isLoadingImage) ? (
+                  <LoadingCircle />
+                ) : (
+                  item.icon
+                )} */}
               {item.icon}
             </div>
             <div>
@@ -501,11 +583,11 @@ const renderItems = () => {
   };
 };
 
-const SlashCommand = Command.configure({
+const AtCommand = Command.configure({
   suggestion: {
     items: getSuggestionItems,
     render: renderItems,
   },
 });
 
-export default SlashCommand;
+export default AtCommand;
