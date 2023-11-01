@@ -49,11 +49,7 @@ export default function Editor({
       const lastChar = getPrevText(e.editor, {
         chars: 1,
       });
-      if (lastChar === "@") {
-        //show shortcut menu
 
-        console.log("mention");
-      }
       // if (lastTwo === "++" && !isLoadingText) {
       //   e.editor.commands.deleteRange({
       //     from: selection.from - 2,

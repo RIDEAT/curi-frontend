@@ -30,6 +30,10 @@ export const WorkflowAPI = {
     const { response, result } = await fetcherWithToken(
       `${WorkflowAPI.getWorkflowsEndPoint(workspaceId)}/${workflowId}`
     );
+    localStorage.setItem(
+      "requiredRoles",
+      JSON.stringify((result as IWorkflow).requiredRoles)
+    );
     return result as IWorkflow;
   },
   createWorkflow: async (workspaceId: string, name: string) => {
