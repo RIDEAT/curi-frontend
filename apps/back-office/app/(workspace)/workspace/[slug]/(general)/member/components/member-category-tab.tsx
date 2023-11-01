@@ -94,7 +94,7 @@ export function MemberCategoryTab() {
           )}
         </div>
 
-        <HackleFeature featureKey={4}>
+        <HackleFeature featureKey={5}>
           {(featureOn) => (featureOn ? <MemberImportDialog /> : <div></div>)}
         </HackleFeature>
       </div>
