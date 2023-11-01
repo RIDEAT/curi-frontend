@@ -181,13 +181,13 @@ function MemberImportDialog() {
                 {requesting ? (
                   <LoadingCircle />
                 ) : (
-                  <button
+                  <Button
                     onClick={async (e) => {
                       await handleOnSubmit(e);
                     }}
                   >
                     일괄 추가하기
-                  </button>
+                  </Button>
                 )}
               </form>
             </div>
