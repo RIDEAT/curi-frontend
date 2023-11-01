@@ -90,6 +90,7 @@ const Command = Extension.create({
       },
     };
   },
+
   addProseMirrorPlugins() {
     return [
       Suggestion({
@@ -105,21 +106,12 @@ const AI_CHAT_COMMAND_TITLE = "AI 보조 쓰기";
 const AI_IMAGE_COMMAND_TITLE = "AI 이미지 생성";
 
 const getSuggestionItems = async ({ query }: { query: string }) => {
-  const currentURL = window.location.href;
-  const segments = currentURL.split("/");
-  const workspaceId = segments[4];
-  const workflowId = segments[6];
-
-  // const workflow = await WorkflowAPI.getOne(workspaceId, workflowId);
-  const workflow = { requiredRoles: [] };
-  console.log("현재 URL:", currentURL);
-  console.log("현재 id:", workspaceId);
-
-  console.log(workflow.requiredRoles);
+  const requiredRolesInStorage = localStorage.getItem("requiredRoles");
+  const requiredRoles = JSON.parse(requiredRolesInStorage);
 
   const roleItems = [];
 
-  workflow.requiredRoles.forEach((role) => {
+  requiredRoles.forEach((role) => {
     // 이름 정보 추가
     roleItems.push({
       title: role.name + " 이름",
@@ -156,7 +148,6 @@ const getSuggestionItems = async ({ query }: { query: string }) => {
       // 다른 필요한 설정들을 추가하세요
     });
   });
-  console.log("roleItems: ", roleItems);
 
   return [
     ...roleItems,
@@ -455,7 +446,6 @@ const CommandList = ({
   useEffect(() => {
     const navigationKeys = ["ArrowUp", "ArrowDown", "Enter"];
     const onKeyDown = (e: KeyboardEvent) => {
-      console.log(e.key);
       if (navigationKeys.includes(e.key)) {
         e.preventDefault();
         if (e.key === "ArrowUp") {
