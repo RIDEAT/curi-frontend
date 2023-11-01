@@ -48,6 +48,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/package.json .
 
 COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/.next/static ./apps/back-office/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/back-office/public ./apps/back-office/public
+
 
 RUN ls -la
 
