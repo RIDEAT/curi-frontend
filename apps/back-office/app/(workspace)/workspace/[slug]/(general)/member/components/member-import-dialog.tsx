@@ -20,6 +20,44 @@ import {
   pushSuccessToast,
 } from "ui";
 
+import { z, ZodError } from "zod";
+
+const typeSchema = z.enum(["employee", "manager"]);
+const nameSchema = z.string().regex(/^[a-zA-Z가-힣0-9]{2,20}$/, {
+  message:
+    "이름은 2자에서 20자 사이의 문자, 숫자, 또는 한글로 이루어져야 합니다.",
+});
+
+const emailSchema = z
+  .string()
+  .regex(/^.{4,255}$/, {
+    message: "이메일은 4자에서 255자 사이여야 합니다.",
+  })
+  .email({
+    message: "올바른 이메일 형식이 아닙니다.",
+  });
+
+const phoneNumSchema = z.string().regex(/^\d{3}-\d{3,4}-\d{4}$/, {
+  message: "전화번호 형식은 XXX-XXXX-XXXX 형태여야 합니다.",
+});
+
+const departmentSchema = z.string().regex(/^[a-zA-Z가-힣\s]{2,20}$/, {
+  message:
+    "부서 이름은 2자에서 20자 사이의 문자, 한글, 또는 공백이어야 합니다.",
+});
+
+function validateData(data) {
+  console.log("department:", data.department);
+  const validatedData = {
+    type: typeSchema.parse(data.type),
+    name: nameSchema.parse(data.name),
+    email: emailSchema.parse(data.email),
+    phoneNum: phoneNumSchema.parse(data.phoneNum),
+    department: departmentSchema.parse(data.department),
+  };
+  return validatedData;
+}
+
 function MemberImportDialog() {
   const { employeeMutate } = useEmployees();
   const { managerMutate } = useManagers();
@@ -39,19 +77,38 @@ function MemberImportDialog() {
     const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
     const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
 
-    const array = csvRows.map((i) => {
-      const values = i.split(",");
+    const array = [];
+    let validationFailed = false;
+    let validationErrors = ""; // 실패한 필드 정보를 저장하는 배열
+
+    for (let i = 0; i < csvRows.length; i++) {
+      const values = csvRows[i].split(",");
       const obj = csvHeader.reduce((object, header: string, index) => {
-        let val = values[index];
+        let val = values[index] as string;
+        header = header.trim();
+        val = val.trim();
+
         if (header == "memberType") {
           header = "type";
           if (val == "일반") val = "employee";
           else if (val == "매니저") val = "manager";
-          else throw new Error("잘못된 멤버 타입입니다.");
         }
 
-        if (header.startsWith("department")) {
+        if (header == "email") {
+          if (!val) val = "example@gmail.com";
+        }
+
+        if (header == "name") {
+          if (!val) val = "미정";
+        }
+
+        if (header == "phoneNum") {
+          if (!val) val = "010-0000-0000";
+        }
+
+        if (header == "department") {
           header = "department";
+          if (!val) val = "미정";
         }
 
         object[header] = val;
@@ -59,13 +116,34 @@ function MemberImportDialog() {
         return object;
       }, {});
       const typed = obj as IMember;
+
+      try {
+        const validatedData = validateData(typed);
+        console.log("유효한 데이터:", validatedData);
+      } catch (error) {
+        if (error instanceof ZodError) {
+          console.error("유효성 검사 실패:", error.errors[0].message);
+          validationFailed = true;
+          validationErrors = error.errors[0].message;
+          break;
+        } else {
+          console.error("오류 발생:", error.message);
+        }
+      }
       typed.wid = parseInt(currentWorkspaceId);
+      array.push(typed);
+    }
 
-      return typed;
-    }) as IMember[];
+    if (!validationFailed) {
+      setMemberArray(array);
+    } else {
+      // 실패한 필드 정보를 포함한 실패 토스트 메시지 표시
+      const errorMessage = `입력 데이터의 유효성을 확인하세요.\n${validationErrors}`;
 
-    setMemberArray(array);
+      pushFailToast("일괄 추가 실패", errorMessage);
+    }
   };
+
   const toServer = async () => {
     try {
       setRequesting(true);

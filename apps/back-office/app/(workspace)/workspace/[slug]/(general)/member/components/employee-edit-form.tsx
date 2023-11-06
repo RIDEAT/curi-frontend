@@ -42,8 +42,9 @@ const phoneNumSchema = z.string().regex(/^\d{3}-\d{3,4}-\d{4}$/, {
   message: "전화번호 형식은 XXX-XXXX-XXXX 형태여야 합니다.",
 });
 
-const departmentSchema = z.string().regex(/^[a-zA-Z가-힣]{2,20}$/, {
-  message: "부서 이름은 2자에서 20자 사이의 문자 또는 한글이어야 합니다.",
+const departmentSchema = z.string().regex(/^[a-zA-Z가-힣\s]{2,20}$/, {
+  message:
+    "부서 이름은 2자에서 20자 사이의 문자, 한글, 또는 공백이어야 합니다.",
 });
 
 const startDateSchema = z.date().refine((date) => date instanceof Date, {
