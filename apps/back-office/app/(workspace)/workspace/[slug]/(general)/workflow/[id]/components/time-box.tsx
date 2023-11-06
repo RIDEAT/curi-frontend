@@ -81,6 +81,7 @@ function TimeBox({
             stakeholder={employeeSequence.role.name}
             modules={[...employeeSequence.modules]}
             satisfactionChecked={employeeSequence.checkSatisfaction}
+            chatbotChecked={true}
             date={date}
           />
         ) : (
@@ -103,6 +104,7 @@ function TimeBox({
             stakeholder={managerSequence.role.name}
             modules={[...managerSequence.modules]}
             satisfactionChecked={managerSequence.checkSatisfaction}
+            chatbotChecked={true}
             date={date}
           />
         ) : (

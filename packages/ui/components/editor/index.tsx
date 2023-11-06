@@ -198,6 +198,7 @@ export default function Editor({
         </div>
       )}
       {editor && editable && <EditorBubbleMenu editor={editor} />}
+
       <EditorContent editor={editor} />
     </div>
   );

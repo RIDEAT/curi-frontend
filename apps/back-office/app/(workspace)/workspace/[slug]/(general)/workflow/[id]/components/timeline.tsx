@@ -25,10 +25,6 @@ function Timeline() {
     <div className="min-w-[800px] h-[90vh] overflow-scroll scrollbar-hide">
       <div className="sticky top-0 ml-2">
         <SequenceCreateDialog />
-        <div className="my-2"></div>
-        <HackleFeature featureKey={4}>
-          {(featureOn) => (featureOn ? <ChatbotDialog /> : <div></div>)}
-        </HackleFeature>
       </div>
       <div className="w-full flex flex-col items-center mt-2">
         {filteredSequences.length > 0 &&
