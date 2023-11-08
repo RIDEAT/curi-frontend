@@ -157,4 +157,48 @@ export const FrontOfficeAPI = {
     const result = await response.json();
     return result;
   },
+  getAttachment: async (
+    frontOfficeId: string,
+    launchedModuleId: string,
+    token: string
+  ) => {
+    const response = await fetch(
+      FrontOfficeAPI.frontOfficeEndPoint +
+        `/${frontOfficeId}/launched-modules/${launchedModuleId}/attachments`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        credentials: "include",
+      }
+    );
+
+    const result = await response.json();
+    return result;
+  },
+  getPresignedUrlForAttachment: async (
+    frontOfficeId: string,
+    launchedModuleId: string,
+    token: string,
+    fileName: string
+  ) => {
+    const response = await fetch(
+      FrontOfficeAPI.frontOfficeEndPoint +
+        `/${frontOfficeId}/launched-modules/${launchedModuleId}/attachments`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        credentials: "include",
+        body: JSON.stringify({ fileName }),
+      }
+    );
+
+    const result = await response.json();
+    return result;
+  },
 };

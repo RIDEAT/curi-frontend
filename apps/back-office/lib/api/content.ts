@@ -144,7 +144,6 @@ export const ContentAPI = {
       return attachment?.name;
     });
 
-    console.log(attachmentsInfo);
     const { response, result } = await fetcherWithTokenAndBody(
       ContentAPI.getContentEndPoint(
         workspaceId,

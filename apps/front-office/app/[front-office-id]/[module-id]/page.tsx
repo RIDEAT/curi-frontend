@@ -166,6 +166,24 @@ export default function ModuleDisplay({
     setIsRedirecting(false);
   };
 
+  const attachmentUploader = async (filename: string, file: File) => {
+    const result = await FrontOfficeAPI.getPresignedUrlForAttachment(
+      params["front-office-id"],
+      params["module-id"],
+      token,
+      filename
+    );
+    const response = await fetch(result.preSignedUrl, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": file.type,
+      },
+    });
+
+    return result;
+  };
+
   useEffect(() => {
     if (launchedSequence) {
       const isFinalModule = isCheckThisModuleFinal();
@@ -222,7 +240,10 @@ export default function ModuleDisplay({
       <CardContent>
         {getModuleContentComponents(
           launchedModule?.contentResponse.contents,
-          launchedModule?.contentResponse.type
+          launchedModule?.contentResponse.type,
+          {
+            uploader: attachmentUploader,
+          }
         )}
       </CardContent>
       <DisplayCardFooterLayout>

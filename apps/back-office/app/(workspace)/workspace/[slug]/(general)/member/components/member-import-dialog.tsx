@@ -69,12 +69,10 @@ function MemberImportDialog() {
   const toServer = async () => {
     try {
       setRequesting(true);
-      console.log(memberArray);
       const { response, result } = await MemberAPI.createAll(
         currentWorkspaceId,
         memberArray
       );
-      console.log(response, result);
       if (response.ok == false) throw new Error("일괄 추가 실패");
       setRequesting(false);
       await employeeMutate();

@@ -13,10 +13,16 @@ import {
   WEB_URL_MODULE_VALUE,
   YOUTUBE_MODULE_VALUE,
   QUIZ_MODULE_VALUE,
+  ATTACHMENT_MODULE_VALUE,
 } from "../icons";
 import { ContentsModuleContent } from "./modules/contents-module-content";
+import { AttachmentsModuleContent } from "./modules/attachments-module-content";
 
-const getModuleContentComponents = (contents: any, type: ModuleType) => {
+const getModuleContentComponents = (
+  contents: any,
+  type: ModuleType,
+  options?: { uploader: any }
+) => {
   switch (type) {
     case NOTION_MODULE_VALUE:
       return <NotionModuleContent contents={contents} />;
@@ -41,6 +47,14 @@ const getModuleContentComponents = (contents: any, type: ModuleType) => {
 
     case QUIZ_MODULE_VALUE:
       return <QuizModuleContent contents={contents} />;
+
+    case ATTACHMENT_MODULE_VALUE:
+      return (
+        <AttachmentsModuleContent
+          contents={contents}
+          uploader={options?.uploader}
+        />
+      );
 
     default:
       return <div>no matching module type</div>;

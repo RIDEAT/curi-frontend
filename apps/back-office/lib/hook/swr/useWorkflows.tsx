@@ -1,7 +1,5 @@
 import useSWR from "swr";
 
-import { IWorkspace } from "workspace-types";
-import { WorkspaceAPI } from "../../api/workspace";
 import { WorkflowAPI } from "../../api/workflow";
 import { useCurrentWorkspace } from "../useCurrentWorkspace";
 
