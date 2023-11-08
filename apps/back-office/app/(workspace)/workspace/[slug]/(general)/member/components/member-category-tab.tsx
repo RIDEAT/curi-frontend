@@ -11,6 +11,7 @@ import {
   TabsTrigger,
 } from "ui";
 
+import { HackleFeature } from "@hackler/react-sdk";
 import { MemberType } from "member-types";
 import { EmployeeTable } from "./employee-table";
 import { PlusIcon } from "@radix-ui/react-icons";
@@ -93,7 +94,9 @@ export function MemberCategoryTab() {
           )}
         </div>
 
-        <MemberImportDialog />
+        <HackleFeature featureKey={5}>
+          {(featureOn) => (featureOn ? <MemberImportDialog /> : <div></div>)}
+        </HackleFeature>
       </div>
       <TabsContent value="employee">
         <p className="text-sm text-muted-foreground">
