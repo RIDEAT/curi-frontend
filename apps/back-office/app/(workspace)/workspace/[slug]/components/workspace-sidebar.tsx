@@ -15,6 +15,7 @@ import {
   DashboardIcon,
   ManagementIcon,
   MemberIcon,
+  ReportIcon,
   WorkflowIcon,
 } from "ui";
 import { cn } from "ui/lib/utils";
@@ -52,6 +53,12 @@ const generalMenuList = (slug: string) => [
         label: "분석",
         path: `/workspace/${slug}/analysis`,
         icon: (active?: boolean) => <AnalysisIcon active={active} />,
+      },
+      {
+        value: "attachment-management",
+        label: "제출",
+        path: `/workspace/${slug}/attachment-management`,
+        icon: (active?: boolean) => <ReportIcon active={active} />,
       },
       {
         value: "management",
