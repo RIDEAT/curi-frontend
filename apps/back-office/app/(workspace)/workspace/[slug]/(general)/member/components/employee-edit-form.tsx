@@ -128,7 +128,7 @@ function EmployeeEditForm({
           onFocus={focusHandler}
         />
       </TableCell>
-      <TableCell>
+      {/* <TableCell>
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -155,7 +155,7 @@ function EmployeeEditForm({
             />
           </PopoverContent>
         </Popover>
-      </TableCell>
+      </TableCell>*/}
       <TableCell>
         <Input
           className="max-w-[500px] truncate font-medium"
