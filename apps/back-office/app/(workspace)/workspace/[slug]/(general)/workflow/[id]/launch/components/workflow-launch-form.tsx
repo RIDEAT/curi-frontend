@@ -103,6 +103,7 @@ function LaunchTableRow({
   const [members, setMembers] = useState([]);
 
   const setKeyDate = (date: Date) => {
+    if (!date) return;
     const newLaunchTargetData = [...launchTargetData];
     newLaunchTargetData[index].keyDate = date;
     setLaunchTargetData(newLaunchTargetData);
