@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Chatbot from "./components/chatbot";
+import { HackleFeature } from "@hackler/react-sdk";
 
 export default function DisplayLayout({
   children,
@@ -10,7 +11,27 @@ export default function DisplayLayout({
   const [showChatbot, setShowChatbot] = useState(false);
 
   const toggleChatbot = () => {
-    setShowChatbot(!showChatbot);
+    const currentUrl = window.location.href;
+
+    const urlObj = new URL(currentUrl);
+    const pathname = urlObj.pathname;
+
+    const parts = pathname.split("/");
+    const targetValue = parts[parts.length - 1];
+
+    const url =
+      process.env.NEXT_PUBLIC_CHATBOT_ENDPOINT + "/chatbot/" + targetValue;
+
+    fetch(url, {
+      method: "delete", // POST 요청을 사용하려면 'POST'로 설정합니다.
+      headers: {
+        "Content-Type": "application/json", // JSON 형식의 데이터를 보내기 위한 헤더 설정
+      },
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setShowChatbot(!showChatbot);
+      });
   };
 
   return (

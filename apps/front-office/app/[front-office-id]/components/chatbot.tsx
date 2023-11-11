@@ -24,7 +24,6 @@ export default function Chatbot() {
   const parts = pathname.split("/");
   const targetValue = parts[parts.length - 1];
 
-  const [chatbotTrain, setChatbotTrain] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messageState, setMessageState] = useState<{
@@ -53,15 +52,6 @@ export default function Chatbot() {
       messageList.scrollTop = messageList.scrollHeight;
     }
   }, [messages]);
-
-  // Focus on text field on load
-  useEffect(() => {
-    textAreaRef.current?.focus();
-
-    if (!chatbotTrain) console.log("마운트 될떄 한번");
-
-    setChatbotTrain(true);
-  }, []);
 
   // Handle form submission
   const handleSubmit = async (e: any) => {
