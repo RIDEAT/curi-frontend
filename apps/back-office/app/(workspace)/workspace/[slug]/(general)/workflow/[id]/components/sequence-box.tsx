@@ -21,7 +21,7 @@ import { ModuleCreateDialog } from "./module-create-dialog";
 import { ModuleAPI } from "../../../../../../../../lib/api/module";
 import { useCurrentWorkspace } from "../../../../../../../../lib/hook/useCurrentWorkspace";
 import { useCurrentWorkflow } from "../../../../../../../../lib/hook/useCurrentWorkflow";
-import { ChatBubbleIcon, TextIcon } from "@radix-ui/react-icons";
+import { ChatBubbleIcon, TextIcon, CheckIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { SequenceAPI } from "../../../../../../../../lib/api/sequence";
@@ -39,6 +39,7 @@ export interface SequenceBoxProps {
   stakeholder: string;
   modules: IModule[];
   satisfactionChecked: boolean;
+  chatbotChecked: boolean;
   date: string;
 }
 
@@ -58,6 +59,7 @@ function SequenceBox({
   stakeholder,
   modules,
   satisfactionChecked,
+  chatbotChecked,
   date,
 }: SequenceBoxProps) {
   const router = useRouter();
@@ -69,6 +71,7 @@ function SequenceBox({
     [...modules].sort((a, b) => a.order - b.order)
   );
   const [checked, setChecked] = useState(satisfactionChecked);
+  const [chatbot, setChatbot] = useState(chatbotChecked);
   const [isEdit, setIsEdit] = useState(false);
 
   const form = useForm<ModuleNameUpdateFormValues>({
@@ -114,6 +117,23 @@ function SequenceBox({
 
   const satisfactionSwitchHandler = (checked: boolean) => {
     satisfactionCheckedHandler(checked);
+  };
+
+  const chatbotCheckedHandler = async (checked: boolean) => {
+    setChatbot(checked);
+    /*
+    await SequenceAPI.update(
+      currentWorkspaceId,
+      currentWorkflowId,
+      sequenceId,
+      {
+        checkSatisfaction: checked,
+      }
+    );*/
+  };
+
+  const chatbotSwitchHandler = (checked: boolean) => {
+    chatbotCheckedHandler(checked);
   };
 
   const moduleOrderUpdateHandler = (moduleItems) => {
@@ -212,6 +232,18 @@ function SequenceBox({
             <CardContent className="flex justify-between p-2">
               <div className="ml-1 flex gap-3 items-center text-sm font-semibold">
                 <ChatBubbleIcon className="w-5 h-5" />
+                <div>챗봇</div>
+              </div>
+              <Switch
+                checked={chatbot}
+                onCheckedChange={chatbotSwitchHandler}
+              />
+            </CardContent>
+          </Card>
+          <Card className="mt-2">
+            <CardContent className="flex justify-between p-2">
+              <div className="ml-1 flex gap-3 items-center text-sm font-semibold">
+                <CheckIcon className="w-5 h-5" />
                 <div>만족도 조사</div>
               </div>
               <Switch
@@ -220,6 +252,7 @@ function SequenceBox({
               />
             </CardContent>
           </Card>
+
           <ModuleCreateDialog
             lastOrder={modules.length}
             sequenceId={sequenceId}
