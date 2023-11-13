@@ -47,7 +47,6 @@ const departmentSchema = z.string().regex(/^[a-zA-Z가-힣\s]{2,20}$/, {
 });
 
 function validateData(data) {
-  console.log("department:", data.department);
   const validatedData = {
     type: typeSchema.parse(data.type),
     name: nameSchema.parse(data.name),
@@ -119,7 +118,6 @@ function MemberImportDialog() {
 
       try {
         const validatedData = validateData(typed);
-        console.log("유효한 데이터:", validatedData);
       } catch (error) {
         if (error instanceof ZodError) {
           console.error("유효성 검사 실패:", error.errors[0].message);
@@ -180,8 +178,6 @@ function MemberImportDialog() {
     if (memberArray.length > 0) {
       toServer();
       setFile(undefined);
-    } else {
-      console.log("memberArray is empty");
     }
   }, [memberArray]);
 

@@ -1,15 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import {
-  Badge,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  ErrorBadge,
-  LoadingCircle,
-} from "ui";
+import { Badge, CardContent, CardHeader, ErrorBadge, LoadingCircle } from "ui";
 import { useLaunchedSequence } from "../../../lib/hook/swr/useLaunchedSequence";
 import { LaunchedModuleList } from "../components/launched-module-list";
 import { DisplayCardLayout } from "../components/display-card-layout";
