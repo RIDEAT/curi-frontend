@@ -1,13 +1,11 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import Image from "next/image";
-import Link from "next/link";
+
 import ReactMarkdown from "react-markdown";
-import { DisplayCardLayout } from "./display-card-layout";
+
 import CircularProgress from "@mui/material/CircularProgress";
-import { useSearchParams } from "next/navigation";
-import { set } from "date-fns";
 
 type Message = {
   type: "apiMessage" | "userMessage";
