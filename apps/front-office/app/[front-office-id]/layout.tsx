@@ -2,7 +2,6 @@
 import { ReactNode, useState } from "react";
 import { ChatbotDialog } from "./components/chatbot/chatbot-dialog";
 import Chatbot from "./components/chatbot/chatbot";
-import { HackleFeature } from "@hackler/react-sdk";
 
 export default function DisplayLayout({ children }: { children: ReactNode }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -15,15 +14,7 @@ export default function DisplayLayout({ children }: { children: ReactNode }) {
           {children}
         </div>
       )}
-      <HackleFeature featureKey={6}>
-        {(featureOn) =>
-          featureOn ? (
-            <ChatbotDialog isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
-          ) : (
-            <div></div>
-          )
-        }
-      </HackleFeature>
+      <ChatbotDialog isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
     </>
   );
 }
