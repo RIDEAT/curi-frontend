@@ -89,6 +89,7 @@ function MemberImportDialog() {
 
         if (header == "memberType") {
           header = "type";
+          if (!val) val = "employee";
           if (val == "general") val = "employee";
         }
 
