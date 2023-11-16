@@ -89,8 +89,7 @@ function MemberImportDialog() {
 
         if (header == "memberType") {
           header = "type";
-          if (val == "일반") val = "employee";
-          else if (val == "매니저") val = "manager";
+          if (val == "general") val = "employee";
         }
 
         if (header == "email") {
