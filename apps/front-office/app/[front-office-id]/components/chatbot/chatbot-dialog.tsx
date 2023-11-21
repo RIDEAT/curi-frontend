@@ -10,12 +10,12 @@ import { ChatbotAPI } from "../../../../lib/api/chatbot";
 export function ChatbotDialog({
   isOpen,
   setIsOpen,
+  frontOfficeId,
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  frontOfficeId: string;
 }) {
-  const frontOfficeId = useFrontOfficeId();
-
   const toggleChatbot = () => {
     setIsOpen((prev) => !prev);
     ChatbotAPI.initialize(frontOfficeId);

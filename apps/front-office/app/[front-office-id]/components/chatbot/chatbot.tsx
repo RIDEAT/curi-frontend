@@ -13,15 +13,7 @@ type Message = {
   isStreaming?: boolean;
 };
 
-export default function Chatbot() {
-  const currentUrl = window.location.href;
-
-  const urlObj = new URL(currentUrl);
-  const pathname = urlObj.pathname;
-
-  const parts = pathname.split("/");
-  const targetValue = parts[parts.length - 1];
-
+export default function Chatbot({ frontOfficeId }) {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messageState, setMessageState] = useState<{
@@ -38,6 +30,7 @@ export default function Chatbot() {
     ],
     history: [],
   });
+
   const { messages, pending, history } = messageState;
 
   const messageListRef = useRef<HTMLDivElement>(null);
@@ -79,7 +72,7 @@ export default function Chatbot() {
     const ctrl = new AbortController();
 
     const url =
-      process.env.NEXT_PUBLIC_CHATBOT_ENDPOINT + "/chatbot/" + targetValue;
+      process.env.NEXT_PUBLIC_CHATBOT_ENDPOINT + "/chatbot/" + frontOfficeId;
 
     fetch(url, {
       method: "POST", // POST 요청을 사용하려면 'POST'로 설정합니다.
